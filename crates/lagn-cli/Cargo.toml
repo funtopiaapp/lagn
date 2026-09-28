@@ -1,0 +1,21 @@
+[package]
+name = "lagn-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "lagn"
+path = "src/main.rs"
+
+[dependencies]
+lagn-core = { workspace = true }
+lagn-ephem = { workspace = true }
+lagn-rules = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { version = "4", features = ["derive", "env"] }
+
+[dev-dependencies]
+serde_json = { workspace = true }

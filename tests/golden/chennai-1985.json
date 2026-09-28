@@ -1,0 +1,173 @@
+{
+  "id": "chennai-1985",
+  "description": "baseline South Indian birth; Tula lagna, Pushya janma nakshatra",
+  "verified_against": null,
+  "verified_by": null,
+  "verified_on": null,
+  "notes": "",
+  "input": {
+    "date": "1985-06-21",
+    "time": "14:30",
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "utc_offset_hours": 5.5,
+    "place": "Chennai"
+  },
+  "settings": {
+    "ayanamsa": "lahiri",
+    "node": "mean",
+    "house_system": "whole_sign",
+    "year_length": "julian"
+  },
+  "expected": {
+    "jd_ut": 2446237.875,
+    "ayanamsa_degrees": 23.650802,
+    "lagna": {
+      "rasi": "tula",
+      "degrees_in_rasi": 10.334167,
+      "nakshatra": "swati",
+      "pada": 2,
+      "navamsa": "makara"
+    },
+    "grahas": {
+      "sun": {
+        "rasi": "mithuna",
+        "degrees_in_rasi": 6.280181,
+        "nakshatra": "mrigashira",
+        "pada": 4,
+        "house": 9,
+        "navamsa": "vrischika",
+        "retrograde": false
+      },
+      "moon": {
+        "rasi": "karka",
+        "degrees_in_rasi": 10.431832,
+        "nakshatra": "pushya",
+        "pada": 3,
+        "house": 10,
+        "navamsa": "tula",
+        "retrograde": false
+      },
+      "mars": {
+        "rasi": "mithuna",
+        "degrees_in_rasi": 14.272229,
+        "nakshatra": "ardra",
+        "pada": 3,
+        "house": 9,
+        "navamsa": "kumbha",
+        "retrograde": false
+      },
+      "mercury": {
+        "rasi": "mithuna",
+        "degrees_in_rasi": 21.823742,
+        "nakshatra": "punarvasu",
+        "pada": 1,
+        "house": 9,
+        "navamsa": "mesha",
+        "retrograde": false
+      },
+      "jupiter": {
+        "rasi": "makara",
+        "degrees_in_rasi": 22.883966,
+        "nakshatra": "shravana",
+        "pada": 4,
+        "house": 4,
+        "navamsa": "karka",
+        "retrograde": true
+      },
+      "venus": {
+        "rasi": "mesha",
+        "degrees_in_rasi": 20.774652,
+        "nakshatra": "bharani",
+        "pada": 3,
+        "house": 7,
+        "navamsa": "tula",
+        "retrograde": false
+      },
+      "saturn": {
+        "rasi": "tula",
+        "degrees_in_rasi": 28.737095,
+        "nakshatra": "vishakha",
+        "pada": 3,
+        "house": 1,
+        "navamsa": "mithuna",
+        "retrograde": true
+      },
+      "rahu": {
+        "rasi": "mesha",
+        "degrees_in_rasi": 22.422693,
+        "nakshatra": "bharani",
+        "pada": 3,
+        "house": 7,
+        "navamsa": "tula",
+        "retrograde": false
+      },
+      "ketu": {
+        "rasi": "tula",
+        "degrees_in_rasi": 22.422693,
+        "nakshatra": "vishakha",
+        "pada": 1,
+        "house": 1,
+        "navamsa": "mesha",
+        "retrograde": false
+      }
+    },
+    "vimshottari": {
+      "janma_nakshatra": "pushya",
+      "birth_lord": "saturn",
+      "balance_years": 8.884639,
+      "mahadashas": [
+        {
+          "lord": "saturn",
+          "start_jd": 2442543.239306,
+          "end_jd": 2449482.989306
+        },
+        {
+          "lord": "mercury",
+          "start_jd": 2449482.989306,
+          "end_jd": 2455692.239306
+        },
+        {
+          "lord": "ketu",
+          "start_jd": 2455692.239306,
+          "end_jd": 2458248.989306
+        },
+        {
+          "lord": "venus",
+          "start_jd": 2458248.989306,
+          "end_jd": 2465553.989306
+        },
+        {
+          "lord": "sun",
+          "start_jd": 2465553.989306,
+          "end_jd": 2467745.489306
+        },
+        {
+          "lord": "moon",
+          "start_jd": 2467745.489306,
+          "end_jd": 2471397.989306
+        },
+        {
+          "lord": "mars",
+          "start_jd": 2471397.989306,
+          "end_jd": 2473954.739306
+        },
+        {
+          "lord": "rahu",
+          "start_jd": 2473954.739306,
+          "end_jd": 2480529.239306
+        },
+        {
+          "lord": "jupiter",
+          "start_jd": 2480529.239306,
+          "end_jd": 2486373.239306
+        },
+        {
+          "lord": "saturn",
+          "start_jd": 2486373.239306,
+          "end_jd": 2493312.989306
+        }
+      ]
+    }
+  }
+}

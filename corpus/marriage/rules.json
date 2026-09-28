@@ -1,0 +1,889 @@
+[
+  {
+    "id": "marriage.h7.benefic_occupant",
+    "topic": "marriage",
+    "title": "A natural benefic occupies the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 7,
+        "by": "benefics"
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "A natural benefic sits in the 7th house, the house of marriage. Classical texts read this as support for married life and for the spouse's nature.",
+      "impact": "Married life tends to have ease in it: a supportive partner, and a household that runs on goodwill."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: benefics in the kalatra bhava support marriage. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h7.malefic_occupant",
+    "topic": "marriage",
+    "title": "The Sun, Saturn, Rahu or Ketu occupies the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 7,
+        "by": {
+          "grahas": [
+            "sun",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -2,
+    "text": {
+      "en": "The Sun, Saturn, Rahu or Ketu sits in the 7th house. Classical texts associate a malefic here with strain in married life, to be weighed together with the 7th lord and Venus rather than on its own. Mars in the 7th is judged separately as Chevvai dosha.",
+      "impact": "Married life may ask for patience, and for give and take on both sides. This is read as friction to work through, not as a prediction about the marriage itself."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Changed: set is now Sun, Saturn, Rahu, Ketu. Mars in the 7th is judged only by the Chevvai dosha rules, which avoids counting one placement twice. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h7.jupiter_aspect",
+    "topic": "marriage",
+    "title": "Jupiter aspects the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 7,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Jupiter casts its aspect on the 7th house. Jupiter's aspect is traditionally held to protect and strengthen the house it falls on.",
+      "impact": "The best-regarded influence on marriage: a partner of good character, and protection over the marriage through its harder stretches."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect protecting a house is universally taught. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h7.saturn_aspect",
+    "topic": "marriage",
+    "title": "Saturn aspects the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 7,
+        "by": {
+          "grahas": [
+            "saturn"
+          ]
+        }
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "delay"
+    ],
+    "text": {
+      "en": "Saturn casts its aspect on the 7th house. This is commonly read as a sign of delay or of a serious, duty-bound approach to marriage. Recorded as a timing indication, not scored.",
+      "impact": "Saturn here is read as later rather than not at all. Marriage often comes at a more settled age, and tends to be taken seriously when it does."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Delay indication, correctly unscored. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h7.saturn_occupant",
+    "topic": "marriage",
+    "title": "Saturn occupies the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          7
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "delay"
+    ],
+    "text": {
+      "en": "Saturn sits in the 7th house. Commonly read as delay in marriage. Recorded as a timing indication; the malefic-occupant rule already scores the affliction.",
+      "impact": "Marriage may come later than it does for others, and is usually approached with a sense of duty. Saturn is slow in this house rather than unkind."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Delay indication, correctly unscored. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h7.node_occupant",
+    "topic": "marriage",
+    "title": "Rahu or Ketu occupies the 7th house",
+    "tradition": "kerala",
+    "when": {
+      "house_occupied": {
+        "house": 7,
+        "by": {
+          "grahas": [
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "nodes"
+    ],
+    "text": {
+      "en": "Rahu or Ketu sits in the 7th house. South Indian practice, Kerala especially, treats this as calling for careful examination, including sarpa dosha considerations. Noted rather than scored, because the rule for malefics in the 7th already weighs it.",
+      "impact": "Worth looking at carefully during horoscope matching. By itself it is not a negative verdict on marriage."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Correctly unscored and flagged for examination. Re-reviewed 2026-09-22: user-facing text cleaned of internal reviewer notes; meaning unchanged. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.h2.malefic_occupant",
+    "topic": "marriage",
+    "title": "A natural malefic occupies the 2nd house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 2,
+        "by": "malefics"
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 2nd house, the house of family (kutumba). Classical texts associate this with friction in family life after marriage.",
+      "impact": "Family life may have its demanding stretches, particularly around money and the wider household. Keeping matters spoken about openly helps."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "rejected",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Fires in about 40% of charts: noise, not signal. The 2nd house is secondary for marriage, and Mars there already counts under Chevvai dosha. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.l7.dusthana",
+    "topic": "marriage",
+    "title": "The 7th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 7
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "text": {
+      "en": "The lord of the 7th house sits in a dusthana (the 6th, 8th or 12th). Classical texts treat this as weakening what the 7th house promises.",
+      "impact": "Marriage may come later, or begin at a distance, or need some effort in its early years. This points to timing and effort rather than to the absence of a partner."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord placed in a dusthana (6, 8, 12) is classically held to damage its own bhava's significations. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": {
+      "lord_of": 7
+    }
+  },
+  {
+    "id": "marriage.l7.kendra_trikona",
+    "topic": "marriage",
+    "title": "The 7th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 7
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 7th house sits in a kendra or trikona. Classical texts treat this as supporting what the 7th house promises.",
+      "impact": "Marriage is well supported. A partner arrives in the natural course, and the marriage tends to hold."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a kendra or trikona is classically held to support its own bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.l7.strong",
+    "topic": "marriage",
+    "title": "The 7th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 7
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 7th house is exalted, in moolatrikona or in its own sign in the rasi chart, and so able to give its results fully.",
+      "impact": "A strong indication for a settled marriage, and for a capable partner."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: an exalted, moolatrikona or own-sign lord gives its bhava's results fully. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.l7.debilitated",
+    "topic": "marriage",
+    "title": "The 7th lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 7
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "text": {
+      "en": "The lord of the 7th house is debilitated in the rasi chart. Classical texts treat a debilitated lord as struggling to deliver its house's results, unless cancelled.",
+      "impact": "The early stretch of married life may need patience while the two of you settle together. A chart shows tendencies; people make marriages."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle. Known limitation: neecha bhanga (cancelled debilitation) is not yet modelled. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": {
+      "lord_of": 7
+    }
+  },
+  {
+    "id": "marriage.l7.combust",
+    "topic": "marriage",
+    "title": "The 7th lord is combust",
+    "tradition": "parashari",
+    "when": {
+      "combust": {
+        "graha": {
+          "lord_of": 7
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "The lord of the 7th house is combust, too close to the Sun, which is traditionally held to weaken it.",
+      "impact": "Your partner's needs, or your own, can get overshadowed by other demands. Making deliberate space for the relationship is the practical answer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard: a lord within its combustion orb of the Sun is classically weakened (asta), so its bhava's results are reduced. Half weight, as combustion is a lesser affliction than debilitation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": {
+      "lord_of": 7
+    }
+  },
+  {
+    "id": "marriage.l7.navamsa_strong",
+    "topic": "marriage",
+    "title": "The 7th lord is strong in the navamsa",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 7
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d9"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the rasi-chart 7th house is exalted, in moolatrikona or in its own sign in the navamsa (D-9), the chart of marriage.",
+      "impact": "The chart read specifically for marriage agrees with the main one, which strengthens the promise of a settled married life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-9 confirmation of the 7th lord at half weight is standard practice. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.l7.navamsa_debilitated",
+    "topic": "marriage",
+    "title": "The 7th lord is debilitated in the navamsa",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 7
+        },
+        "in": [
+          "debilitated"
+        ],
+        "varga": "d9"
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "The lord of the rasi-chart 7th house is debilitated in the navamsa (D-9).",
+      "impact": "The chart read for marriage is less supportive than the main one. Married life may ask more of you privately than it appears to from outside, and patience through the quiet stretches is what carries it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-9 confirmation of the 7th lord at half weight is standard practice. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": {
+      "lord_of": 7
+    }
+  },
+  {
+    "id": "marriage.venus.strong",
+    "topic": "marriage",
+    "title": "Venus is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "venus",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Venus, the karaka (significator) of marriage, is exalted, in moolatrikona or in its own sign in the rasi chart.",
+      "impact": "Warmth and affection come naturally to you, and tend to be returned."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Kalatra karaka dignity: core. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.venus.debilitated",
+    "topic": "marriage",
+    "title": "Venus is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "venus",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "text": {
+      "en": "Venus, the karaka of marriage, is debilitated in the rasi chart.",
+      "impact": "Affection may be harder to express, or to feel returned, particularly early on. This usually softens with time, and with a partner who is patient."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Kalatra karaka dignity: core. Neecha bhanga not yet modelled. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "venus"
+  },
+  {
+    "id": "marriage.venus.combust",
+    "topic": "marriage",
+    "title": "Venus is combust",
+    "tradition": "parashari",
+    "when": {
+      "combust": {
+        "graha": "venus"
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "Venus, the karaka of marriage, is combust, too close to the Sun, which is traditionally held to weaken it.",
+      "impact": "Your own wishes in love can get overshadowed by duty or by someone else's plans. Saying plainly what you want matters here."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard: Venus within its combustion orb (10 degrees, 8 if retrograde) is classically weakened as karaka. Half weight, as for the 7th lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "venus"
+  },
+  {
+    "id": "marriage.venus.dusthana",
+    "topic": "marriage",
+    "title": "Venus is in the 6th or 8th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "venus",
+        "houses": [
+          6,
+          8
+        ]
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "Venus, the karaka of marriage, sits in the 6th or 8th house, which classical texts treat as weakening it. (Venus in the 12th, the house of bed comforts, is traditionally favourable and is not counted here.)",
+      "impact": "Relationships may go through testing stretches. Working through them with patience, rather than starting over, is what the chart supports."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Changed: houses 6 and 8 only. Venus in the 12th (bed comforts) is a well-known favourable exception. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "venus"
+  },
+  {
+    "id": "marriage.venus.navamsa_strong",
+    "topic": "marriage",
+    "title": "Venus is strong in the navamsa",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "venus",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d9"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Venus is exalted, in moolatrikona or in its own sign in the navamsa (D-9).",
+      "impact": "The chart read for marriage supports affection and a warm married life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard D-9 confirmation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.venus.navamsa_debilitated",
+    "topic": "marriage",
+    "title": "Venus is debilitated in the navamsa",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "venus",
+        "in": [
+          "debilitated"
+        ],
+        "varga": "d9"
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "Venus is debilitated in the navamsa (D-9).",
+      "impact": "Affection needs conscious tending in married life, rather than being taken for granted."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard D-9 confirmation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "venus"
+  },
+  {
+    "id": "marriage.venus.with_malefic",
+    "topic": "marriage",
+    "title": "Venus shares a sign with Saturn, Rahu or Ketu",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "conjunct": {
+            "a": "venus",
+            "b": "saturn"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "venus",
+            "b": "rahu"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "venus",
+            "b": "ketu"
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "text": {
+      "en": "Venus, the karaka of marriage, shares a sign with Saturn, Rahu or Ketu, which classical texts treat as affliction to the karaka.",
+      "impact": "Affection can carry some weight or restraint with it: duty, distance, or a partner who shows love in practical rather than demonstrative ways."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Changed: Mars removed. Venus with Mars reads as passion, not simple affliction; Saturn and the nodes are the affliction meant. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "venus"
+  },
+  {
+    "id": "marriage.jupiter.strong_female",
+    "topic": "marriage",
+    "title": "Female native: Jupiter is strong",
+    "tradition": "parashari",
+    "when": {
+      "all": [
+        {
+          "native": {
+            "sex": "female"
+          }
+        },
+        {
+          "dignity": {
+            "graha": "jupiter",
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "For a female native, classical texts also examine Jupiter as a significator of the husband. Here Jupiter is exalted, in moolatrikona or in its own sign. Cannot be evaluated unless the native's sex is supplied.",
+      "impact": "In a woman's chart Jupiter stands for the husband. Strong here, it indicates a decent and capable partner."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter as husband's significator in a female chart is standard. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.jupiter.debilitated_female",
+    "topic": "marriage",
+    "title": "Female native: Jupiter is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "all": [
+        {
+          "native": {
+            "sex": "female"
+          }
+        },
+        {
+          "dignity": {
+            "graha": "jupiter",
+            "in": [
+              "debilitated"
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "text": {
+      "en": "For a female native, classical texts also examine Jupiter as a significator of the husband. Here Jupiter is debilitated. Cannot be evaluated unless the native's sex is supplied.",
+      "impact": "Read traditionally as a partner who has struggles of his own. Patience and realistic expectations serve better here than idealising."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter as husband's significator in a female chart is standard. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    },
+    "subject": "jupiter"
+  },
+  {
+    "id": "marriage.sav.h7_strong",
+    "topic": "marriage",
+    "title": "The 7th house has 28 or more SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 7,
+        "min": 28
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The 7th house holds 28 or more Sarvashtakavarga bindus, at or above the average of about 28, which is commonly read as a well-supported house.",
+      "impact": "The marriage part of your chart carries good general support."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The commonly taught 'above 28 bindus is good'. Re-reviewed 2026-09-22: user-facing text cleaned of internal reviewer notes; meaning unchanged. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.sav.h7_weak",
+    "topic": "marriage",
+    "title": "The 7th house has 24 or fewer SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 7,
+        "max": 24
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "The 7th house holds 24 or fewer Sarvashtakavarga bindus, well below the average of about 28, which is commonly read as a house needing support.",
+      "impact": "The marriage part of your chart carries less general support, so this area repays conscious effort."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The commonly taught 'below 25 is weak'. Calibration note: fires in about 46% of charts because the 7th house structurally gets fewer bindus; an astrologer may prefer a lower threshold. Re-reviewed 2026-09-22: user-facing text cleaned of internal reviewer notes; meaning unchanged. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.timing.periods",
+    "topic": "marriage",
+    "title": "Periods examined for marriage",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 7
+      },
+      "venus",
+      {
+        "lord_of": 7,
+        "varga": "d9"
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for the timing of marriage: those of the 7th lord, of Venus, and of the 7th lord of the navamsa.",
+      "impact": "These are the stretches when marriage matters usually move: meeting someone, an engagement, or the marriage itself."
+    },
+    "source": {
+      "reference": null,
+      "note": "Written from general knowledge of a commonly stated principle. The reviewer must confirm the interpretation and supply the textual source before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard timing lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.venus.karaka_in_7",
+    "topic": "marriage",
+    "title": "Venus, the karaka of marriage, occupies the 7th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "venus",
+        "houses": [
+          7
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "karaka_bhava_nashaya"
+    ],
+    "text": {
+      "en": "Venus, the karaka of marriage, sits in the 7th house itself. The classical dictum karako bhava nashaya holds that a karaka in its own bhava can harm that bhava's matters; how strongly it applies is debated, so this is noted rather than scored.",
+      "impact": "The significator of marriage sits in the house of marriage. Practitioners differ on whether this helps or hinders, so it is noted rather than counted either way."
+    },
+    "source": {
+      "reference": null,
+      "note": "Added during review. The dictum is commonly stated; the reviewer did not verify a textual source."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Added: Venus in the 7th otherwise scored +2 as a benefic occupant with no counterweight. Noted, not scored, because the dictum's weight is debated. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

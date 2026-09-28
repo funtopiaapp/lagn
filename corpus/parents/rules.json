@@ -1,0 +1,554 @@
+[
+  {
+    "id": "parents.mother.lord_supported",
+    "topic": "parents",
+    "title": "The 4th lord is dignified or in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 4
+            },
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        },
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 4
+            },
+            "houses": [
+              1,
+              4,
+              5,
+              7,
+              9,
+              10
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:mother"
+    ],
+    "text": {
+      "en": "The lord of the 4th house, the house of the mother, is dignified or well placed, traditionally a support for the mother's welfare.",
+      "impact": "Your mother's wellbeing has good support in your chart, and the bond with her tends to be a steady one."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The 4th house signifies the mother (Parashari). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.lord_dusthana",
+    "topic": "parents",
+    "title": "The 4th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 4
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:mother"
+    ],
+    "subject": {
+      "lord_of": 4
+    },
+    "text": {
+      "en": "The lord of the 4th house, the house of the mother, sits in a dusthana, traditionally a sign to support the mother with care.",
+      "impact": "Your mother may carry more than her share of responsibility, or live at some distance from you. Staying in regular touch matters more here than in most charts."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed lord weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.karaka_strong",
+    "topic": "parents",
+    "title": "The Moon is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "moon",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:mother"
+    ],
+    "text": {
+      "en": "The Moon, significator of the mother, is dignified.",
+      "impact": "A warm, supportive relationship with your mother is the usual reading, along with good support from her side of the family."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The Moon is the karaka of the mother. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.karaka_afflicted",
+    "topic": "parents",
+    "title": "The Moon shares a sign with Saturn, Rahu or Ketu",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "saturn"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "rahu"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "ketu"
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:mother"
+    ],
+    "subject": "moon",
+    "text": {
+      "en": "The Moon, significator of the mother, shares a sign with Saturn, Rahu or Ketu, traditionally read as strain the mother may carry.",
+      "impact": "Your mother may carry worries she does not speak about, or her health may need attention. Your steady presence helps her more than anything else you can offer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "An afflicted karaka is classically adverse to what it signifies. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.benefic",
+    "topic": "parents",
+    "title": "A natural benefic occupies the 4th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 4,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:mother"
+    ],
+    "text": {
+      "en": "A natural benefic sits in the 4th house, the house of the mother.",
+      "impact": "A kindly influence over your mother and over home life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics support the house they occupy. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.malefic",
+    "topic": "parents",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 4th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 4,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:mother"
+    ],
+    "text": {
+      "en": "A natural malefic sits in the 4th house, the house of the mother.",
+      "impact": "Home life may have its demanding stretches, and your mother may carry responsibilities or health matters that need looking after. Practical help and regular contact are what the tradition suggests."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics are classically adverse to the house they occupy. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.mother.jupiter_aspect",
+    "topic": "parents",
+    "title": "Jupiter aspects the 4th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 4,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:mother"
+    ],
+    "text": {
+      "en": "Jupiter aspects the 4th house, the house of the mother, traditionally a protective influence.",
+      "impact": "A protective influence over your mother's wellbeing."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect protects. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.lord_supported",
+    "topic": "parents",
+    "title": "The 9th lord is dignified or in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 9
+            },
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        },
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 9
+            },
+            "houses": [
+              1,
+              4,
+              5,
+              7,
+              9,
+              10
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:father"
+    ],
+    "text": {
+      "en": "The lord of the 9th house, the house of the father, is dignified or well placed, traditionally a support for the father's welfare.",
+      "impact": "Your father's position and wellbeing have good support, and his standing tends to benefit you."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The 9th house signifies the father (Parashari). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.lord_dusthana",
+    "topic": "parents",
+    "title": "The 9th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 9
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:father"
+    ],
+    "subject": {
+      "lord_of": 9
+    },
+    "text": {
+      "en": "The lord of the 9th house, the house of the father, sits in a dusthana, traditionally a sign to support the father with care.",
+      "impact": "Your father may have carried struggles of his own, or spent time away from the family. Distance here is usually circumstance rather than feeling, and keeping contact open matters."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed lord weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.karaka_strong",
+    "topic": "parents",
+    "title": "The Sun is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "sun",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:father"
+    ],
+    "text": {
+      "en": "The Sun, significator of the father, is dignified.",
+      "impact": "A strong bond with your father is the usual reading, along with his support in practical matters."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The Sun is the karaka of the father. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.karaka_afflicted",
+    "topic": "parents",
+    "title": "The Sun shares a sign with Saturn, Rahu or Ketu",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "conjunct": {
+            "a": "sun",
+            "b": "saturn"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "sun",
+            "b": "rahu"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "sun",
+            "b": "ketu"
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:father"
+    ],
+    "subject": "sun",
+    "text": {
+      "en": "The Sun, significator of the father, shares a sign with Saturn, Rahu or Ketu, traditionally read as strain the father may carry.",
+      "impact": "Your father may carry strain, or his health may need attention. Keeping the conversation open between you is the practical answer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "An afflicted karaka is classically adverse to what it signifies. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.benefic",
+    "topic": "parents",
+    "title": "A natural benefic occupies the 9th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 9,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:father"
+    ],
+    "text": {
+      "en": "A natural benefic sits in the 9th house, the house of the father.",
+      "impact": "A kindly influence over your father, and over what comes to you through him."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics support the house they occupy. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.malefic",
+    "topic": "parents",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 9th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 9,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "parent:father"
+    ],
+    "text": {
+      "en": "A natural malefic sits in the 9th house, the house of the father.",
+      "impact": "The relationship with your father may ask for patience, or he may have burdens of his own to carry."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics are classically adverse to the house they occupy. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "parents.father.jupiter_aspect",
+    "topic": "parents",
+    "title": "Jupiter aspects the 9th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 9,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 1,
+    "tags": [
+      "parent:father"
+    ],
+    "text": {
+      "en": "Jupiter aspects the 9th house, the house of the father, traditionally a protective influence.",
+      "impact": "A protective influence over your father's wellbeing."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect protects. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

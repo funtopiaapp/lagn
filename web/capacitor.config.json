@@ -1,0 +1,11 @@
+{
+  "appId": "app.lagn",
+  "appName": "Lagn",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}

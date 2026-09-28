@@ -1,0 +1,29 @@
+[package]
+name = "lagn-server"
+description = "Phase 4: HTTP API over the verified kernel, serving the web app."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "lagn-server"
+path = "src/main.rs"
+
+[dependencies]
+lagn-core = { workspace = true }
+lagn-rules = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+tower-http = { version = "0.6", features = ["fs", "limit", "catch-panic", "timeout", "cors", "set-header"] }
+jiff = { version = "0.2", features = ["tzdb-bundle-always"] }
+jiff-tzdb = "0.1"
+clap = { version = "4", features = ["derive", "env"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+lagn-core = { workspace = true }
+http-body-util = "0.1"
+jiff = "0.2"

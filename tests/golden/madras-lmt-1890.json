@@ -1,0 +1,173 @@
+{
+  "id": "madras-lmt-1890",
+  "description": "pre-1906 Madras local mean time, before IST existed",
+  "verified_against": null,
+  "verified_by": null,
+  "verified_on": null,
+  "notes": "",
+  "input": {
+    "date": "1890-03-14",
+    "time": "04:22",
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "utc_offset_hours": 5.3514,
+    "place": "Madras"
+  },
+  "settings": {
+    "ayanamsa": "lahiri",
+    "node": "mean",
+    "house_system": "whole_sign",
+    "year_length": "julian"
+  },
+  "expected": {
+    "jd_ut": 2411440.4589694445,
+    "ayanamsa_degrees": 22.318986,
+    "lagna": {
+      "rasi": "makara",
+      "degrees_in_rasi": 28.883816,
+      "nakshatra": "dhanishta",
+      "pada": 2,
+      "navamsa": "kanya"
+    },
+    "grahas": {
+      "sun": {
+        "rasi": "meena",
+        "degrees_in_rasi": 1.023422,
+        "nakshatra": "purva_bhadrapada",
+        "pada": 4,
+        "house": 3,
+        "navamsa": "karka",
+        "retrograde": false
+      },
+      "moon": {
+        "rasi": "vrischika",
+        "degrees_in_rasi": 28.301491,
+        "nakshatra": "jyeshtha",
+        "pada": 4,
+        "house": 11,
+        "navamsa": "meena",
+        "retrograde": false
+      },
+      "mars": {
+        "rasi": "vrischika",
+        "degrees_in_rasi": 12.676763,
+        "nakshatra": "anuradha",
+        "pada": 3,
+        "house": 11,
+        "navamsa": "tula",
+        "retrograde": false
+      },
+      "mercury": {
+        "rasi": "kumbha",
+        "degrees_in_rasi": 9.478193,
+        "nakshatra": "shatabhisha",
+        "pada": 1,
+        "house": 2,
+        "navamsa": "dhanus",
+        "retrograde": false
+      },
+      "jupiter": {
+        "rasi": "makara",
+        "degrees_in_rasi": 11.468295,
+        "nakshatra": "shravana",
+        "pada": 1,
+        "house": 1,
+        "navamsa": "mesha",
+        "retrograde": false
+      },
+      "venus": {
+        "rasi": "meena",
+        "degrees_in_rasi": 6.811914,
+        "nakshatra": "uttara_bhadrapada",
+        "pada": 2,
+        "house": 3,
+        "navamsa": "kanya",
+        "retrograde": false
+      },
+      "saturn": {
+        "rasi": "simha",
+        "degrees_in_rasi": 6.425457,
+        "nakshatra": "magha",
+        "pada": 2,
+        "house": 8,
+        "navamsa": "vrishabha",
+        "retrograde": true
+      },
+      "rahu": {
+        "rasi": "mithuna",
+        "degrees_in_rasi": 6.409871,
+        "nakshatra": "mrigashira",
+        "pada": 4,
+        "house": 6,
+        "navamsa": "vrischika",
+        "retrograde": false
+      },
+      "ketu": {
+        "rasi": "dhanus",
+        "degrees_in_rasi": 6.409871,
+        "nakshatra": "mula",
+        "pada": 2,
+        "house": 12,
+        "navamsa": "vrishabha",
+        "retrograde": false
+      }
+    },
+    "vimshottari": {
+      "janma_nakshatra": "jyeshtha",
+      "birth_lord": "mercury",
+      "balance_years": 2.165598,
+      "mahadashas": [
+        {
+          "lord": "mercury",
+          "start_jd": 2406022.193812,
+          "end_jd": 2412231.443812
+        },
+        {
+          "lord": "ketu",
+          "start_jd": 2412231.443812,
+          "end_jd": 2414788.193812
+        },
+        {
+          "lord": "venus",
+          "start_jd": 2414788.193812,
+          "end_jd": 2422093.193812
+        },
+        {
+          "lord": "sun",
+          "start_jd": 2422093.193812,
+          "end_jd": 2424284.693812
+        },
+        {
+          "lord": "moon",
+          "start_jd": 2424284.693812,
+          "end_jd": 2427937.193812
+        },
+        {
+          "lord": "mars",
+          "start_jd": 2427937.193812,
+          "end_jd": 2430493.943812
+        },
+        {
+          "lord": "rahu",
+          "start_jd": 2430493.943812,
+          "end_jd": 2437068.443812
+        },
+        {
+          "lord": "jupiter",
+          "start_jd": 2437068.443812,
+          "end_jd": 2442912.443812
+        },
+        {
+          "lord": "saturn",
+          "start_jd": 2442912.443812,
+          "end_jd": 2449852.193812
+        },
+        {
+          "lord": "mercury",
+          "start_jd": 2449852.193812,
+          "end_jd": 2456061.443812
+        }
+      ]
+    }
+  }
+}

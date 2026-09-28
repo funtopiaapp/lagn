@@ -1,0 +1,464 @@
+[
+  {
+    "id": "education.l4.kendra_trikona",
+    "topic": "education",
+    "title": "The 4th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 4
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 4th house, the house of schooling, sits in a kendra or trikona.",
+      "impact": "Schooling tends to go smoothly: a settled place to study, and an education that is finished rather than cut short."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A well-placed 4th lord supports education. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.l4.dusthana",
+    "topic": "education",
+    "title": "The 4th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 4
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 4
+    },
+    "text": {
+      "en": "The lord of the 4th house, the house of schooling, sits in a dusthana, which classical texts read as interruptions in education.",
+      "impact": "Schooling may be interrupted, or take place away from home, or the household may be unsettled during the study years. Continuity matters more here than the choice of school."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed 4th lord weakens formal education. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.l5.kendra_trikona",
+    "topic": "education",
+    "title": "The 5th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 5th house, the house of intelligence, sits in a kendra or trikona.",
+      "impact": "Learning comes naturally. You tend to grasp things quickly and to enjoy the subjects you choose."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A well-placed 5th lord supports learning. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.l5.dusthana",
+    "topic": "education",
+    "title": "The 5th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 5
+    },
+    "text": {
+      "en": "The lord of the 5th house, the house of intelligence, sits in a dusthana, which classical texts read as effort needed in studies.",
+      "impact": "Concentration can take more effort than it does for others, and early results may not reflect your ability. A set routine and a teacher who explains well make a real difference."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed 5th lord weakens learning. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.jupiter_aspects",
+    "topic": "education",
+    "title": "Jupiter aspects the 4th or 5th house",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "house_aspected": {
+            "house": 4,
+            "by": {
+              "grahas": [
+                "jupiter"
+              ]
+            }
+          }
+        },
+        {
+          "house_aspected": {
+            "house": 5,
+            "by": {
+              "grahas": [
+                "jupiter"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter, the teacher, aspects the 4th or 5th house, traditionally a blessing on learning.",
+      "impact": "A teacher's blessing, in the traditional phrase. Good guidance tends to appear at the right moment, and learning has a thoughtful, principled quality to it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect protects the house it falls on. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.h4.malefic",
+    "topic": "education",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 4th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 4,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 4th house, the house of schooling, which classical texts read as disruption to settled study.",
+      "impact": "The study years may have some disruption around them: a move, an unsettled household, or pressure at home. Steady surroundings help more than extra tuition."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics in the 4th are classically adverse to its significations. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.h5.malefic",
+    "topic": "education",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 5,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 5th house, the house of intelligence, which classical texts read as effort needed to focus.",
+      "impact": "Focus can be harder to hold, and the mind gets restless. Short, regular study sessions tend to work much better than long ones."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics in the 5th are classically adverse to its significations. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.higher_learning",
+    "topic": "education",
+    "title": "The 5th and 9th lords are related (higher learning)",
+    "tradition": "parashari",
+    "when": {
+      "sambandha": {
+        "a": {
+          "lord_of": 5
+        },
+        "b": {
+          "lord_of": 9
+        }
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lords of the 5th (intelligence) and 9th (higher learning) houses are related, classically favourable for higher studies.",
+      "impact": "Further study is supported: degrees, research or specialised training, often with help from teachers or family."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "5th-9th lord sambandha is a commonly cited combination for learning. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.d24_strong",
+    "topic": "education",
+    "title": "Mercury or Jupiter is strong in the D-24 (siddhamsa)",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": "mercury",
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ],
+            "varga": "d24"
+          }
+        },
+        {
+          "dignity": {
+            "graha": "jupiter",
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ],
+            "varga": "d24"
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Mercury or Jupiter is exalted, in moolatrikona or in its own sign in the siddhamsa (D-24), the chart of learning.",
+      "impact": "The chart read specifically for learning agrees, which strengthens the promise of a good education."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-24 is the classical varga for education. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.timing.periods",
+    "topic": "education",
+    "title": "Periods examined for education",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 4
+      },
+      {
+        "lord_of": 5
+      },
+      "mercury",
+      "jupiter"
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for education: those of the 4th and 5th lords, Mercury and Jupiter.",
+      "impact": "These are the stretches when education usually moves: admissions, examinations, courses and qualifications."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard education timing lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.mercury.strong",
+    "topic": "education",
+    "title": "Mercury is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "mercury",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Mercury, the karaka of intellect and learning, is exalted, in moolatrikona or in its own sign.",
+      "impact": "A quick, clear mind. You tend to learn by understanding rather than by rote, and you can explain what you know to others."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Mercury signifies intellect and learning. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.mercury.debilitated",
+    "topic": "education",
+    "title": "Mercury is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "mercury",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "mercury",
+    "text": {
+      "en": "Mercury, the karaka of intellect and learning, is debilitated, unless the debilitation is cancelled.",
+      "impact": "Learning may need more repetition, and you may doubt your own grasp of a subject more than you need to. Writing things down, and explaining them to someone else, helps a great deal."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Mercury signifies intellect and learning; paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "education.mercury.neecha_bhanga",
+    "topic": "education",
+    "title": "Mercury's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "mercury"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "education.mercury.debilitated"
+    ],
+    "text": {
+      "en": "Mercury is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. Learning takes effort at first, but understanding catches up."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

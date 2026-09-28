@@ -1,0 +1,393 @@
+[
+  {
+    "id": "graha.sun",
+    "title": "For the Sun (Surya)",
+    "triggers": [
+      "graha:sun"
+    ],
+    "deity": null,
+    "day": "Sunday",
+    "practices": [
+      "Offer water to the rising Sun (arghya)",
+      "Recite the Aditya Hridayam"
+    ],
+    "places": [
+      "Suryanar Kovil (near Kumbakonam)"
+    ],
+    "charity": "Donate wheat, a navadhanya grain associated with the Sun",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for the Sun: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.moon",
+    "title": "For the Moon (Chandra)",
+    "triggers": [
+      "graha:moon"
+    ],
+    "deity": "Ambal (Parvati)",
+    "day": "Monday",
+    "practices": [
+      "Worship Ambal (Parvati) on Mondays",
+      "Keep a calm daily routine"
+    ],
+    "places": [
+      "Thingalur Kailasanathar temple (Chandran sthalam)"
+    ],
+    "charity": "Donate raw rice, a navadhanya grain associated with the Moon",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for the Moon: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.mars",
+    "title": "For Mars (Kuja)",
+    "triggers": [
+      "graha:mars"
+    ],
+    "deity": "Murugan",
+    "day": "Tuesday",
+    "practices": [
+      "Worship Murugan on Tuesdays",
+      "Recite the Skanda Sashti Kavacham"
+    ],
+    "places": [
+      "Vaitheeswaran Koil (Angaraka sthalam)"
+    ],
+    "charity": "Donate toor dal (thuvarai), a navadhanya grain associated with Mars",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Mars: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.mercury",
+    "title": "For Mercury (Budha)",
+    "triggers": [
+      "graha:mercury"
+    ],
+    "deity": "Vishnu (Perumal)",
+    "day": "Wednesday",
+    "practices": [
+      "Worship Vishnu (Perumal) on Wednesdays",
+      "Recite the Vishnu Sahasranamam"
+    ],
+    "places": [
+      "Thiruvenkadu Swetharanyeswarar temple (Budhan sthalam)"
+    ],
+    "charity": "Donate green gram (pachai payaru), a navadhanya grain associated with Mercury",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Mercury: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.jupiter",
+    "title": "For Jupiter (Guru)",
+    "triggers": [
+      "graha:jupiter"
+    ],
+    "deity": "Dakshinamurthy",
+    "day": "Thursday",
+    "practices": [
+      "Worship Dakshinamurthy on Thursdays",
+      "Respect and support teachers and elders"
+    ],
+    "places": [
+      "Alangudi Apatsahayeswarar temple (Guru sthalam)"
+    ],
+    "charity": "Donate Bengal gram (kondai kadalai), a navadhanya grain associated with Jupiter",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Jupiter: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.venus",
+    "title": "For Venus (Shukra)",
+    "triggers": [
+      "graha:venus"
+    ],
+    "deity": "Mahalakshmi",
+    "day": "Friday",
+    "practices": [
+      "Worship Mahalakshmi on Fridays",
+      "Recite the Lalitha Sahasranamam"
+    ],
+    "places": [
+      "Kanjanur Agneeswarar temple (Sukran sthalam)"
+    ],
+    "charity": "Donate white field beans (mochai), a navadhanya grain associated with Venus",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Venus: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.saturn",
+    "title": "For Saturn (Shani)",
+    "triggers": [
+      "graha:saturn"
+    ],
+    "deity": null,
+    "day": "Saturday",
+    "practices": [
+      "Light a sesame-oil lamp on Saturdays",
+      "Worship Hanuman",
+      "Serve and help the elderly and labourers"
+    ],
+    "places": [
+      "Thirunallar Dharbaranyeswarar temple (Saneeswaran sthalam)"
+    ],
+    "charity": "Donate black sesame (ellu), a navadhanya grain associated with Saturn",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Saturn: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.rahu",
+    "title": "For Rahu (Rahu)",
+    "triggers": [
+      "graha:rahu"
+    ],
+    "deity": "Durga",
+    "day": "during Rahu kalam",
+    "practices": [
+      "Worship Durga during Rahu kalam"
+    ],
+    "places": [
+      "Thirunageswaram Naganathaswamy temple (Rahu sthalam)"
+    ],
+    "charity": "Donate black gram (ulundu), a navadhanya grain associated with Rahu",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Rahu: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "graha.ketu",
+    "title": "For Ketu (Ketu)",
+    "triggers": [
+      "graha:ketu"
+    ],
+    "deity": "Vinayagar (Ganesha)",
+    "day": "Tuesday",
+    "practices": [
+      "Worship Vinayagar (Ganesha)"
+    ],
+    "places": [
+      "Keezhperumpallam Naganathar temple (Ketu sthalam)"
+    ],
+    "charity": "Donate horse gram (kollu), a navadhanya grain associated with Ketu",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Standard Tamil Navagraha association for Ketu: deity, day, sthalam and navadhanya grain."
+    }
+  },
+  {
+    "id": "dosha.chevvai",
+    "title": "For Chevvai (Kuja) dosha",
+    "triggers": [
+      "dosha:kuja"
+    ],
+    "deity": "Murugan",
+    "day": "Tuesday",
+    "practices": [
+      "Worship Murugan on Tuesdays",
+      "Recite the Skanda Sashti Kavacham",
+      "In Tamil practice, matching with a partner who has a comparable dosha (dosha samyam) is traditionally considered"
+    ],
+    "places": [
+      "Vaitheeswaran Koil",
+      "The Arupadai Veedu temples of Murugan"
+    ],
+    "charity": "Donate toor dal (thuvarai)",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Widely followed Tamil remedies for Chevvai dosha, including the dosha samyam custom."
+    }
+  },
+  {
+    "id": "dosha.sarpa",
+    "title": "For sarpa (naga) dosha",
+    "triggers": [
+      "dosha:sarpa"
+    ],
+    "deity": "Nagaraja",
+    "day": null,
+    "practices": [
+      "Worship Nagaraja and the naga deities",
+      "Offer the Ayilyam puja (Kerala practice)"
+    ],
+    "places": [
+      "Mannarasala Sree Nagaraja temple (Kerala)",
+      "Thirunageswaram and Keezhperumpallam (Tamil Nadu)",
+      "Srikalahasti (Andhra Pradesh)"
+    ],
+    "charity": null,
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Widely followed Kerala and Tamil remedies for sarpa dosha."
+    }
+  },
+  {
+    "id": "transit.shani",
+    "title": "During sade sati and challenging Saturn transits",
+    "triggers": [
+      "transit:sade_sati",
+      "transit:ashtama_shani",
+      "transit:ardhashtama_shani",
+      "transit:kantaka_shani"
+    ],
+    "deity": "Saneeswaran and Hanuman",
+    "day": "Saturday",
+    "practices": [
+      "Light a sesame-oil lamp on Saturdays",
+      "Worship Hanuman",
+      "Serve and help the elderly and labourers",
+      "Keep patience and steady routines"
+    ],
+    "places": [
+      "Thirunallar Dharbaranyeswarar temple"
+    ],
+    "charity": "Donate black sesame (ellu)",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Widely followed Tamil remedies during sade sati and ashtama shani."
+    }
+  },
+  {
+    "id": "dosha.pitru",
+    "title": "For pitru rina (the ancestors)",
+    "triggers": [
+      "dosha:pitru"
+    ],
+    "deity": "the pitrus (the forefathers)",
+    "day": "Amavasya, the new-moon day",
+    "practices": [
+      "Offer tarpanam on the new-moon day and through Mahalaya paksha",
+      "Perform or attend a Thila homam where that is the family custom",
+      "Feed others in the name of the departed, and look after the elders who are still living"
+    ],
+    "places": [
+      "Srivanchiyam and Thilatharpanapuri (Tamil Nadu)",
+      "Rameswaram, Agni Theertham",
+      "Thirunelveli Salivateeswarar temple"
+    ],
+    "charity": "Offer food, and black sesame with water, in the name of the forefathers",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Standard Tamil pitru observances: tarpanam at Amavasya and Mahalaya, Thila homam, and the recognised pitru sthalams."
+    }
+  },
+  {
+    "id": "dosha.matru",
+    "title": "For matru rina (the mother)",
+    "triggers": [
+      "dosha:matru"
+    ],
+    "deity": "Ambal (Parvati)",
+    "day": "Monday",
+    "practices": [
+      "Worship Ambal on Mondays",
+      "Recite the Abirami Anthadhi or the Lalitha Sahasranamam",
+      "Care for your mother in practical ways, or for elder women who stand in that place"
+    ],
+    "places": [
+      "Any Ambal sannidhi",
+      "Thingalur Kailasanathar temple (the Chandran sthalam)"
+    ],
+    "charity": "Offer rice, milk or white cloth",
+    "source": {
+      "reference": null,
+      "note": "Traditional practice as commonly followed in Tamil Nadu and Kerala, from general knowledge; reviewed by AI. Optional and devotional: no gemstones, no paid services, and never a substitute for medical, legal or financial advice."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Standard Tamil observances where the Moon or the 4th is afflicted: Ambal worship on Mondays, and service to the mother."
+    }
+  }
+]

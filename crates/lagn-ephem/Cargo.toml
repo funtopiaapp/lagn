@@ -1,0 +1,12 @@
+[package]
+name = "lagn-ephem"
+description = "Layer 1: safe, deterministic sidereal ephemeris over Swiss Ephemeris."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+swe-sys = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }

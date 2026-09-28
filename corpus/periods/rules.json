@@ -1,0 +1,481 @@
+[
+  {
+    "id": "periods.antar.functional_malefic",
+    "topic": "periods",
+    "title": "The antardasha lord is a functional malefic for this lagna",
+    "tradition": "parashari",
+    "when": {
+      "functional": {
+        "graha": {
+          "period": "antar"
+        },
+        "is": [
+          "malefic"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "subject": {
+      "period": "antar"
+    },
+    "text": {
+      "en": "The sub-period lord rules difficult houses for this lagna (3, 6, 8, 11 or 12 without a trikona), so its matters tend to demand effort.",
+      "impact": "During this stretch, matters tend to ask more effort than usual. It suits consolidating what you have rather than taking large risks."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Functional malefic sub-period lord: standard dasha judgement. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.maha.functional_malefic",
+    "topic": "periods",
+    "title": "The mahadasha lord is a functional malefic for this lagna",
+    "tradition": "parashari",
+    "when": {
+      "functional": {
+        "graha": {
+          "period": "maha"
+        },
+        "is": [
+          "malefic"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "subject": {
+      "period": "maha"
+    },
+    "text": {
+      "en": "The major-period lord rules difficult houses for this lagna, colouring the whole period with effort and adjustment.",
+      "impact": "This long period carries a demanding tone. Progress comes, but through effort and adjustment rather than easily."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Functional malefic major-period lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.dusthana",
+    "topic": "periods",
+    "title": "The antardasha lord sits in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "period": "antar"
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "subject": {
+      "period": "antar"
+    },
+    "text": {
+      "en": "The sub-period lord sits in a dusthana, so health, debts, disputes, sudden changes or expenses can come forward.",
+      "impact": "Health, expenses, disagreements or sudden changes are more likely to need attention in this stretch. Staying on top of routine matters keeps it manageable."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed period lord is classically adverse. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.debilitated",
+    "topic": "periods",
+    "title": "The antardasha lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "period": "antar"
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "subject": {
+      "period": "antar"
+    },
+    "text": {
+      "en": "The sub-period lord is debilitated, so its results may come with obstacles, unless the debilitation is cancelled.",
+      "impact": "Results may come more slowly than the effort deserves. Patience, and finishing what is already begun, work better than new ventures here."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Debilitated period lord; paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.neecha_bhanga",
+    "topic": "periods",
+    "title": "The antardasha lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "period": "antar"
+        }
+      }
+    },
+    "scope": "period",
+    "polarity": 0,
+    "overrides": [
+      "periods.antar.debilitated"
+    ],
+    "text": {
+      "en": "The sub-period lord is debilitated, but a recognised condition cancels the debilitation.",
+      "impact": "The weakness in this stretch is cancelled. What looks difficult at the start tends to turn around."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.combust",
+    "topic": "periods",
+    "title": "The antardasha lord is combust",
+    "tradition": "parashari",
+    "when": {
+      "combust": {
+        "graha": {
+          "period": "antar"
+        }
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "subject": {
+      "period": "antar"
+    },
+    "text": {
+      "en": "The sub-period lord is combust, so its significations may be subdued.",
+      "impact": "Your efforts may get less recognition than usual during this stretch. Keeping a record of what you have done is worth the trouble."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A combust period lord is classically weakened. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.shashtashtaka",
+    "topic": "periods",
+    "title": "The antardasha lord is 6th or 8th from the mahadasha lord",
+    "tradition": "parashari",
+    "when": {
+      "graha_from": {
+        "graha": {
+          "period": "antar"
+        },
+        "from": {
+          "period": "maha"
+        },
+        "houses": [
+          6,
+          8
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": -1,
+    "text": {
+      "en": "The two period lords stand 6th and 8th from each other (shashtashtaka), a classically uneasy combination calling for patience.",
+      "impact": "The two period lords sit uneasily together, which shows as friction: with people, or between what you want and what circumstances allow. Patience carries this one."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Shashtashtaka between dasha and bhukti lords is a standard adverse relationship. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.yogakaraka",
+    "topic": "periods",
+    "title": "The antardasha lord is the yogakaraka",
+    "tradition": "parashari",
+    "when": {
+      "functional": {
+        "graha": {
+          "period": "antar"
+        },
+        "is": [
+          "yogakaraka"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 2,
+    "text": {
+      "en": "The sub-period lord is the yogakaraka for this lagna, classically among the most rewarding sub-periods.",
+      "impact": "One of the better stretches of a life. Position, means and recognition tend to come together."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Yogakaraka period: standard. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.functional_benefic",
+    "topic": "periods",
+    "title": "The antardasha lord is a functional benefic",
+    "tradition": "parashari",
+    "when": {
+      "functional": {
+        "graha": {
+          "period": "antar"
+        },
+        "is": [
+          "benefic"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "The sub-period lord rules a trikona for this lagna, classically supportive.",
+      "impact": "A supportive stretch. Things tend to move in your favour for reasonable effort."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Functional benefic period lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.maha.yogakaraka",
+    "topic": "periods",
+    "title": "The mahadasha lord is the yogakaraka",
+    "tradition": "parashari",
+    "when": {
+      "functional": {
+        "graha": {
+          "period": "maha"
+        },
+        "is": [
+          "yogakaraka"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "The major-period lord is the yogakaraka for this lagna, supporting the whole period.",
+      "impact": "A favourable long period, supporting the whole stretch of years."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Yogakaraka major period. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.strong",
+    "topic": "periods",
+    "title": "The antardasha lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "period": "antar"
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "The sub-period lord is dignified and able to give its results fully.",
+      "impact": "The lord of this stretch is strong, so its results tend to come through fully."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dignified period lord delivers its results. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.antar.kendra_trikona",
+    "topic": "periods",
+    "title": "The antardasha lord sits in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "period": "antar"
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "The sub-period lord sits in a kendra or trikona, classically favourable.",
+      "impact": "A well-placed period lord, so this stretch tends to be a constructive one."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A well-placed period lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.harmony",
+    "topic": "periods",
+    "title": "The antardasha lord is in a kendra or trikona from the mahadasha lord",
+    "tradition": "parashari",
+    "when": {
+      "graha_from": {
+        "graha": {
+          "period": "antar"
+        },
+        "from": {
+          "period": "maha"
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "The two period lords stand in kendra or trikona from each other, a classically harmonious combination.",
+      "impact": "The two period lords work well together, so the stretch tends to feel settled."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Kendra/trikona relationship between period lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "periods.jupiter_aspect",
+    "topic": "periods",
+    "title": "Jupiter aspects the antardasha lord",
+    "tradition": "parashari",
+    "when": {
+      "aspects_graha": {
+        "from": "jupiter",
+        "to": {
+          "period": "antar"
+        }
+      }
+    },
+    "scope": "period",
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter aspects the sub-period lord, traditionally a protective influence through the period.",
+      "impact": "Jupiter's influence over this stretch is protective: difficulties tend to be softened."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect protects. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

@@ -1,0 +1,11 @@
+[package]
+name = "swe-sys"
+description = "Raw FFI bindings to the Swiss Ephemeris C library (vendored)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+links = "swe"
+
+[build-dependencies]
+cc = "1"

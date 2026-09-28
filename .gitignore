@@ -1,0 +1,10 @@
+/target
+**/*.rs.bk
+.DS_Store
+tools/swetest/swetest
+web/node_modules
+web/dist
+web/test-results
+web/playwright-report
+web/dist-xorigin
+*.orig

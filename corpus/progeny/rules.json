@@ -1,0 +1,485 @@
+[
+  {
+    "id": "progeny.l5.kendra_trikona",
+    "topic": "progeny",
+    "title": "The 5th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 5th house sits in a kendra or trikona, which classical texts read as support for children.",
+      "impact": "Matters of children are well supported in your chart."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a kendra or trikona strengthens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.l5.dusthana",
+    "topic": "progeny",
+    "title": "The 5th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 5
+    },
+    "text": {
+      "en": "The lord of the 5th house sits in a dusthana (the 6th, 8th or 12th), which classical texts read as strain on children.",
+      "impact": "This is read as children coming later, or after some effort, which may include medical help. The tradition has no quarrel with that. It speaks about timing and patience."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a dusthana weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.l5.strong",
+    "topic": "progeny",
+    "title": "The 5th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 5
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 5th house is exalted, in moolatrikona or in its own sign, and able to give its results fully.",
+      "impact": "A strong indication for children, and for a warm bond with them."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a dignified lord gives its bhava's results fully. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.l5.debilitated",
+    "topic": "progeny",
+    "title": "The 5th lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 5
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 5
+    },
+    "text": {
+      "en": "The lord of the 5th house is debilitated, which classical texts read as difficulty with children, unless the debilitation is cancelled.",
+      "impact": "Patience is usually called for in this area, and help where help is needed. A chart shows tendencies; it does not settle matters like this."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle, paired with a neecha bhanga cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.l5.neecha_bhanga",
+    "topic": "progeny",
+    "title": "The 5th lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 5
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "progeny.l5.debilitated"
+    ],
+    "text": {
+      "en": "The lord of the 5th house is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The difficulty is cancelled. What looked like a delay tends to resolve itself."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule (engine variant N-1). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.jupiter_aspects_5",
+    "topic": "progeny",
+    "title": "Jupiter aspects the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 5,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Jupiter, the putrakaraka, aspects the 5th house of children, traditionally a strong blessing for progeny.",
+      "impact": "The classical blessing for children. Jupiter's aspect here is among the best indications in a chart for progeny, and for happiness through them."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect on the 5th is a classical support. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.h5.benefic",
+    "topic": "progeny",
+    "title": "A natural benefic occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 5,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the 5th house of children.",
+      "impact": "A kindly influence on children, and on your relationship with them."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics in the 5th support progeny. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.jupiter.dusthana",
+    "topic": "progeny",
+    "title": "Jupiter is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "jupiter",
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "jupiter",
+    "text": {
+      "en": "Jupiter, the putrakaraka, sits in a dusthana, traditionally a sign that matters of children may call for patience.",
+      "impact": "Matters of children may ask for patience, and for help at some stage."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed putrakaraka is classically adverse. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.h5.nodes",
+    "topic": "progeny",
+    "title": "Rahu or Ketu occupies the 5th house",
+    "tradition": "kerala",
+    "when": {
+      "house_occupied": {
+        "house": 5,
+        "by": {
+          "grahas": [
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "dosha:sarpa"
+    ],
+    "text": {
+      "en": "Rahu or Ketu sits in the 5th house. South Indian practice, Kerala especially, associates this with sarpa dosha affecting progeny, and recommends traditional remedies.",
+      "impact": "Kerala and Tamil practice reads this as sarpa dosha touching this part of the chart, and prescribes the temple remedies listed below. In practice it is read as delay that responds to patience and, where needed, to medical help."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Nodes in the 5th as sarpa dosha is widely held in Kerala practice. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.h5.saturn",
+    "topic": "progeny",
+    "title": "Saturn occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          5
+        ]
+      }
+    },
+    "polarity": 0,
+    "text": {
+      "en": "Saturn in the 5th house is traditionally read as delay rather than denial in matters of children. Noted, not scored.",
+      "impact": "Saturn here is read as later rather than not at all. Children often come at a more settled stage of life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Saturn's delaying nature; unscored. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.d7.jupiter_strong",
+    "topic": "progeny",
+    "title": "Jupiter is strong in the saptamsa (D-7)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d7"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter is exalted, in moolatrikona or in its own sign in the saptamsa (D-7), the chart of progeny.",
+      "impact": "The chart read specifically for children agrees, which strengthens the promise."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-7 is the classical varga for children. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.timing.periods",
+    "topic": "progeny",
+    "title": "Periods examined for children",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 5
+      },
+      "jupiter",
+      {
+        "lord_of": 5,
+        "varga": "d7"
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for the birth of children: those of the 5th lord, Jupiter and the 5th lord of the saptamsa.",
+      "impact": "These are the stretches traditionally examined for the birth of children."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard progeny timing lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.jupiter.strong",
+    "topic": "progeny",
+    "title": "Jupiter is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter, the karaka of children (putrakaraka), is exalted, in moolatrikona or in its own sign.",
+      "impact": "Jupiter, the significator of children, is strong: the best-regarded single indication in this part of a chart."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Jupiter signifies children (putrakaraka). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.jupiter.debilitated",
+    "topic": "progeny",
+    "title": "Jupiter is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "jupiter",
+    "text": {
+      "en": "Jupiter, the karaka of children (putrakaraka), is debilitated, unless the debilitation is cancelled.",
+      "impact": "This area may ask for patience. Jupiter's condition speaks about timing, not about finality."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Jupiter signifies children (putrakaraka); paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "progeny.jupiter.neecha_bhanga",
+    "topic": "progeny",
+    "title": "Jupiter's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "jupiter"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "progeny.jupiter.debilitated"
+    ],
+    "text": {
+      "en": "Jupiter is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The difficulty is cancelled. What looked like a delay tends to resolve itself."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

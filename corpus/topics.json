@@ -1,0 +1,357 @@
+[
+  {
+    "id": "marriage",
+    "title": "Marriage",
+    "summary": "Marriage prospects, the spouse, and Chevvai dosha.",
+    "ages": [
+      18,
+      45
+    ],
+    "focus": {
+      "houses": [
+        7
+      ],
+      "karakas": [
+        {
+          "graha": "venus",
+          "role": "love, the spouse and married life"
+        },
+        {
+          "graha": "jupiter",
+          "role": "the husband in a woman's chart",
+          "sex": "female"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d9",
+          "house": 7
+        }
+      ]
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Marriage; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "career",
+    "title": "Career",
+    "summary": "Career strength, field indications and career periods.",
+    "ages": [
+      18,
+      65
+    ],
+    "focus": {
+      "houses": [
+        10
+      ],
+      "karakas": [
+        {
+          "graha": "sun",
+          "role": "authority and recognition"
+        },
+        {
+          "graha": "saturn",
+          "role": "work, service and perseverance"
+        },
+        {
+          "graha": "mercury",
+          "role": "commerce, skill and intellect at work"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d10",
+          "house": 10
+        }
+      ]
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Career; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "wealth",
+    "title": "Wealth",
+    "summary": "Wealth, gains, dhana yogas and financial periods.",
+    "ages": [
+      18,
+      80
+    ],
+    "focus": {
+      "houses": [
+        2,
+        11
+      ],
+      "karakas": [
+        {
+          "graha": "jupiter",
+          "role": "wealth, growth and good fortune"
+        },
+        {
+          "graha": "venus",
+          "role": "comforts and material enjoyment"
+        }
+      ],
+      "vargas": []
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Wealth; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "education",
+    "title": "Education",
+    "summary": "Learning, schooling and higher education.",
+    "ages": [
+      4,
+      30
+    ],
+    "focus": {
+      "houses": [
+        4,
+        5
+      ],
+      "karakas": [
+        {
+          "graha": "mercury",
+          "role": "intellect, learning and communication"
+        },
+        {
+          "graha": "jupiter",
+          "role": "wisdom, teachers and higher knowledge"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d24",
+          "house": 4
+        }
+      ]
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Education; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "health",
+    "title": "Health",
+    "summary": "Constitutional tendencies and areas to look after.",
+    "disclaimer": "This is a traditional astrological reading, not a medical assessment. For any health concern, consult a qualified doctor.",
+    "ages": [
+      0,
+      90
+    ],
+    "focus": {
+      "houses": [
+        1,
+        6
+      ],
+      "karakas": [
+        {
+          "graha": "sun",
+          "role": "vitality and the constitution"
+        },
+        {
+          "graha": "moon",
+          "role": "the mind and emotional balance"
+        }
+      ],
+      "vargas": []
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Health; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "vitality",
+    "title": "Vitality and care",
+    "summary": "Resilience of the constitution and periods for extra care.",
+    "disclaimer": "This is a traditional astrological reading, not a medical assessment. For any health concern, consult a qualified doctor. This reading never estimates a lifespan.",
+    "ages": [
+      0,
+      90
+    ],
+    "focus": {
+      "houses": [
+        1,
+        8
+      ],
+      "karakas": [
+        {
+          "graha": "saturn",
+          "role": "longevity and endurance (ayushkaraka)"
+        }
+      ],
+      "vargas": []
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Vitality and care; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "progeny",
+    "title": "Children",
+    "summary": "Prospects and timing for children.",
+    "ages": [
+      20,
+      45
+    ],
+    "focus": {
+      "houses": [
+        5
+      ],
+      "karakas": [
+        {
+          "graha": "jupiter",
+          "role": "children (putrakaraka)"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d7",
+          "house": 5
+        }
+      ]
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Children; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "parents",
+    "title": "Parents",
+    "summary": "The native's chart read for the mother (4th house, Moon) and father (9th house, Sun).",
+    "ages": [
+      0,
+      60
+    ],
+    "focus": {
+      "houses": [
+        4,
+        9
+      ],
+      "karakas": [
+        {
+          "graha": "moon",
+          "role": "the mother"
+        },
+        {
+          "graha": "sun",
+          "role": "the father"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d12",
+          "house": 4
+        },
+        {
+          "varga": "d12",
+          "house": 9
+        }
+      ]
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Parents; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "later_life",
+    "title": "Later life",
+    "summary": "Comfort, income and peace in later years; periods from about age 55.",
+    "ages": [
+      55,
+      85
+    ],
+    "focus": {
+      "houses": [
+        4,
+        11,
+        12
+      ],
+      "karakas": [
+        {
+          "graha": "saturn",
+          "role": "old age, discipline and endurance"
+        },
+        {
+          "graha": "jupiter",
+          "role": "wisdom and contentment"
+        }
+      ],
+      "vargas": []
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-21",
+      "comment": "Topic metadata for Later life; the disclaimer policy of DESIGN 6 section 2 applied. Focus (houses, karakas, vargas) per standard bhava and karaka assignments; D-12 dwadasamsa for parents."
+    }
+  },
+  {
+    "id": "past_life",
+    "title": "Past life",
+    "summary": "What the chart is traditionally held to carry forward from before this birth, and how that meets the life you are living now.",
+    "disclaimer": "This is a traditional interpretive frame, not a claim about events. It describes tendencies the chart is held to carry forward; it never names a past identity, place or time, and nothing here can be tested.",
+    "ages": [
+      0,
+      90
+    ],
+    "focus": {
+      "houses": [
+        5,
+        9,
+        12
+      ],
+      "karakas": [
+        {
+          "graha": "ketu",
+          "role": "what is already finished and carried forward"
+        },
+        {
+          "graha": "jupiter",
+          "role": "dharma, merit and good faith"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d60",
+          "house": 1
+        }
+      ],
+      "karmic_axis": true,
+      "bridge": true
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Topic metadata for the purva janma reading. Focus follows the standard sources for past merit: the 5th (purva punya), 9th (dharma), 12th (release), Ketu as karaka, and D-60 as the varga Parashara weights for past-life karma. The disclaimer states plainly that this is a frame, not a fact."
+    }
+  }
+]

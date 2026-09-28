@@ -1,0 +1,136 @@
+{
+  "houses": [
+    {
+      "house": 1,
+      "name": "Tanu",
+      "significations": [
+        "self",
+        "body and health",
+        "temperament",
+        "appearance"
+      ]
+    },
+    {
+      "house": 2,
+      "name": "Dhana",
+      "significations": [
+        "wealth",
+        "family",
+        "speech",
+        "food"
+      ]
+    },
+    {
+      "house": 3,
+      "name": "Sahaja",
+      "significations": [
+        "courage and initiative",
+        "younger siblings",
+        "communication",
+        "short journeys"
+      ]
+    },
+    {
+      "house": 4,
+      "name": "Sukha",
+      "significations": [
+        "mother",
+        "home and property",
+        "vehicles",
+        "comforts",
+        "schooling"
+      ]
+    },
+    {
+      "house": 5,
+      "name": "Putra",
+      "significations": [
+        "children",
+        "intelligence",
+        "creativity",
+        "past merit (purva punya)"
+      ]
+    },
+    {
+      "house": 6,
+      "name": "Ripu",
+      "significations": [
+        "health complaints",
+        "debts",
+        "disputes and competition",
+        "service"
+      ]
+    },
+    {
+      "house": 7,
+      "name": "Kalatra",
+      "significations": [
+        "spouse and marriage",
+        "partnerships",
+        "business dealings",
+        "public relations"
+      ]
+    },
+    {
+      "house": 8,
+      "name": "Randhra",
+      "significations": [
+        "sudden changes",
+        "inheritance and shared resources",
+        "research",
+        "hidden matters"
+      ]
+    },
+    {
+      "house": 9,
+      "name": "Bhagya",
+      "significations": [
+        "fortune",
+        "father",
+        "teachers and dharma",
+        "higher learning",
+        "long journeys"
+      ]
+    },
+    {
+      "house": 10,
+      "name": "Karma",
+      "significations": [
+        "career",
+        "status and recognition",
+        "authority",
+        "public actions"
+      ]
+    },
+    {
+      "house": 11,
+      "name": "Labha",
+      "significations": [
+        "gains and income",
+        "friends and networks",
+        "elder siblings",
+        "fulfilment of wishes"
+      ]
+    },
+    {
+      "house": 12,
+      "name": "Vyaya",
+      "significations": [
+        "expenses",
+        "foreign lands",
+        "rest and sleep",
+        "spiritual life"
+      ]
+    }
+  ],
+  "source": {
+    "reference": null,
+    "note": "Standard bhava karakatva, from general knowledge; reviewed by AI."
+  },
+  "review": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Standard Parashari bhava significations. The 8th house wording avoids predictive mention of death, per the content policy."
+  }
+}

@@ -1,0 +1,710 @@
+[
+  {
+    "id": "past_life.l5.strong",
+    "topic": "past_life",
+    "title": "The 5th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 5
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 5th house, the bhava of purva punya (merit carried from before this birth), is dignified. Classical texts read a strong 5th lord as merit that is intact and available.",
+      "impact": "In everyday terms, some things come to you more easily than your effort alone explains: help at the right moment, a knack you did not have to learn, goodwill you did not have to earn. The tradition reads that as credit already banked."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Core principle: the 5th is the bhava of purva punya; a dignified lord means merit intact."
+    }
+  },
+  {
+    "id": "past_life.l5.kendra_trikona",
+    "topic": "past_life",
+    "title": "The 5th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          9,
+          10,
+          7
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 5th house sits in a kendra or trikona, which classical texts read as merit that finds expression in this life.",
+      "impact": "Whatever you carry forward has somewhere to go in this life. Support tends to arrive through people and openings rather than having to be forced."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Core principle: a bhava lord in a kendra or trikona strengthens its bhava."
+    }
+  },
+  {
+    "id": "past_life.l5.dusthana",
+    "topic": "past_life",
+    "title": "The 5th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 5
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 5
+    },
+    "text": {
+      "en": "The lord of the 5th house sits in a dusthana, which classical texts read as merit that has to be renewed by effort in this life rather than drawn on freely.",
+      "impact": "Less tends to come for free than for others, and early support can be thin. The tradition's answer is plain: merit is renewable, and service, study and generosity in this life build it back. Effort here is not wasted."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "A dusthana-placed 5th lord weakens the bhava of past merit."
+    }
+  },
+  {
+    "id": "past_life.l5.debilitated",
+    "topic": "past_life",
+    "title": "The 5th lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 5
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 5
+    },
+    "text": {
+      "en": "The lord of the 5th house is debilitated, unless the debilitation is cancelled.",
+      "impact": "Support may feel scarce at the start of life, and recognition slow. This describes the opening position, not the closing one: patience and steady work change it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Core principle, paired with a neecha bhanga cancellation."
+    }
+  },
+  {
+    "id": "past_life.l5.neecha_bhanga",
+    "topic": "past_life",
+    "title": "The 5th lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 5
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "past_life.l5.debilitated"
+    ],
+    "text": {
+      "en": "The lord of the 5th house is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "What looked like a thin start is cancelled. Support tends to appear later, often after a stretch where you had to manage without it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Neecha bhanga cancels the debilitation rule (variant N-1)."
+    }
+  },
+  {
+    "id": "past_life.h5.benefic",
+    "topic": "past_life",
+    "title": "A natural benefic occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 5,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the 5th house, the bhava of merit carried forward.",
+      "impact": "A kindly influence over what you carry: good instincts, and people who wish you well turning up when it matters."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Benefics support the bhava they occupy."
+    }
+  },
+  {
+    "id": "past_life.h5.malefic",
+    "topic": "past_life",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 5,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 5th house, which classical texts read as merit that carries conditions with it.",
+      "impact": "What comes to you tends to come with a test attached: the opportunity that needs nerve, or the help that arrives late. Taking those tests rather than avoiding them is what the tradition says converts the merit."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Malefics in the 5th are classically adverse to its significations."
+    }
+  },
+  {
+    "id": "past_life.jupiter_aspects_5",
+    "topic": "past_life",
+    "title": "Jupiter aspects the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 5,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Jupiter aspects the 5th house of purva punya, traditionally the strongest protection of merit carried forward.",
+      "impact": "One of the better indications in this part of a chart: guidance and good fortune tend to find you, particularly when your intentions are straight."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Jupiter's aspect on the bhava of merit is a classical blessing."
+    }
+  },
+  {
+    "id": "past_life.l9.supported",
+    "topic": "past_life",
+    "title": "The 9th lord is dignified or in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 9
+            },
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        },
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 9
+            },
+            "houses": [
+              1,
+              4,
+              5,
+              9,
+              10,
+              7
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 9th house, the bhava of dharma and fortune, is dignified or well placed.",
+      "impact": "Your sense of what is right, and your luck, tend to point the same way. Teachers, elders and chance breaks play a real part in your life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "The 9th is the bhava of dharma and fortune; a strong lord supports both."
+    }
+  },
+  {
+    "id": "past_life.l9.dusthana",
+    "topic": "past_life",
+    "title": "The 9th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 9
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 9
+    },
+    "text": {
+      "en": "The lord of the 9th house sits in a dusthana, read as fortune that asks for effort and for faith to be rebuilt rather than inherited.",
+      "impact": "Beliefs handed down to you may not survive contact with your own life, and luck can feel absent in the early stretches. People with this placement often arrive at a steadier conviction of their own later, and value it more for having earned it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "A dusthana-placed 9th lord weakens dharma and fortune."
+    }
+  },
+  {
+    "id": "past_life.ketu.h12",
+    "topic": "past_life",
+    "title": "Ketu occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "ketu",
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Ketu, the graha of what is already finished, sits in the 12th house of release and moksha, a placement the tradition reads as favourable for inner completion.",
+      "impact": "A pull towards quiet, solitude and the inner life, and less appetite for display than most people have. The tradition treats this as a settled placement rather than a lack."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Ketu in the 12th is classically favourable for moksha."
+    }
+  },
+  {
+    "id": "past_life.ketu.trikona",
+    "topic": "past_life",
+    "title": "Ketu occupies the 5th or 9th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "ketu",
+        "houses": [
+          5,
+          9
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Ketu sits in a trikona, the houses of merit and dharma, which classical texts read as spiritual work already done.",
+      "impact": "Certain things you seem to have arrived already knowing, especially where insight matters more than instruction. It can also show as impatience with the beginner stages of things."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Ketu in a trikona is read as spiritual merit carried forward."
+    }
+  },
+  {
+    "id": "past_life.h12.released",
+    "topic": "past_life",
+    "title": "A benefic occupies the 12th house, or Jupiter aspects it",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "house_occupied": {
+            "house": 12,
+            "by": "benefics"
+          }
+        },
+        {
+          "house_aspected": {
+            "house": 12,
+            "by": {
+              "grahas": [
+                "jupiter"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A benefic influence on the 12th house, the bhava of release, which the tradition reads as an unforced letting go of what is finished.",
+      "impact": "You tend to be able to put things down when their time is over, without it costing you much. Rest, retreat and time alone restore you."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Benefic influence on the 12th supports its significations."
+    }
+  },
+  {
+    "id": "past_life.h12.unfinished",
+    "topic": "past_life",
+    "title": "Mars, Saturn or Rahu occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 12,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 12th house, read as attachments and matters not yet set down. (Ketu here is read differently and is not counted.)",
+      "impact": "Letting go tends to take longer for you than for others, whether of places, people or old grievances, and unbroken sleep matters more than you think. Deliberately finishing things, rather than leaving them open, is what helps."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Malefics in the 12th classically trouble its significations; Ketu excepted."
+    }
+  },
+  {
+    "id": "past_life.saturn_in_5",
+    "topic": "past_life",
+    "title": "Saturn occupies the 5th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          5
+        ]
+      }
+    },
+    "polarity": 0,
+    "text": {
+      "en": "Saturn in the 5th house of merit is read as fruit that ripens slowly: what is carried forward is real but arrives late.",
+      "impact": "Recognition and reward tend to come later than they do for your peers, and to last longer when they come. Noted rather than counted for or against."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Saturn's delaying nature in the bhava of merit; unscored."
+    }
+  },
+  {
+    "id": "past_life.d60.lagna_lord_strong",
+    "topic": "past_life",
+    "title": "The lagna lord is strong in the shashtiamsa (D-60)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 1
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d60"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the lagna is dignified in the shashtiamsa (D-60), the divisional chart Parashara weighs most heavily for karma carried from before this birth.",
+      "impact": "The finest of the divisional charts agrees with the main one here, which the tradition treats as the deepest kind of support. It is sensitive to the exact minute of birth, so it counts only where the birth time is known accurately."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "D-60 is the classical varga for purva janma karma (variant PL-2: lagna lord only)."
+    }
+  },
+  {
+    "id": "past_life.d60.lagna_lord_debilitated",
+    "topic": "past_life",
+    "title": "The lagna lord is debilitated in the shashtiamsa (D-60)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 1
+        },
+        "in": [
+          "debilitated"
+        ],
+        "varga": "d60"
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 1
+    },
+    "text": {
+      "en": "The lord of the lagna is debilitated in the shashtiamsa (D-60), the varga read for karma carried forward.",
+      "impact": "The finest divisional chart asks for more effort than the main one promises. It depends on the exact minute of birth, so treat it lightly unless your birth time is recorded precisely, and read the main chart first."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "D-60 confirmation, read cautiously because of its time sensitivity."
+    }
+  },
+  {
+    "id": "past_life.jupiter.strong",
+    "topic": "past_life",
+    "title": "Jupiter is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter, the karaka of dharma and merit, is dignified.",
+      "impact": "Generosity, teaching and good faith come naturally to you, and the tradition holds that these are exactly what build merit for what comes next."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Karaka dignity: Jupiter signifies dharma and merit."
+    }
+  },
+  {
+    "id": "past_life.jupiter.debilitated",
+    "topic": "past_life",
+    "title": "Jupiter is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "jupiter",
+    "text": {
+      "en": "Jupiter, the karaka of dharma and merit, is debilitated, unless the debilitation is cancelled.",
+      "impact": "Faith and good guidance may have to be found rather than inherited, and advice is worth checking before you act on it. Choosing teachers carefully matters here."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Karaka dignity, paired with neecha bhanga."
+    }
+  },
+  {
+    "id": "past_life.jupiter.neecha_bhanga",
+    "topic": "past_life",
+    "title": "Jupiter's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "jupiter"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "past_life.jupiter.debilitated"
+    ],
+    "text": {
+      "en": "Jupiter is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The difficulty is cancelled: guidance tends to arrive after a stretch of having to work things out alone."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Neecha bhanga cancels the debilitation rule."
+    }
+  },
+  {
+    "id": "past_life.timing.periods",
+    "topic": "past_life",
+    "title": "Periods when this comes forward",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 5
+      },
+      {
+        "lord_of": 9
+      },
+      "ketu",
+      "jupiter"
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for matters of merit and dharma: those of the 5th and 9th lords, Ketu and Jupiter.",
+      "impact": "These are the stretches when the pattern described here tends to show itself, often as a change in what you believe or what you want."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari principles for purva janma (the 5th house of past merit, the 9th, the 12th, the Ketu-Rahu axis and the D-60) and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The plain-language line describes tendencies carried forward, never events or identities."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-27",
+      "comment": "Standard timing lords for the bhavas of merit and dharma."
+    }
+  }
+]

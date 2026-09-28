@@ -1,0 +1,607 @@
+[
+  {
+    "id": "wealth.l2.kendra_trikona",
+    "topic": "wealth",
+    "title": "The 2nd lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 2
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 2nd house sits in a kendra or trikona, which classical texts read as support for wealth and family resources.",
+      "impact": "Money tends to stay with you. Income finds its way into savings, family resources and things you keep, rather than passing straight through."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a kendra or trikona strengthens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l2.dusthana",
+    "topic": "wealth",
+    "title": "The 2nd lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 2
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 2
+    },
+    "text": {
+      "en": "The lord of the 2nd house sits in a dusthana (the 6th, 8th or 12th), which classical texts read as strain on wealth and family resources.",
+      "impact": "Money tends to go out about as fast as it comes in, with expenses, dues or family needs taking their share. Budgeting and keeping savings out of easy reach help more than simply earning more."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a dusthana weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l2.strong",
+    "topic": "wealth",
+    "title": "The 2nd lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 2
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 2nd house is exalted, in moolatrikona or in its own sign, and able to give its results fully.",
+      "impact": "Resources hold. What you build up tends to last, and family means support you rather than drain you."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a dignified lord gives its bhava's results fully. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l2.debilitated",
+    "topic": "wealth",
+    "title": "The 2nd lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 2
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 2
+    },
+    "text": {
+      "en": "The lord of the 2nd house is debilitated, which classical texts read as difficulty with wealth and family resources, unless the debilitation is cancelled.",
+      "impact": "Savings can be harder to hold on to than to earn, particularly in the early years. This points to habits worth building rather than to a fixed level of means."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle, paired with a neecha bhanga cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l2.neecha_bhanga",
+    "topic": "wealth",
+    "title": "The 2nd lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 2
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "wealth.l2.debilitated"
+    ],
+    "text": {
+      "en": "The lord of the 2nd house is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. The early years may be tight, but resources tend to steady and grow later."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule (engine variant N-1). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l11.dusthana",
+    "topic": "wealth",
+    "title": "The 11th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 11
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 11
+    },
+    "text": {
+      "en": "The lord of the 11th house, the house of gains, sits in a dusthana, which classical texts read as gains that come with effort or are spent.",
+      "impact": "Gains tend to come with effort, or later than expected. Income from steady work usually serves you better than anything promising quick returns."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dusthana-placed 11th lord weakens gains. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.l11.strong",
+    "topic": "wealth",
+    "title": "The 11th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 11
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 11th house, the house of gains, is exalted, in moolatrikona or in its own sign.",
+      "impact": "Gains come readily: income, bonuses, help from friends, and the returns on work done earlier."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A dignified 11th lord supports gains. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.dhana_yoga",
+    "topic": "wealth",
+    "title": "Dhana yoga: the lords of wealth houses are related",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 2
+            },
+            "b": {
+              "lord_of": 11
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 2
+            },
+            "b": {
+              "lord_of": 9
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 2
+            },
+            "b": {
+              "lord_of": 5
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 5
+            },
+            "b": {
+              "lord_of": 11
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 9
+            },
+            "b": {
+              "lord_of": 11
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 1
+            },
+            "b": {
+              "lord_of": 2
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 1
+            },
+            "b": {
+              "lord_of": 11
+            }
+          }
+        },
+        {
+          "sambandha": {
+            "a": {
+              "lord_of": 5
+            },
+            "b": {
+              "lord_of": 9
+            }
+          }
+        }
+      ]
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Lords of the wealth-giving houses (1, 2, 5, 9, 11) are related by conjunction, mutual aspect or exchange: a dhana yoga, classically a sign of prosperity.",
+      "impact": "A genuine money combination. Earnings, savings and gains support each other, so wealth tends to build over the years rather than staying flat."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Dhana yoga from sambandha among the lords of 1, 2, 5, 9 and 11 is standard. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.h2.benefic_occupant",
+    "topic": "wealth",
+    "title": "A natural benefic occupies the 2nd house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 2,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the 2nd house, the house of wealth and family.",
+      "impact": "A kindly influence over your resources: family support, and money that arrives without much bitterness attached to it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics in the dhana bhava support it. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.h11.occupied",
+    "topic": "wealth",
+    "title": "A graha occupies the 11th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 11,
+        "by": "any"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "At least one graha sits in the 11th house. Classical texts hold that every graha gives gains from the 11th.",
+      "impact": "Gains have a clear channel in your chart, and income tends to come through more than one source."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "'All planets give good results in the 11th' is a commonly stated principle. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.lakshmi",
+    "topic": "wealth",
+    "title": "The 9th lord is strong and in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "all": [
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 9
+            },
+            "houses": [
+              1,
+              4,
+              5,
+              7,
+              9,
+              10
+            ]
+          }
+        },
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 9
+            },
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 9th house, the house of fortune, is dignified and well placed: a strong indication of fortune (akin to Lakshmi yoga).",
+      "impact": "Good fortune supports your means: the kind of luck that shows up as timely help, a well-timed opening, or support from elders."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A simplified Lakshmi-yoga condition: strong 9th lord in a kendra or trikona. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.sav.h11_strong",
+    "topic": "wealth",
+    "title": "The 11th house has 28 or more SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 11,
+        "min": 28
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The 11th house holds 28 or more Sarvashtakavarga bindus: a well-supported house of gains.",
+      "impact": "The part of the chart that governs gains is well supported, so income tends to respond when you put effort in."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The commonly taught 'above 28 bindus is good'. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.timing.periods",
+    "topic": "wealth",
+    "title": "Periods examined for wealth",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 2
+      },
+      {
+        "lord_of": 11
+      },
+      {
+        "lord_of": 9
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for financial gains: those of the 2nd, 11th and 9th lords.",
+      "impact": "These are the stretches when money matters usually move: a rise in income, a major purchase, or a change in how you earn."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard wealth timing lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.jupiter.strong",
+    "topic": "wealth",
+    "title": "Jupiter is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter, the karaka of wealth and wisdom, is exalted, in moolatrikona or in its own sign.",
+      "impact": "Jupiter looking after your resources usually shows as timely help, generosity that comes back to you, and growth without much grasping."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Jupiter signifies wealth and wisdom. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.jupiter.debilitated",
+    "topic": "wealth",
+    "title": "Jupiter is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "jupiter",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "jupiter",
+    "text": {
+      "en": "Jupiter, the karaka of wealth and wisdom, is debilitated, unless the debilitation is cancelled.",
+      "impact": "Growth in means may be slower, and advice about money is worth checking rather than taking on trust. Simple, conservative choices serve you best."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Jupiter signifies wealth and wisdom; paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "wealth.jupiter.neecha_bhanga",
+    "topic": "wealth",
+    "title": "Jupiter's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "jupiter"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "wealth.jupiter.debilitated"
+    ],
+    "text": {
+      "en": "Jupiter is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. Caution with money still suits you, but growth tends to come."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

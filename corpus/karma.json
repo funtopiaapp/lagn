@@ -1,0 +1,128 @@
+{
+  "ketu_house": [
+    {
+      "house": 1,
+      "station": "a life turned on its own resources: standing alone, doing things by one's own hand, and an independence that did not have to be taught"
+    },
+    {
+      "house": 2,
+      "station": "a life lived inside a household and its means: family, food, speech and the keeping of what was earned"
+    },
+    {
+      "house": 3,
+      "station": "a life of effort and nerve: initiative, journeys close to home, messages carried, and skill with the hands"
+    },
+    {
+      "house": 4,
+      "station": "a settled life on the land: a house, fields or property, vehicles, and the care of a household"
+    },
+    {
+      "house": 5,
+      "station": "a life of learning and counsel: study, teaching, advice given, devotion and recitation"
+    },
+    {
+      "house": 6,
+      "station": "a life of service: healing and medicine, discipline, dealing with conflict, debts and the troubles of others"
+    },
+    {
+      "house": 7,
+      "station": "a life bound to others: marriage, partnership, trade and constant dealing with the public"
+    },
+    {
+      "house": 8,
+      "station": "a life touched by upheaval and by what is not spoken of: inheritance, research, crisis, and the hidden side of things"
+    },
+    {
+      "house": 9,
+      "station": "a life of faith and instruction: pilgrimage, law, teaching, and guidance given to those who asked for it"
+    },
+    {
+      "house": 10,
+      "station": "a public life: office, administration or command, with responsibility carried in the open"
+    },
+    {
+      "house": 11,
+      "station": "a life among groups: guilds, patrons, alliances, and gains that came through other people"
+    },
+    {
+      "house": 12,
+      "station": "a life apart: retreat, foreign places, institutions of care or seclusion, and the inner life"
+    }
+  ],
+  "ketu_sign": [
+    {
+      "sign": 1,
+      "name": "Mesha",
+      "temperament": "forceful and quick to act, used to going first and to settling things directly"
+    },
+    {
+      "sign": 2,
+      "name": "Rishabha",
+      "temperament": "steady and patient, attached to comfort, to land and to what was rightfully one's own"
+    },
+    {
+      "sign": 3,
+      "name": "Mithuna",
+      "temperament": "quick-minded and many-sided, skilled with words, hands and the passing on of information"
+    },
+    {
+      "sign": 4,
+      "name": "Karka",
+      "temperament": "feeling and protective, bound closely to family, to home and to the care of others"
+    },
+    {
+      "sign": 5,
+      "name": "Simha",
+      "temperament": "proud and commanding, accustomed to being listened to and to answering for others"
+    },
+    {
+      "sign": 6,
+      "name": "Kanya",
+      "temperament": "exacting and analytical, serviceable, attentive to detail, health and method"
+    },
+    {
+      "sign": 7,
+      "name": "Tula",
+      "temperament": "companionable and fair-minded, made for agreement, negotiation and living alongside others"
+    },
+    {
+      "sign": 8,
+      "name": "Vrischika",
+      "temperament": "intense and private, enduring, well acquainted with crisis and with what survives it"
+    },
+    {
+      "sign": 9,
+      "name": "Dhanus",
+      "temperament": "principled and far-travelling, given to teaching and to matters of belief"
+    },
+    {
+      "sign": 10,
+      "name": "Makara",
+      "temperament": "disciplined and sparing, dutiful, used to carrying weight without complaint"
+    },
+    {
+      "sign": 11,
+      "name": "Kumbha",
+      "temperament": "unconventional and collective-minded, somewhat detached, at home among many rather than one"
+    },
+    {
+      "sign": 12,
+      "name": "Meena",
+      "temperament": "devotional and imaginative, self-effacing, drawn to what cannot be seen"
+    }
+  ],
+  "dispositor": {
+    "strong": "The lord of that sign is well placed in your chart, which the tradition reads as a life whose work bore fruit: what was taken up was carried through, and it is that completed quality you are held to arrive with.",
+    "weak": "The lord of that sign is weakly placed in your chart, which the tradition reads as work left unfinished: interrupted rather than failed. That is the thread this life is held to pick up, and the section below on debts says where."
+  },
+  "source": {
+    "reference": null,
+    "note": "Ketu by house and sign, read for the station and temperament carried forward, as commonly taught in modern South Indian practice; the condition of the lord of Ketu's sign is read for how that life went. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. These are the tradition's inferences about orientation and pattern, never a record of events."
+  },
+  "review": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-27",
+    "comment": "Ketu house and sign tables for the life carried forward. Each entry describes a station or a temperament, never an identity, a place or a time, since a chart cannot encode those."
+  }
+}

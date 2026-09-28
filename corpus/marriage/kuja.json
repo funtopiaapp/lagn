@@ -1,0 +1,625 @@
+[
+  {
+    "id": "marriage.kuja.from_lagna",
+    "topic": "marriage",
+    "title": "Chevvai dosha counted from the lagna",
+    "tradition": "tamil",
+    "when": {
+      "graha_from": {
+        "graha": "mars",
+        "from": "lagna",
+        "houses": [
+          2,
+          4,
+          7,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "tags": [
+      "dosha:kuja"
+    ],
+    "text": {
+      "en": "Mars is in the 2nd, 4th, 7th, 8th or 12th house counted from the lagna: Chevvai (Kuja) dosha. Tamil practice gives this great weight in marriage matching, and it is cancelled in several recognised conditions.",
+      "impact": "Chevvai dosha is widely respected in South Indian practice. In everyday terms it is read as friction or impatience in married life, not as a bar to marriage. The customary answer is matching with a partner whose chart carries the same dosha, and the remedies below. Most people whose charts carry it lead perfectly ordinary married lives."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Houses 2, 4, 7, 8, 12 from the lagna: the standard Tamil list. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.from_moon",
+    "topic": "marriage",
+    "title": "Chevvai dosha counted from the Moon",
+    "tradition": "tamil",
+    "when": {
+      "graha_from": {
+        "graha": "mars",
+        "from": "moon",
+        "houses": [
+          2,
+          4,
+          7,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -1,
+    "tags": [
+      "dosha:kuja"
+    ],
+    "text": {
+      "en": "Mars is in the 2nd, 4th, 7th, 8th or 12th house counted from the Moon: Chevvai (Kuja) dosha as judged from the Moon.",
+      "impact": "Counted from the Moon, this is the milder form of Chevvai dosha. It is read as some friction in married life, eased by the customary matching and the remedies below."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Changed: polarity -2 to -1. Recognised but weighted below the lagna, and avoids one Mars scoring -4 from two viewpoints. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.from_venus",
+    "topic": "marriage",
+    "title": "Chevvai dosha counted from Venus",
+    "tradition": "tamil",
+    "when": {
+      "graha_from": {
+        "graha": "mars",
+        "from": "venus",
+        "houses": [
+          2,
+          4,
+          7,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "tags": [
+      "dosha:kuja"
+    ],
+    "text": {
+      "en": "Mars is in the 2nd, 4th, 7th, 8th or 12th house counted from Venus. Not all practitioners use Venus as a reference point.",
+      "impact": "Counted from Venus, this form of Chevvai dosha is not used by every practitioner. Where it is used, it is read as friction to work through with patience, not as a bar to marriage."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "rejected",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Venus is not a universal reference point (variant R-2), and a third viewpoint over-counts one placement. Re-reviewed 2026-09-22: user-facing text cleaned of internal reviewer notes; meaning unchanged. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.cancel.dignity",
+    "topic": "marriage",
+    "title": "Chevvai dosha cancelled: Mars in its own or exaltation sign",
+    "tradition": "tamil",
+    "when": {
+      "graha_in_sign": {
+        "graha": "mars",
+        "signs": [
+          "mesha",
+          "vrischika",
+          "makara"
+        ]
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "marriage.kuja.from_lagna",
+      "marriage.kuja.from_moon",
+      "marriage.kuja.from_venus"
+    ],
+    "tags": [
+      "dosha:kuja",
+      "cancellation"
+    ],
+    "text": {
+      "en": "Mars is in its own sign (Mesha or Vrischika) or its exaltation sign (Makara), a commonly recognised cancellation of Chevvai dosha.",
+      "impact": "The dosha is cancelled. In practice the tradition treats a cancelled dosha as no longer standing in the way of a match."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Universally printed cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.cancel.jupiter",
+    "topic": "marriage",
+    "title": "Chevvai dosha cancelled: Jupiter with or aspecting Mars",
+    "tradition": "tamil",
+    "when": {
+      "any": [
+        {
+          "conjunct": {
+            "a": "mars",
+            "b": "jupiter"
+          }
+        },
+        {
+          "aspects_graha": {
+            "from": "jupiter",
+            "to": "mars"
+          }
+        }
+      ]
+    },
+    "polarity": 0,
+    "overrides": [
+      "marriage.kuja.from_lagna",
+      "marriage.kuja.from_moon",
+      "marriage.kuja.from_venus"
+    ],
+    "tags": [
+      "dosha:kuja",
+      "cancellation"
+    ],
+    "text": {
+      "en": "Jupiter shares a sign with Mars or aspects it, a commonly recognised cancellation of Chevvai dosha.",
+      "impact": "Jupiter's presence cancels the dosha. The tradition treats a cancelled dosha as no longer standing in the way of a match."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Universally printed cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.cancel.sign_exception_lagna",
+    "topic": "marriage",
+    "title": "Chevvai dosha cancelled by a house-specific sign exception, counted from the lagna",
+    "tradition": "tamil",
+    "when": {
+      "any": [
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "lagna",
+                "houses": [
+                  2
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mithuna",
+                  "kanya"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "lagna",
+                "houses": [
+                  4
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mesha",
+                  "vrischika"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "lagna",
+                "houses": [
+                  7
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "karka",
+                  "makara"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "lagna",
+                "houses": [
+                  8
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "dhanus",
+                  "meena"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "lagna",
+                "houses": [
+                  12
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "vrishabha",
+                  "tula"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "polarity": 0,
+    "overrides": [
+      "marriage.kuja.from_lagna"
+    ],
+    "tags": [
+      "dosha:kuja",
+      "cancellation"
+    ],
+    "text": {
+      "en": "Mars occupies a dosha house counted from the lagna, but in a sign that commonly recognised exceptions exempt: the 2nd in Mithuna or Kanya, the 4th in Mesha or Vrischika, the 7th in Karka or Makara, the 8th in Dhanus or Meena, the 12th in Vrishabha or Tula.",
+      "impact": "A recognised sign exception cancels the dosha, so it is not counted against a match."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The house-specific sign exceptions as commonly printed. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.cancel.sign_exception_moon",
+    "topic": "marriage",
+    "title": "Chevvai dosha cancelled by a house-specific sign exception, counted from the Moon",
+    "tradition": "tamil",
+    "when": {
+      "any": [
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "moon",
+                "houses": [
+                  2
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mithuna",
+                  "kanya"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "moon",
+                "houses": [
+                  4
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mesha",
+                  "vrischika"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "moon",
+                "houses": [
+                  7
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "karka",
+                  "makara"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "moon",
+                "houses": [
+                  8
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "dhanus",
+                  "meena"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "moon",
+                "houses": [
+                  12
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "vrishabha",
+                  "tula"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "polarity": 0,
+    "overrides": [
+      "marriage.kuja.from_moon"
+    ],
+    "tags": [
+      "dosha:kuja",
+      "cancellation"
+    ],
+    "text": {
+      "en": "Mars occupies a dosha house counted from the Moon, but in a sign that commonly recognised exceptions exempt: the 2nd in Mithuna or Kanya, the 4th in Mesha or Vrischika, the 7th in Karka or Makara, the 8th in Dhanus or Meena, the 12th in Vrishabha or Tula.",
+      "impact": "A recognised sign exception cancels the dosha, so it is not counted against a match."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The house-specific sign exceptions as commonly printed. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "marriage.kuja.cancel.sign_exception_venus",
+    "topic": "marriage",
+    "title": "Chevvai dosha cancelled by a house-specific sign exception, counted from Venus",
+    "tradition": "tamil",
+    "when": {
+      "any": [
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "venus",
+                "houses": [
+                  2
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mithuna",
+                  "kanya"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "venus",
+                "houses": [
+                  4
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "mesha",
+                  "vrischika"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "venus",
+                "houses": [
+                  7
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "karka",
+                  "makara"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "venus",
+                "houses": [
+                  8
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "dhanus",
+                  "meena"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "graha_from": {
+                "graha": "mars",
+                "from": "venus",
+                "houses": [
+                  12
+                ]
+              }
+            },
+            {
+              "graha_in_sign": {
+                "graha": "mars",
+                "signs": [
+                  "vrishabha",
+                  "tula"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "polarity": 0,
+    "overrides": [
+      "marriage.kuja.from_venus"
+    ],
+    "tags": [
+      "dosha:kuja",
+      "cancellation"
+    ],
+    "text": {
+      "en": "Mars occupies a dosha house counted from Venus, but in a sign that commonly recognised exceptions exempt: the 2nd in Mithuna or Kanya, the 4th in Mesha or Vrischika, the 7th in Karka or Makara, the 8th in Dhanus or Meena, the 12th in Vrishabha or Tula.",
+      "impact": "A recognised sign exception cancels the dosha, so it is not counted against a match."
+    },
+    "source": {
+      "reference": null,
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+    },
+    "review": {
+      "status": "rejected",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "It cancels a rejected rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

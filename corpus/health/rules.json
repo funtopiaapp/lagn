@@ -1,0 +1,692 @@
+[
+  {
+    "id": "health.l1.kendra_trikona",
+    "topic": "health",
+    "title": "The 1st (lagna) lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 1
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 1st (lagna) house sits in a kendra or trikona, which classical texts read as support for health and vitality.",
+      "impact": "Your constitution has good support. You tend to recover well and to keep your energy through demanding stretches."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a kendra or trikona strengthens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l1.dusthana",
+    "topic": "health",
+    "title": "The 1st (lagna) lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 1
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 1
+    },
+    "text": {
+      "en": "The lord of the 1st (lagna) house sits in a dusthana (the 6th, 8th or 12th), which classical texts read as strain on health and vitality.",
+      "impact": "Your body tends to let you know when you overdo things. Regular sleep, meals at fixed times and routine check-ups do more for you than they do for most people."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a dusthana weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l1.strong",
+    "topic": "health",
+    "title": "The 1st (lagna) lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 1
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 1st (lagna) house is exalted, in moolatrikona or in its own sign, and able to give its results fully.",
+      "impact": "A strong constitution. Good stamina and quick recovery are the usual pattern."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a dignified lord gives its bhava's results fully. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l1.debilitated",
+    "topic": "health",
+    "title": "The 1st (lagna) lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 1
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 1
+    },
+    "text": {
+      "en": "The lord of the 1st (lagna) house is debilitated, which classical texts read as difficulty with health and vitality, unless the debilitation is cancelled.",
+      "impact": "Energy can run lower than you would like, especially after pushing hard for a long stretch. Building health steadily, through rest, food and exercise you actually enjoy, matters more than any quick fix."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle, paired with a neecha bhanga cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l1.neecha_bhanga",
+    "topic": "health",
+    "title": "The 1st (lagna) lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 1
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "health.l1.debilitated"
+    ],
+    "text": {
+      "en": "The lord of the 1st (lagna) house is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. Frailty earlier in life tends to give way to better health as the years go on."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule (engine variant N-1). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l1.combust",
+    "topic": "health",
+    "title": "The lagna lord is combust",
+    "tradition": "parashari",
+    "when": {
+      "combust": {
+        "graha": {
+          "lord_of": 1
+        }
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 1
+    },
+    "text": {
+      "en": "The lord of the lagna is combust, too close to the Sun, traditionally read as lower resilience.",
+      "impact": "You may run on empty without noticing it. Pacing yourself, and stopping before you are exhausted, is the useful habit here."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Combustion weakens the lagna lord; half weight. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.h1.benefic",
+    "topic": "health",
+    "title": "A natural benefic occupies the lagna",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 1,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the lagna, traditionally a support for health.",
+      "impact": "A protective influence over your health. Things that could have been serious tend to stay mild."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics in the lagna support the body. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.h1.malefic",
+    "topic": "health",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the lagna",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 1,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the lagna, traditionally read as a need to look after health more deliberately.",
+      "impact": "Your health responds to how you live, more visibly than it does for most people. Attention to rest, food and movement pays off quickly, and neglect shows up quickly too."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics in the lagna are classically adverse to health. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.jupiter_aspects_lagna",
+    "topic": "health",
+    "title": "Jupiter aspects the lagna",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 1,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Jupiter aspects the lagna, traditionally a strong protection of health.",
+      "impact": "The classical protection. Health difficulties tend to be caught in time and to pass without lasting harm."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect on the lagna is a classical protection. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.h6.malefics",
+    "topic": "health",
+    "title": "A natural malefic occupies the 6th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 6,
+        "by": {
+          "grahas": [
+            "sun",
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural malefic sits in the 6th house, which classical texts read as the ability to overcome illness and opposition.",
+      "impact": "This sounds odd but is good news: the tradition reads it as the strength to throw off illness, and to come through competition and opposition intact."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics in the 6th (an upachaya) overcome its significations: disease and enemies. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l6_in_lagna",
+    "topic": "health",
+    "title": "The 6th lord is in the lagna",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 6
+        },
+        "houses": [
+          1
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 6
+    },
+    "text": {
+      "en": "The lord of the 6th house, the house of illness, sits in the lagna, traditionally a sign to be attentive to health.",
+      "impact": "It is worth being attentive to your health rather than assuming it looks after itself. Small complaints seen to early rarely become big ones."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "6th lord in the lagna links illness to the self. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.l8_in_lagna",
+    "topic": "health",
+    "title": "The 8th lord is in the lagna",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 8
+        },
+        "houses": [
+          1
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 8
+    },
+    "text": {
+      "en": "The lord of the 8th house sits in the lagna, traditionally a sign to guard against strain and sudden setbacks to health.",
+      "impact": "Your energy tends to come in cycles, with stretches of strain among them. Regular check-ups, and not ignoring symptoms, are the practical answer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "8th lord in the lagna is classically adverse to health. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.moon_afflicted",
+    "topic": "health",
+    "title": "The Moon shares a sign with Saturn, Rahu or Ketu",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "saturn"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "rahu"
+          }
+        },
+        {
+          "conjunct": {
+            "a": "moon",
+            "b": "ketu"
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "subject": "moon",
+    "text": {
+      "en": "The Moon, significator of the mind, shares a sign with Saturn, Rahu or Ketu, traditionally read as a tendency to emotional strain; rest and routine help.",
+      "impact": "The mind can carry more than it lets on: worry, broken sleep or low mood coming in phases. Rest, routine, people you can talk to, and professional help when you need it all make a difference."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "An afflicted Moon is classically associated with mental strain. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.sav.h1_strong",
+    "topic": "health",
+    "title": "The lagna has 28 or more SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 1,
+        "min": 28
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lagna holds 28 or more Sarvashtakavarga bindus, a well-supported first house.",
+      "impact": "Your chart gives the body good general support."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The commonly taught 'above 28 bindus is good'. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.tendency.saturn_lagna",
+    "topic": "health",
+    "title": "Saturn in the lagna: joints and posture",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          1
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "health:tendency"
+    ],
+    "text": {
+      "en": "Saturn in the lagna is traditionally associated with stiffness in the joints and bones. Regular movement and good posture are worth attention.",
+      "impact": "In practice: stiffness, and aches in the back or joints that come with cold weather or long sitting. Daily movement and attention to posture are what help."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Saturn; tendency only. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.tendency.mars_lagna",
+    "topic": "health",
+    "title": "Mars in the lagna: heat and minor injuries",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "mars",
+        "houses": [
+          1
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "health:tendency"
+    ],
+    "text": {
+      "en": "Mars in the lagna is traditionally associated with heat, inflammation and minor cuts or injuries. Avoiding haste helps.",
+      "impact": "In practice: heat in the body, inflammation, and the occasional cut, burn or sporting injury from moving fast. Slowing down at the right moments prevents most of it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Mars; tendency only. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.tendency.sun_dusthana",
+    "topic": "health",
+    "title": "The Sun in the 6th, 8th or 12th: energy and eyes",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "sun",
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "health:tendency"
+    ],
+    "text": {
+      "en": "The Sun in a dusthana is traditionally associated with fluctuating energy and attention to the eyes and heart. Regular check-ups are a sensible habit.",
+      "impact": "In practice: energy that dips, and eyes that tire. Regular check-ups, including eyes and heart, are a sensible habit rather than a cause for worry."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of the Sun; tendency only. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.tendency.nodes_lagna",
+    "topic": "health",
+    "title": "Rahu or Ketu in the lagna: seek clear diagnosis",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 1,
+        "by": {
+          "grahas": [
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "health:tendency"
+    ],
+    "text": {
+      "en": "Rahu or Ketu in the lagna is traditionally associated with complaints that are hard to pin down. A proper medical diagnosis matters more than guesswork.",
+      "impact": "In practice: complaints that are vague or hard to name. The useful response is a proper diagnosis from a doctor rather than guesswork or self-treatment."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of the nodes; tendency only. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.sun.strong",
+    "topic": "health",
+    "title": "The Sun is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "sun",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The Sun, the karaka of vitality, is exalted, in moolatrikona or in its own sign.",
+      "impact": "Vitality is well supported: good baseline energy, and a constitution that holds up."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: The Sun signifies vitality. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.sun.debilitated",
+    "topic": "health",
+    "title": "The Sun is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "sun",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "sun",
+    "text": {
+      "en": "The Sun, the karaka of vitality, is debilitated, unless the debilitation is cancelled.",
+      "impact": "Energy and confidence can dip in phases. Daylight, movement and regular meals help more than you would expect."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: The Sun signifies vitality; paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "health.sun.neecha_bhanga",
+    "topic": "health",
+    "title": "The Sun's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "sun"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "health.sun.debilitated"
+    ],
+    "text": {
+      "en": "The Sun is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. Energy tends to steady as life goes on."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

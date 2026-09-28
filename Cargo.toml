@@ -1,0 +1,29 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/swe-sys",
+    "crates/lagn-ephem",
+    "crates/lagn-core",
+    "crates/lagn-rules",
+    "crates/lagn-cli",
+    "crates/lagn-server",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+license = "AGPL-3.0-or-later"
+
+[workspace.dependencies]
+swe-sys     = { path = "crates/swe-sys" }
+lagn-ephem  = { path = "crates/lagn-ephem" }
+lagn-core   = { path = "crates/lagn-core" }
+lagn-rules  = { path = "crates/lagn-rules" }
+thiserror   = "2"
+serde       = { version = "1", features = ["derive"] }
+serde_json  = { version = "1", features = ["float_roundtrip"] }
+
+[profile.release]
+lto = true
+codegen-units = 1

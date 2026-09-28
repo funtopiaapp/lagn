@@ -1,0 +1,62 @@
+{
+  "dina": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "gana": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "mahendra": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "stree_deergha": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "yoni": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "rasi": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "rasi_adhipati": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "vasya": {
+    "status": "rejected",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Not confident of the Vasya sign table: printed Tamil tables disagree on several entries. Supply a trusted table to add it."
+  },
+  "rajju": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "vedha": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-09-21",
+    "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  }
+}

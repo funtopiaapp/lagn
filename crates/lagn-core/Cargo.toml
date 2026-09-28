@@ -1,0 +1,15 @@
+[package]
+name = "lagn-core"
+description = "Layers 2-3: charts, vargas, dashas. Pure, no I/O."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+lagn-ephem = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }

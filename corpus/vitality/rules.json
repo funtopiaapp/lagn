@@ -1,0 +1,368 @@
+[
+  {
+    "id": "vitality.l1.strong",
+    "topic": "vitality",
+    "title": "The lagna lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 1
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the lagna is dignified, traditionally a sign of strong constitution and resilience.",
+      "impact": "A robust constitution. You tend to bounce back from illness and strain faster than most people do."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Lagna lord strength is the primary vitality indicator. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.l1.weak",
+    "topic": "vitality",
+    "title": "The lagna lord is debilitated or in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 1
+            },
+            "in": [
+              "debilitated"
+            ]
+          }
+        },
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 1
+            },
+            "houses": [
+              6,
+              8,
+              12
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 1
+    },
+    "text": {
+      "en": "The lord of the lagna is debilitated or in a dusthana, traditionally a sign to build and protect one's constitution deliberately.",
+      "impact": "Your constitution asks to be built up rather than spent. Regular rest, food and moderate exercise repay you more here than in most charts."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A weak lagna lord is classically a sign of lower resilience. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.l8.well_placed",
+    "topic": "vitality",
+    "title": "The 8th lord is dignified or in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "dignity": {
+            "graha": {
+              "lord_of": 8
+            },
+            "in": [
+              "exalted",
+              "moolatrikona",
+              "own_sign"
+            ]
+          }
+        },
+        {
+          "graha_in_house": {
+            "graha": {
+              "lord_of": 8
+            },
+            "houses": [
+              1,
+              4,
+              5,
+              7,
+              9,
+              10
+            ]
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 8th house is dignified or well placed, traditionally a sign of sustained vitality.",
+      "impact": "Classically read as steady endurance: the body holds up well over the long run."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A strong 8th lord supports longevity matters classically. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.jupiter_aspect",
+    "topic": "vitality",
+    "title": "Jupiter aspects the lagna or the 8th house",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "house_aspected": {
+            "house": 1,
+            "by": {
+              "grahas": [
+                "jupiter"
+              ]
+            }
+          }
+        },
+        {
+          "house_aspected": {
+            "house": 8,
+            "by": {
+              "grahas": [
+                "jupiter"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter aspects the lagna or the 8th house, traditionally a protective influence on vitality.",
+      "impact": "A protective influence over your wellbeing. Difficulties tend to pass rather than settle in."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Jupiter's aspect is a classical protection. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.h8.benefic",
+    "topic": "vitality",
+    "title": "A natural benefic occupies the 8th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 8,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the 8th house, traditionally a support for vitality.",
+      "impact": "A kindly influence on endurance. Strain tends to ease rather than to build up."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics in the 8th are classically protective. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.h8.malefic",
+    "topic": "vitality",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 8th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 8,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 8th house, traditionally a sign to take particular care in periods ruled by that graha.",
+      "impact": "Worth taking the care periods below seriously, with proper rest and check-ups during them. This is about looking after yourself at the right times, nothing more."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Malefics in the 8th are classically adverse. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.care.periods",
+    "topic": "vitality",
+    "title": "Periods traditionally marked for extra care",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 6
+      },
+      {
+        "lord_of": 8
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis of the 6th and 8th lords are traditionally times to look after health with extra care: rest, routine and regular check-ups.",
+      "impact": "These are the stretches when the tradition advises extra care: keep to your routines, rest properly and have regular check-ups. They are times for attention, not for alarm."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "6th and 8th lord periods as care periods; framed as care, never as danger. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.saturn.strong",
+    "topic": "vitality",
+    "title": "Saturn is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "saturn",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Saturn, the karaka of longevity (ayushkaraka), is exalted, in moolatrikona or in its own sign.",
+      "impact": "Saturn, the significator of a long life, is strong here. Endurance and steady habits come naturally to you."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Saturn signifies longevity (ayushkaraka). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.saturn.debilitated",
+    "topic": "vitality",
+    "title": "Saturn is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "saturn",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "saturn",
+    "text": {
+      "en": "Saturn, the karaka of longevity (ayushkaraka), is debilitated, unless the debilitation is cancelled.",
+      "impact": "Stamina may run lower in stretches. Consistency in sleep, food and movement is what builds it back up."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Saturn signifies longevity (ayushkaraka); paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "vitality.saturn.neecha_bhanga",
+    "topic": "vitality",
+    "title": "Saturn's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "saturn"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "vitality.saturn.debilitated"
+    ],
+    "text": {
+      "en": "Saturn is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weakness is cancelled. Endurance tends to improve with age and routine."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]

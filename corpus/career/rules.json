@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "career.l10.kendra_trikona",
+    "topic": "career",
+    "title": "The 10th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 10
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 10th house sits in a kendra or trikona, which classical texts read as support for career and standing.",
+      "impact": "In everyday terms, work tends to go somewhere. Your efforts get noticed, and responsibility comes to you in the natural course rather than by struggle."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a kendra or trikona strengthens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.dusthana",
+    "topic": "career",
+    "title": "The 10th lord is in the 6th, 8th or 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 10
+        },
+        "houses": [
+          6,
+          8,
+          12
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 10
+    },
+    "text": {
+      "en": "The lord of the 10th house sits in a dusthana (the 6th, 8th or 12th), which classical texts read as strain on career and standing.",
+      "impact": "This often shows as a career that takes a less direct route: changes of job or field, stretches of working behind the scenes, or success that arrives later than it does for others. Many people with this placement do well in service, healthcare, research or work abroad. Persistence through the indirect stretches is what makes it come good."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a bhava lord in a dusthana weakens its bhava. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.strong",
+    "topic": "career",
+    "title": "The 10th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 10
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 10th house is exalted, in moolatrikona or in its own sign, and able to give its results fully.",
+      "impact": "This usually shows as steady standing at work. What you take up, you tend to hold, and your reputation grows with time rather than fading."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle: a dignified lord gives its bhava's results fully. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.debilitated",
+    "topic": "career",
+    "title": "The 10th lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 10
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 10
+    },
+    "text": {
+      "en": "The lord of the 10th house is debilitated, which classical texts read as difficulty with career and standing, unless the debilitation is cancelled.",
+      "impact": "Work can ask more effort of you than it seems to of others, or start slowly before it settles. This speaks about the pace of the climb, not about your ability."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Core principle, paired with a neecha bhanga cancellation. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.neecha_bhanga",
+    "topic": "career",
+    "title": "The 10th lord's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 10
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "career.l10.debilitated"
+    ],
+    "text": {
+      "en": "The lord of the 10th house is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The difficulty is lifted. A slow or awkward start at work tends to turn around, and the effort put in during the lean years is usually what carries you afterwards."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule (engine variant N-1). Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.saturn.strong",
+    "topic": "career",
+    "title": "Saturn is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "saturn",
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Saturn, the karaka of work and service, is exalted, in moolatrikona or in its own sign.",
+      "impact": "Discipline pays here. Long hours, patience and reliability tend to be noticed and rewarded, particularly in established organisations."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Saturn signifies work and service. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.saturn.debilitated",
+    "topic": "career",
+    "title": "Saturn is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": "saturn",
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": "saturn",
+    "text": {
+      "en": "Saturn, the karaka of work and service, is debilitated, unless the debilitation is cancelled.",
+      "impact": "Work may feel heavier than it should at times, and progress slower. Keeping steady routines and finishing what you start helps more than changing course often."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Karaka dignity: Saturn signifies work and service; paired with neecha bhanga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.saturn.neecha_bhanga",
+    "topic": "career",
+    "title": "Saturn's debilitation is cancelled",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": "saturn"
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "career.saturn.debilitated"
+    ],
+    "text": {
+      "en": "Saturn is debilitated, but a recognised condition cancels the debilitation (neecha bhanga).",
+      "impact": "The weight lifts. Patience is still asked of you, but the effort tends to start paying off."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Neecha bhanga cancels the debilitation rule. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.combust",
+    "topic": "career",
+    "title": "The 10th lord is combust",
+    "tradition": "parashari",
+    "when": {
+      "combust": {
+        "graha": {
+          "lord_of": 10
+        }
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 10
+    },
+    "text": {
+      "en": "The lord of the 10th house is combust, too close to the Sun, which is traditionally held to weaken it.",
+      "impact": "Your work may get less recognition than it deserves for a while, or your role may sit in someone else's shadow. Keeping a record of what you contribute helps."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Combustion weakens a lord; half weight. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.h10.benefic_occupant",
+    "topic": "career",
+    "title": "A natural benefic occupies the 10th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 10,
+        "by": "benefics"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "A natural benefic sits in the 10th house, the house of career and standing.",
+      "impact": "Working life tends to have a pleasant side to it: supportive colleagues, decent conditions, and help arriving when you need it."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Benefics in the karma bhava support it. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.sun_in_10",
+    "topic": "career",
+    "title": "The Sun is in the 10th house (directional strength)",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "sun",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The Sun gains directional strength (dig bala) in the 10th house, supporting authority and recognition at work.",
+      "impact": "You tend to be seen. Visible roles and positions of responsibility suit you, and recognition comes openly rather than quietly."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Dig bala: the Sun is strongest in the 10th. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.mars_in_10",
+    "topic": "career",
+    "title": "Mars is in the 10th house (directional strength)",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "mars",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Mars gains directional strength (dig bala) in the 10th house, supporting drive and capability at work.",
+      "impact": "You bring energy and push to your work. Demanding, competitive or technical roles tend to suit you, and you get things finished."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Dig bala: Mars is strongest in the 10th. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.dharma_karma_yoga",
+    "topic": "career",
+    "title": "The 9th and 10th lords are related (dharma-karmadhipati yoga)",
+    "tradition": "parashari",
+    "when": {
+      "sambandha": {
+        "a": {
+          "lord_of": 9
+        },
+        "b": {
+          "lord_of": 10
+        }
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lords of the 9th and 10th houses are related by conjunction, mutual aspect or exchange: the dharma-karmadhipati yoga, classically among the strongest combinations for career.",
+      "impact": "One of the better combinations for working life. What you believe in and what you do for a living tend to point the same way, and openings often come through mentors, teachers or people who take an interest in you."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Dharma-karmadhipati yoga is a standard raja yoga. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.lagna_karma",
+    "topic": "career",
+    "title": "The 1st and 10th lords are related",
+    "tradition": "parashari",
+    "when": {
+      "sambandha": {
+        "a": {
+          "lord_of": 1
+        },
+        "b": {
+          "lord_of": 10
+        }
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lords of the 1st and 10th houses are related, linking the native's own efforts directly to career.",
+      "impact": "Your work is closely tied to who you are. You tend to do best where your own name, judgement and effort are on the line, rather than in an anonymous role."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Lagna-karma lord sambandha is a commonly cited career combination. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.yogakaraka_placed",
+    "topic": "career",
+    "title": "The yogakaraka is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "any": [
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "mars",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "mars",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "venus",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "venus",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "saturn",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "saturn",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "moon",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "moon",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "sun",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "sun",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "mercury",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "mercury",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "all": [
+            {
+              "functional": {
+                "graha": "jupiter",
+                "is": [
+                  "yogakaraka"
+                ]
+              }
+            },
+            {
+              "graha_in_house": {
+                "graha": "jupiter",
+                "houses": [
+                  1,
+                  4,
+                  5,
+                  7,
+                  9,
+                  10
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The yogakaraka for this lagna (the graha ruling both a kendra and a trikona) sits in a kendra or trikona, classically a strong support for rise in career.",
+      "impact": "A real lift for working life. Position, responsibility and the means that come with them tend to arrive together, often in one good stretch of years."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "A well-placed yogakaraka is a standard raja yoga indicator. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.d10_strong",
+    "topic": "career",
+    "title": "The 10th lord is strong in the dasamsa (D-10)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 10
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d10"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the rasi-chart 10th house is exalted, in moolatrikona or in its own sign in the dasamsa (D-10), the chart of career.",
+      "impact": "The chart read specifically for career agrees with the main one, which strengthens the promise of a settled professional life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-10 confirmation of the 10th lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.l10.d10_debilitated",
+    "topic": "career",
+    "title": "The 10th lord is debilitated in the dasamsa (D-10)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 10
+        },
+        "in": [
+          "debilitated"
+        ],
+        "varga": "d10"
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 10
+    },
+    "text": {
+      "en": "The lord of the rasi-chart 10th house is debilitated in the dasamsa (D-10).",
+      "impact": "The chart read specifically for career is less supportive than the main one. Usually the outward position comes, but the daily work asks more of you than it looks like from outside. Guarding your own time and energy is the practical answer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "D-10 confirmation of the 10th lord. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.sav.h10_strong",
+    "topic": "career",
+    "title": "The 10th house has 28 or more SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 10,
+        "min": 28
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The 10th house holds 28 or more Sarvashtakavarga bindus, at or above the average: a well-supported house.",
+      "impact": "The career part of your chart carries good overall support, so effort at work tends to find a response."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "The commonly taught 'above 28 bindus is good'. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.timing.periods",
+    "topic": "career",
+    "title": "Periods examined for career",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 10
+      },
+      {
+        "lord_of": 10,
+        "varga": "d10"
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for career events: those of the 10th lord and of the 10th lord of the dasamsa.",
+      "impact": "These are the stretches of life when career matters usually move: a change of role, a promotion, or the decision to work for yourself."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard career timing lords. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.sun",
+    "topic": "career",
+    "title": "Sun in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "sun",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Sun in the 10th house is classically associated with government, administration and positions of authority. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards roles with authority or public standing: government service, administration, or being the person who answers for the work."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Sun in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.moon",
+    "topic": "career",
+    "title": "Moon in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "moon",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Moon in the 10th house is classically associated with public-facing work, care, hospitality and trades involving liquids. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work with people and their needs: care, hospitality, food, public-facing roles, or anything that depends on being liked and trusted."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Moon in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.mars",
+    "topic": "career",
+    "title": "Mars in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "mars",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Mars in the 10th house is classically associated with engineering, police or defence, surgery, sport and land or property. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work that needs nerve and precision: engineering, the forces, surgery, sport, or land and property."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Mars in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.mercury",
+    "topic": "career",
+    "title": "Mercury in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "mercury",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Mercury in the 10th house is classically associated with commerce, accounts, writing, communication and information technology. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work with words, numbers and systems: business, accounts, writing, teaching, software and communication."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Mercury in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.jupiter",
+    "topic": "career",
+    "title": "Jupiter in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "jupiter",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Jupiter in the 10th house is classically associated with teaching, law, finance, advisory and religious roles. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work that advises or guides: teaching, law, finance, consulting, or a religious or charitable role."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Jupiter in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.venus",
+    "topic": "career",
+    "title": "Venus in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "venus",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Venus in the 10th house is classically associated with the arts, design, entertainment, fashion, hospitality and luxury goods. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work with beauty and comfort in it: design, the arts, entertainment, fashion, hospitality or fine goods."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Venus in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.saturn",
+    "topic": "career",
+    "title": "Saturn in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Saturn in the 10th house is classically associated with service, industry, manufacturing, large organisations and work with labour. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards work that endures: industry, manufacturing, large organisations, public service, or anything built on patience and structure."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Saturn in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.rahu",
+    "topic": "career",
+    "title": "Rahu in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "rahu",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Rahu in the 10th house is classically associated with unconventional or foreign fields, technology and large networks. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards the unconventional: technology, foreign connections, large networks, or fields that did not exist a generation ago."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Rahu in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  },
+  {
+    "id": "career.field.ketu",
+    "topic": "career",
+    "title": "Ketu in the 10th house: career field indication",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "ketu",
+        "houses": [
+          10
+        ]
+      }
+    },
+    "polarity": 0,
+    "tags": [
+      "career:field"
+    ],
+    "text": {
+      "en": "Ketu in the 10th house is classically associated with research, specialised technical work and spiritual pursuits. An indication of inclination, to be weighed with the whole chart.",
+      "impact": "In practice, a pull towards depth rather than breadth: research, specialised technical work, healing, or a contemplative life."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-09-22",
+      "comment": "Standard karakatva of Ketu in the karma bhava; unscored because it describes a field, not strength. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+    }
+  }
+]
