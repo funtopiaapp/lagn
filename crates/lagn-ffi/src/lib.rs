@@ -339,10 +339,28 @@ mod tests {
     #[test]
     fn bad_input_comes_back_as_an_error_not_a_crash() {
         init();
-        for bad in ["", "{", "null", r#"{"birth":{"date":"nonsense"}}"#, r#"{"birth":null}"#] {
-            let b = cstring(bad);
+        // Each of these fails at a different stage, and the message must say
+        // which: a client showing "invalid request" for a bad latitude would
+        // be useless to whoever typed it.
+        let complete = |date: &str, time: &str, lat: &str| {
+            format!(r#"{{"birth":{{"date":"{date}","time":"{time}","latitude":{lat},"longitude":80.27,"utc_offset_hours":5.5}}}}"#)
+        };
+        let cases: Vec<(String, &str)> = vec![
+            ("".to_string(), "invalid request"),
+            ("{".to_string(), "invalid request"),
+            ("null".to_string(), "invalid request"),
+            (r#"{"birth":null}"#.to_string(), "invalid request"),
+            (r#"{"birth":{"date":"1985-06-21"}}"#.to_string(), "missing field"),
+            (complete("not-a-date", "14:30:00", "13.08"), "date must be YYYY-MM-DD"),
+            (complete("1985-02-30", "14:30:00", "13.08"), "invalid calendar date"),
+            (complete("1985-06-21", "25:00:00", "13.08"), "invalid clock time"),
+            (complete("1985-06-21", "14:30:00", "999"), "latitude 999 out of range"),
+        ];
+        for (bad, expected) in cases {
+            let b = cstring(&bad);
             let v = call(|| unsafe { lagn_chart(b.as_ptr()) });
-            assert!(v["error"].is_string(), "{bad:?} gave {v}");
+            let message = v["error"].as_str().unwrap_or_else(|| panic!("{bad:?} gave {v}"));
+            assert!(message.contains(expected), "{bad:?} gave {message:?}, expected {expected:?}");
         }
         // Null pointers are handled.
         let v = call(|| unsafe { lagn_chart(std::ptr::null()) });

@@ -8,6 +8,9 @@ rust-version.workspace = true
 # staticlib for iOS (linked into the app), cdylib for Android (loaded by the
 # JVM), rlib so the Rust tests can call the same code.
 crate-type = ["staticlib", "cdylib", "rlib"]
+# No runnable examples here, and rustdoc cannot resolve the dependency rlibs
+# for a staticlib/cdylib crate under the release profile's LTO.
+doctest = false
 
 [dependencies]
 lagn-server = { path = "../lagn-server" }
