@@ -2,6 +2,7 @@
 //! `docs/phase4/DESIGN.md`. The server computes nothing itself: every value
 //! comes from `lagn-core` and `lagn-rules`, unchanged.
 
+pub mod api;
 pub mod offset;
 pub mod places;
 pub mod view;
@@ -16,12 +17,10 @@ use axum::http::{HeaderMap, StatusCode};
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Json, Router};
-use lagn_core::{DerivationSettings, Ephemeris};
-use lagn_rules::corpus::{summary, Corpus, CorpusSummary};
-use lagn_rules::report::{match_report, review_sheet, MatchReport};
-use lagn_rules::resolve::{evaluate_topic, Mode};
-use lagn_rules::{FactBase, NativeInfo, StarPos};
-use serde::{Deserialize, Serialize};
+use lagn_rules::corpus::Corpus;
+use lagn_rules::report::{review_sheet, MatchReport};
+use lagn_rules::resolve::Mode;
+use serde::Deserialize;
 use axum::http::{header, HeaderName, HeaderValue, Method};
 use tower_http::catch_panic::CatchPanicLayer;
 use tower_http::cors::{AllowOrigin, CorsLayer};
@@ -30,7 +29,6 @@ use tower_http::limit::RequestBodyLimitLayer;
 use tower_http::services::{ServeDir, ServeFile};
 
 use crate::places::PlaceIndex;
-use crate::view::BirthInput;
 
 /// Maximum request body.
 pub const BODY_LIMIT: usize = 16 * 1024;
@@ -127,267 +125,51 @@ async fn health() -> Json<serde_json::Value> {
     Json(serde_json::json!({ "status": "ok" }))
 }
 
-#[derive(Serialize)]
-pub struct VersionInfo {
-    pub engine: &'static str,
-    pub swiss_ephemeris: String,
-    pub tzdb: String,
-    pub tzdb_considered: Vec<offset::TzCandidate>,
-    pub platform: String,
-    pub places: usize,
-    pub corpus: CorpusSummary,
-    pub poruthams_approved: usize,
-    pub review_enabled: bool,
-    pub attribution: &'static str,
+async fn version(State(s): State<Arc<AppState>>) -> Json<api::VersionInfo> {
+    Json(api::version(&s))
 }
 
-async fn version(State(s): State<Arc<AppState>>) -> Json<VersionInfo> {
-    let poruthams_approved = s
-        .corpus
-        .porutham
-        .as_ref()
-        .map(|m| m.values().filter(|r| r.status == lagn_rules::ReviewStatus::Approved).count())
-        .unwrap_or(0);
-    Json(VersionInfo {
-        engine: env!("CARGO_PKG_VERSION"),
-        swiss_ephemeris: Ephemeris::library_version(),
-        tzdb: s.tzdb.version_label(),
-        tzdb_considered: s.tzdb.considered.clone(),
-        platform: format!("{}-{}", std::env::consts::ARCH, std::env::consts::OS),
-        places: s.places.len(),
-        corpus: summary(&s.corpus),
-        poruthams_approved,
-        review_enabled: s.review_token.is_some(),
-        attribution: ATTRIBUTION,
-    })
-}
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct PlacesQuery {
-    q: String,
-    limit: Option<usize>,
-}
-
-async fn places_search(State(s): State<Arc<AppState>>, q: Result<Query<PlacesQuery>, axum::extract::rejection::QueryRejection>) -> ApiResult<Vec<places::Place>> {
+async fn places_search(State(s): State<Arc<AppState>>, q: Result<Query<api::PlacesQuery>, axum::extract::rejection::QueryRejection>) -> ApiResult<Vec<places::Place>> {
     let Query(q) = q.map_err(|e| ApiError::BadRequest(e.body_text()))?;
-    if q.q.chars().count() > 100 {
-        return Err(ApiError::BadRequest("query too long".into()));
-    }
-    Ok(Json(s.places.search(&q.q, q.limit.unwrap_or(10).clamp(1, 50))))
+    api::places(&s, &q).map(Json)
 }
 
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct OffsetQuery {
-    tz: String,
-    date: String,
-    time: String,
-    longitude: Option<f64>,
-}
-
-async fn offset_suggest(State(s): State<Arc<AppState>>, q: Result<Query<OffsetQuery>, axum::extract::rejection::QueryRejection>) -> ApiResult<offset::Suggestion> {
+async fn offset_suggest(State(s): State<Arc<AppState>>, q: Result<Query<api::OffsetQuery>, axum::extract::rejection::QueryRejection>) -> ApiResult<offset::Suggestion> {
     let Query(q) = q.map_err(|e| ApiError::BadRequest(e.body_text()))?;
-    let date = view::parse_date(&q.date).map_err(ApiError::BadRequest)?;
-    let time = view::parse_time(&q.time).map_err(ApiError::BadRequest)?;
-    offset::suggest(&s.tzdb, &q.tz, date, time, q.longitude).map(Json).map_err(ApiError::BadRequest)
-}
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct ChartRequest {
-    birth: BirthInput,
-    #[serde(default)]
-    derivation: Option<DerivationSettings>,
+    api::offset(&s, &q).map(Json)
 }
 
 async fn chart(body: Body) -> ApiResult<view::ChartResponse> {
-    let req: ChartRequest = parse_json(body)?;
-    compute(move || {
-        let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
-        let d = req.derivation.unwrap_or_default();
-        Ok(view::chart_response(req.birth, c, &d, Some(view::jd_now())))
-    })
-    .await
-    .map(Json)
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::chart(req)).await.map(Json)
 }
 
-fn check_ages(from: f64, to: f64) -> Result<(), ApiError> {
-    if !(from >= 0.0 && to > from && to <= 120.0) {
-        return Err(ApiError::BadRequest("age range must satisfy 0 <= from_age < to_age <= 120".into()));
-    }
-    Ok(())
-}
-
-#[derive(Serialize)]
-struct TopicsResponse {
-    topics: Vec<lagn_rules::catalogue::TopicMeta>,
-    bhavas: Vec<lagn_rules::catalogue::BhavaMeaning>,
-}
-
-/// The topic catalogue. Only approved topics that have approved natal rules
-/// are listed, so the app never offers a topic that would come back empty.
-async fn topics(State(s): State<Arc<AppState>>) -> Json<TopicsResponse> {
-    let topics = s
-        .corpus
-        .topics
-        .iter()
-        .filter(|t| Mode::Production.admits(t.review.status))
-        .filter(|t| {
-            s.corpus.rules.iter().any(|r| {
-                r.topic == t.id && r.scope == lagn_rules::Scope::Natal && Mode::Production.admits(r.review.status)
-            })
-        })
-        .cloned()
-        .collect();
-    let bhavas = s
-        .corpus
-        .bhavas
-        .as_ref()
-        .filter(|b| Mode::Production.admits(b.review.status))
-        .map(|b| b.houses.clone())
-        .unwrap_or_default();
-    Json(TopicsResponse { topics, bhavas })
-}
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct TopicRequest {
-    birth: BirthInput,
-    #[serde(default)]
-    derivation: Option<DerivationSettings>,
-    #[serde(default)]
-    sex: Option<lagn_rules::Sex>,
-    /// Defaults to the topic's catalogue ages (18-45 if it has none).
-    #[serde(default)]
-    from_age: Option<f64>,
-    #[serde(default)]
-    to_age: Option<f64>,
-    #[serde(default)]
-    mode: Mode,
+async fn topics(State(s): State<Arc<AppState>>) -> Json<api::TopicsResponse> {
+    Json(api::topics(&s))
 }
 
 async fn topic(State(s): State<Arc<AppState>>, UrlPath(name): UrlPath<String>, headers: HeaderMap, body: Body) -> ApiResult<view::TopicResponse> {
-    let req: TopicRequest = parse_json(body)?;
+    let req: api::TopicRequest = parse_json(body)?;
     let mode = authorise(&s, &headers, req.mode)?;
-    // Period rules are served by /api/periods, not as a topic.
-    if !s.corpus.rules.iter().any(|r| r.topic == name && r.scope == lagn_rules::Scope::Natal) {
-        return Err(ApiError::NotFound(format!("no rules for topic {name:?}")));
-    }
-    let meta = s.corpus.topics.iter().find(|t| t.id == name && mode.admits(t.review.status)).cloned();
-    let [dfrom, dto] = meta.as_ref().map(|m| m.ages).unwrap_or([18.0, 45.0]);
-    let (from_age, to_age) = (req.from_age.unwrap_or(dfrom), req.to_age.unwrap_or(dto));
-    check_ages(from_age, to_age)?;
-    compute(move || {
-        let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
-        let tz = c.birth.moment.utc_offset_hours;
-        let facts = FactBase::new(c, req.derivation.unwrap_or_default(), NativeInfo { sex: req.sex });
-        let report = evaluate_topic(&name, &s.corpus.rules, &facts, mode, (from_age, to_age));
-        let pariharams = lagn_rules::pariharam::suggest(&s.corpus, &report.results, &[], mode);
-        let writeup = meta.as_ref().map(|m| {
-            lagn_rules::writeup::write_up(&s.corpus, m, &m.focus, &report, &facts, (from_age, to_age), |_| true)
-        });
-        Ok(view::TopicResponse { meta, pariharams, writeup, ..view::topic_response(report, tz) })
-    })
-    .await
-    .map(Json)
+    compute(move || api::topic(&s, &name, req, mode)).await.map(Json)
 }
 
-fn d_from() -> f64 { 0.0 }
-fn d_to() -> f64 { 80.0 }
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct PeriodsRequest {
-    birth: BirthInput,
-    #[serde(default)]
-    derivation: Option<DerivationSettings>,
-    #[serde(default)]
-    sex: Option<lagn_rules::Sex>,
-    #[serde(default = "d_from")]
-    from_age: f64,
-    #[serde(default = "d_to")]
-    to_age: f64,
-    #[serde(default)]
-    mode: Mode,
-}
-
-/// Sensitive periods: every antardasha in the age range with its period
-/// rules, focus houses, overlapping transits and pariharams.
 async fn periods(State(s): State<Arc<AppState>>, headers: HeaderMap, body: Body) -> ApiResult<view::PeriodsResponse> {
-    let req: PeriodsRequest = parse_json(body)?;
+    let req: api::PeriodsRequest = parse_json(body)?;
     let mode = authorise(&s, &headers, req.mode)?;
-    check_ages(req.from_age, req.to_age)?;
-    compute(move || {
-        let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
-        let tz = c.birth.moment.utc_offset_hours;
-        let t = lagn_rules::reading::transits(&c, req.from_age, req.to_age)
-            .map_err(|e| ApiError::Internal(format!("transits: {e}")))?;
-        let mut facts = FactBase::new(c, req.derivation.unwrap_or_default(), NativeInfo { sex: req.sex });
-        let r = lagn_rules::reading::sensitive_periods(&s.corpus, &mut facts, mode, (req.from_age, req.to_age), &t.windows);
-        Ok(view::periods_response(r, &t, tz, view::jd_now()))
-    })
-    .await
-    .map(Json)
+    compute(move || api::periods(&s, req, mode)).await.map(Json)
 }
 
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct Person {
-    birth: BirthInput,
-    #[serde(default)]
-    sex: Option<lagn_rules::Sex>,
-}
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct FamilyRequest {
-    native: Person,
-    member: Person,
-    relation: lagn_rules::family::Relation,
-    #[serde(default)]
-    derivation: Option<DerivationSettings>,
-    #[serde(default)]
-    mode: Mode,
-}
-
-/// A family member's own chart beside the native's relational reading. Both
-/// birth records arrive with the request; nothing is stored.
 async fn family(State(s): State<Arc<AppState>>, headers: HeaderMap, body: Body) -> ApiResult<lagn_rules::family::FamilyReading> {
-    let req: FamilyRequest = parse_json(body)?;
+    let req: api::FamilyRequest = parse_json(body)?;
     let mode = authorise(&s, &headers, req.mode)?;
-    compute(move || {
-        let d = req.derivation.unwrap_or_default();
-        let n = req.native.birth.to_chart().map_err(|e| ApiError::BadRequest(format!("native: {e}")))?;
-        let m = req.member.birth.to_chart().map_err(|e| ApiError::BadRequest(format!("member: {e}")))?;
-        let native = FactBase::new(n, d, NativeInfo { sex: req.native.sex });
-        let member = FactBase::new(m, d, NativeInfo { sex: req.member.sex });
-        Ok(lagn_rules::family::family_reading(&s.corpus, &native, &member, req.relation, mode))
-    })
-    .await
-    .map(Json)
-}
-
-#[derive(Deserialize)]
-#[serde(deny_unknown_fields)]
-struct MatchRequest {
-    bride: BirthInput,
-    groom: BirthInput,
-    #[serde(default)]
-    mode: Mode,
+    compute(move || api::family(&s, req, mode)).await.map(Json)
 }
 
 async fn match_(State(s): State<Arc<AppState>>, headers: HeaderMap, body: Body) -> ApiResult<MatchReport> {
-    let req: MatchRequest = parse_json(body)?;
+    let req: api::MatchRequest = parse_json(body)?;
     let mode = authorise(&s, &headers, req.mode)?;
-    compute(move || {
-        let b = req.bride.to_chart().map_err(|e| ApiError::BadRequest(format!("bride: {e}")))?;
-        let g = req.groom.to_chart().map_err(|e| ApiError::BadRequest(format!("groom: {e}")))?;
-        let star = |c: &lagn_core::Chart| StarPos { nakshatra: c.janma_nakshatra().nakshatra, rasi: c.janma_rasi() };
-        Ok(match_report(&s.corpus, star(&b), star(&g), mode))
-    })
-    .await
-    .map(Json)
+    compute(move || api::match_(&s, req, mode)).await.map(Json)
 }
 
 #[derive(Deserialize)]

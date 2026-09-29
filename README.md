@@ -42,6 +42,7 @@ Specs: `docs/phase2/`, `docs/phase3/`, `docs/phase6/DESIGN.md`. QA: `tests/QA-PH
 | 7 | Interface: app shell, light/dark with a manual choice, family verdict and tabs | done: `docs/phase7/DESIGN.md`, `tests/QA-PHASE7.md` |
 | 8 | Past life (purva janma): merit carried forward, the Ketu-Rahu axis, and the bridge to the present-life readings | done: `docs/phase8/DESIGN.md`, `tests/QA-PHASE8.md` |
 | 9 | The life carried forward (station, temperament), bonds (partner, children), and debts (rina and shapa) with their remedies | done: `docs/phase9/DESIGN.md`, `tests/QA-PHASE9.md` |
+| 10 | Runs on the device with no server: a C ABI, an Android JNI layer, and a client that uses whichever transport exists | engine done and parity-tested; iOS/Android builds need Xcode and the NDK: `docs/phase10/DESIGN.md` |
 | 10 | Narration (Tamil, Malayalam) | not started |
 
 ## Layout
@@ -54,7 +55,10 @@ crates/
   lagn-rules/   layer 4 - rule language, evaluator, review gate, poruthams,
                 readings (periods, family, pariharams)
   lagn-cli/     validation CLI
-  lagn-server/  HTTP API (axum) serving the web app
+  lagn-server/  HTTP API (axum) serving the web app; `api` holds the
+                operations both transports call
+  lagn-ffi/     C ABI and Android JNI, so a phone runs the engine with no
+                server (`include/lagn.h`)
 corpus/         reviewed rules per topic, topics.json, bhava.json, pariharam.json
 web/            React PWA
 ephe/           .se1 ephemeris data, 1200-2400 AD

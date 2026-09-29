@@ -1,0 +1,32 @@
+[package]
+name = "lagn-ffi"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+# staticlib for iOS (linked into the app), cdylib for Android (loaded by the
+# JVM), rlib so the Rust tests can call the same code.
+crate-type = ["staticlib", "cdylib", "rlib"]
+# No runnable examples here, and rustdoc cannot resolve the dependency rlibs
+# for a staticlib/cdylib crate under the release profile's LTO.
+doctest = false
+
+[dependencies]
+lagn-server = { path = "../lagn-server" }
+lagn-rules = { path = "../lagn-rules" }
+lagn-core = { path = "../lagn-core" }
+serde = { workspace = true }
+jni = { version = "0.21", optional = true }
+serde_json = { workspace = true }
+
+[features]
+# Android: adds the Java_app_lagn_LagnNative_* entry points.
+jni = ["dep:jni"]
+
+[dev-dependencies]
+# Only for the parity test: the device build links none of this.
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
