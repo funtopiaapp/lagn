@@ -7,6 +7,7 @@ members = [
     "crates/lagn-rules",
     "crates/lagn-cli",
     "crates/lagn-server",
+    "crates/lagn-ffi",
 ]
 
 [workspace.package]
