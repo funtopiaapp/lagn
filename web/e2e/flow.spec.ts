@@ -1,6 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
+
 const TOKEN = readFileSync(new URL("./fixtures/review-token.txt", import.meta.url), "utf8").trim();
 
 async function enter(page: Page, date: string, time: string, place: string, pick: RegExp) {
@@ -16,6 +17,14 @@ async function chartFromApi(page: Page, birth: unknown) {
   expect(res.ok()).toBeTruthy();
   return res.json();
 }
+
+
+// Most of these tests exercise the HTTP transport. When the local engine is
+// deployed beside the app it answers instead, and no request is made - so the
+// engine is withheld here, and the tests that cover it opt back in.
+test.beforeEach(async ({ page }) => {
+  await page.route("**/engine/**", (route) => route.abort());
+});
 
 test("the rendered chart equals the API's output, cell for cell", async ({ page }) => {
   const errors: string[] = [];
@@ -377,4 +386,115 @@ test("sex is asked once, on the birth form, and used by every reading", async ({
     await page.getByRole("button", { name: tab, exact: true }).click();
     await expect(page.getByLabel(/sex/i)).toHaveCount(0);
   }
+});
+
+test("the source is offered to anyone using the hosted app (AGPL section 13)", async ({ page }) => {
+  await page.goto("/");
+  const link = page.getByRole("link", { name: "Source code" });
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute("href", "https://github.com/funtopiaapp/lagn");
+  await expect(page.getByText(/Free software, AGPL-3.0/)).toBeVisible();
+});
+
+test("the engine runs in the browser, and agrees with the server exactly", async ({ page }) => {
+  await page.unroute("**/engine/**"); // this test is about the local engine
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+
+  // The engine installs itself at start-up; wait for it rather than assuming.
+  await page.waitForFunction(() => typeof window.Lagn?.chart === "function", null, { timeout: 60_000 });
+
+  const birth = { date: "1985-06-21", time: "14:30:00", latitude: 13.08, longitude: 80.27, utc_offset_hours: 5.5 };
+
+  // Every reading, computed locally, must equal what the server computes.
+  const local = await page.evaluate(async (b) => {
+    interface Engine {
+      topics(): Promise<string>;
+      chart(request: string): Promise<string>;
+      periods(request: string): Promise<string>;
+      match(request: string): Promise<string>;
+      places(request: string): Promise<string>;
+      topic(name: string, request: string): Promise<string>;
+    }
+    const L = window.Lagn as unknown as Engine;
+    const topics = JSON.parse(await L.topics());
+    const out: Record<string, unknown> = {
+      topics,
+      chart: JSON.parse(await L.chart(JSON.stringify({ birth: b }))),
+      periods: JSON.parse(await L.periods(JSON.stringify({ birth: b, from_age: 20, to_age: 45 }))),
+      match: JSON.parse(await L.match(JSON.stringify({ bride: b, groom: b }))),
+      places: JSON.parse(await L.places(JSON.stringify({ q: "Chennai", limit: 3 }))),
+    };
+    for (const t of topics.topics as { id: string }[]) {
+      out[`topic:${t.id}`] = JSON.parse(await L.topic(t.id, JSON.stringify({ birth: b })));
+    }
+    return out;
+  }, birth);
+
+  // The comparison is the one scripts/qa_cross_platform.py already applies
+  // between macOS and Linux: anything discrete - a sign, a house, a verdict,
+  // a score, a sentence - must match exactly, and floating-point values are
+  // measured rather than assumed identical. wasi-libc's sin and cos differ
+  // from the host's in the last bits, which is why this is not byte equality.
+  const LIMIT = 1e-9;
+  function compare(local: unknown, server: unknown, path: string, out: { discrete: string[]; worst: number; worstAt: string }) {
+    const volatile = ["current", "running_now", "as_of_utc", "platform"];
+    if (local && server && typeof local === "object" && typeof server === "object" && !Array.isArray(local)) {
+      const a = local as Record<string, unknown>, b = server as Record<string, unknown>;
+      const keys = new Set([...Object.keys(a), ...Object.keys(b)].filter((k) => !volatile.includes(k)));
+      for (const k of keys) {
+        if (!(k in a) || !(k in b)) { out.discrete.push(`${path}.${k}: present on one side only`); continue; }
+        compare(a[k], b[k], `${path}.${k}`, out);
+      }
+    } else if (Array.isArray(local) && Array.isArray(server)) {
+      if (local.length !== server.length) { out.discrete.push(`${path}: length ${local.length} vs ${server.length}`); return; }
+      local.forEach((x, i) => compare(x, server[i], `${path}[${i}]`, out));
+    } else if (typeof local === "number" && typeof server === "number") {
+      const d = Math.abs(local - server);
+      if (d > out.worst) { out.worst = d; out.worstAt = path; }
+    } else if (local !== server) {
+      out.discrete.push(`${path}: ${JSON.stringify(local)} vs ${JSON.stringify(server)}`);
+    }
+  }
+
+  const post = async (path: string, body: unknown) =>
+    (await page.request.post(path, { data: body })).json();
+
+  const out = { discrete: [] as string[], worst: 0, worstAt: "" };
+  compare(local.topics, await (await page.request.get("/api/topics")).json(), "topics", out);
+  compare(local.chart, await post("/api/chart", { birth }), "chart", out);
+  compare(local.periods, await post("/api/periods", { birth, from_age: 20, to_age: 45 }), "periods", out);
+  compare(local.match, await post("/api/match", { bride: birth, groom: birth }), "match", out);
+
+  const topics = (local.topics as { topics: { id: string }[] }).topics;
+  expect(topics.length).toBeGreaterThanOrEqual(10);
+  for (const t of topics) {
+    compare(local[`topic:${t.id}`], await post(`/api/topic/${t.id}`, { birth }), `topic.${t.id}`, out);
+  }
+
+  // Nothing discrete may differ: every reading, verdict and sentence is identical.
+  expect(out.discrete).toEqual([]);
+  // And the numeric drift stays far below anything astrologically meaningful.
+  expect(out.worst, `largest numeric difference at ${out.worstAt}`).toBeLessThan(LIMIT);
+  console.log(`  local vs server: 0 discrete differences, largest numeric ${out.worst.toExponential(2)} at ${out.worstAt}`);
+
+  expect(errors).toEqual([]);
+});
+
+test("a reading is computed locally, with no network request for it", async ({ page }) => {
+  await page.unroute("**/engine/**");
+  const apiCalls: string[] = [];
+  page.on("request", (r) => { if (r.url().includes("/api/")) apiCalls.push(r.url()); });
+  await page.goto("/");
+  await page.waitForFunction(() => typeof window.Lagn?.chart === "function", null, { timeout: 60_000 });
+
+  await enter(page, "1985-06-21", "14:30", "Chennai", /Chennai/);
+  await page.getByRole("button", { name: "Compute chart" }).click();
+  await expect(page.locator("svg.si-chart")).toBeVisible();
+  await page.getByRole("button", { name: "Readings", exact: true }).click();
+  await expect(page.locator(".writeup .lead")).toBeVisible();
+
+  // Place search, the chart and the reading all happened in the browser.
+  expect(apiCalls).toEqual([]);
 });

@@ -12,6 +12,7 @@
 #define LAGN_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,6 +56,12 @@ char *lagn_offset(const char *request_json);
 
 /* Release a string returned by any function above. NULL is allowed. */
 void lagn_string_free(char *p);
+
+/* Allocate len bytes inside the module's memory, for hosts that cannot
+ * otherwise place a string there (WebAssembly). Native callers pass their own
+ * pointers and do not need these. */
+unsigned char *lagn_buffer_alloc(size_t len);
+void lagn_buffer_free(unsigned char *p, size_t len);
 
 #ifdef __cplusplus
 }

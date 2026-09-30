@@ -43,6 +43,7 @@ Specs: `docs/phase2/`, `docs/phase3/`, `docs/phase6/DESIGN.md`. QA: `tests/QA-PH
 | 8 | Past life (purva janma): merit carried forward, the Ketu-Rahu axis, and the bridge to the present-life readings | done: `docs/phase8/DESIGN.md`, `tests/QA-PHASE8.md` |
 | 9 | The life carried forward (station, temperament), bonds (partner, children), and debts (rina and shapa) with their remedies | done: `docs/phase9/DESIGN.md`, `tests/QA-PHASE9.md` |
 | 10 | Runs on the device with no server: a C ABI, an Android JNI layer, and a client that uses whichever transport exists | engine done and parity-tested; iOS/Android builds need Xcode and the NDK: `docs/phase10/DESIGN.md` |
+| 12 | The engine compiled to WebAssembly: every reading computed in the browser, deployable as static files | done: `docs/phase12/DESIGN.md`, `tests/QA-PHASE12.md` |
 | 10 | Narration (Tamil, Malayalam) | not started |
 
 ## Layout
@@ -66,6 +67,17 @@ tests/golden/   pinned charts (see that directory's README)
 tools/swetest/  the reference CLI, built from the vendored sources as an oracle
 scripts/        cross-validation and fixture generation
 ```
+
+## Run it with no server
+
+```bash
+bash scripts/build-wasm.sh      # compiles the engine to WebAssembly (needs wasi-sdk)
+cd web && npm run build         # the app, with the engine beside it
+```
+
+The result is static files. Every chart, reading and place search is computed
+in the browser; open the network tab and watch nothing happen.
+`node scripts/wasm-smoke.mjs` runs the same module outside a browser.
 
 ## Build and run
 
@@ -159,5 +171,11 @@ ambiguity that most needs to be visible.
 
 ## Licence
 
-AGPL-3.0-or-later, inherited from Swiss Ephemeris. **See `NOTICE.md` - this
-must be resolved before any closed-source deployment.**
+AGPL-3.0-or-later (`LICENSE`). Swiss Ephemeris is vendored under the same
+licence, which is what forces the choice: see `NOTICE.md`.
+
+One consequence worth knowing before planning a release: publishing the source
+satisfies the AGPL, but **AGPL and the Apple App Store are incompatible**, and
+open-sourcing does not fix that. Shipping an iOS build needs either the Swiss
+Ephemeris Professional Licence, or replacing the ephemeris. `NOTICE.md` sets
+out the three options.

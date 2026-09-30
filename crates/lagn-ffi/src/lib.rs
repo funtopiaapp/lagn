@@ -80,6 +80,35 @@ unsafe fn input<'a>(p: *const c_char) -> Option<&'a str> {
     unsafe { CStr::from_ptr(p) }.to_str().ok()
 }
 
+/// Allocate `len` bytes inside this module's own memory and return a pointer
+/// to them. A WebAssembly host has no other way to place a request string
+/// where the engine can read it: it writes the UTF-8 bytes plus a trailing
+/// NUL into this buffer and passes the pointer. Release with
+/// [`lagn_buffer_free`]. Native callers do not need this.
+#[no_mangle]
+pub extern "C" fn lagn_buffer_alloc(len: usize) -> *mut u8 {
+    if len == 0 {
+        return std::ptr::null_mut();
+    }
+    let mut buf = Vec::<u8>::with_capacity(len);
+    let ptr = buf.as_mut_ptr();
+    std::mem::forget(buf);
+    ptr
+}
+
+/// Release a buffer from [`lagn_buffer_alloc`]. `len` must be the length that
+/// was allocated.
+///
+/// # Safety
+/// `ptr` must come from `lagn_buffer_alloc` with the same `len`, and must not
+/// have been freed already.
+#[no_mangle]
+pub unsafe extern "C" fn lagn_buffer_free(ptr: *mut u8, len: usize) {
+    if !ptr.is_null() && len > 0 {
+        drop(unsafe { Vec::from_raw_parts(ptr, 0, len) });
+    }
+}
+
 /// Release a string returned by any function in this library.
 ///
 /// # Safety

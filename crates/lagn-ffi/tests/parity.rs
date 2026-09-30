@@ -233,12 +233,15 @@ fn the_header_declares_exactly_what_the_library_exports() {
     exported.dedup();
     assert!(exported.len() >= 12, "found only {exported:?}");
 
+    // Any top-level declaration of a lagn_* function, whatever its return type.
     let declared: Vec<String> = header
         .lines()
-        .filter(|l| l.starts_with("char *lagn") || l.starts_with("void lagn") || l.starts_with("bool lagn"))
+        .filter(|l| !l.starts_with(' ') && !l.starts_with('*') && l.contains("lagn_") && l.trim_end().ends_with(';'))
         .filter_map(|l| l.split('(').next())
         .map(|l| l.rsplit(['*', ' ']).next().unwrap().to_string())
+        .filter(|n| n.starts_with("lagn_"))
         .collect();
+    assert!(declared.len() >= 12, "the header parser found only {declared:?}");
 
     for name in &exported {
         assert!(declared.contains(name), "{name} is exported but not declared in include/lagn.h");
