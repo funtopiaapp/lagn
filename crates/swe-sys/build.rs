@@ -42,6 +42,14 @@ fn main() {
         // validated on macOS.
         .define("TLSOFF", None);
 
+    // WebAssembly has no dynamic loader, and upstream's swe_get_library_path
+    // calls dladdr to find its own .so. NO_SWE_GLP is upstream's own switch
+    // for suppressing that function; nothing here calls it.
+    let target_arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default();
+    if target_arch == "wasm32" {
+        build.define("NO_SWE_GLP", None);
+    }
+
     for src in SOURCES {
         build.file(vendor.join(src));
         println!("cargo:rerun-if-changed=vendor/{src}");
@@ -50,8 +58,9 @@ fn main() {
 
     build.compile("swe");
 
-    // libm: present in libSystem on Apple platforms, separate elsewhere.
-    if !cfg!(target_vendor = "apple") && cfg!(unix) {
+    // libm: present in libSystem on Apple platforms and in wasi-libc, separate
+    // elsewhere.
+    if target_arch != "wasm32" && !cfg!(target_vendor = "apple") && cfg!(unix) {
         println!("cargo:rustc-link-lib=m");
     }
 }

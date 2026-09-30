@@ -1,6 +1,8 @@
 import type {
   BirthInput, ChartResponse, FamilyReading, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
+import { bridge, type NativeBridge } from "./lib/native";
+import { transportReady } from "./lib/transport";
 
 /** An API failure, carrying the server's own error message. */
 export class ApiError extends Error {
@@ -18,6 +20,37 @@ export class ApiError extends Error {
  * --allow-origin.
  */
 export const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/+$/, "");
+
+/**
+ * One reading, two transports. On a device the engine is embedded and answers
+ * through `window.Lagn`; in a browser the same JSON comes over HTTP. Errors
+ * have the same `{error}` shape either way, so there is one error path.
+ */
+async function viaNative<T>(call: (b: NativeBridge) => Promise<string>): Promise<T | typeof NOT_NATIVE> {
+  // A call made while the engine is still loading waits for it, rather than
+  // falling through to a server that may not exist.
+  await transportReady();
+  const b = bridge();
+  if (!b) return NOT_NATIVE;
+  let text: string;
+  try {
+    text = await call(b);
+  } catch (e) {
+    throw new ApiError(0, e instanceof Error ? e.message : "The engine on this device failed to answer.");
+  }
+  let body: unknown;
+  try {
+    body = JSON.parse(text);
+  } catch {
+    throw new ApiError(0, "The engine on this device returned something unreadable.");
+  }
+  if (body && typeof body === "object" && "error" in body) {
+    throw new ApiError(400, String((body as { error: unknown }).error));
+  }
+  return body as T;
+}
+
+const NOT_NATIVE = Symbol("not native");
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let res: Response;
@@ -49,34 +82,58 @@ function post<T>(path: string, payload: unknown, reviewToken?: string): Promise<
 }
 
 export const api = {
-  version: () => request<VersionInfo>("/api/version"),
+  version: async () => {
+    const n = await viaNative<VersionInfo>((b) => b.version());
+    return n !== NOT_NATIVE ? n : request<VersionInfo>("/api/version");
+  },
 
-  places: (q: string, limit = 8) =>
-    request<Place[]>(`/api/places?${new URLSearchParams({ q, limit: String(limit) })}`),
+  places: async (q: string, limit = 8) => {
+    const n = await viaNative<Place[]>((b) => b.places(JSON.stringify({ q, limit })));
+    return n !== NOT_NATIVE ? n : request<Place[]>(`/api/places?${new URLSearchParams({ q, limit: String(limit) })}`);
+  },
 
-  offset: (tz: string, date: string, time: string, longitude?: number) => {
+  offset: async (tz: string, date: string, time: string, longitude?: number) => {
+    const n = await viaNative<OffsetSuggestion>((b) => b.offset(JSON.stringify({ tz, date, time, longitude })));
+    if (n !== NOT_NATIVE) return n;
     const p = new URLSearchParams({ tz, date, time });
     if (longitude !== undefined) p.set("longitude", String(longitude));
     return request<OffsetSuggestion>(`/api/offset?${p}`);
   },
 
-  chart: (birth: BirthInput) => post<ChartResponse>("/api/chart", { birth }),
+  chart: async (birth: BirthInput) => {
+    const n = await viaNative<ChartResponse>((b) => b.chart(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<ChartResponse>("/api/chart", { birth });
+  },
 
-  topics: () => request<TopicsResponse>("/api/topics"),
+  topics: async () => {
+    const n = await viaNative<TopicsResponse>((b) => b.topics());
+    return n !== NOT_NATIVE ? n : request<TopicsResponse>("/api/topics");
+  },
 
   /** Review mode is requested only when a reviewer token is supplied. Ages
    *  default to the topic's own range on the server. */
-  topic: (name: string, birth: BirthInput, opts: { sex?: "female" | "male"; from_age?: number; to_age?: number }, reviewToken?: string) =>
-    post<TopicResponse>(`/api/topic/${encodeURIComponent(name)}`,
-      { birth, ...opts, mode: reviewToken ? "review" : "production" }, reviewToken),
+  topic: async (name: string, birth: BirthInput, opts: { sex?: "female" | "male"; from_age?: number; to_age?: number }, reviewToken?: string) => {
+    const payload = { birth, ...opts, mode: reviewToken ? "review" : "production" };
+    const n = await viaNative<TopicResponse>((b) => b.topic(name, JSON.stringify(payload)));
+    return n !== NOT_NATIVE ? n : post<TopicResponse>(`/api/topic/${encodeURIComponent(name)}`, payload, reviewToken);
+  },
 
-  periods: (birth: BirthInput, opts: { sex?: "female" | "male"; from_age: number; to_age: number }, reviewToken?: string) =>
-    post<PeriodsResponse>("/api/periods", { birth, ...opts, mode: reviewToken ? "review" : "production" }, reviewToken),
+  periods: async (birth: BirthInput, opts: { sex?: "female" | "male"; from_age: number; to_age: number }, reviewToken?: string) => {
+    const payload = { birth, ...opts, mode: reviewToken ? "review" : "production" };
+    const n = await viaNative<PeriodsResponse>((b) => b.periods(JSON.stringify(payload)));
+    return n !== NOT_NATIVE ? n : post<PeriodsResponse>("/api/periods", payload, reviewToken);
+  },
 
-  family: (native: { birth: BirthInput; sex?: "female" | "male" }, member: { birth: BirthInput; sex?: "female" | "male" },
-    relation: string, reviewToken?: string) =>
-    post<FamilyReading>("/api/family", { native, member, relation, mode: reviewToken ? "review" : "production" }, reviewToken),
+  family: async (native: { birth: BirthInput; sex?: "female" | "male" }, member: { birth: BirthInput; sex?: "female" | "male" },
+    relation: string, reviewToken?: string) => {
+    const payload = { native, member, relation, mode: reviewToken ? "review" : "production" };
+    const n = await viaNative<FamilyReading>((b) => b.family(JSON.stringify(payload)));
+    return n !== NOT_NATIVE ? n : post<FamilyReading>("/api/family", payload, reviewToken);
+  },
 
-  match: (bride: BirthInput, groom: BirthInput, reviewToken?: string) =>
-    post<MatchResponse>("/api/match", { bride, groom, mode: reviewToken ? "review" : "production" }, reviewToken),
+  match: async (bride: BirthInput, groom: BirthInput, reviewToken?: string) => {
+    const payload = { bride, groom, mode: reviewToken ? "review" : "production" };
+    const n = await viaNative<MatchResponse>((b) => b.match(JSON.stringify(payload)));
+    return n !== NOT_NATIVE ? n : post<MatchResponse>("/api/match", payload, reviewToken);
+  },
 };

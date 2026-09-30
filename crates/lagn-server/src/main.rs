@@ -7,12 +7,23 @@ use clap::Parser;
 use lagn_core::Ephemeris;
 use lagn_server::{router_with, AppState, Cors};
 
+/// Hosting platforms hand the port over in $PORT and expect the process to
+/// listen on every interface. Locally, listening only on the loopback is the
+/// safer default.
+fn default_addr() -> String {
+    match std::env::var("PORT").ok().filter(|p| p.parse::<u16>().is_ok()) {
+        Some(port) => format!("0.0.0.0:{port}"),
+        None => "127.0.0.1:8080".to_string(),
+    }
+}
+
 #[derive(Parser)]
 #[command(name = "lagn-server", about = "HTTP API and web app for the lagn kernel")]
 struct Args {
-    /// Address to listen on.
-    #[arg(long, default_value = "127.0.0.1:8080")]
-    addr: String,
+    /// Address to listen on. Defaults to 127.0.0.1:8080, or 0.0.0.0:$PORT
+    /// when PORT is set, which is how most hosting platforms assign one.
+    #[arg(long)]
+    addr: Option<String>,
     #[arg(long, default_value = "ephe")]
     ephe: PathBuf,
     #[arg(long, default_value = "corpus")]
@@ -62,10 +73,11 @@ async fn run() -> Result<(), String> {
     let state_tz = state.tzdb.version_label();
     let cors = Cors::parse(&a.allow_origin)?;
     let app = router_with(state, a.static_dir.as_deref(), &cors);
-    let listener = tokio::net::TcpListener::bind(&a.addr).await.map_err(|e| format!("bind {}: {e}", a.addr))?;
+    let addr = a.addr.clone().unwrap_or_else(default_addr);
+    let listener = tokio::net::TcpListener::bind(&addr).await.map_err(|e| format!("bind {addr}: {e}"))?;
     eprintln!(
         "lagn-server listening on http://{}  (review mode: {}; tz database: {})",
-        a.addr, if review { "enabled" } else { "disabled" }, state_tz
+        addr, if review { "enabled" } else { "disabled" }, state_tz
     );
     axum::serve(listener, app)
         .with_graceful_shutdown(async { let _ = tokio::signal::ctrl_c().await; })

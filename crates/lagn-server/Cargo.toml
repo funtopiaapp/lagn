@@ -9,18 +9,25 @@ license.workspace = true
 [[bin]]
 name = "lagn-server"
 path = "src/main.rs"
+required-features = ["http"]
+
+[features]
+default = ["http"]
+# The axum transport. Off for WebAssembly and for a phone, where the engine is
+# called directly and no server exists.
+http = ["dep:axum", "dep:tokio", "dep:tower-http", "dep:clap"]
 
 [dependencies]
 lagn-core = { workspace = true }
 lagn-rules = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-axum = "0.8"
-tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
-tower-http = { version = "0.6", features = ["fs", "limit", "catch-panic", "timeout", "cors", "set-header"] }
+axum = { version = "0.8", optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"], optional = true }
+tower-http = { version = "0.6", features = ["fs", "limit", "catch-panic", "timeout", "cors", "set-header"], optional = true }
 jiff = { version = "0.2", features = ["tzdb-bundle-always"] }
 jiff-tzdb = "0.1"
-clap = { version = "4", features = ["derive", "env"] }
+clap = { version = "4", features = ["derive", "env"], optional = true }
 
 [dev-dependencies]
 tower = { version = "0.5", features = ["util"] }

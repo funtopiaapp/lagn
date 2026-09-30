@@ -80,6 +80,14 @@ test.describe("installable PWA", () => {
   });
 });
 
+
+// Most of these tests exercise the HTTP transport. When the local engine is
+// deployed beside the app it answers instead, and no request is made - so the
+// engine is withheld here, and the tests that cover it opt back in.
+test.beforeEach(async ({ page }) => {
+  await page.route("**/engine/**", (route) => route.abort());
+});
+
 test("the app runs under its Content-Security-Policy with no violations", async ({ page }) => {
   const violations: string[] = [];
   page.on("console", (m) => { if (/Content Security Policy|CSP/i.test(m.text())) violations.push(m.text()); });

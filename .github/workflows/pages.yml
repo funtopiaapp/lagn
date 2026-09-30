@@ -1,0 +1,79 @@
+# Build the app with the engine compiled to WebAssembly and publish it to
+# GitHub Pages. The result is static: no server, no database, nothing to pay
+# for, and every reading is computed in the visitor's browser.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# One deployment at a time; let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the Rust WebAssembly target
+        run: rustup target add wasm32-wasip1
+
+      - name: Install wasi-sdk
+        run: |
+          # Swiss Ephemeris is C, so a C compiler that targets WebAssembly is
+          # needed. Rust links the result with its own lld.
+          version=34
+          url="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${version}/wasi-sdk-${version}.0-x86_64-linux.tar.gz"
+          curl -fsSL "$url" -o /tmp/wasi-sdk.tar.gz
+          mkdir -p "$HOME/wasi-sdk"
+          tar xzf /tmp/wasi-sdk.tar.gz -C "$HOME/wasi-sdk" --strip-components=1
+          echo "WASI_SDK=$HOME/wasi-sdk" >> "$GITHUB_ENV"
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: wasm-${{ hashFiles('Cargo.lock') }}
+
+      - name: Build the engine
+        run: bash scripts/build-wasm.sh
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Build the app
+        working-directory: web
+        env:
+          # A project site is served from /<repo>/, so assets need that prefix.
+          BASE_URL: /${{ github.event.repository.name }}/
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -251,3 +251,4 @@ footer .meta { font-size: 0.8rem; }
 [data-kind="life_carried"], [data-kind="bonds"], [data-kind="debts"] { background: var(--surface-2); border-radius: var(--radius-sm); padding: 12px 14px; }
 [data-kind="debts"] { border-left: 4px solid var(--warn); }
 [data-kind="debts"] ul.points li { border-left-color: var(--warn); }
+footer a { color: var(--accent); }

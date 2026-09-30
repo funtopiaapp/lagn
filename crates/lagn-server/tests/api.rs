@@ -581,6 +581,8 @@ async fn every_response_carries_the_security_headers() {
         assert_eq!(h.get("x-content-type-options").unwrap(), "nosniff");
         assert_eq!(h.get("referrer-policy").unwrap(), "no-referrer");
         let csp = h.get("content-security-policy").unwrap().to_str().unwrap();
+        // script-src allows WebAssembly but never eval() of JavaScript.
+        assert!(csp.contains("'wasm-unsafe-eval'") && !csp.contains("'unsafe-eval'"), "{csp}");
         for d in ["default-src 'self'", "script-src 'self'", "frame-ancestors 'none'", "object-src 'none'"] {
             assert!(csp.contains(d), "CSP missing {d}: {csp}");
         }
