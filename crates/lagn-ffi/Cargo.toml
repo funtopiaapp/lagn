@@ -13,7 +13,7 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 doctest = false
 
 [dependencies]
-lagn-server = { path = "../lagn-server" }
+lagn-server = { path = "../lagn-server", default-features = false }
 lagn-rules = { path = "../lagn-rules" }
 lagn-core = { path = "../lagn-core" }
 serde = { workspace = true }
@@ -25,6 +25,8 @@ serde_json = { workspace = true }
 jni = ["dep:jni"]
 
 [dev-dependencies]
+# The parity test needs the HTTP transport to compare against.
+lagn-server = { path = "../lagn-server", features = ["http"] }
 # Only for the parity test: the device build links none of this.
 axum = "0.8"
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }

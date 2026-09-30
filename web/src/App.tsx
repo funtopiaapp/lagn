@@ -109,6 +109,12 @@ export function App() {
           </details>
         )}
         <p>For guidance and study. Not a substitute for professional advice on health, legal or financial matters.</p>
+        {/* AGPL section 13: anyone using this over a network is entitled to
+            the source of the version they are using. */}
+        <p>
+          Free software, AGPL-3.0.{" "}
+          <a href="https://github.com/funtopiaapp/lagn" target="_blank" rel="noopener noreferrer">Source code</a>.
+        </p>
         {version && (
           <p className="meta">
             Engine {version.engine} · Swiss Ephemeris {version.swiss_ephemeris} · tz database {version.tzdb} · {version.attribution}

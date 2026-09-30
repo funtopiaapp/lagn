@@ -2,6 +2,7 @@ import type {
   BirthInput, ChartResponse, FamilyReading, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
+import { transportReady } from "./lib/transport";
 
 /** An API failure, carrying the server's own error message. */
 export class ApiError extends Error {
@@ -26,6 +27,9 @@ export const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/+$/, ""
  * have the same `{error}` shape either way, so there is one error path.
  */
 async function viaNative<T>(call: (b: NativeBridge) => Promise<string>): Promise<T | typeof NOT_NATIVE> {
+  // A call made while the engine is still loading waits for it, rather than
+  // falling through to a server that may not exist.
+  await transportReady();
   const b = bridge();
   if (!b) return NOT_NATIVE;
   let text: string;
