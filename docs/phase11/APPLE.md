@@ -124,9 +124,16 @@ avoids putting an Apple ID password in a script.)
 The answers are unusually simple, and worth stating plainly because they are a
 selling point:
 
-- **Data collected: none.** No accounts, no analytics, no network calls.
-- Birth details and family members stay on the device.
+- **Data collected: none that identifies anyone.** No accounts, no profiles,
+  no cookies, no analytics SDK.
+- Birth details and family members stay on the device and are never sent
+  anywhere.
 - The engine runs locally, which is why the app works in aeroplane mode.
+- **One exception, stated in the footer:** the web deployment shows a visit
+  count, which is an image fetched from a counting service. That service sees
+  the visitor's IP address and browser, as any web request does. It is allowed
+  by the Content-Security-Policy as an image only - it cannot run scripts or
+  be connected to - and it is a build setting: an iOS build ships without it.
 
 If that ever stops being true, this section is the first thing to change.
 

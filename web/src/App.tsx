@@ -10,6 +10,7 @@ import { ReadingsView } from "./components/ReadingsView";
 import { loadToken, saveToken } from "./lib/session";
 import { loadTheme, type Theme } from "./lib/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
 type Tab = "chart" | "readings" | "periods" | "family" | "match";
@@ -115,6 +116,13 @@ export function App() {
           Free software, AGPL-3.0.{" "}
           <a href="https://github.com/funtopiaapp/lagn" target="_blank" rel="noopener noreferrer">Source code</a>.
         </p>
+        <VisitCounter />
+        {import.meta.env.VITE_COUNTER_BADGE && (
+          <p>
+            Visits are counted by a third party, which sees your address and browser. No cookies, no accounts.
+            Your birth details and family members never leave this device.
+          </p>
+        )}
         {version && (
           <p className="meta">
             Engine {version.engine} · Swiss Ephemeris {version.swiss_ephemeris} · tz database {version.tzdb} · {version.attribution}

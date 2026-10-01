@@ -769,3 +769,31 @@ async fn family_endpoint_equals_the_library_and_rejects_bad_input() {
     let (st, _, _) = call(app(None), post("/api/family", &json!({ "native": { "birth": b }, "member": { "birth": b }, "relation": "child", "mode": "review" }), None)).await;
     assert_eq!(st, StatusCode::FORBIDDEN);
 }
+
+#[test]
+fn the_counter_origin_is_allowed_as_an_image_and_nothing_else() {
+    use lagn_server::http::csp;
+    // Unset: no external host anywhere in the policy.
+    std::env::remove_var("LAGN_COUNTER_ORIGIN");
+    let plain = csp();
+    assert!(plain.contains("img-src 'self' data:"));
+    assert!(!plain.contains("https://"), "{plain}");
+
+    std::env::set_var("LAGN_COUNTER_ORIGIN", "https://hits.sh");
+    let with = csp();
+    assert!(with.contains("img-src 'self' data: https://hits.sh"), "{with}");
+    // The counting service may not run code, be connected to, or frame us.
+    for directive in ["script-src", "connect-src", "default-src"] {
+        let part = with.split(';').find(|d| d.trim().starts_with(directive)).unwrap();
+        assert!(!part.contains("hits.sh"), "{directive} must not name the counter: {part}");
+    }
+
+    // Anything that is not a bare https origin is ignored rather than trusted:
+    // this value reaches a response header, so an injected directive would be
+    // a policy bypass.
+    for bad in ["http://hits.sh", "https://hits.sh; script-src *", "https://hits.sh/path", "*", "https://a b"] {
+        std::env::set_var("LAGN_COUNTER_ORIGIN", bad);
+        assert_eq!(csp(), plain, "accepted {bad:?}");
+    }
+    std::env::remove_var("LAGN_COUNTER_ORIGIN");
+}

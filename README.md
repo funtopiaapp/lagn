@@ -77,6 +77,11 @@ cd web && npm run build         # the app, with the engine beside it
 
 The result is static files. Every chart, reading and place search is computed
 in the browser; open the network tab and watch nothing happen.
+
+The deployed site shows a visit count in the footer, which is the one request
+it makes to anyone - an image from a counting service, allowed by the
+Content-Security-Policy as an image and nothing else. Build without
+`VITE_COUNTER_BADGE` and the app contacts no one at all.
 `node scripts/wasm-smoke.mjs` runs the same module outside a browser.
 
 ## Build and run
