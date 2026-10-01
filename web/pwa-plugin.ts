@@ -6,12 +6,15 @@ import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import type { Plugin } from "vite";
 
-function cspFor(apiBase: string): string {
+function cspFor(apiBase: string, counter = ""): string {
   const api = apiBase ? ` ${new URL(apiBase).origin}` : "";
+  // The visit counter is an image from one named host, and nothing else: no
+  // script from it runs, and it is not allowed to be connected to.
+  const img = counter ? ` ${counter}` : "";
   return [
     // 'wasm-unsafe-eval' lets the engine compile in the browser; eval() of
     // JavaScript stays forbidden.
-    "default-src 'self'", "script-src 'self' 'wasm-unsafe-eval'", "style-src 'self'", "img-src 'self' data:",
+    "default-src 'self'", "script-src 'self' 'wasm-unsafe-eval'", "style-src 'self'", `img-src 'self' data:${img}`,
     `connect-src 'self'${api}`, "manifest-src 'self'", "worker-src 'self'", "font-src 'self'",
     "object-src 'none'", "base-uri 'none'", "form-action 'self'",
   ].join("; ");
@@ -69,14 +72,16 @@ self.addEventListener("fetch", (e) => {
 });
 `;
 
-export function pwa(apiBase: string, base = "/"): Plugin {
+export { cspFor };
+
+export function pwa(apiBase: string, base = "/", counterOrigin = ""): Plugin {
   let outDir = "dist";
   return {
     name: "lagn-pwa",
     configResolved(c) { outDir = c.build.outDir; },
     transformIndexHtml: (html) => html.replace(
       "<!--lagn:csp-->",
-      `<meta http-equiv="Content-Security-Policy" content="${cspFor(apiBase)}" />`,
+      `<meta http-equiv="Content-Security-Policy" content="${cspFor(apiBase, counterOrigin)}" />`,
     ),
     closeBundle() {
       // start_url and the icon paths are absolute in the source manifest;

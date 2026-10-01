@@ -60,6 +60,11 @@ jobs:
         env:
           # A project site is served from /<repo>/, so assets need that prefix.
           BASE_URL: /${{ github.event.repository.name }}/
+          # The visit counter shown in the footer. Counting needs a server and
+          # this app has none, so one external service is used; it is an image,
+          # allowed by the CSP as an image only. Unset it and the app makes no
+          # request to anyone after loading.
+          VITE_COUNTER_BADGE: https://hits.sh/funtopiaapp.github.io/lagn.svg?style=flat-square&label=visits&color=9c3417&labelColor=555555
         run: |
           npm ci
           npm run build

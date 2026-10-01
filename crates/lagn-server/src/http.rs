@@ -205,6 +205,24 @@ impl Cors {
 /// Content-Security-Policy for the web app served by this server.
 // 'wasm-unsafe-eval' permits compiling WebAssembly - the engine running in
 // the browser - without permitting eval() of JavaScript, which stays blocked.
+/// The policy actually sent. `LAGN_COUNTER_ORIGIN` adds one host to `img-src`
+/// so a visit counter can be shown when the app is served by this server; the
+/// static build does the same through its meta tag. The host is allowed as an
+/// image and nothing else - it may not run scripts or be connected to - and a
+/// value that is not a bare origin is ignored rather than trusted.
+pub fn csp() -> String {
+    match std::env::var("LAGN_COUNTER_ORIGIN") {
+        Ok(origin)
+            if origin.starts_with("https://")
+                && !origin.contains(|c: char| c.is_whitespace() || c == ';' || c == ',')
+                && origin.matches('/').count() == 2 =>
+        {
+            CSP.replace("img-src 'self' data:", &format!("img-src 'self' data: {origin}"))
+        }
+        _ => CSP.to_string(),
+    }
+}
+
 pub const CSP: &str = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; \
 connect-src 'self'; manifest-src 'self'; worker-src 'self'; font-src 'self'; object-src 'none'; \
 base-uri 'none'; form-action 'self'; frame-ancestors 'none'";
@@ -252,7 +270,10 @@ pub fn router_with(state: Arc<AppState>, static_dir: Option<&Path>, cors: &Cors)
         .layer(RequestBodyLimitLayer::new(BODY_LIMIT * 4))
         .layer(CatchPanicLayer::new())
         .layer(tower_http::timeout::TimeoutLayer::with_status_code(StatusCode::REQUEST_TIMEOUT, Duration::from_secs(20)))
-        .layer(SetResponseHeaderLayer::if_not_present(header::CONTENT_SECURITY_POLICY, HeaderValue::from_static(CSP)))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::CONTENT_SECURITY_POLICY,
+            HeaderValue::from_str(&csp()).unwrap_or_else(|_| HeaderValue::from_static(CSP)),
+        ))
         .layer(SetResponseHeaderLayer::if_not_present(header::X_CONTENT_TYPE_OPTIONS, HeaderValue::from_static("nosniff")))
         .layer(SetResponseHeaderLayer::if_not_present(header::REFERRER_POLICY, HeaderValue::from_static("no-referrer")))
 }

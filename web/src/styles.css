@@ -252,3 +252,5 @@ footer .meta { font-size: 0.8rem; }
 [data-kind="debts"] { border-left: 4px solid var(--warn); }
 [data-kind="debts"] ul.points li { border-left-color: var(--warn); }
 footer a { color: var(--accent); }
+.visits { margin: 8px 0 4px; }
+.visits img { display: block; opacity: 0.9; }
