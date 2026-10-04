@@ -67,7 +67,15 @@ fn replay(path: &Path, report: &mut Report) {
         report.verified += 1;
     }
 
+    // Every file in this directory must be a chart fixture; anything else is
+    // in the wrong place. Say so, rather than unwrapping into a bare None.
     let inp = &f["input"];
+    assert!(
+        inp["date"].is_string(),
+        "{}: not a chart fixture - no input.date. Every .json in tests/golden/ \
+         pins one birth chart; other fixtures belong elsewhere under tests/.",
+        path.display()
+    );
     let (year, month, day) = parse_date(inp["date"].as_str().unwrap());
     let (hour, minute, second) = parse_time(inp["time"].as_str().unwrap());
 

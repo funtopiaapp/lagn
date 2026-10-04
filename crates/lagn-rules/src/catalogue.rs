@@ -16,12 +16,29 @@ pub struct TopicMeta {
     /// Shown with every reading of this topic. Required for health and vitality.
     #[serde(default)]
     pub disclaimer: Option<String>,
+    /// A dosha readers come to this topic to ask about. The write-up states
+    /// its verdict either way, so the summary need not promise one that may
+    /// never appear.
+    #[serde(default)]
+    pub dosha: Option<DoshaNote>,
     /// Default age range for timing windows.
     pub ages: [f64; 2],
     /// What the write-up explains (DESIGN section 4a).
     #[serde(default)]
     pub focus: Focus,
     pub review: Review,
+}
+
+/// A dosha the topic reports on whether or not it is present. Its rules are
+/// found by the prefix they share, so the corpus decides which rules judge it
+/// and no topic name is written into the engine.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct DoshaNote {
+    /// As a reader knows it, e.g. "Chevvai dosha".
+    pub name: String,
+    /// Shared prefix of the rules that judge it, e.g. "marriage.kuja.".
+    pub rule_prefix: String,
 }
 
 /// The bhavas, karakas and divisional charts a topic's write-up explains.

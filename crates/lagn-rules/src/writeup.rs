@@ -31,6 +31,8 @@ pub enum SectionKind {
     Supporting,
     Care,
     Noted,
+    /// A named dosha's verdict, stated whether or not it applies.
+    Dosha,
     Eased,
     Unknown,
     Timing,
@@ -405,6 +407,79 @@ fn point(r: &RuleResult, rules: &[crate::Rule], f: &FactBase) -> Point {
     Point { rule: r.id.clone(), title: r.title.clone(), text: r.text.clone(), meaning: r.impact.clone(), polarity: r.polarity, because }
 }
 
+/// A definite verdict on a named dosha: present, present-but-cancelled, or
+/// absent. Readers open the marriage topic to ask about Chevvai dosha, and
+/// before this the subtitle promised an answer that only appeared when the
+/// dosha happened to apply (defect D4). Silence is not an answer, so the
+/// absent case is stated too.
+fn dosha_section(meta: &TopicMeta, report: &TopicReport, results: &[&RuleResult]) -> Option<Section> {
+    let note = meta.dosha.as_ref()?;
+    let mine = |id: &str| id.starts_with(note.rule_prefix.as_str());
+    let name = note.name.as_str();
+
+    // Rule titles repeat the dosha's name ("Chevvai dosha counted from the
+    // lagna"), which would stutter once the name is already in the sentence.
+    // What is left keeps its own capitalisation, so "the Moon" survives.
+    let detail = |title: &str| -> String {
+        title
+            .strip_prefix(name)
+            .map(|rest| rest.trim_start().to_string())
+            .filter(|rest| !rest.is_empty())
+            .unwrap_or_else(|| title.to_string())
+    };
+    let list = |items: Vec<String>| items.join("; ");
+
+    // Only the scored rules decide presence; the cancellation rules under the
+    // same prefix carry polarity 0 and would otherwise read as the dosha.
+    let present: Vec<String> = results
+        .iter()
+        .filter(|r| mine(&r.id) && r.effective && r.polarity < 0)
+        .map(|r| detail(&r.title))
+        .collect();
+    // Each entry names the count that was cancelled and the exception that
+    // cancelled it; naming only one of the two reads as the other.
+    let title_of = |id: &String| -> String {
+        report
+            .results
+            .iter()
+            .find(|r| &r.id == id)
+            .map(|r| r.title.clone())
+            .unwrap_or_else(|| id.clone())
+    };
+    let cancelled: Vec<String> = report
+        .cancelled
+        .iter()
+        .filter(|(id, _)| mine(id))
+        .map(|(id, by)| format!("{} - {}", detail(&title_of(id)), detail(&title_of(by))))
+        .collect();
+
+    let paragraph = if !present.is_empty() {
+        let mut t = format!("{name} applies in this chart: {}.", list(present));
+        if !cancelled.is_empty() {
+            t.push_str(&format!(
+                " A further count of it is not scored, being cancelled by a classical exception: {}.",
+                list(cancelled)
+            ));
+        }
+        t
+    } else if !cancelled.is_empty() {
+        format!(
+            "{name} would apply in this chart, but every count of it is cancelled by a classical \
+             exception, so it is not scored against this reading: {}.",
+            list(cancelled)
+        )
+    } else {
+        format!("{name} does not apply in this chart. No count of it is present.")
+    };
+
+    Some(Section {
+        kind: SectionKind::Dosha,
+        heading: name.to_string(),
+        paragraphs: vec![paragraph],
+        points: Vec::new(),
+    })
+}
+
 fn summary(meta: &TopicMeta, report: &TopicReport, results: &[&RuleResult]) -> Vec<String> {
     let pos: i32 = results.iter().filter(|r| r.effective && r.polarity > 0).map(|r| r.polarity as i32).sum();
     let neg: i32 = results.iter().filter(|r| r.effective && r.polarity < 0).map(|r| -(r.polarity as i32)).sum();
@@ -447,6 +522,7 @@ pub fn write_up(
     let mut sections: Vec<Section> = focus.houses.iter().map(|&h| house_section(f, bhavas, h)).collect();
     sections.extend(karaka_section(f, focus));
     sections.extend(varga_section(f, focus));
+    sections.extend(dosha_section(meta, report, &results));
     if focus.karmic_axis {
         sections.extend(life_carried_section(f, corpus.karma.as_ref()));
         sections.push(karmic_axis_section(f, bhavas));
@@ -529,7 +605,15 @@ pub fn write_up(
                 for t in &rule.timing {
                     if let Some(g) = f.resolve(*t) {
                         let why = crate::explain::graha(t);
+                        // A graha can time an area twice over: once as a house
+                        // lord, once as the karaka, which is itself. The second
+                        // reason is its own name, and printing it beside the
+                        // name already shown read "Venus (Shukra), the lord of
+                        // the 7th and Shukra". A real role always wins.
+                        let own = g.name();
                         match lords.iter_mut().find(|(x, _)| *x == g) {
+                            Some(_) if why == own => {}
+                            Some((_, w)) if w.as_str() == own => *w = why,
                             Some((_, w)) if !w.contains(&why) => { w.push_str(" and "); w.push_str(&why); }
                             Some(_) => {}
                             None => lords.push((g, why)),
@@ -554,9 +638,34 @@ pub fn write_up(
             .collect();
         paragraphs.extend(shown);
         if windows.len() > 12 {
-            paragraphs.push(format!("...and {} more periods (see the table under Details).", windows.len() - 12));
+            // The count is of what this list leaves out, so it has to say what
+            // the table holds, or it reads as the total (defect D3).
+            let more = windows.len() - 12;
+            paragraphs.push(format!(
+                "...and {more} more {}; the table under Details lists all {}.",
+                if more == 1 { "period" } else { "periods" },
+                windows.len()
+            ));
         }
         sections.push(Section { kind: SectionKind::Timing, heading: "Timing".into(), paragraphs, points: Vec::new() });
+    } else {
+        // Health and parents carry no reviewed timing rule, so those topics
+        // never show a timing table at all. A section that silently vanishes
+        // looks like an unfinished feature; saying which case this is costs a
+        // sentence (defect D6).
+        let topic_is_timed = corpus.rules.iter().any(|r| r.topic == meta.id && !r.timing.is_empty());
+        let text = if topic_is_timed {
+            format!(
+                "No dasha period between ages {} and {} is picked out for this area by the timing rules.",
+                ages.0, ages.1
+            )
+        } else {
+            "This engine does not time this area by dasha: no classical timing rule for it has been \
+             reviewed. What is written above describes the standing condition of the chart, not when \
+             it comes forward."
+                .to_string()
+        };
+        sections.push(Section { kind: SectionKind::Timing, heading: "Timing".into(), paragraphs: vec![text], points: Vec::new() });
     }
 
     WriteUp { summary: summary(meta, report, &results), sections }
