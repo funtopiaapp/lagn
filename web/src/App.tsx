@@ -86,7 +86,7 @@ export function App() {
               ))}
             </nav>
             {tab === "chart" && <ChartView chart={chart} />}
-            {tab === "readings" && <ReadingsView birth={chart.input} sex={sex} reviewToken={token} />}
+            {tab === "readings" && <ReadingsView birth={chart.input} sex={sex} reviewToken={token} lagna={chart.lagna} />}
             {tab === "periods" && <PeriodsView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "family" && <FamilyView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "match" && <MatchView birth={chart.input} reviewToken={token} />}

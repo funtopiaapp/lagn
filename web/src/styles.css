@@ -166,7 +166,10 @@ ul.dasha ul { padding-left: 22px; border-left: 2px solid var(--line); margin-lef
 
 /* ---------------------------------------------------------------- readings */
 .notice { border-left: 4px solid var(--accent); background: var(--surface-2); padding: 12px 14px; border-radius: var(--radius-sm); margin: 12px 0; }
-.notice.review, .notice.disclaimer { border-left-color: var(--warn); }
+.notice.review, .notice.disclaimer, .notice.warn { border-left-color: var(--warn); }
+/* The lagna-margin note carries its own weight in the text, so the body stays
+   the normal colour; only the leading clause is emphasised. */
+.notice.warn.lagna-margin { font-weight: 400; color: inherit; }
 .topics { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--gap); }
 .topics button { border-radius: 999px; padding: 8px 14px; background: var(--surface); }
 .topics button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }

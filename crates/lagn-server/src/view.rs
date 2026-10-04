@@ -122,6 +122,21 @@ pub struct LagnaView {
     pub nakshatra: &'static str,
     pub nakshatra_tamil: &'static str,
     pub pada: u8,
+    /// Minutes of clock time either side of the birth moment for which the
+    /// lagna stays in this rasi, and the nearer of the two. Every house is
+    /// counted from the lagna, so `margin_minutes` is how wrong the birth
+    /// time can be before the whole reading shifts by a house.
+    pub holds_for: LagnaHoldView,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct LagnaHoldView {
+    pub minutes_in: f64,
+    pub minutes_left: f64,
+    pub margin_minutes: f64,
+    /// True when the search hit its 12-hour cap instead of finding a
+    /// boundary, which happens only at extreme latitudes.
+    pub capped: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -366,6 +381,21 @@ pub fn chart_response(input: BirthInput, chart: Chart, settings: &DerivationSett
             nakshatra: chart.lagna.nakshatra.nakshatra.name(),
             nakshatra_tamil: chart.lagna.nakshatra.nakshatra.tamil_name(),
             pada: chart.lagna.nakshatra.pada,
+            holds_for: {
+                // A chart that computed cannot fail here: the same ascendant
+                // at a nearby instant. If it somehow does, report no margin
+                // rather than dropping the whole response.
+                let w = chart.lagna_window().unwrap_or(lagn_core::LagnaWindow {
+                    minutes_in: 0.0,
+                    minutes_left: 0.0,
+                });
+                LagnaHoldView {
+                    minutes_in: w.minutes_in,
+                    minutes_left: w.minutes_left,
+                    margin_minutes: w.margin_minutes(),
+                    capped: w.minutes_in >= 719.0 || w.minutes_left >= 719.0,
+                }
+            },
         },
         positions,
         vargas,

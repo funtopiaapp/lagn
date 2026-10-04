@@ -44,6 +44,12 @@ export interface Position {
   baladi: string; jagradadi: string;
 }
 export interface VargaCell { key: string; abbrev: string; sign: string; sign_index: number; house: number; dignity: string }
+/** How long the lagna stays in its rasi either side of the birth moment, in
+ *  minutes. `margin_minutes` is the nearer edge: how wrong the birth time can
+ *  be before every house shifts. `capped` means no boundary was found within
+ *  twelve hours, which happens only at extreme latitudes. */
+export interface LagnaHold { minutes_in: number; minutes_left: number; margin_minutes: number; capped: boolean }
+
 export interface VargaView { varga: string; label: string; lagna: string; lagna_index: number; grahas: VargaCell[] }
 export interface Period {
   lord: string; start: string; end: string; from_birth: boolean; current: boolean;
@@ -64,7 +70,7 @@ export interface ChartResponse {
   lagna_index: number;
   julian_day_ut: number;
   ayanamsa: string;
-  lagna: { rasi: string; rasi_tamil: string; degrees: string; nakshatra: string; nakshatra_tamil: string; pada: number };
+  lagna: { rasi: string; rasi_tamil: string; degrees: string; nakshatra: string; nakshatra_tamil: string; pada: number; holds_for?: LagnaHold };
   positions: Position[];
   vargas: VargaView[];
   dasha: DashaView;
@@ -146,6 +152,6 @@ export interface FamilyReading {
 }
 
 export interface WriteUpPoint { rule: string; title: string; text: string; meaning?: string | null; polarity: number; because: string[] }
-export type SectionKind = "house" | "karakas" | "varga" | "supporting" | "care" | "noted" | "eased" | "unknown" | "timing" | "karmic_axis" | "bridge" | "life_carried" | "bonds" | "debts";
+export type SectionKind = "house" | "karakas" | "varga" | "supporting" | "care" | "noted" | "dosha" | "eased" | "unknown" | "timing" | "karmic_axis" | "bridge" | "life_carried" | "bonds" | "debts";
 export interface WriteUpSection { kind: SectionKind; heading: string; paragraphs: string[]; points?: WriteUpPoint[] }
 export interface WriteUp { summary: string[]; sections: WriteUpSection[] }

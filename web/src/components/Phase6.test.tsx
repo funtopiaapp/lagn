@@ -23,21 +23,31 @@ function route(map: Record<string, unknown>) {
   });
 }
 
+// Roomy margin: these tests are about the topic list, not the birth-time
+// warning, which has its own tests.
+const lagna = {
+  rasi: "Mesha", rasi_tamil: "Mesham", degrees: "10\u00b000'00\"",
+  nakshatra: "Ashwini", nakshatra_tamil: "Aswini", pada: 3,
+  holds_for: { minutes_in: 90, minutes_left: 95, margin_minutes: 90, capped: false },
+};
+
 describe("ReadingsView", () => {
   it("offers every catalogue topic and shows the health disclaimer before any reading", async () => {
     vi.stubGlobal("fetch", route({ "/api/topics": topics }));
-    render(<ReadingsView birth={birth} reviewToken="" />);
+    render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
     const nav = await screen.findByRole("navigation", { name: "Topics" });
     expect(within(nav).getAllByRole("button").map((b) => b.textContent)).toEqual(["Marriage", "Health"]);
     await userEvent.setup().click(within(nav).getByRole("button", { name: "Health" }));
     expect(screen.getByRole("heading", { name: "Health" })).toBeInTheDocument();
-    expect(screen.getByRole("note")).toHaveTextContent(/consult a qualified doctor/);
+    // The birth-time margin is a note too, so name the one meant here.
+    const notes = screen.getAllByRole("note").map((n) => n.textContent ?? "");
+    expect(notes.some((t) => /consult a qualified doctor/.test(t))).toBe(true);
   });
 
   it("shows pariharams with the findings that brought them up", async () => {
     const reading = { report: { topic: "health", mode: "production", results: [rule("health.l1.dusthana", -2)], withheld: {}, supporting: [], afflicting: ["health.l1.dusthana"], cancelled: [], unknown: [], score: -2, label: "afflicted" }, windows: [], meta: topics.topics[1], pariharams: [pariharam] };
     vi.stubGlobal("fetch", route({ "/api/topics": topics, "/api/topic/health": reading }));
-    render(<ReadingsView birth={birth} reviewToken="" />);
+    render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
     const u = userEvent.setup();
     await u.click(await screen.findByRole("button", { name: "Health" }));
     expect(await screen.findByText("For Saturn (Shani)")).toBeInTheDocument();
@@ -48,7 +58,7 @@ describe("ReadingsView", () => {
   it("never shows one topic's reading under another topic", async () => {
     const reading = { report: { topic: "marriage", mode: "production", results: [rule("marriage.x", 1)], withheld: {}, supporting: ["marriage.x"], afflicting: [], cancelled: [], unknown: [], score: 1, label: "supportive" }, windows: [], pariharams: [] };
     vi.stubGlobal("fetch", route({ "/api/topics": topics, "/api/topic/marriage": reading }));
-    render(<ReadingsView birth={birth} reviewToken="" />);
+    render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
     const u = userEvent.setup();
     await screen.findByText("Supporting");
     await u.click(screen.getByRole("button", { name: "Health" }));

@@ -1,0 +1,1714 @@
+{
+  "description": "The thirteen charts of the independent 1.0 validation pass, with every topic score as 1.0 produced it.",
+  "provenance": "tests/QA-VALIDATION-1.0.md - independent QA, 2026-10-01/02. Anonymised: subject codes only, no names.",
+  "regenerate": "python3 scripts/make_validation13.py",
+  "locks_not_blesses": "A score here is what 1.0 computes, not what is correct. Several conflict with the documented life; see the report's failure patterns P1 and P2.",
+  "ayanamsa": "lahiri",
+  "node": "mean",
+  "houses": "whole-sign",
+  "subjects": [
+    {
+      "code": "01",
+      "descriptor": "M team-sport athlete, b. 1973",
+      "time_confidence": "B",
+      "birth": {
+        "date": "1973-04-24",
+        "time": "13:14",
+        "lat": 19.07283,
+        "lon": 72.88261,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "karka",
+        "degrees_in_rasi": 21.00010086505428,
+        "nakshatra": "ashlesha",
+        "pada": 2
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 8
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 10,
+          "label": "supportive",
+          "supporting": 6,
+          "afflicting": 0,
+          "windows": 15
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 8,
+          "label": "supportive",
+          "supporting": 5,
+          "afflicting": 0,
+          "windows": 20
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 18
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 26
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 14
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 5,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 33
+        }
+      }
+    },
+    {
+      "code": "02",
+      "descriptor": "M film actor turned politician, b. 1974",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1974-06-22",
+        "time": "12:00",
+        "lat": 13.08784,
+        "lon": 80.27847,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "kanya",
+        "degrees_in_rasi": 4.3576946940405605,
+        "nakshatra": "uttara_phalguni",
+        "pada": 3
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 2,
+          "windows": 9
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 14
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 7,
+          "label": "supportive",
+          "supporting": 5,
+          "afflicting": 0,
+          "windows": 24
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 15
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 28
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 7
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 16
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 2,
+          "windows": 44
+        }
+      }
+    },
+    {
+      "code": "03",
+      "descriptor": "M veteran film actor, b. 1942",
+      "time_confidence": "B",
+      "birth": {
+        "date": "1942-10-11",
+        "time": "16:00",
+        "lat": 25.44478,
+        "lon": 81.84322,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "kumbha",
+        "degrees_in_rasi": 21.556656718498004,
+        "nakshatra": "purva_bhadrapada",
+        "pada": 1
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": -10,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 8,
+          "windows": 4
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 2,
+          "windows": 13
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 5,
+          "afflicting": 2,
+          "windows": 18
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 11
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 19
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 2,
+          "windows": 9
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": -2,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 3,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 2,
+          "windows": 42
+        }
+      }
+    },
+    {
+      "code": "04",
+      "descriptor": "M film actor, b. 1965",
+      "time_confidence": "C",
+      "birth": {
+        "date": "1965-11-02",
+        "time": "06:35",
+        "lat": 28.61,
+        "lon": 77.21,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "tula",
+        "degrees_in_rasi": 15.488450973844863,
+        "nakshatra": "swati",
+        "pada": 3
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 6
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 19
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 7
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 23
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 7,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 8
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 3,
+          "windows": 44
+        }
+      }
+    },
+    {
+      "code": "05",
+      "descriptor": "M politician, b. 1950",
+      "time_confidence": "C+",
+      "birth": {
+        "date": "1950-09-17",
+        "time": "11:00",
+        "lat": 23.78593,
+        "lon": 72.63893,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "vrischika",
+        "degrees_in_rasi": 1.2508617635191115,
+        "nakshatra": "vishakha",
+        "pada": 4
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 2,
+          "windows": 8
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 1,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 16
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 27
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 13
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 28
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 6
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 11
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 34
+        }
+      }
+    },
+    {
+      "code": "06",
+      "descriptor": "M team-sport athlete, b. 1988",
+      "time_confidence": "C-",
+      "birth": {
+        "date": "1988-11-05",
+        "time": "07:30",
+        "lat": 28.65195,
+        "lon": 77.23149,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "tula",
+        "degrees_in_rasi": 29.81026081457793,
+        "nakshatra": "vishakha",
+        "pada": 3
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": -4,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 3,
+          "windows": 12
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 10
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 18
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 9
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": -1,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 21
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": -2,
+          "label": "afflicted",
+          "supporting": 0,
+          "afflicting": 2,
+          "windows": 7
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 11
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": -1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 3,
+          "windows": 43
+        }
+      }
+    },
+    {
+      "code": "07",
+      "descriptor": "M team-sport athlete, b. 1981",
+      "time_confidence": "C",
+      "birth": {
+        "date": "1981-07-07",
+        "time": "11:00",
+        "lat": 23.34316,
+        "lon": 85.3094,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "kanya",
+        "degrees_in_rasi": 9.07529256265775,
+        "nakshatra": "uttara_phalguni",
+        "pada": 4
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 5,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 8
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 7,
+          "label": "supportive",
+          "supporting": 5,
+          "afflicting": 0,
+          "windows": 8
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 9
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 9
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 27
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 6
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 11
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 4,
+          "windows": 38
+        }
+      }
+    },
+    {
+      "code": "08",
+      "descriptor": "M film actor, b. 1954",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1954-11-07",
+        "time": "12:00",
+        "lat": 9.37158,
+        "lon": 78.83077,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "makara",
+        "degrees_in_rasi": 13.450851090091646,
+        "nakshatra": "shravana",
+        "pada": 2
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 7
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 11
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 9,
+          "label": "supportive",
+          "supporting": 6,
+          "afflicting": 0,
+          "windows": 24
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 6,
+          "label": "mixed",
+          "supporting": 5,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 28
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 1,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 7
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 16
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 44
+        }
+      }
+    },
+    {
+      "code": "09",
+      "descriptor": "M film actor, b. 1974",
+      "time_confidence": "C",
+      "birth": {
+        "date": "1974-01-10",
+        "time": "06:00",
+        "lat": 19.07283,
+        "lon": 72.88261,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "dhanus",
+        "degrees_in_rasi": 7.342615538279176,
+        "nakshatra": "mula",
+        "pada": 3
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": -2,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 3,
+          "windows": 11
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 15
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 28
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 11
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 28
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 11
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 0,
+          "label": "neutral",
+          "supporting": 0,
+          "afflicting": 0,
+          "windows": 9
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 46
+        }
+      }
+    },
+    {
+      "code": "10",
+      "descriptor": "F film actress, b. 1986",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1986-01-05",
+        "time": "12:00",
+        "lat": 55.67594,
+        "lon": 12.56553,
+        "tz": 1.0,
+        "sex": "female"
+      },
+      "lagna": {
+        "rasi": "mesha",
+        "degrees_in_rasi": 10.544649674208959,
+        "nakshatra": "ashwini",
+        "pada": 4
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": -6,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 7,
+          "windows": 10
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 1,
+          "windows": 13
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 27
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 12
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "mixed",
+          "supporting": 2,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 19
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 8
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 1,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 8
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 31
+        }
+      }
+    },
+    {
+      "code": "11",
+      "descriptor": "M team-sport athlete, b. 1997",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1997-10-04",
+        "time": "12:00",
+        "lat": 29.86632,
+        "lon": 77.89118,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "dhanus",
+        "degrees_in_rasi": 0.7080035231251713,
+        "nakshatra": "mula",
+        "pada": 1
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 3,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 2,
+          "windows": 5
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 8,
+          "label": "mixed",
+          "supporting": 6,
+          "afflicting": 1,
+          "windows": 11
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 5,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 22
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": -1,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 2,
+          "windows": 11
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 1,
+          "label": "supportive",
+          "supporting": 1,
+          "afflicting": 0,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 20
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 3
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": -1,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 2,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 14
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": -1,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 4,
+          "windows": 40
+        }
+      }
+    },
+    {
+      "code": "12",
+      "descriptor": "F racket-sport athlete, b. 1986",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1986-11-15",
+        "time": "12:00",
+        "lat": 19.07283,
+        "lon": 72.88261,
+        "tz": 5.5,
+        "sex": "female"
+      },
+      "lagna": {
+        "rasi": "makara",
+        "degrees_in_rasi": 11.58612473707484,
+        "nakshatra": "shravana",
+        "pada": 1
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 13
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 10,
+          "label": "supportive",
+          "supporting": 6,
+          "afflicting": 0,
+          "windows": 9
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 5,
+          "afflicting": 0,
+          "windows": 23
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 13
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 1,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 21
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 4,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 10
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 2,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 1,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 15
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 5,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 37
+        }
+      }
+    },
+    {
+      "code": "13",
+      "descriptor": "M politician, b. 1968",
+      "time_confidence": "D",
+      "birth": {
+        "date": "1968-08-16",
+        "time": "12:00",
+        "lat": 28.90909,
+        "lon": 75.61469,
+        "tz": 5.5,
+        "sex": "male"
+      },
+      "lagna": {
+        "rasi": "tula",
+        "degrees_in_rasi": 18.1530924948689,
+        "nakshatra": "swati",
+        "pada": 4
+      },
+      "topics": {
+        "marriage": {
+          "ages": [
+            18,
+            45
+          ],
+          "score": 0,
+          "label": "mixed",
+          "supporting": 3,
+          "afflicting": 3,
+          "windows": 9
+        },
+        "career": {
+          "ages": [
+            18,
+            65
+          ],
+          "score": 4,
+          "label": "mixed",
+          "supporting": 4,
+          "afflicting": 1,
+          "windows": 10
+        },
+        "wealth": {
+          "ages": [
+            18,
+            80
+          ],
+          "score": 7,
+          "label": "supportive",
+          "supporting": 5,
+          "afflicting": 0,
+          "windows": 18
+        },
+        "education": {
+          "ages": [
+            4,
+            30
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 9
+        },
+        "health": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 0
+        },
+        "vitality": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 0,
+          "label": "neutral",
+          "supporting": 0,
+          "afflicting": 0,
+          "windows": 21
+        },
+        "progeny": {
+          "ages": [
+            20,
+            45
+          ],
+          "score": 5,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 6
+        },
+        "parents": {
+          "ages": [
+            0,
+            60
+          ],
+          "score": 3,
+          "label": "supportive",
+          "supporting": 3,
+          "afflicting": 0,
+          "windows": 0
+        },
+        "later_life": {
+          "ages": [
+            55,
+            85
+          ],
+          "score": 2,
+          "label": "supportive",
+          "supporting": 2,
+          "afflicting": 0,
+          "windows": 10
+        },
+        "past_life": {
+          "ages": [
+            0,
+            90
+          ],
+          "score": 6,
+          "label": "supportive",
+          "supporting": 4,
+          "afflicting": 0,
+          "windows": 43
+        }
+      }
+    }
+  ]
+}

@@ -170,7 +170,7 @@ test("every topic reads, and sensitive periods equal the API", async ({ page }) 
   for (const t of topics) {
     await page.getByRole("navigation", { name: "Topics" }).getByRole("button", { name: t.title, exact: true }).click();
     await expect(page.getByRole("heading", { name: t.title, exact: true })).toBeVisible();
-    if (t.disclaimer) await expect(page.getByRole("note")).toHaveText(t.disclaimer);
+    if (t.disclaimer) await expect(page.locator(".notice.disclaimer")).toHaveText(t.disclaimer);
     // The write-up's conclusion, read on open, is the engine's own text.
     const api = await (await page.request.post(`/api/topic/${t.id}`, { data: { birth } })).json();
     await expect(page.locator(".writeup .lead")).toHaveText(api.writeup.summary[0]);
@@ -254,8 +254,8 @@ test("the past-life reading appears, carries its frame, and bridges to the other
   await expect(page.getByRole("heading", { name: "Past life", exact: true })).toBeVisible();
 
   // The frame is stated before anything is read.
-  await expect(page.getByRole("note")).toContainText("not a claim about events");
-  await expect(page.getByRole("note")).toContainText("never names a past identity");
+  await expect(page.locator(".notice.disclaimer")).toContainText("not a claim about events");
+  await expect(page.locator(".notice.disclaimer")).toContainText("never names a past identity");
 
   const api = await (await page.request.post("/api/topic/past_life", { data: { birth } })).json();
   const axis = api.writeup.sections.find((s: { kind: string }) => s.kind === "karmic_axis");
