@@ -797,3 +797,40 @@ fn the_counter_origin_is_allowed_as_an_image_and_nothing_else() {
     }
     std::env::remove_var("LAGN_COUNTER_ORIGIN");
 }
+
+#[tokio::test]
+async fn a_different_romanisation_still_finds_the_town() {
+    // Defect D8. The validation pass could not find Subject-08's birth town,
+    // Paramakudi, and substituted Ramanathapuram thirty kilometres away. The
+    // town is in the data - as "Paramagudi", with no alternates - so an exact
+    // or prefix match could never reach it.
+    let (st, v, _) = call(app(None), get("/api/places?q=Paramakudi&limit=5")).await;
+    assert_eq!(st, StatusCode::OK);
+    let names: Vec<&str> = v.as_array().unwrap().iter().filter_map(|p| p["name"].as_str()).collect();
+    assert!(names.contains(&"Paramagudi"), "Paramakudi must reach Paramagudi, got {names:?}");
+
+    // The same town, spelled with the doubled consonant some sources use.
+    let (_, v, _) = call(app(None), get("/api/places?q=Paramakkudi&limit=5")).await;
+    let names: Vec<&str> = v.as_array().unwrap().iter().filter_map(|p| p["name"].as_str()).collect();
+    assert!(names.contains(&"Paramagudi"), "got {names:?}");
+
+    // Aspirates and vowel length, the other common pair of variants.
+    let (_, v, _) = call(app(None), get("/api/places?q=Thiruchirapalli&limit=5")).await;
+    let names: Vec<&str> = v.as_array().unwrap().iter().filter_map(|p| p["name"].as_str()).collect();
+    assert!(names.iter().any(|n| n.starts_with("Tiruchi")), "got {names:?}");
+}
+
+#[tokio::test]
+async fn the_fold_never_displaces_an_exact_match() {
+    // The fallback is lossy, so it must stay a fallback: a query that matches
+    // a real name exactly keeps that name first, and the historical aliases
+    // and population ranking above are unaffected.
+    for (q, want) in [("Madurai", "Madurai"), ("Delhi", "Delhi"), ("Kochi", "Kochi")] {
+        let (_, v, _) = call(app(None), get(&format!("/api/places?q={q}&limit=1"))).await;
+        assert_eq!(v[0]["name"], want, "exact match for {q} was displaced");
+    }
+    // "mad" has prefix hits, so the fold must not run and add a tier-2 flood.
+    let (_, v, _) = call(app(None), get("/api/places?q=mad&limit=10")).await;
+    let pops: Vec<u64> = v.as_array().unwrap().iter().map(|p| p["population"].as_u64().unwrap()).collect();
+    assert!(pops.windows(2).all(|w| w[0] >= w[1]), "prefix tier must stay in population order: {pops:?}");
+}

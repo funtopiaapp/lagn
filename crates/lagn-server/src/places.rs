@@ -41,6 +41,46 @@ fn key(s: &str) -> String {
         .join(" ")
 }
 
+/// A transliteration-insensitive form of a key, for the fallback pass.
+///
+/// Indian place names reach us in many romanisations and GeoNames carries
+/// only one of them, often with no alternates: the dataset has Paramagudi
+/// and nothing else, so a reader who types the equally correct Paramakudi
+/// found no town at all and substituted a different one thirty kilometres
+/// away (defect D8). Folding the systematic variants together - aspirates,
+/// voicing, doubled letters, long vowels - lets the two spellings meet.
+///
+/// This is deliberately lossy and so is only ever a fallback, tried after an
+/// exact or prefix match has found nothing.
+fn fold(k: &str) -> String {
+    // Long vowels first: "ee" and "oo" are vowel length, not doubling, and
+    // collapsing duplicates later would turn them into the wrong vowel.
+    let mut s = k.replace("ee", "i").replace("oo", "u");
+    // Aspirated digraphs, then the voiced consonant of each pair, both mapped
+    // to one representative so that g/k, d/t, b/p, j/c and z/s all meet.
+    for (from, to) in [
+        ("th", "t"), ("dh", "t"), ("kh", "k"), ("gh", "k"), ("ph", "p"),
+        ("bh", "p"), ("ch", "c"), ("sh", "s"), ("zh", "s"),
+    ] {
+        s = s.replace(from, to);
+    }
+    s = s
+        .chars()
+        .map(|c| match c {
+            'g' => 'k', 'd' => 't', 'b' => 'p', 'j' => 'c', 'z' => 's', 'v' => 'w', 'y' => 'i',
+            other => other,
+        })
+        .collect();
+    // Doubled letters are a romanisation choice: Paramakudi/Paramakkudi.
+    let mut out = String::with_capacity(s.len());
+    for c in s.chars() {
+        if !out.ends_with(c) {
+            out.push(c);
+        }
+    }
+    out
+}
+
 impl PlaceIndex {
     pub fn load(path: &Path) -> Result<PlaceIndex, String> {
         let text = std::fs::read_to_string(path).map_err(|e| format!("read {}: {e}", path.display()))?;
@@ -115,6 +155,20 @@ impl PlaceIndex {
             };
             if let Some((r, alias)) = rank {
                 hits.push((r, u64::MAX - e.place.population, e.place.id, i, alias));
+            }
+        }
+        // Nothing matched as written. Try again on the folded forms, so a
+        // different-but-valid romanisation of a real town still finds it.
+        // Only now: a fold is lossy, and an exact hit must never be displaced.
+        if hits.is_empty() {
+            let fq = fold(&q);
+            for (i, e) in self.entries.iter().enumerate() {
+                let hit = fold(&e.name_key) == fq
+                    || fold(&e.ascii_key) == fq
+                    || e.alternates.iter().any(|(k, _)| fold(k) == fq);
+                if hit {
+                    hits.push((2, u64::MAX - e.place.population, e.place.id, i, None));
+                }
             }
         }
         hits.sort_by_key(|h| (h.0, h.1, h.2));

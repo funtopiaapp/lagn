@@ -2,7 +2,11 @@
   {
     "id": "marriage",
     "title": "Marriage",
-    "summary": "Marriage prospects, the spouse, and Chevvai dosha.",
+    "summary": "Marriage prospects and the spouse.",
+    "dosha": {
+      "name": "Chevvai dosha",
+      "rule_prefix": "marriage.kuja."
+    },
     "ages": [
       18,
       45

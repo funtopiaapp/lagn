@@ -3,6 +3,7 @@ import type { ChartResponse } from "../types";
 import { AshtakavargaTable } from "./AshtakavargaTable";
 import { DashaTimeline } from "./DashaTimeline";
 import { PositionsTable } from "./PositionsTable";
+import { LagnaMargin } from "./LagnaMargin";
 import { SouthIndianChart, type ChartEntry } from "./SouthIndianChart";
 
 export function ChartView({ chart }: { chart: ChartResponse }) {
@@ -28,6 +29,7 @@ export function ChartView({ chart }: { chart: ChartResponse }) {
         <p className="summary">
           Lagna <strong>{chart.lagna.rasi}</strong> {chart.lagna.degrees} · Janma nakshatra <strong>{chart.dasha.janma_nakshatra}</strong> ({chart.dasha.janma_nakshatra_tamil}) · Ayanamsa (Lahiri) {chart.ayanamsa}
         </p>
+        <LagnaMargin hold={chart.lagna.holds_for} rasi={chart.lagna.rasi} />
         <label className="varga-select">Chart
           <select value={varga} onChange={(e) => setVarga(e.target.value)}>
             {chart.vargas.map((x) => <option key={x.varga} value={x.varga}>{x.label}</option>)}

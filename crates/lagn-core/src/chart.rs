@@ -106,6 +106,24 @@ pub struct Chart {
     pub placements: [Placement; 9],
 }
 
+/// How long the lagna holds its rasi, either side of the birth moment. See
+/// [`Chart::lagna_window`].
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct LagnaWindow {
+    /// Minutes from the lagna entering this rasi up to the birth moment.
+    pub minutes_in: f64,
+    /// Minutes from the birth moment until the lagna leaves this rasi.
+    pub minutes_left: f64,
+}
+
+impl LagnaWindow {
+    /// The nearer edge: how wrong the birth time can be before every house in
+    /// the reading moves by one.
+    pub fn margin_minutes(&self) -> f64 {
+        self.minutes_in.min(self.minutes_left)
+    }
+}
+
 impl Chart {
     /// Compute a chart. Deterministic: same inputs, same bytes out, forever.
     pub fn compute(birth: BirthData, settings: ChartSettings) -> Result<Chart, EphemError> {
@@ -138,6 +156,64 @@ impl Chart {
             birth,
             settings,
         })
+    }
+
+    /// How long the lagna holds the rasi it is in, in minutes of clock time
+    /// either side of this birth moment.
+    ///
+    /// Every house in a reading is counted from the lagna, so this is the
+    /// number that decides how much an uncertain birth time actually matters.
+    /// A chart with four hours of margin tolerates a remembered time; one with
+    /// eight minutes does not, and a reading cast from a defaulted time should
+    /// not speak with the same authority in both cases.
+    ///
+    /// Determinism: same inputs, same bytes out. The search below is a
+    /// bracket-and-bisect on the ascendant's own sign, not a rate estimate,
+    /// because a rasi can rise in minutes or hold for hours depending on
+    /// latitude and which sign it is.
+    pub fn lagna_window(&self) -> Result<LagnaWindow, EphemError> {
+        let eph = Ephemeris::new(self.settings.ayanamsa, self.settings.node_type);
+        let rasi_at = |jd: f64| -> Result<Rasi, EphemError> {
+            let (a, _) = eph.angles(
+                jd,
+                self.birth.latitude,
+                self.birth.longitude,
+                self.settings.house_system,
+            )?;
+            Ok(Rasi::from_longitude(a.ascendant))
+        };
+        let here = self.lagna.rasi;
+
+        // Far past any birth time's uncertainty. Inside the polar circles a
+        // sign really can hold longer than this, and the answer is then
+        // reported as the cap rather than a false precision.
+        const CAP_MINUTES: f64 = 12.0 * 60.0;
+
+        // `dir` is -1 looking back to when the lagna entered this rasi, +1
+        // forward to when it leaves.
+        let edge = |dir: f64| -> Result<f64, EphemError> {
+            let (mut lo, mut hi) = (0.0f64, 1.0f64);
+            while rasi_at(self.jd_ut + dir * hi / 1440.0)? == here {
+                lo = hi;
+                hi *= 2.0;
+                if hi > CAP_MINUTES {
+                    return Ok(CAP_MINUTES);
+                }
+            }
+            // Sixteen halvings of at most 12 hours: under a tenth of a
+            // second, far finer than any birth time is ever known.
+            for _ in 0..16 {
+                let mid = 0.5 * (lo + hi);
+                if rasi_at(self.jd_ut + dir * mid / 1440.0)? == here {
+                    lo = mid;
+                } else {
+                    hi = mid;
+                }
+            }
+            Ok(0.5 * (lo + hi))
+        };
+
+        Ok(LagnaWindow { minutes_in: edge(-1.0)?, minutes_left: edge(1.0)? })
     }
 
     pub fn placement(&self, graha: Graha) -> &Placement {

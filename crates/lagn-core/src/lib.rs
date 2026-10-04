@@ -24,7 +24,7 @@ pub mod relationship;
 pub mod transit;
 pub mod varga;
 
-pub use chart::{BirthData, Chart, ChartSettings, Lagna, Placement, VargaChart};
+pub use chart::{BirthData, Chart, ChartSettings, Lagna, LagnaWindow, Placement, VargaChart};
 pub use dasha::{DashaChain, DashaPeriod, Vimshottari, YearLength};
 pub use nakshatra::{Nakshatra, NakshatraPosition};
 pub use rasi::{Element, Mobility, Rasi};
