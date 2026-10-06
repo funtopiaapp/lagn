@@ -35,7 +35,12 @@ export function ReadingsView({ birth, sex, reviewToken, lagna }: Props) {
       <QuestionBox
         questions={questions}
         topics={topics}
-        onChoose={(topicId, q) => { setSelected(topicId); setAsked(q); setLoaded(null); }}
+        // The reading already in hand is kept. Clearing it meant a question
+        // about the topic already selected - marriage, which is the default -
+        // never produced an answer: the topic view did not remount, so it
+        // never refetched, so it never reported the reading back. The guard
+        // below is what stops a previous topic's answer being shown.
+        onChoose={(topicId, q) => { setSelected(topicId); setAsked(q); }}
       />
       {asked && loaded && loaded.report.topic === asked.topic && (
         <>
