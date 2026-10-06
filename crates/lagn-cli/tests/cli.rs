@@ -404,7 +404,11 @@ fn rules_validate_reports_the_shipped_corpus() {
     assert!(out.contains("corpus valid"));
     assert!(out.contains("status approved"));
     assert!(!out.contains("status draft"), "an unreviewed draft is in the shipped corpus");
-    assert!(out.contains("poruthams: 9/10 approved"), "Vasya stays rejected until a table exists");
+    // Vasya was rejected until its table was supplied; all ten are approved
+    // since 2026-10-05, with four of its rows marked as the majority reading
+    // of disagreeing sources.
+    let n = lagn_rules::PoruthamKind::ALL.len();
+    assert!(out.contains(&format!("poruthams: {n}/{n} approved")), "{out}");
 }
 
 #[test]
@@ -484,14 +488,22 @@ fn an_invalid_corpus_is_refused_with_its_problems_listed() {
 fn match_shows_reviewed_poruthams_and_reports_the_hand_checked_pair() {
     let v: serde_json::Value = serde_json::from_str(&stdout(&lagn(&["match", "--bride", BRIDE, "--groom", GROOM, "--json"]))).unwrap();
     assert_eq!(v["mode"], "production");
-    assert_eq!(v["results"].as_array().unwrap().len(), 9);
-    assert_eq!(v["withheld"], 1, "Vasya is rejected");
-    assert!(v["results"].as_array().unwrap().iter().all(|r| r[1] == "approved" && r[0]["kind"] != "vasya"));
+    assert_eq!(v["results"].as_array().unwrap().len(), lagn_rules::PoruthamKind::ALL.len());
+    assert_eq!(v["withheld"], 0, "every porutham is approved");
+    assert!(v["results"].as_array().unwrap().iter().all(|r| r[1] == "approved"));
+    // Vasya is among them, and a verdict that turns on one of the four
+    // disputed rows says so rather than reading as settled.
+    let vasya = v["results"].as_array().unwrap().iter()
+        .find(|r| r[0]["kind"] == "vasya").expect("vasya is evaluated");
+    assert_ne!(vasya[0]["verdict"], "not_evaluated");
     assert!(v["reviewers"].as_array().unwrap().iter().any(|r| r.as_str().unwrap().contains("AI")), "provenance missing");
     assert_eq!(v["bride"]["nakshatra"], "pushya");
     assert_eq!(v["groom"]["nakshatra"], "magha");
-    assert_eq!(v["matched"], 4);
-    assert_eq!(v["evaluated"], 9);
+    // Vasya does not match for this pair (Karka is not under Simha's sway).
+    // The twelve-porutham form then adds Naadi, which does match here, and
+    // Varna, which does not: Brahmin bride against a Kshatriya groom.
+    assert_eq!(v["matched"], 5);
+    assert_eq!(v["evaluated"], lagn_rules::PoruthamKind::ALL.len());
     assert!(v["critical_failures"].as_array().unwrap().is_empty());
 }
 
@@ -509,7 +521,7 @@ fn match_table_covers_the_whole_input_space() {
     let v: serde_json::Value = serde_json::from_str(&stdout(&lagn(&["match", "--table"]))).unwrap();
     let rows = v.as_array().unwrap();
     assert_eq!(rows.len(), 108 * 108);
-    assert!(rows.iter().all(|r| r["results"].as_array().unwrap().len() == 10));
+    assert!(rows.iter().all(|r| r["results"].as_array().unwrap().len() == lagn_rules::PoruthamKind::ALL.len()));
 }
 
 #[test]

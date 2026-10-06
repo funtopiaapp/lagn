@@ -321,7 +321,7 @@
     "id": "past_life",
     "title": "Past life",
     "summary": "What the chart is traditionally held to carry forward from before this birth, and how that meets the life you are living now.",
-    "disclaimer": "This is a traditional interpretive frame, not a claim about events. It describes tendencies the chart is held to carry forward; it never names a past identity, place or time, and nothing here can be tested.",
+    "disclaimer": "This is a traditional interpretive frame, not a claim about events. Where it names the kinds of life a placement is associated with, those are possibilities the tradition offers together, never a record of a past identity: a chart cannot encode a name, a year or a place, and none is claimed here. Nothing in this reading can be tested.",
     "ages": [
       0,
       90
@@ -354,8 +354,56 @@
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Topic metadata for the purva janma reading. Focus follows the standard sources for past merit: the 5th (purva punya), 9th (dharma), 12th (release), Ketu as karaka, and D-60 as the varga Parashara weights for past-life karma. The disclaimer states plainly that this is a frame, not a fact."
+      "date": "2026-10-05",
+      "comment": "Topic metadata for Past life. Disclaimer rewritten 2026-10-05 at the product owner's direction: the reading now names the kinds of life a placement is associated with, so the former promise that it 'never names a past identity' had become false and had to go. What replaces it is the narrower claim that is still true - those kinds are offered together as possibilities and are not a record of an identity - plus the reason, which is that a chart cannot encode a name, a year or a place. The Phase 9 bans are unchanged: no proper nouns, no years, no centuries, no second-person claim about what the native did, and nothing framed as blame."
+    }
+  },
+  {
+    "id": "immigration",
+    "title": "Living abroad",
+    "summary": "Foreign residence, the periods when the matter comes forward, and what the chart asks of you.",
+    "disclaimer": "This is a reading of the chart, not legal advice. Immigration decisions are made by governments under rules that change; nothing here predicts an approval, a refusal or a date. For anything you intend to act on, consult a qualified immigration lawyer or your country's official guidance.",
+    "ages": [
+      18,
+      70
+    ],
+    "focus": {
+      "houses": [
+        12,
+        9,
+        4
+      ],
+      "karakas": [
+        {
+          "graha": "rahu",
+          "role": "foreign places, foreigners and what lies outside one's own custom"
+        },
+        {
+          "graha": "saturn",
+          "role": "patience, service and long official processes"
+        },
+        {
+          "graha": "moon",
+          "role": "the mind's attachments and movement across water"
+        },
+        {
+          "graha": "jupiter",
+          "role": "law, learning and lawful expansion"
+        }
+      ],
+      "vargas": [
+        {
+          "varga": "d4",
+          "house": 12
+        }
+      ],
+      "bridge": true
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Topic metadata for Living abroad. Houses 12 (distant residence), 9 (long journeys) and 4 (home, read as what is left) per standard bhava assignments; Rahu, Saturn, Moon and Jupiter as the karakas conventionally cited for foreign matters; D-4 chaturthamsa as the varga for residence. A disclaimer is carried although DESIGN 6 section 2 requires one only for health and vitality: immigration is a legal matter with real financial stakes, and guardrail 3's rule that a reading never substitutes for legal advice applies directly. Age range opens at 18 because the decisions this topic describes are made by adults."
     }
   }
 ]

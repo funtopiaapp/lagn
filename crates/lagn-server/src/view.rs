@@ -417,6 +417,22 @@ pub struct WindowView {
     pub maha: &'static str,
     pub antar: &'static str,
     pub matched: Vec<&'static str>,
+    /// How the period rules judge this stretch for this area: "favourable",
+    /// "mixed", "asks for care", or "no period factor applies".
+    pub verdict: &'static str,
+    /// True when the topic's own timing rules single out this stretch.
+    pub live: bool,
+    /// Ranking across every stretch in range: best, good, mixed, caution,
+    /// not judged.
+    pub rank: &'static str,
+    /// "past", "now" or "ahead", against the server's clock. Someone asking
+    /// when to do a thing needs the stretches still to come; the frontend
+    /// cannot work that out because it does no calendar arithmetic.
+    pub when: &'static str,
+    pub score: i32,
+    /// Lines that name the area, so "supports" never stands on its own.
+    pub supports: Vec<String>,
+    pub cautions: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -431,17 +447,41 @@ pub struct TopicResponse {
     pub writeup: Option<lagn_rules::writeup::WriteUp>,
 }
 
-pub fn topic_response(report: TopicReport, tz: f64) -> TopicResponse {
-    let windows = report
-        .timing
+pub fn topic_response(
+    report: TopicReport,
+    tz: f64,
+    judged: &[lagn_rules::reading::TopicWindow],
+    now_jd: Option<f64>,
+) -> TopicResponse {
+    // Every stretch in range, ranked - not only the ones the timing rules name.
+    // Listing only those left holes a reader could not distinguish from a
+    // quiet period. `rule` names the timing rule where the topic is live.
+    let rule_id = report.timing.first().map(|w| w.rule.clone()).unwrap_or_default();
+    let windows = judged
         .iter()
-        .map(|w| WindowView {
-            rule: w.rule.clone(),
-            start: civil_date(w.start_jd, tz),
-            end: civil_date(w.end_jd, tz),
-            maha: w.maha.name(),
-            antar: w.antar.name(),
-            matched: w.matched.iter().map(|g| g.name()).collect(),
+        .map(|w| {
+            let j = Some(w);
+            WindowView {
+                rule: if w.live { rule_id.clone() } else { String::new() },
+                start: civil_date(w.start_jd, tz),
+                end: civil_date(w.end_jd, tz),
+                maha: w.maha.name(),
+                antar: w.antar.name(),
+                matched: w.matched.iter().map(|g| g.name()).collect(),
+                verdict: j.map(|j| j.verdict.label()).unwrap_or("no period factor applies"),
+                live: j.map(|j| j.live).unwrap_or(false),
+                rank: j.map(|j| j.rank.label()).unwrap_or("not judged"),
+                when: match now_jd {
+                    Some(n) if n >= w.end_jd => "past",
+                    Some(n) if n >= w.start_jd => "now",
+                    Some(_) => "ahead",
+                    // No clock given: nothing is claimed about when it falls.
+                    None => "unknown",
+                },
+                score: j.map(|j| j.score).unwrap_or(0),
+                supports: j.map(|j| j.supports.clone()).unwrap_or_default(),
+                cautions: j.map(|j| j.cautions.clone()).unwrap_or_default(),
+            }
         })
         .collect();
     TopicResponse { report, windows, meta: None, pariharams: Vec::new(), writeup: None }

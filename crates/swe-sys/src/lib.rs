@@ -97,6 +97,17 @@ pub const SE_NASCMC: usize = 8;
 // House systems (passed as the ASCII code of the letter)
 // ---------------------------------------------------------------------------
 /// Whole-sign houses. The South Indian / Tamil-Kerala default: bhava == rasi.
+/// Rising, for `swe_rise_trans`.
+pub const SE_CALC_RISE: i32 = 1;
+/// Setting, for `swe_rise_trans`.
+pub const SE_CALC_SET: i32 = 2;
+/// Use the disc centre rather than the limb. Indian panchangam practice takes
+/// sunrise at the upper limb with refraction, which is the default, so this is
+/// present for comparison rather than for use.
+pub const SE_BIT_DISC_CENTER: i32 = 256;
+/// Ignore refraction, for comparison against sources that do.
+pub const SE_BIT_NO_REFRACTION: i32 = 512;
+
 pub const SE_HSYS_WHOLE_SIGN: c_int = b'W' as c_int;
 /// Equal houses from the ascendant.
 pub const SE_HSYS_EQUAL: c_int = b'A' as c_int;
@@ -171,6 +182,23 @@ extern "C" {
         jut: *mut c_double,
     );
     pub fn swe_deltat_ex(tjd: c_double, iflag: i32, serr: *mut c_char) -> c_double;
+
+    /// Rising, setting and transit times. `geopos` is `[lon, lat, altitude]`,
+    /// east- and north-positive. `tret[0]` receives the event's Julian Day in
+    /// UT. Returns -2 when the body neither rises nor sets on that day, which
+    /// happens inside the polar circles and is not an error.
+    pub fn swe_rise_trans(
+        tjd_ut: c_double,
+        ipl: i32,
+        starname: *mut c_char,
+        epheflag: i32,
+        rsmi: i32,
+        geopos: *mut c_double,
+        atpress: c_double,
+        attemp: c_double,
+        tret: *mut c_double,
+        serr: *mut c_char,
+    ) -> i32;
     /// Local Mean Time -> Local Apparent Time. Needed for pre-standard-time births.
     pub fn swe_lmt_to_lat(
         tjd_lmt: c_double,

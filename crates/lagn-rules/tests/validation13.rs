@@ -318,3 +318,101 @@ fn report_lagna_margins() {
     }
     println!();
 }
+
+/// A topic's ranked timing must cover its whole age range without holes.
+///
+/// It used to list only the stretches a topic's timing rules named. On a
+/// Mesha-lagna chart whose 10th lord is Saturn, that meant career windows
+/// jumped from 2029 to 2041 - the entire Mercury mahadasha vanished, because
+/// its lord is not a timing lord. A reader could not tell that from a period
+/// where nothing happens.
+#[test]
+fn ranked_timing_covers_the_range_with_no_gaps() {
+    use lagn_rules::reading::topic_timing;
+
+    init_ephemeris();
+    let corpus = lagn_rules::corpus::load(&root().join("corpus")).expect("corpus loads");
+    let doc = fixture();
+
+    // The chart that exposed the hole, plus the fixture's thirteen.
+    let kollam = serde_json::json!({
+        "code": "kollam-1981",
+        "birth": { "date": "1981-12-21", "time": "14:10", "lat": 8.88113, "lon": 76.58469, "tz": 5.5, "sex": "male" },
+    });
+    let mut subjects: Vec<&Value> = vec![&kollam];
+    subjects.extend(doc["subjects"].as_array().expect("subjects array"));
+
+    for s in subjects {
+        let code = s["code"].as_str().expect("code");
+        for (topic, ages) in [("career", (18.0, 65.0)), ("marriage", (18.0, 45.0)), ("wealth", (18.0, 80.0))] {
+            let mut f = facts_for(s);
+            let report = evaluate_topic(topic, &corpus.rules, &f, Mode::Production, ages);
+            let judged = topic_timing(&corpus, &mut f, Mode::Production, topic, &report.timing, ages);
+            if judged.is_empty() {
+                continue; // a topic the corpus does not time by dasha
+            }
+
+            // Every stretch the timing rules named is still present.
+            for w in &report.timing {
+                assert!(
+                    judged.iter().any(|j| j.maha == w.maha && j.antar == w.antar && j.live),
+                    "{code} {topic}: {:?}/{:?} was named by the timing rules but is not marked live",
+                    w.maha, w.antar
+                );
+            }
+
+            // And the ranked list is contiguous: each stretch begins where the
+            // last ended, so there is no span a reader cannot account for.
+            let mut sorted = judged.clone();
+            sorted.sort_by(|a, b| a.start_jd.partial_cmp(&b.start_jd).expect("finite"));
+            for pair in sorted.windows(2) {
+                let (a, b) = (&pair[0], &pair[1]);
+                let gap_days = b.start_jd - a.end_jd;
+                assert!(
+                    gap_days.abs() < 1.0,
+                    "{code} {topic}: {:.0} day gap between {:?}/{:?} and {:?}/{:?}",
+                    gap_days, a.maha, a.antar, b.maha, b.antar
+                );
+            }
+            // Every stretch carries a rank, so none is silently unexplained.
+            assert!(judged.iter().all(|j| !j.rank.label().is_empty()));
+        }
+    }
+}
+
+/// The reported case, pinned: career timing for a Mesha-lagna chart born
+/// 1981-12-21 at Kollam used to skip from 2029 to 2041 because Mercury, whose
+/// mahadasha that is, is not one of its timing lords.
+#[test]
+fn the_mercury_mahadasha_is_no_longer_missing_from_career_timing() {
+    use lagn_core::jd_to_civil;
+    use lagn_rules::reading::topic_timing;
+
+    init_ephemeris();
+    let corpus = lagn_rules::corpus::load(&root().join("corpus")).expect("corpus loads");
+    let s = serde_json::json!({
+        "birth": { "date": "1981-12-21", "time": "14:10", "lat": 8.88113, "lon": 76.58469, "tz": 5.5, "sex": "male" },
+    });
+    let mut f = facts_for(&s);
+    let ages = (18.0, 65.0);
+    let report = evaluate_topic("career", &corpus.rules, &f, Mode::Production, ages);
+    let judged = topic_timing(&corpus, &mut f, Mode::Production, "Career", &report.timing, ages);
+
+    // Mercury's mahadasha runs 2029-2046 on this chart. Every year of it that
+    // falls inside the age range must be represented by some stretch.
+    let year = |jd: f64| jd_to_civil(jd, 5.5).year;
+    for y in 2030..=2040 {
+        assert!(
+            judged.iter().any(|w| year(w.start_jd) <= y && y <= year(w.end_jd)),
+            "no career stretch covers {y}; the Mercury mahadasha is missing again"
+        );
+    }
+    // The timing rules genuinely name only a few of those stretches, which is
+    // why the old list had a hole. Both facts should hold at once.
+    let in_mercury: Vec<_> = judged.iter().filter(|w| (2030..=2040).contains(&year(w.start_jd))).collect();
+    assert!(in_mercury.len() >= 6, "only {} stretches in the gap", in_mercury.len());
+    assert!(
+        in_mercury.iter().all(|w| !w.live),
+        "the stretches in the old gap are listed, but none should be marked live"
+    );
+}

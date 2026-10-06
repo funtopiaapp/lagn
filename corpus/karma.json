@@ -2,51 +2,117 @@
   "ketu_house": [
     {
       "house": 1,
-      "station": "a life turned on its own resources: standing alone, doing things by one's own hand, and an independence that did not have to be taught"
+      "station": "a life turned on its own resources: standing alone, doing things by one's own hand, and an independence that did not have to be taught",
+      "callings": [
+        "soldiering",
+        "wandering",
+        "the ascetic life",
+        "any work done alone and by one's own hand"
+      ]
     },
     {
       "house": 2,
-      "station": "a life lived inside a household and its means: family, food, speech and the keeping of what was earned"
+      "station": "a life lived inside a household and its means: family, food, speech and the keeping of what was earned",
+      "callings": [
+        "trade",
+        "the keeping of a household's wealth",
+        "reciting, singing or the spoken word"
+      ]
     },
     {
       "house": 3,
-      "station": "a life of effort and nerve: initiative, journeys close to home, messages carried, and skill with the hands"
+      "station": "a life of effort and nerve: initiative, journeys close to home, messages carried, and skill with the hands",
+      "callings": [
+        "carrying messages",
+        "a craft worked with the hands",
+        "performing",
+        "work that took courage more than rank"
+      ]
     },
     {
       "house": 4,
-      "station": "a settled life on the land: a house, fields or property, vehicles, and the care of a household"
+      "station": "a settled life on the land: a house, fields or property, vehicles, and the care of a household",
+      "callings": [
+        "farming",
+        "the keeping of land or a house",
+        "work rooted to one place and one family"
+      ]
     },
     {
       "house": 5,
-      "station": "a life of learning and counsel: study, teaching, advice given, devotion and recitation"
+      "station": "a life of learning and counsel: study, teaching, advice given, devotion and recitation",
+      "callings": [
+        "teaching",
+        "counselling",
+        "priestly duty",
+        "the care and instruction of children"
+      ]
     },
     {
       "house": 6,
-      "station": "a life of service: healing and medicine, discipline, dealing with conflict, debts and the troubles of others"
+      "station": "a life of service: healing and medicine, discipline, dealing with conflict, debts and the troubles of others",
+      "callings": [
+        "healing",
+        "service in another's household",
+        "soldiering",
+        "work that dealt with other people's troubles"
+      ]
     },
     {
       "house": 7,
-      "station": "a life bound to others: marriage, partnership, trade and constant dealing with the public"
+      "station": "a life bound to others: marriage, partnership, trade and constant dealing with the public",
+      "callings": [
+        "trade conducted in partnership",
+        "mediation",
+        "work that was always done with and through other people"
+      ]
     },
     {
       "house": 8,
-      "station": "a life touched by upheaval and by what is not spoken of: inheritance, research, crisis, and the hidden side of things"
+      "station": "a life touched by upheaval and by what is not spoken of: inheritance, research, crisis, and the hidden side of things",
+      "callings": [
+        "the keeping of secrets",
+        "inheritance and what is buried",
+        "occult or investigative work"
+      ]
     },
     {
       "house": 9,
-      "station": "a life of faith and instruction: pilgrimage, law, teaching, and guidance given to those who asked for it"
+      "station": "a life of faith and instruction: pilgrimage, law, teaching, and guidance given to those who asked for it",
+      "callings": [
+        "priesthood",
+        "scholarship",
+        "pilgrimage",
+        "the teaching of what is right"
+      ]
     },
     {
       "house": 10,
-      "station": "a public life: office, administration or command, with responsibility carried in the open"
+      "station": "a public life: office, administration or command, with responsibility carried in the open",
+      "callings": [
+        "administration",
+        "command",
+        "public office",
+        "work that carried responsibility in front of others"
+      ]
     },
     {
       "house": 11,
-      "station": "a life among groups: guilds, patrons, alliances, and gains that came through other people"
+      "station": "a life among groups: guilds, patrons, alliances, and gains that came through other people",
+      "callings": [
+        "work among guilds and networks",
+        "patronage",
+        "the gathering of many small gains"
+      ]
     },
     {
       "house": 12,
-      "station": "a life apart: retreat, foreign places, institutions of care or seclusion, and the inner life"
+      "station": "a life apart: retreat, foreign places, institutions of care or seclusion, and the inner life",
+      "callings": [
+        "the renunciate's life",
+        "the monastery or the hermitage",
+        "work done far from home, or apart from everyone"
+      ]
     }
   ],
   "ketu_sign": [
@@ -113,7 +179,37 @@
   ],
   "dispositor": {
     "strong": "The lord of that sign is well placed in your chart, which the tradition reads as a life whose work bore fruit: what was taken up was carried through, and it is that completed quality you are held to arrive with.",
-    "weak": "The lord of that sign is weakly placed in your chart, which the tradition reads as work left unfinished: interrupted rather than failed. That is the thread this life is held to pick up, and the section below on debts says where."
+    "weak": "The lord of that sign is weakly placed in your chart, which the tradition reads as work left unfinished: interrupted rather than failed. That is the thread this life is held to pick up, and the section below on debts says where.",
+    "craft": [
+      {
+        "graha": "sun",
+        "craft": "carried authority, and answered to no one nearby"
+      },
+      {
+        "graha": "moon",
+        "craft": "cared for people, and moved with them"
+      },
+      {
+        "graha": "mars",
+        "craft": "cut, built or fought, and needed a steady hand"
+      },
+      {
+        "graha": "mercury",
+        "craft": "counted, wrote, taught or traded"
+      },
+      {
+        "graha": "jupiter",
+        "craft": "taught, advised, or kept what is sacred"
+      },
+      {
+        "graha": "venus",
+        "craft": "made something beautiful, or kept the peace"
+      },
+      {
+        "graha": "saturn",
+        "craft": "endured: labour, service, and the care of the old and the poor"
+      }
+    ]
   },
   "source": {
     "reference": null,
@@ -122,7 +218,7 @@
   "review": {
     "status": "approved",
     "reviewer": "Claude (AI review at the product owner's direction)",
-    "date": "2026-09-27",
-    "comment": "Ketu house and sign tables for the life carried forward. Each entry describes a station or a temperament, never an identity, a place or a time, since a chart cannot encode those."
+    "date": "2026-10-05",
+    "comment": "Ketu house and sign tables for the life carried forward. Each entry describes a station or a temperament, never an identity, a place or a time, since a chart cannot encode those. Callings added 2026-10-05 at the product owner's direction, who asked that the reading name the kinds of life a placement is associated with rather than only its disposition. They are always several, always framed as what the tradition associates with the placement, and never asserted of the native: a chart cannot encode an occupation any more than it can encode a name. The house gives the sphere and the dispositor the craft, so the pairing is derived rather than enumerated. The Phase 9 bans on names, years, centuries and on blame are unchanged, and so is the ban on the second-person claim."
   }
 }

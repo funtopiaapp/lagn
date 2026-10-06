@@ -6,7 +6,7 @@ use std::path::{Path, PathBuf};
 use lagn_core::{jd_to_civil, BirthData, BirthMoment, Chart, ChartSettings};
 use lagn_rules::corpus::{summary, Corpus};
 use lagn_rules::porutham::{match_stars, PoruthamResult, StarPos, Verdict};
-pub use lagn_rules::report::{match_report, review_sheet, MatchReport};
+pub use lagn_rules::report::{review_sheet, MatchReport};
 use lagn_rules::resolve::{Label, Mode, TopicReport};
 use lagn_rules::{FactBase, ReviewStatus, Truth};
 use serde::Serialize;
@@ -47,7 +47,9 @@ pub fn print_validation(c: &Corpus) {
     }
     if let Some(p) = &c.porutham {
         let approved = p.values().filter(|r| r.status == ReviewStatus::Approved).count();
-        println!("  poruthams: {approved}/10 approved");
+        // The denominator is however many the engine knows, not a number
+        // typed once: the twelve-porutham form added two.
+        println!("  poruthams: {approved}/{} approved", lagn_rules::PoruthamKind::ALL.len());
     }
 }
 
@@ -60,7 +62,7 @@ fn date(jd: f64, tz: f64) -> String {
     format!("{:04}-{:02}-{:02}", d.year, d.month, d.day)
 }
 
-pub fn print_topic(r: &TopicReport, facts: &FactBase) {
+pub fn print_topic(r: &TopicReport, facts: &FactBase, judged: &[lagn_rules::reading::TopicWindow]) {
     let tz = facts.chart.birth.moment.utc_offset_hours;
     println!("\n  Topic: {}   mode: {:?}", r.topic, r.mode);
     if !r.withheld.is_empty() {
@@ -126,10 +128,15 @@ pub fn print_topic(r: &TopicReport, facts: &FactBase) {
         println!("\n  Periods to examine");
         for w in &r.timing {
             let m: Vec<&str> = w.matched.iter().map(|g| g.name()).collect();
+            let j = judged.iter().find(|j| j.maha == w.maha && j.antar == w.antar);
+            let verdict = j.map(|j| format!("  [{}]", j.verdict.label())).unwrap_or_default();
             println!(
-                "    {} -> {}   {} / {}   (via {})",
+                "    {} -> {}   {} / {}   (via {}){verdict}",
                 date(w.start_jd, tz), date(w.end_jd, tz), w.maha.name(), w.antar.name(), m.join(", ")
             );
+            for l in j.map(|j| j.supports.iter().chain(j.cautions.iter())).into_iter().flatten() {
+                println!("       {l}");
+            }
         }
     }
     println!();
@@ -164,11 +171,10 @@ pub fn parse_person(spec: &str) -> Result<Chart, Box<dyn std::error::Error>> {
     Ok(Chart::compute(birth, ChartSettings::default())?)
 }
 
-pub fn star_of(c: &Chart) -> StarPos {
-    StarPos { nakshatra: c.janma_nakshatra().nakshatra, rasi: c.janma_rasi() }
-}
-
-pub fn print_match(m: &MatchReport) {
+/// `bride_tz` and `groom_tz` are each chart's own UTC offset: a dasha
+/// boundary belongs to the chart it came from, so it is shown in that chart's
+/// local time.
+pub fn print_match(m: &MatchReport, bride_tz: f64, groom_tz: f64) {
     println!("\n  Porutham   mode: {:?}", m.mode);
     println!("  Bride: {} ({}), {}", m.bride.nakshatra.name(), m.bride.nakshatra.tamil_name(), m.bride.rasi.name());
     println!("  Groom: {} ({}), {}", m.groom.nakshatra.name(), m.groom.nakshatra.tamil_name(), m.groom.rasi.name());
@@ -194,7 +200,74 @@ pub fn print_match(m: &MatchReport) {
         let names: Vec<&str> = m.critical_failures.iter().map(|k| k.name()).collect();
         println!("  Critical: {}", names.join(", "));
     }
-    println!("  This is the porutham procedure only; the decision rests with the family's astrologer.\n");
+
+    // What each one measures and what its verdict means, so the table above
+    // is a summary of something rather than a score on its own.
+    if !m.explained.is_empty() {
+        println!("\n  What each porutham measures");
+        for x in &m.explained {
+            if x.means.is_empty() {
+                continue;
+            }
+            println!("    {} — it tests {}", x.name, x.measures);
+            println!("      {}: {}.", if x.verdict == Verdict::Matching { "Matching" } else { "Not matching" }, x.means);
+        }
+    }
+    // The checks a commercial report prints beside the poruthams.
+    if let Some(p) = &m.papa {
+        println!("\n  Papasamyam");
+        for (who, side) in [("Bride", &p.bride), ("Groom", &p.groom)] {
+            let detail: Vec<String> = side
+                .from
+                .iter()
+                .map(|f| {
+                    let names: Vec<String> =
+                        f.placements.iter().map(|(g, h)| format!("{} in {h}", g.name())).collect();
+                    format!("from {}: {} ({})", f.from, f.count, if names.is_empty() { "none".into() } else { names.join(", ") })
+                })
+                .collect();
+            println!("    {who:<6} total {}   {}", side.total, detail.join("; "));
+        }
+        println!(
+            "    {}",
+            if p.balanced {
+                "The groom's count is not the lower of the two, which is what the check asks for."
+            } else {
+                "The groom's count is the lower, which the check asks against. Weighted variants of this count differ between sources."
+            }
+        );
+    }
+    if let Some(c) = &m.chevvai {
+        println!("\n  Chevvai dosha");
+        println!("    Bride: {}{}", if c.bride { "present" } else { "not present" },
+            if c.bride_counts.is_empty() { String::new() } else { format!(" ({})", c.bride_counts.join("; ")) });
+        println!("    Groom: {}{}", if c.groom { "present" } else { "not present" },
+            if c.groom_counts.is_empty() { String::new() } else { format!(" ({})", c.groom_counts.join("; ")) });
+        if c.mutual {
+            println!("    Both carry it, which classical practice reads as the two cancelling each other.");
+        }
+    }
+    if !m.dasa_sandhi.is_empty() {
+        println!("\n  Dasa sandhi  (both charts change major period within 18 months)");
+        for d in &m.dasa_sandhi {
+            println!(
+                "    bride {} -> {} on {}   groom {} -> {} on {}   {:.0} months apart",
+                d.bride_from.name(), d.bride_to.name(), date(d.bride_jd, bride_tz),
+                d.groom_from.name(), d.groom_to.name(), date(d.groom_jd, groom_tz),
+                d.months_apart
+            );
+        }
+    }
+
+    if !m.reading.is_empty() {
+        println!("\n  How married life is read from this");
+        for p in &m.reading {
+            println!("    {p}");
+        }
+        println!();
+    } else {
+        println!("  This is the porutham procedure only; the decision rests with the family's astrologer.\n");
+    }
 }
 
 /// Raw procedure output for all 11,664 pada pairs, ungated, for the QA oracle.
@@ -233,4 +306,39 @@ pub fn print_write_up(w: &lagn_rules::writeup::WriteUp) {
         }
         println!();
     }
+}
+
+// ---------------------------------------------------------------------------
+// day
+// ---------------------------------------------------------------------------
+
+/// A day's panchanga and the parts of it tradition marks out.
+pub fn print_days(days: &[(lagn_core::DayTimings, lagn_core::Panchanga)], tz: f64) {
+    use lagn_core::day::{karana_name, paksha, tithi_name, yoga_name};
+
+    let hm = |jd: f64| {
+        let c = jd_to_civil(jd, tz);
+        format!("{:02}:{:02}", c.hour, c.minute)
+    };
+    let span = |s: &lagn_core::DaySegment| format!("{} - {}", hm(s.start_jd), hm(s.end_jd));
+
+    for (t, p) in days {
+        let c = jd_to_civil(t.sunrise_jd, tz);
+        println!(
+            "\n  {:04}-{:02}-{:02}  {} ({})   sunrise {}  sunset {}",
+            c.year, c.month, c.day, t.vara.english(), t.vara.tamil_name(),
+            hm(t.sunrise_jd), hm(t.sunset_jd)
+        );
+        println!(
+            "    Panchanga   tithi {} {} ({})   nakshatra {} pada {}   yoga {}   karana {}",
+            p.tithi, tithi_name(p.tithi), paksha(p.tithi),
+            p.nakshatra.nakshatra.name(), p.nakshatra.pada,
+            yoga_name(p.yoga), karana_name(p.karana)
+        );
+        println!("    Rahu kalam    {}   (part {} of 8)", span(&t.rahu_kalam), t.rahu_kalam.part);
+        println!("    Yamagandam    {}   (part {} of 8)", span(&t.yamagandam), t.yamagandam.part);
+        println!("    Kuligai       {}   (part {} of 8)", span(&t.kuligai), t.kuligai.part);
+        println!("    Abhijit       {}   (the auspicious middle of the day)", span(&t.abhijit));
+    }
+    println!();
 }

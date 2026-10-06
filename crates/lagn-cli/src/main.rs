@@ -57,6 +57,32 @@ enum Command {
     Transits(AgeArgs),
     /// Period rules evaluated for every antardasha.
     Periods(AgeArgs),
+    /// A day's panchanga and its Rahu kalam, Yamagandam, Kuligai and Abhijit.
+    Day(DayArgs),
+}
+
+/// A day at a place. No birth chart: these timings belong to the day and the
+/// place, not to a person.
+#[derive(Parser)]
+#[command(allow_negative_numbers = true)]
+struct DayArgs {
+    /// Date, YYYY-MM-DD.
+    #[arg(long)]
+    date: String,
+    /// Latitude, degrees north-positive.
+    #[arg(long)]
+    lat: f64,
+    /// Longitude, degrees east-positive.
+    #[arg(long)]
+    lon: f64,
+    /// UTC offset in hours in force at that place on that date.
+    #[arg(long, default_value_t = 5.5)]
+    tz: f64,
+    /// How many days to print, starting at --date.
+    #[arg(long, default_value_t = 1)]
+    days: u32,
+    #[arg(long)]
+    json: bool,
 }
 
 #[derive(Parser)]
@@ -328,7 +354,9 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                     SexArg::Male => lagn_rules::Sex::Male,
                 }),
             };
-            let facts = lagn_rules::FactBase::new(chart, a.derivation.settings(), native);
+            // Mutable because judging the topic's windows binds the period
+            // lords per window; the borrows never overlap.
+            let mut facts = lagn_rules::FactBase::new(chart, a.derivation.settings(), native);
             let mode = if a.review { lagn_rules::Mode::Review } else { lagn_rules::Mode::Production };
             let report = lagn_rules::evaluate_topic(&a.name, &corpus.rules, &facts, mode, (a.from_age, a.to_age));
             if a.writeup {
@@ -342,7 +370,15 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             } else if a.json {
                 println!("{}", serde_json::to_string_pretty(&report)?);
             } else {
-                phase3::print_topic(&report, &facts);
+                // The topic's own windows, each judged by the period rules for
+                // the same stretch, so the printout says whether a window
+                // supports this area rather than only that it is listed.
+                let title = corpus.topics.iter().find(|t| t.id == a.name).map(|t| t.title.clone())
+                    .unwrap_or_else(|| a.name.clone());
+                let judged = lagn_rules::reading::topic_timing(
+                    &corpus, &mut facts, mode, &title, &report.timing, (a.from_age, a.to_age),
+                );
+                phase3::print_topic(&report, &facts, &judged);
             }
         }
         Command::Match(a) => {
@@ -350,14 +386,21 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", phase3::match_table_json());
             } else {
                 let corpus = phase3::load(a.corpus.as_deref())?;
-                let bride = phase3::star_of(&phase3::parse_person(a.bride.as_deref().unwrap())?);
-                let groom = phase3::star_of(&phase3::parse_person(a.groom.as_deref().unwrap())?);
+                // Whole charts, not just the two stars: papasamyam, dasa
+                // sandhi and Chevvai dosha need them, and the CLI should print
+                // what the app shows.
+                let bride = phase3::parse_person(a.bride.as_deref().unwrap())?;
+                let groom = phase3::parse_person(a.groom.as_deref().unwrap())?;
                 let mode = if a.review { lagn_rules::Mode::Review } else { lagn_rules::Mode::Production };
-                let m = phase3::match_report(&corpus, bride, groom, mode);
+                let m = lagn_rules::report::match_report_full(&corpus, &bride, &groom, mode);
                 if a.json {
                     println!("{}", serde_json::to_string_pretty(&m)?);
                 } else {
-                    phase3::print_match(&m);
+                    phase3::print_match(
+                        &m,
+                        bride.birth.moment.utc_offset_hours,
+                        groom.birth.moment.utc_offset_hours,
+                    );
                 }
             }
         }
@@ -367,6 +410,35 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 return Err(format!("no rules for topic {:?}", a.topic).into());
             }
             print!("{}", phase3::review_sheet(&corpus, &a.topic, a.samples.max(1)));
+        }
+        Command::Day(a) => {
+            let d: Vec<&str> = a.date.split('-').collect();
+            if d.len() != 3 {
+                return Err("date must be YYYY-MM-DD".into());
+            }
+            let (y, m, dd): (i32, u32, u32) = (d[0].parse()?, d[1].parse()?, d[2].parse()?);
+            if !(1..=366).contains(&a.days) {
+                return Err("--days must be 1..=366".into());
+            }
+            let eph = lagn_core::Ephemeris::new(lagn_core::Ayanamsa::Lahiri, lagn_core::NodeType::Mean);
+            let mut out = Vec::new();
+            for i in 0..a.days {
+                // Start the search just before local midnight, so the first
+                // sunrise found is the one belonging to this date.
+                let midnight = lagn_core::julian_day_ut(y, m, dd, 0.0, lagn_core::Calendar::Gregorian)?
+                    - a.tz / 24.0 + i as f64;
+                let sun = eph.sun_day(midnight, a.lat, a.lon)?;
+                let t = lagn_core::day_timings(sun.sunrise_jd, sun.sunset_jd);
+                let s = eph.position(sun.sunrise_jd, lagn_core::Graha::Sun)?;
+                let mo = eph.position(sun.sunrise_jd, lagn_core::Graha::Moon)?;
+                let p = lagn_core::panchanga(s.longitude, mo.longitude, sun.sunrise_jd);
+                out.push((t, p));
+            }
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&out)?);
+            } else {
+                phase3::print_days(&out, a.tz);
+            }
         }
         Command::Transits(a) => {
             if !(a.from_age >= 0.0 && a.to_age > a.from_age && a.to_age <= 120.0) {

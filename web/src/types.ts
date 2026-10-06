@@ -85,9 +85,13 @@ export interface RuleResult {
   text: string; impact?: string | null; trace: TraceEntry[]; tags?: string[]; subject?: string;
 }
 
+/** A matter a reader can ask about, mapped to the reading that answers it.
+ *  `keywords` are match terms only and are never shown. */
+export interface Question { id: string; question: string; topic: string; keywords: string[] }
+
 export interface TopicMeta { id: string; title: string; summary: string; disclaimer?: string; ages: [number, number] }
 export interface BhavaMeaning { house: number; name: string; significations: string[] }
-export interface TopicsResponse { topics: TopicMeta[]; bhavas: BhavaMeaning[] }
+export interface TopicsResponse { questions: Question[]; topics: TopicMeta[]; bhavas: BhavaMeaning[] }
 
 export interface Pariharam {
   id: string; title: string; triggers: string[]; deity: string | null; day: string | null;
@@ -120,19 +124,49 @@ export interface TopicResponse {
     cancelled: [string, string][]; unknown: string[]; score: number;
     label: "supportive" | "afflicted" | "mixed" | "neutral";
   };
-  windows: { rule: string; start: string; end: string; maha: string; antar: string; matched: string[] }[];
+  windows: TimingWindow[];
   meta?: TopicMeta | null;
   pariharams?: Suggested[];
   writeup?: WriteUp | null;
 }
 
 export interface PoruthamResult { kind: string; verdict: "matching" | "not_matching" | "not_evaluated"; critical: boolean; detail: string }
+/** One porutham with what it measures and what its verdict is read to mean. */
+export interface PoruthamExplained {
+  kind: string; name: string; verdict: "matching" | "not_matching" | "not_evaluated";
+  critical: boolean; detail: string; measures: string; means: string; touches: string;
+}
+/** Papasamyam: the papa count from one reference point. */
+export interface PapaFrom { from: string; count: number; placements: [string, number][] }
+export interface Papa { from: PapaFrom[]; total: number }
+export interface PapaComparison { bride: Papa; groom: Papa; balanced: boolean; difference: number }
+/** One coincidence of mahadasha changes between the two charts. */
+export interface DasaSandhi {
+  bride_jd: number; bride_from: string; bride_to: string;
+  groom_jd: number; groom_from: string; groom_to: string; months_apart: number;
+}
+/** Chevvai dosha on both sides, which is how a report states it. */
+export interface ChevvaiBoth {
+  bride: boolean; groom: boolean; bride_counts: string[]; groom_counts: string[]; mutual: boolean;
+}
+
+/** The results gathered into the areas of married life they speak to. */
+export interface MatchArea { touches: string; matching: string[]; not_matching: string[]; critical: boolean }
 export interface MatchResponse {
   mode: "production" | "review";
   bride: { nakshatra: string; rasi: string };
   groom: { nakshatra: string; rasi: string };
   results: [PoruthamResult, string][];
   withheld: number; reviewers: string[]; matched: number; evaluated: number; critical_failures: string[];
+  /** What each porutham measures and what its verdict means. Empty when the
+   *  explainer is not reviewed. */
+  explained: PoruthamExplained[];
+  areas: MatchArea[];
+  /** How to read the whole match, in the order a reader needs it. */
+  reading: string[];
+  papa?: PapaComparison;
+  dasa_sandhi?: DasaSandhi[];
+  chevvai?: ChevvaiBoth;
 }
 
 export interface VersionInfo {
@@ -150,6 +184,35 @@ export interface FamilyReading {
   compared_with: string;
   comparison: string[];
 }
+
+/** One of a topic's timing windows, with how the period rules judge the
+ *  stretch for that topic. `supports` and `cautions` name the area, so a line
+ *  never says "supports" without saying what it supports. */
+export type TimingVerdict = "favourable" | "mixed" | "asks for care" | "no period factor applies";
+/** Ranking across every stretch in range, best first. */
+export type TimingRank = "best" | "good" | "mixed" | "caution" | "not judged";
+export interface TimingWindow {
+  rule: string; start: string; end: string; maha: string; antar: string; matched: string[];
+  verdict: TimingVerdict; score: number; supports: string[]; cautions: string[];
+  /** True when the topic's own timing rules single out this stretch. */
+  live: boolean;
+  rank: TimingRank;
+  /** Against the server's clock. The frontend does no calendar arithmetic, so
+   *  it cannot work this out for itself. */
+  when: "past" | "now" | "ahead" | "unknown";
+}
+
+/** One named part of a day. `part` is which eighth (or which fifteenth, for
+ *  Abhijit) of the daylight it occupies. */
+export interface DaySegment { start: string; end: string; part: number }
+/** A day's panchanga and the parts of it tradition marks out. */
+export interface DayView {
+  date: string; vara: string; vara_tamil: string; sunrise: string; sunset: string;
+  tithi: number; tithi_name: string; paksha: string;
+  nakshatra: string; nakshatra_tamil: string; pada: number; yoga: string; karana: string;
+  rahu_kalam: DaySegment; yamagandam: DaySegment; kuligai: DaySegment; abhijit: DaySegment;
+}
+export interface DaysResponse { days: DayView[] }
 
 export interface WriteUpPoint { rule: string; title: string; text: string; meaning?: string | null; polarity: number; because: string[] }
 export type SectionKind = "house" | "karakas" | "varga" | "supporting" | "care" | "noted" | "dosha" | "eased" | "unknown" | "timing" | "karmic_axis" | "bridge" | "life_carried" | "bonds" | "debts";

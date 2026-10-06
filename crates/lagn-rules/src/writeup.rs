@@ -101,6 +101,16 @@ pub fn ordinal(n: u8) -> String {
     format!("{n}{suffix}")
 }
 
+/// "a", "a and b", "a, b and c" - the engine never shows a reader a bare
+/// comma-separated list.
+fn join_and(items: &[String]) -> String {
+    match items {
+        [] => String::new(),
+        [one] => one.clone(),
+        [init @ .., last] => format!("{} and {last}", init.join(", ")),
+    }
+}
+
 /// Items that contain commas, joined with semicolons: "a, x; and b, y".
 fn join_semi(items: &[String]) -> String {
     match items {
@@ -244,7 +254,7 @@ fn life_carried_section(f: &FactBase, karma: Option<&crate::catalogue::Karma>) -
         f.dignity(disp, Varga::D1),
         Some(Dignity::Exalted | Dignity::Moolatrikona | Dignity::OwnSign | Dignity::GreatFriend | Dignity::Friend)
     ) && !matches!(dh, 6 | 8 | 12);
-    let paragraphs = vec![
+    let mut paragraphs = vec![
         format!(
             "The station — Ketu sits in your {} house, and the tradition reads that as {}.",
             ordinal(house), station
@@ -259,8 +269,42 @@ fn life_carried_section(f: &FactBase, karma: Option<&crate::catalogue::Karma>) -
             condition_of(f, disp),
             if strong { &k.dispositor.strong } else { &k.dispositor.weak }
         ),
-        "Read this as orientation and pattern, which is what the placements can carry. A chart holds nine grahas in twelve houses; it cannot hold a name, a year or a place, so none is given.".to_string(),
     ];
+
+    // The kinds of life the placement is associated with. Several, always, and
+    // phrased as what the tradition associates rather than as a claim about
+    // the native - a chart can no more encode an occupation than a name. The
+    // house gives the sphere and the dispositor the craft.
+    let callings = k.callings(house);
+    if !callings.is_empty() {
+        let list: Vec<String> = callings.iter().map(|c| c.to_string()).collect();
+        let mut t = format!(
+            "The kinds of life it is associated with — readings of this placement traditionally \
+             point to lives of {}.",
+            join_and(&list)
+        );
+        if let Some(craft) = k.craft(disp) {
+            t.push_str(&format!(
+                " With {} as the dispositor, the tradition narrows that to work that {}.",
+                graha_name(disp), craft
+            ));
+        }
+        t.push_str(
+            " These are possibilities of one kind, offered together and never one at a time: the \
+             tradition associates them with the placement, and nothing here is a record of a past \
+             identity or can be checked against one.",
+        );
+        paragraphs.push(t);
+    }
+
+    // Last, so it qualifies everything above it rather than interrupting.
+    paragraphs.push(
+        "Read all of this as orientation and pattern, which is what the placements can carry. A \
+         chart holds nine grahas in twelve houses; it cannot hold a name, a year or a place, so \
+         none is given."
+            .to_string(),
+    );
+
     Some(Section { kind: SectionKind::LifeCarried, heading: "The life carried forward".into(), paragraphs, points: Vec::new() })
 }
 

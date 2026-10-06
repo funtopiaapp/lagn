@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { api, ApiError } from "../api";
 import { readDate, readTime } from "../lib/readback";
+import { addSaved, loadSaved } from "../lib/savedBirths";
 import type { BirthInput, OffsetSuggestion, Place, Sex } from "../types";
 
 interface Props {
@@ -10,6 +11,11 @@ interface Props {
   busy?: boolean;
   /** Ask the person's sex here, once, for the rules that depend on it. */
   askSex?: boolean;
+  /** Fill the form from a saved profile. Its offset was already seen and
+   *  confirmed when the profile was first entered, so it is reused rather
+   *  than asked again - but it is shown, because an offset applied without
+   *  the person seeing it is how a chart goes silently wrong. */
+  prefill?: { id: string; birth: BirthInput; sex?: Sex; label: string } | null;
 }
 
 /** Choice of UTC offset: one of the suggested candidates, or a typed value. */
@@ -22,7 +28,7 @@ type OffsetChoice = { kind: "candidate"; index: number } | { kind: "manual" } | 
  * it is never applied without the user seeing it. A historical, ambiguous or
  * local-mean-time suggestion is never preselected: the user must choose.
  */
-export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props) {
+export function BirthForm({ title, submitLabel, onSubmit, busy, askSex, prefill }: Props) {
   const id = useId();
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -38,7 +44,45 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
   const [manualOffset, setManualOffset] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sex, setSex] = useState<"" | Sex>("");
+  // Saving is opt-in: birth details are the most personal thing here, so
+  // nothing is kept unless it is asked for.
+  const [save, setSave] = useState(false);
+  const [saveName, setSaveName] = useState("");
+  const [saveFailed, setSaveFailed] = useState(false);
+  // The profile the fields currently come from. A ref as well as state: both
+  // effects below run in the same pass, so the offset effect would otherwise
+  // read the previous render's value and reset the offset this one just
+  // filled in. The ref updates immediately; the state is for rendering.
+  const fromRef = useRef<string | null>(null);
+  const [fromProfile, setFromProfileState] = useState<string | null>(null);
+  const setFromProfile = (id: string | null) => {
+    fromRef.current = id;
+    setFromProfileState(id);
+  };
   const searchSeq = useRef(0);
+
+  // Fill from a saved profile when one is handed in.
+  useEffect(() => {
+    if (!prefill) return;
+    const b = prefill.birth;
+    setDate(b.date);
+    setTime(b.time.slice(0, 8));
+    // Coordinates rather than a place search: they are exact, and re-running
+    // the search would ask the offset question again for an answer already
+    // given.
+    setManual(true);
+    setPlace(null);
+    setQuery("");
+    setLat(String(b.latitude));
+    setLon(String(b.longitude));
+    setTz("");
+    setManualOffset(String(b.utc_offset_hours));
+    setChoice({ kind: "manual" });
+    setSuggestion(null);
+    setSex(prefill.sex ?? "");
+    setFromProfile(prefill.id);
+    setError(null);
+  }, [prefill]);
 
   // Place search, debounced; stale responses are discarded.
   useEffect(() => {
@@ -61,6 +105,10 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
 
   // Offset suggestion whenever date, time and place are all known.
   useEffect(() => {
+    // A prefilled profile already carries an offset its owner confirmed, so
+    // this must not reset it. Editing any field clears fromProfile and the
+    // ordinary flow resumes.
+    if (fromRef.current) return;
     setSuggestion(null);
     setChoice(null);
     setError(null);
@@ -76,7 +124,8 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
       })
       .catch((e) => { if (live) setError(e instanceof ApiError ? e.message : String(e)); });
     return () => { live = false; };
-  }, [date, time, zone, coordsOk, lonNum]);
+  }, [date, time, zone, coordsOk, lonNum, fromProfile]);
+
 
   const offsetValue = (): number | null => {
     if (!choice) return null;
@@ -94,14 +143,23 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
     e.preventDefault();
     setError(null);
     if (!ready || offset === null || latNum === undefined || lonNum === undefined) return;
-    onSubmit({
+    const birth: BirthInput = {
       date,
       time: time.length === 5 ? `${time}:00` : time,
       latitude: latNum,
       longitude: lonNum,
       utc_offset_hours: offset,
       place: manual ? "" : place ? `${place.name}, ${place.admin1}` : "",
-    }, sex || undefined);
+    };
+    // The form saves, not the caller. This form is used for the main chart,
+    // for a porutham partner and for a family member, and when only the first
+    // of those did the saving the checkbox silently did nothing in the other
+    // two - a control that lied.
+    if (save) {
+      const out = addSaved(loadSaved(), birth, { name: saveName, sex: sex || undefined });
+      setSaveFailed(!out.stored);
+    }
+    onSubmit(birth, sex || undefined);
   };
 
   const pick = (p: Place) => { setPlace(p); setQuery(`${p.name}, ${p.admin1}, ${p.country}`); setResults([]); };
@@ -110,12 +168,20 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
     <form className="card birth-form" onSubmit={submit} aria-labelledby={`${id}-title`}>
       <h2 id={`${id}-title`}>{title}</h2>
 
+      {fromProfile && prefill && (
+        <p className="notice asked" role="status">
+          Filled from your saved profile <strong>{prefill.label}</strong>, including the UTC offset
+          you confirmed for it ({prefill.birth.utc_offset_hours >= 0 ? "+" : ""}
+          {prefill.birth.utc_offset_hours}). Change any field and the offset is asked again.
+        </p>
+      )}
+
       <div className="row">
         <label>Date of birth
-          <input type="date" required min="1200-01-01" max="3000-12-31" value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type="date" required min="1200-01-01" max="3000-12-31" value={date} onChange={(e) => { setDate(e.target.value); setFromProfile(null); }} />
         </label>
         <label>Time of birth
-          <input type="time" required step={1} value={time} onChange={(e) => setTime(e.target.value)} />
+          <input type="time" required step={1} value={time} onChange={(e) => { setTime(e.target.value); setFromProfile(null); }} />
         </label>
       </div>
       {(readDate(date) || readTime(time)) && (
@@ -130,7 +196,7 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
           <label>Place of birth
             <input type="text" autoComplete="off" placeholder="Town or city, e.g. Madurai" value={query}
               aria-expanded={results.length > 0} aria-controls={`${id}-places`}
-              onChange={(e) => { setQuery(e.target.value); setPlace(null); }} />
+              onChange={(e) => { setQuery(e.target.value); setPlace(null); setFromProfile(null); }} />
           </label>
           {results.length > 0 && (
             <ul id={`${id}-places`} className="place-results" role="listbox">
@@ -193,6 +259,29 @@ export function BirthForm({ title, submitLabel, onSubmit, busy, askSex }: Props)
           <span className="hint">A few classical rules depend on it. If not stated, those rules are shown as "could not be judged", never guessed.</span>
         </label>
       )}
+      <fieldset className="inline save-here">
+        <label className="radio">
+          <input type="checkbox" checked={save} onChange={(e) => setSave(e.target.checked)} />
+          <span>Save this profile on this device</span>
+        </label>
+        {save && (
+          <label className="narrow">Name (optional)
+            <input type="text" maxLength={60} value={saveName} placeholder="e.g. Appa"
+              onChange={(e) => setSaveName(e.target.value)} />
+            <span className="hint">
+              Only so you can recognise this profile in the list later. Leave it blank and
+              the date and place are shown instead. Nothing is sent anywhere.
+            </span>
+          </label>
+        )}
+      </fieldset>
+      {saveFailed && (
+        <p className="error" role="alert">
+          This device would not let the profile be saved, so it has not been kept. Private
+          browsing and blocked site data both do this.
+        </p>
+      )}
+
       {error && <p className="error" role="alert">{error}</p>}
       <button type="submit" className="primary" disabled={!ready}>{busy ? "Working…" : submitLabel}</button>
       {!ready && date && time && coordsOk && offset === null && <p className="hint">Choose the UTC offset to continue.</p>}

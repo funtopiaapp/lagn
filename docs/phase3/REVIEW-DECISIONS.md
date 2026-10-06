@@ -76,3 +76,15 @@ engine rule first.
 | R-2 | **Lagna and Moon**; Venus rejected. |
 | R-3 | Houses 2, 4, 7, 8, 12. |
 | R-4 | The cancellation list above. |
+
+## Later decision: Vasya, 2026-10-05
+
+The rejection above was reversed at the product owner's direction. Its reason
+was not resolved - no trusted table was supplied - so the four rows the sources
+disagree on (Tula, Vrischika, Makara, Kumbha) are the majority reading, and
+`porutham::vasya_disputed` marks them. A verdict resting on one of those rows
+says so in its detail line rather than reading as settled as the other six.
+
+What an astrologer should still check: those four rows, and the direction. The
+test is the common Tamil one, the bride's rasi under the groom's sway, not a
+mutual test. The eight agreed rows are not in question.

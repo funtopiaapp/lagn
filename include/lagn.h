@@ -42,6 +42,10 @@ char *lagn_topic(const char *name, const char *request_json);
 /* {"birth": {...}, "from_age": n, "to_age": n} -> sensitive periods. */
 char *lagn_periods(const char *request_json);
 
+/* A day's panchanga and its Rahu kalam, Yamagandam, Kuligai and Abhijit.
+   Needs no chart: these timings belong to the day and the place. */
+char *lagn_days(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

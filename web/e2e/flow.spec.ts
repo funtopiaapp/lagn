@@ -253,9 +253,23 @@ test("the past-life reading appears, carries its frame, and bridges to the other
   await page.getByRole("navigation", { name: "Topics" }).getByRole("button", { name: "Past life", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Past life", exact: true })).toBeVisible();
 
-  // The frame is stated before anything is read.
-  await expect(page.locator(".notice.disclaimer")).toContainText("not a claim about events");
-  await expect(page.locator(".notice.disclaimer")).toContainText("never names a past identity");
+  // The frame is stated before anything is read. The reading names the kinds
+  // of life a placement is associated with, so the old promise that it "never
+  // names a past identity" is gone; what it promises now is the narrower thing
+  // that is still true.
+  const frame = page.locator(".notice.disclaimer");
+  await expect(frame).toContainText("not a claim about events");
+  await expect(frame).toContainText("never a record of a past identity");
+  await expect(frame).toContainText("cannot encode a name, a year or a place");
+
+  // And the callings themselves reach the page, hedged, in the life-carried
+  // section rather than anywhere a reader could take them for a record.
+  const carried = page.locator('.writeup-section[data-kind="life_carried"]');
+  await expect(carried).toContainText("kinds of life it is associated with");
+  await expect(carried).toContainText("traditionally point to lives of");
+  await expect(carried).toContainText("never one at a time");
+  // Never the second-person claim, on any chart.
+  expect((await carried.innerText()).toLowerCase()).not.toContain("you were");
 
   const api = await (await page.request.post("/api/topic/past_life", { data: { birth } })).json();
   const axis = api.writeup.sections.find((s: { kind: string }) => s.kind === "karmic_axis");

@@ -1,0 +1,110 @@
+{
+  "poruthams": [
+    {
+      "kind": "dina",
+      "name": "Dina",
+      "measures": "the bride's wellbeing and the day-to-day health of the marriage, counted from her star to his",
+      "when_matching": "day-to-day life tends to run without strain, and neither partner's health is read as a drag on the other",
+      "when_not": "ordinary life may ask more care than usual - rest, routine and not letting small complaints go unattended",
+      "touches": "health and daily life"
+    },
+    {
+      "kind": "gana",
+      "name": "Gana",
+      "measures": "temperament: whether the two natures are of a kind that sits together, by the deva, manushya and rakshasa groupings",
+      "when_matching": "the two temperaments are read as compatible, so disagreements tend to stay disagreements rather than becoming character clashes",
+      "when_not": "the two natures pull differently. It is the most workable of the mismatches, and the traditional answer is patience and not trying to remake the other",
+      "touches": "temperament and harmony"
+    },
+    {
+      "kind": "mahendra",
+      "name": "Mahendra",
+      "measures": "the durability of the bond and the prospect of children, by the count from her star to his",
+      "when_matching": "the bond is read as durable, and children as supported",
+      "when_not": "the tradition reads less support here for continuity. It is a count, not a verdict on a family",
+      "touches": "children and continuity"
+    },
+    {
+      "kind": "stree_deergha",
+      "name": "Stree Deergha",
+      "measures": "the wife's long life and the endurance of the marriage, which the texts treat as the same question",
+      "when_matching": "the marriage is read as enduring, and the wife's wellbeing within it as supported",
+      "when_not": "the count falls short of what the texts ask for. They prescribe no remedy beyond care and attention",
+      "touches": "endurance of the marriage"
+    },
+    {
+      "kind": "yoni",
+      "name": "Yoni",
+      "measures": "physical compatibility, by the animal assigned to each star and whether those two are natural enemies",
+      "when_matching": "physical compatibility is read as easy between them",
+      "when_not": "the two stars are assigned natural enemies, which the texts read as friction in physical life needing patience and openness",
+      "touches": "physical compatibility"
+    },
+    {
+      "kind": "rasi",
+      "name": "Rasi",
+      "measures": "the standing of each moon-sign from the other, which the texts read for prosperity and progeny",
+      "when_matching": "the signs stand well from each other, read as mutual prosperity",
+      "when_not": "the signs fall in a count the texts treat as uneasy (2nd, 6th, 8th or 12th), read as strain on shared fortune",
+      "touches": "shared prosperity"
+    },
+    {
+      "kind": "rasi_adhipati",
+      "name": "Rasi Adhipati",
+      "measures": "whether the lords of the two moon-signs are friends, which stands for the meeting of two minds",
+      "when_matching": "the sign lords are friendly or the same, read as an easy meeting of minds",
+      "when_not": "the sign lords are natural enemies, read as two minds that have to work at understanding each other",
+      "touches": "meeting of minds"
+    },
+    {
+      "kind": "vasya",
+      "name": "Vasya",
+      "measures": "mutual attraction and influence: whether one sign is traditionally held under the sway of the other",
+      "when_matching": "the attraction is read as mutual and settled",
+      "when_not": "the sway is absent in this direction, read as attraction that needs tending rather than one that looks after itself",
+      "touches": "attraction and influence"
+    },
+    {
+      "kind": "rajju",
+      "name": "Rajju",
+      "measures": "the thread of the bond itself, by the body region each star belongs to. Sharing a region is the one the texts warn about most",
+      "when_matching": "the two stars belong to different regions of the thread, which is what the texts ask for",
+      "when_not": "both stars fall in the same region of the thread. This is the porutham the texts treat most seriously, and the traditional course is to consult an astrologer rather than to weigh it alone",
+      "touches": "the bond itself"
+    },
+    {
+      "kind": "vedha",
+      "name": "Vedha",
+      "measures": "affliction between the two stars: certain pairs are held to obstruct each other outright",
+      "when_matching": "the two stars do not afflict each other",
+      "when_not": "the two stars are one of the pairs the texts hold to obstruct each other. Like Rajju, this is one to take to an astrologer rather than to set against the count of the rest",
+      "touches": "obstruction between the stars"
+    },
+    {
+      "kind": "naadi",
+      "name": "Naadi",
+      "measures": "the humour each star is assigned - adi, madhya or antya - of which sharing one is what the texts object to",
+      "when_matching": "the two stars fall in different naadis, which is what the texts ask for",
+      "when_not": "both stars share a naadi. The texts treat this as seriously as Rajju, and classical cancellations of it exist that this engine does not compute, so the course is to put it to an astrologer rather than to weigh it against the count",
+      "touches": "constitution and children"
+    },
+    {
+      "kind": "varna",
+      "name": "Varna",
+      "measures": "the varna of each moon-sign, taken from its element: water Brahmin, fire Kshatriya, earth Vaishya, air Shudra",
+      "when_matching": "the groom's varna does not stand below the bride's, which is what the check asks",
+      "when_not": "the groom's varna stands below the bride's. In practice this is the lightest of the twelve, and the texts prescribe no remedy beyond mutual respect",
+      "touches": "work and disposition"
+    }
+  ],
+  "source": {
+    "reference": null,
+    "note": "Authored from general knowledge of what each of the ten poruthams is conventionally held to test, and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review. The two the texts treat most seriously, Rajju and Vedha, say so and send the reader to an astrologer rather than inviting them to weigh it against the count."
+  },
+  "review": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-10-05",
+    "comment": "What each porutham measures, and what a match or a mismatch is traditionally read to mean, so the match view explains rather than only scores. Wording follows the DESIGN 6 section 2 guardrails: a mismatch is stated as what it asks for and what helps, never as a prediction about a marriage, and never as 'danger' or 'loss'. The closing line that the decision rests with the family's astrologer is unchanged and still shown. Naadi and Varna added 2026-10-05 with the 12-porutham form; Naadi's mismatch text sends the reader to an astrologer, as Rajju's and Vedha's do, because the texts treat it as seriously and because its classical cancellations are not computed here."
+  }
+}
