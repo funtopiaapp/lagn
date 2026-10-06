@@ -6,15 +6,18 @@ import { FamilyView } from "./components/FamilyView";
 import { MatchView } from "./components/MatchView";
 import { OfflineBanner } from "./components/OfflineBanner";
 import { PeriodsView } from "./components/PeriodsView";
+import { DayTimingsView } from "./components/DayTimingsView";
 import { ReadingsView } from "./components/ReadingsView";
+import { SavedCharts } from "./components/SavedCharts";
+import { loadSaved, type SavedBirth } from "./lib/savedBirths";
 import { loadToken, saveToken } from "./lib/session";
 import { loadTheme, type Theme } from "./lib/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
-type Tab = "chart" | "readings" | "periods" | "family" | "match";
-const TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"], ["periods", "Sensitive periods"], ["family", "Family"], ["match", "Match"]];
+type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved";
+const TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"], ["periods", "Sensitive periods"], ["day", "Day timings"], ["family", "Family"], ["match", "Match"], ["saved", "Saved profiles"]];
 
 export function App() {
   const [chart, setChart] = useState<ChartResponse | null>(null);
@@ -27,6 +30,9 @@ export function App() {
   const [token, setToken] = useState(loadToken);
   const [tokenDraft, setTokenDraft] = useState("");
   const [theme, setTheme] = useState<Theme>(loadTheme);
+  // Charts kept on this device. Read once; every change writes through.
+  const [saved, setSaved] = useState<SavedBirth[]>(loadSaved);
+  const [showSaved, setShowSaved] = useState(false);
 
   useEffect(() => { api.version().then(setVersion).catch(() => setVersion(null)); }, []);
 
@@ -45,6 +51,9 @@ export function App() {
 
   const setTab = (t: Tab) => {
     if (t !== tab) history.pushState({ lagn: true, view: t }, "");
+    // Any birth form may have saved a profile, so re-read rather than trust a
+    // copy taken when the app started.
+    if (t === "saved") setSaved(loadSaved());
     setTabState(t);
   };
 
@@ -77,7 +86,17 @@ export function App() {
       <main>
         {!chart ? (
           <><p className="tagline">Vedic astrology, computed deterministically, in the South Indian tradition</p>
-          <BirthForm title="Birth details" submitLabel="Compute chart" onSubmit={compute} busy={busy} askSex /></>
+          <BirthForm title="Birth details" submitLabel="Compute chart" onSubmit={compute} busy={busy} askSex />
+          {/* Before any chart exists there is no tab bar, so the saved
+              profiles need their own way in. */}
+          {saved.length > 0 && !showSaved && (
+            <button type="button" className="link" onClick={() => { setSaved(loadSaved()); setShowSaved(true); }}>
+              Open a saved profile ({saved.length})
+            </button>
+          )}
+          {showSaved && (
+            <SavedCharts saved={saved} onChange={setSaved} onOpen={(b, sx) => void compute(b, sx)} />
+          )}</>
         ) : (
           <>
             <nav className="tabs" aria-label="Sections">
@@ -88,8 +107,13 @@ export function App() {
             {tab === "chart" && <ChartView chart={chart} />}
             {tab === "readings" && <ReadingsView birth={chart.input} sex={sex} reviewToken={token} lagna={chart.lagna} />}
             {tab === "periods" && <PeriodsView birth={chart.input} sex={sex} reviewToken={token} />}
+            {tab === "day" && <DayTimingsView birth={chart.input} />}
             {tab === "family" && <FamilyView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "match" && <MatchView birth={chart.input} reviewToken={token} />}
+            {tab === "saved" && (
+              <SavedCharts saved={saved} onChange={setSaved}
+                onOpen={(b, sx) => { setTab("chart"); void compute(b, sx); }} />
+            )}
           </>
         )}
         {error && <p className="error" role="alert">{error}</p>}

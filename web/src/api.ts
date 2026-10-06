@@ -1,5 +1,5 @@
 import type {
-  BirthInput, ChartResponse, FamilyReading, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, ChartResponse, DaysResponse, FamilyReading, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -122,6 +122,13 @@ export const api = {
     const payload = { birth, ...opts, mode: reviewToken ? "review" : "production" };
     const n = await viaNative<PeriodsResponse>((b) => b.periods(JSON.stringify(payload)));
     return n !== NOT_NATIVE ? n : post<PeriodsResponse>("/api/periods", payload, reviewToken);
+  },
+
+  /** A day's own timings. No chart, no review gate: a panchangam states what
+   *  the day is, and nothing in it is interpreted. */
+  days: async (q: { date?: string; latitude: number; longitude: number; utc_offset_hours: number; days?: number; offset_days?: number }) => {
+    const n = await viaNative<DaysResponse>((b) => b.days(JSON.stringify(q)));
+    return n !== NOT_NATIVE ? n : post<DaysResponse>("/api/days", q);
   },
 
   family: async (native: { birth: BirthInput; sex?: "female" | "male" }, member: { birth: BirthInput; sex?: "female" | "male" },

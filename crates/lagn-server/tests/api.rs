@@ -170,9 +170,14 @@ async fn topic_and_match_endpoints_equal_the_library() {
         let (st, mv, _) = call(app(Some(TOKEN)), post("/api/match", &json!({ "bride": b, "groom": g, "mode": "review" }), Some(TOKEN))).await;
         assert_eq!(st, StatusCode::OK);
         let (cb, cg) = (library_chart(&b), library_chart(&g));
-        let star = |c: &Chart| lagn_rules::StarPos { nakshatra: c.janma_nakshatra().nakshatra, rasi: c.janma_rasi() };
-        let want = lagn_rules::report::match_report(&corpus, star(&cb), star(&cg), Mode::Review);
+        // The whole report, as the endpoint serves it: the poruthams plus
+        // papasamyam, dasa sandhi and Chevvai dosha, which need both charts.
+        let want = lagn_rules::report::match_report_full(&corpus, &cb, &cg, Mode::Review);
         assert_eq!(mv, serde_json::to_value(&want).unwrap());
+        // And those three really are present, so this is parity on the whole
+        // thing rather than on a subset of it.
+        assert!(mv["papa"].is_object(), "papasamyam missing from the endpoint");
+        assert!(mv["chevvai"].is_object(), "chevvai missing from the endpoint");
     }
 }
 

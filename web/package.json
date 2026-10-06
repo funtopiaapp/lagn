@@ -12,6 +12,7 @@
     "build:xorigin": "VITE_API_BASE=http://127.0.0.1:8799 vite build --outDir dist-xorigin"
   },
   "dependencies": {
+    "jspdf": "^4.2.1",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

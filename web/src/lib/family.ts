@@ -19,7 +19,9 @@ export interface Member {
 const KEY = "lagn.family.v1";
 export const EXPORT_FORMAT = "lagn-family/1";
 
-function isBirth(b: unknown): b is BirthInput {
+/** Shared with saved charts: birth validation lives here because this is
+ *  where it was first needed, and there must be exactly one copy of it. */
+export function isBirth(b: unknown): b is BirthInput {
   if (!b || typeof b !== "object") return false;
   const x = b as Record<string, unknown>;
   return typeof x.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(x.date)

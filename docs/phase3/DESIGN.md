@@ -31,7 +31,7 @@ null and say so in `note`. Inventing chapter and verse numbers is forbidden.
 1. The rule language (section 3) and its three-valued evaluator (section 4).
 2. The review gate (section 5), cancellation resolution (section 6) and dasha
    timing windows (section 7).
-3. Ten Poruthams (section 8). Nine are built. Vasya is blocked on a
+3. Ten Poruthams (section 8). All ten are built; Vasya was blocked on a
    transcribed table.
 4. A marriage corpus of about 35 draft rules, including Kuja (Chevvai) dosha and
    its cancellations, expressed in the rule language (section 9).
@@ -189,7 +189,7 @@ Let `n` be the nakshatra count and `r` the rasi count.
 | 5 | Yoni | the two yoni animals are not an enemy pair | P-4 |
 | 6 | Rasi | `r` is not 2, 6, 8 or 12 | P-5 |
 | 7 | Rasi Adhipati | the rasi lords are the same, or neither regards the other as a natural enemy (Phase 2 table) | P-6 |
-| 8 | Vasya | **blocked**: reported as not evaluated | P-7 |
+| 8 | Vasya | built 2026-10-05; four of its twelve rows are the majority reading of disagreeing sources, and are marked as such | P-7 |
 | 9 | Rajju | the two nakshatras are in different rajjus | P-8 |
 | 10 | Vedha | the pair is not a vedha pair | none |
 
@@ -267,7 +267,7 @@ semantics as rules.
 | P-4 | Yoni grading | enemy pair means no match; otherwise match | graded scale by male or female animals |
 | P-5 | Rasi disqualifying counts | 2, 6, 8, 12 | 6 and 8 only; excuse 6/8 when the lords are friends |
 | P-6 | Rasi Adhipati basis | natural relationship, both directions | compound; one direction only |
-| P-7 | **Vasya table** | **none: blocked** | the reviewer supplies the table from their panchangam |
+| P-7 | **Vasya table** | majority reading, four rows disputed | an astrologer confirms Tula, Vrischika, Makara and Kumbha against a panchangam they trust |
 | P-8 | Rajju exceptions (aarohana/avarohana) | none; same rajju means no match | allow some same-rajju cases by direction |
 
 ### 8.5 Chart-level variants

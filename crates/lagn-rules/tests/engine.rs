@@ -446,13 +446,20 @@ fn the_shipped_corpus_has_a_complete_review_record() {
         assert!(r.source.reference.is_none(), "{}: a citation may only be added once verified", r.id);
     }
     let p = c.porutham.expect("porutham review file");
-    assert_eq!(p.len(), 10);
+    assert_eq!(p.len(), lagn_rules::PoruthamKind::ALL.len(), "every porutham needs a review record");
     for (k, r) in &p {
         assert_ne!(r.status, ReviewStatus::Draft, "{k:?} never reviewed");
         assert!(r.comment.as_deref().is_some_and(|x| !x.is_empty()), "{k:?}: no review reasoning");
     }
-    // Vasya has no table, so approving it would show a verdict the engine cannot compute.
-    assert_ne!(p[&lagn_rules::PoruthamKind::Vasya].status, ReviewStatus::Approved);
+    // Vasya's table arrived 2026-10-05, so all ten are approved. Four of its
+    // twelve rows are the majority reading of disagreeing sources, and the
+    // engine marks a verdict that rests on one of those rather than letting it
+    // read as settled as the rest.
+    assert_eq!(p[&lagn_rules::PoruthamKind::Vasya].status, ReviewStatus::Approved);
+    let comment = p[&lagn_rules::PoruthamKind::Vasya].comment.as_deref().expect("vasya reasoning");
+    for row in ["Tula", "Vrischika", "Makara", "Kumbha"] {
+        assert!(comment.contains(row), "the vasya review must name {row} as disputed");
+    }
 }
 
 #[test]
@@ -689,7 +696,11 @@ fn every_pariharam_is_reachable_and_every_graha_has_one() {
     // relation between two period lords, so no single graha's pariharam fits.
     // A new negative rule must name its subject or be added here deliberately.
     let expected = [
-        "education.h4.malefic", "education.h5.malefic", "health.h1.malefic", "later_life.h12.expenses",
+        "education.h4.malefic", "education.h5.malefic", "health.h1.malefic",
+        // Both describe the 12th house rather than one graha: any of four
+        // malefics may occupy it, and a bindu count is the whole house's.
+        "immigration.h12.malefic_occupant", "immigration.sav.h12_weak",
+        "later_life.h12.expenses",
         "marriage.h7.malefic_occupant", "marriage.sav.h7_weak", "parents.mother.malefic",
         "parents.father.malefic", "past_life.h5.malefic", "past_life.h12.unfinished",
         "periods.shashtashtaka", "vitality.h8.malefic",
@@ -1215,7 +1226,13 @@ fn the_past_life_topic_never_claims_a_biography_or_blames_the_native() {
     // The frame is declared plainly, every time.
     let d = meta.disclaimer.as_deref().expect("past_life needs a disclaimer").to_lowercase();
     assert!(d.contains("not a claim about events"));
-    assert!(d.contains("never names a past identity"));
+    // The reading now names the kinds of life a placement is associated with,
+    // so the old promise that it "never names a past identity" is gone. What
+    // must still be promised, and still is, is the narrower thing: those kinds
+    // are possibilities and not a record, and the reason why.
+    assert!(d.contains("never a record of a past identity"));
+    assert!(d.contains("cannot encode a name, a year or a place"));
+    assert!(d.contains("possibilities"));
 
     let rules: Vec<_> = corpus.rules.iter().filter(|r| r.topic == "past_life").collect();
     assert!(rules.len() >= 15, "only {} rules", rules.len());
@@ -1412,4 +1429,123 @@ fn every_debt_names_its_settlement_and_reaches_its_remedy() {
         }
     }
     assert!(fired > 20, "only {fired} debts exercised");
+}
+
+/// The past-life reading names the kinds of life a placement is associated
+/// with, which the product owner asked for. It must do that without becoming
+/// a biography: several possibilities, framed as what the tradition
+/// associates, and never a claim about what the native did.
+#[test]
+fn past_life_callings_are_offered_as_possibilities_and_never_as_a_biography() {
+    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../corpus");
+    let corpus = lagn_rules::load(&dir).unwrap();
+    let karma = corpus.karma.as_ref().expect("the karma catalogue");
+    let meta = corpus.topics.iter().find(|t| t.id == "past_life").expect("the topic");
+
+    // Every Ketu house carries callings, and never a single one: one would
+    // read as an answer.
+    for h in 1..=12u8 {
+        let c = karma.callings(h);
+        assert!(c.len() >= 3, "house {h} has {} callings", c.len());
+        for s in c {
+            assert!(past_life_banned_in(s).is_empty(), "house {h}: {:?} in {s:?}", past_life_banned_in(s));
+            assert!(banned_in(s).is_empty(), "house {h}: {:?} in {s:?}", banned_in(s));
+            // A calling is a kind of work, not a sentence about a person.
+            assert!(!s.contains('.'), "house {h}: {s:?} reads as a sentence");
+            assert!(s.chars().next().is_some_and(|c| c.is_lowercase()), "house {h}: {s:?} is capitalised like a name");
+        }
+    }
+    // Every graha lends a craft, so the pairing is always complete.
+    for g in lagn_core::Graha::ALL.into_iter().filter(|g| !matches!(g, lagn_core::Graha::Rahu | lagn_core::Graha::Ketu)) {
+        let craft = karma.craft(g).unwrap_or_else(|| panic!("no craft for {g:?}"));
+        assert!(past_life_banned_in(craft).is_empty(), "{g:?}: {craft:?}");
+        assert!(banned_in(craft).is_empty(), "{g:?}: {craft:?}");
+    }
+
+    // And over generated readings: the callings reach the page, they are
+    // always hedged, and nothing banned comes with them.
+    let mut saw = 0;
+    for f in facts(24, 0xCA_11, None) {
+        let rep = evaluate_topic("past_life", &corpus.rules, &f, Mode::Review, (meta.ages[0], meta.ages[1]));
+        let w = lagn_rules::writeup::topic_write_up(&corpus, &rep, &f, (meta.ages[0], meta.ages[1])).unwrap();
+        for s in &w.sections {
+            for p in &s.paragraphs {
+                assert!(past_life_banned_in(p).is_empty(), "{:?} in {p:?}", past_life_banned_in(p));
+                if p.contains("kinds of life it is associated with") {
+                    saw += 1;
+                    // Hedged, every time.
+                    assert!(p.contains("traditionally point to lives of"), "unhedged: {p:?}");
+                    assert!(p.contains("possibilities"), "no hedge word: {p:?}");
+                    assert!(p.contains("record of a past identity"), "no disavowal of a record: {p:?}");
+                    assert!(p.contains("never one at a time"), "not offered as a set: {p:?}");
+                }
+            }
+        }
+    }
+    assert!(saw >= 20, "the callings paragraph appeared only {saw} times in 24 charts");
+}
+
+/// The porutham explainer reaches readers deciding on a marriage, so it goes
+/// through the same wording guardrails as every other sentence the app shows,
+/// and the two poruthams the texts treat most seriously must send the reader
+/// to an astrologer rather than invite them to weigh it against a count.
+#[test]
+fn the_porutham_explainer_is_reviewed_complete_and_obeys_the_wording_guardrails() {
+    use lagn_rules::porutham::{PoruthamKind, StarPos, Verdict};
+
+    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../corpus");
+    let corpus = lagn_rules::load(&dir).unwrap();
+    let e = corpus.porutham_explain.as_ref().expect("the porutham explainer");
+
+    assert_eq!(e.review.status, ReviewStatus::Approved);
+    assert!(e.review.comment.as_deref().is_some_and(|c| !c.is_empty()));
+    assert!(e.source.reference.is_none(), "a citation may only be added once verified");
+
+    for k in PoruthamKind::ALL {
+        let x = e.get(k).unwrap_or_else(|| panic!("no explanation for {k:?}"));
+        for (what, text) in [
+            ("measures", &x.measures), ("when_matching", &x.when_matching),
+            ("when_not", &x.when_not), ("touches", &x.touches), ("name", &x.name),
+        ] {
+            assert!(banned_in(text).is_empty(), "{k:?} {what}: {:?} in {text:?}", banned_in(text));
+            // A mismatch is never framed as doom; the vocabulary of blame has
+            // no place here either.
+            assert!(past_life_banned_in(text).is_empty(), "{k:?} {what}: {:?}", past_life_banned_in(text));
+        }
+        // Rajju and Vedha are the two the texts treat most seriously. Their
+        // mismatch text must point at an astrologer, not at arithmetic.
+        if k.is_critical() {
+            let t = x.when_not.to_lowercase();
+            assert!(t.contains("astrologer"), "{k:?}: a serious mismatch must send the reader to an astrologer: {:?}", x.when_not);
+        }
+    }
+
+    // And over real matches: the composed reading always ends by saying the
+    // decision is not the app's, and never reads as a verdict on a marriage.
+    let stars = StarPos::all_padas();
+    let mut seen_critical = false;
+    for b in stars.iter().step_by(11) {
+        for g in stars.iter().step_by(13) {
+            let r = lagn_rules::report::match_report(&corpus, *b, *g, Mode::Production);
+            assert_eq!(r.explained.len(), PoruthamKind::ALL.len(), "every porutham should carry its explanation");
+            assert!(!r.reading.is_empty());
+            let last = r.reading.last().expect("a closing line");
+            assert!(last.contains("decision rests with the family's astrologer"), "{last:?}");
+            for line in &r.reading {
+                assert!(banned_in(line).is_empty(), "{:?} in {line:?}", banned_in(line));
+            }
+            // Areas account for every evaluated porutham, once.
+            let in_areas: usize = r.areas.iter().map(|a| a.matching.len() + a.not_matching.len()).sum();
+            let evaluated = r.explained.iter().filter(|x| x.verdict != Verdict::NotEvaluated).count();
+            assert_eq!(in_areas, evaluated, "areas lost or duplicated a porutham");
+            if !r.critical_failures.is_empty() {
+                seen_critical = true;
+                assert!(
+                    r.reading.iter().any(|l| l.contains("texts treat most seriously")),
+                    "a serious mismatch is not escalated in the reading"
+                );
+            }
+        }
+    }
+    assert!(seen_critical, "the sample never produced a critical mismatch, so that path is untested");
 }

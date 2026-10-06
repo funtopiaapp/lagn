@@ -200,6 +200,99 @@ ul.plain { padding-left: 20px; }
 .provenance { font-size: 0.86rem; color: var(--muted); margin: 6px 0; }
 .pariharams .rule { background: var(--surface-2); }
 
+/* ------------------------------------------------------- topic timing */
+.topic-timing { margin: 18px 0; }
+.timing-list { list-style: none; padding: 0; margin: 12px 0; }
+.timing-window { border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--surface); padding: 12px 14px; margin-bottom: 10px; }
+.timing-window.v-favourable { border-left-color: var(--ok); }
+.timing-window.v-asks-for-care { border-left-color: var(--warn); }
+.timing-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.timing-dates { font-variant-numeric: tabular-nums; }
+.timing-why { list-style: none; padding: 0; margin: 8px 0 0; font-size: 0.93rem; }
+.timing-why li { margin: 5px 0; padding-left: 14px; position: relative; }
+.timing-why li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.timing-why li.ok::before { background: var(--ok); }
+.timing-why li.warn::before { background: var(--warn); }
+.timing-why li.warn { color: inherit; font-weight: 400; }
+.timing-blurb { margin: 8px 0 0; color: var(--muted); font-size: 0.93rem; }
+.rank-legend { margin: 10px 0 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface-2); padding: 10px 14px; }
+.rank-legend > summary { font-weight: 600; cursor: pointer; }
+.rank-legend dl { margin: 10px 0 2px; }
+.rank-legend-row { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; }
+.rank-legend-row dt { min-width: 92px; }
+.rank-legend-row dd { margin: 0; font-size: 0.93rem; line-height: 1.5; }
+/* A chip carrying a hover hint should look like it has one. */
+.chip[title] { cursor: help; }
+@media (max-width: 560px) { .rank-legend-row { flex-direction: column; gap: 4px; } }
+
+/* ------------------------------------------------------- profile picker */
+.profile-picker .card-head { justify-content: space-between; }
+.profile-picker label { max-width: 420px; }
+.saved-list .member { padding: 8px 12px; margin-bottom: 6px; }
+
+/* ------------------------------------------------------------ question */
+.question-box label { max-width: 520px; }
+ul.question-hits { list-style: none; padding: 0; margin: 8px 0 0; }
+ul.question-hits li { margin-bottom: 6px; }
+ul.question-hits button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; text-align: left; padding: 10px 12px; background: var(--surface-2); }
+ul.question-hits button:hover { border-color: var(--accent); }
+ul.question-hits .hint { margin: 0; }
+.question-all { margin-top: 10px; }
+.question-all > summary { cursor: pointer; color: var(--muted); }
+.notice.asked { border-left-color: var(--ok); }
+
+/* -------------------------------------------------------------- answer */
+.question-answer { border-left: 4px solid var(--ok); }
+ol.answer-windows { list-style: decimal; padding-left: 22px; margin: 10px 0; }
+ol.answer-windows li { margin-bottom: 12px; }
+ol.answer-windows strong { font-variant-numeric: tabular-nums; margin-right: 8px; }
+ol.answer-windows .hint { margin: 4px 0 0; }
+
+/* ------------------------------------------------------------ porutham */
+.match-reading { margin: 18px 0; }
+.match-reading p { margin: 8px 0; }
+.match-areas ul.areas { list-style: none; padding: 0; margin: 10px 0; }
+.area { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--surface); padding: 10px 14px; margin-bottom: 8px; }
+.area.ok { border-left-color: var(--ok); }
+.area.warn { border-left-color: var(--warn); }
+.area.critical { border-left-color: var(--bad); }
+.area strong { min-width: 190px; }
+.porutham-detail { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 10px; }
+.porutham-detail > summary { font-weight: 600; cursor: pointer; }
+
+/* -------------------------------------------------------- day timings */
+.week-nav { display: flex; align-items: center; gap: 10px; margin: 12px 0; }
+.week-strip { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; padding: 4px 0 10px; }
+.day-chip { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 76px; padding: 8px 10px; border-radius: var(--radius-sm); background: var(--surface-2); border: 1px solid var(--line); }
+.day-chip.current { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.day-chip-vara { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.day-chip.current .day-chip-vara { color: var(--accent); }
+.day-chip-date { font-variant-numeric: tabular-nums; font-weight: 600; }
+.day-chip-rahu { font-size: 0.78rem; font-variant-numeric: tabular-nums; color: var(--muted); }
+.day-chip.current .day-chip-rahu { color: var(--accent); }
+.day-detail { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; }
+dl.panchanga { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 18px; margin: 10px 0 16px; }
+dl.panchanga div { display: flex; gap: 8px; }
+dl.panchanga dt { font-weight: 600; min-width: 84px; color: var(--muted); }
+dl.panchanga dd { margin: 0; }
+ul.day-parts { list-style: none; padding: 0; margin: 0; }
+.day-part { border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--surface); padding: 10px 14px; margin-bottom: 10px; }
+.day-part.avoid { border-left-color: var(--warn); }
+.day-part.good { border-left-color: var(--ok); }
+.day-part-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.day-part-span { font-variant-numeric: tabular-nums; font-weight: 600; }
+.day-part p { margin: 6px 0 0; }
+
+/* ------------------------------------------------------- saved charts */
+.saved-charts .saved-list { margin-top: 10px; }
+.saved-row { align-items: center; gap: 10px; }
+/* The whole label is the open control, so the target is the row's text, not a
+   word in it. */
+.saved-open { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; text-decoration: none; flex: 1; min-width: 0; }
+.saved-open:hover strong { text-decoration: underline; }
+.saved-open .saved-when { margin: 0; font-variant-numeric: tabular-nums; }
+.save-here { align-items: flex-start; }
+
 /* ---------------------------------------------------------------- periods */
 ul.periods { list-style: none; padding: 0; }
 ul.periods .period-window { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 10px; background: var(--surface); }
@@ -257,3 +350,29 @@ footer .meta { font-size: 0.8rem; }
 footer a { color: var(--accent); }
 .visits { margin: 8px 0 4px; }
 .visits img { display: block; opacity: 0.9; }
+
+/* ---------------------------------------------------------------- print */
+/* A reading printed, or saved as a PDF by the browser itself. The generated
+   PDF is the shareable artefact; this is for anyone who would rather use the
+   print dialogue, and it costs nothing to support. Text stays selectable and
+   the system fonts render every transliteration correctly. */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #000; --muted: #333; --line: #bbb; --accent: #000; --shadow: none; }
+  body { padding: 0; }
+  .app { max-width: none; padding: 0; }
+  /* Chrome, not content: navigation, tabs, buttons and forms. */
+  .top, .tabs, .topics, .theme-toggle, .reviewer, .share-pdf, .week-nav, .week-strip,
+  button, .birth-form, .saved-charts, .offline, .visits { display: none !important; }
+  /* Everything collapsible prints open: a printed page cannot be expanded. */
+  details > summary { display: none; }
+  details > *:not(summary) { display: revert !important; }
+  .card { border: none; box-shadow: none; padding: 0; margin: 0 0 18px; }
+  .writeup-section, .timing-window, .rule, .day-part, .area { break-inside: avoid; }
+  h2, h3, h4 { break-after: avoid; }
+  table { font-size: 9pt; }
+  .table-wrap { overflow: visible; border: none; }
+  /* The disclaimers and the provenance must print. They are the reason a
+     printed reading is not worse than the app. */
+  .notice, .notice.disclaimer, .provenance, .hint { display: block !important; color: #333; }
+  a[href]::after { content: ""; }
+}

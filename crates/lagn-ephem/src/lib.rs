@@ -573,3 +573,81 @@ pub fn norm360(deg: f64) -> f64 {
         r
     }
 }
+
+// ---------------------------------------------------------------------------
+// Sunrise and sunset
+// ---------------------------------------------------------------------------
+
+/// The Sun's rising and setting, both as Julian Day in UT.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct SunDay {
+    pub sunrise_jd: f64,
+    pub sunset_jd: f64,
+}
+
+impl SunDay {
+    /// Length of the day from sunrise to sunset, in days.
+    pub fn day_length(&self) -> f64 {
+        self.sunset_jd - self.sunrise_jd
+    }
+}
+
+impl Ephemeris {
+    /// The first sunrise at or after `from_jd_ut`, and the sunset that follows
+    /// it.
+    ///
+    /// Indian panchangam practice measures a day from sunrise, not midnight,
+    /// and divides sunrise-to-sunset into parts to place Rahu kalam and the
+    /// rest. Both events are taken at the upper limb with refraction, which is
+    /// Swiss Ephemeris's default and what printed panchangams use.
+    ///
+    /// `latitude` is degrees north-positive, `longitude` degrees east-positive.
+    pub fn sun_day(&self, from_jd_ut: f64, latitude: f64, longitude: f64) -> Result<SunDay, EphemError> {
+        check_jd(from_jd_ut)?;
+        if !latitude.is_finite() || !(-90.0..=90.0).contains(&latitude) {
+            return Err(EphemError::InvalidLatitude(latitude));
+        }
+        if !longitude.is_finite() || !(-180.0..=180.0).contains(&longitude) {
+            return Err(EphemError::InvalidLongitude(longitude));
+        }
+
+        let _g = lock();
+        // Altitude 0: a panchangam is computed for the place, not its hilltop,
+        // and the difference is seconds.
+        let mut geopos: [c_double; 3] = [longitude, latitude, 0.0];
+
+        let mut event = |rsmi: i32, start: f64| -> Result<f64, EphemError> {
+            let mut tret: [c_double; 10] = [0.0; 10];
+            let mut serr = err_buf();
+            let rc = unsafe {
+                swe_sys::swe_rise_trans(
+                    start,
+                    swe_sys::SE_SUN,
+                    std::ptr::null_mut(),
+                    swe_sys::SEFLG_SWIEPH,
+                    rsmi,
+                    geopos.as_mut_ptr(),
+                    0.0,
+                    0.0,
+                    tret.as_mut_ptr(),
+                    serr.as_mut_ptr(),
+                )
+            };
+            // -2 is Swiss Ephemeris's "no such event on this day", which inside
+            // the polar circles is the truth rather than a failure.
+            if rc == -2 {
+                return Err(EphemError::NoSunriseThatDay { latitude, jd_ut: start });
+            }
+            if rc < 0 {
+                return Err(EphemError::Swiss { call: "swe_rise_trans", message: err_str(&serr) });
+            }
+            Ok(tret[0])
+        };
+
+        let sunrise_jd = event(swe_sys::SE_CALC_RISE, from_jd_ut)?;
+        // Search for the sunset from the sunrise, so the pair always belongs to
+        // one day even when the caller started just before midnight.
+        let sunset_jd = event(swe_sys::SE_CALC_SET, sunrise_jd)?;
+        Ok(SunDay { sunrise_jd, sunset_jd })
+    }
+}
