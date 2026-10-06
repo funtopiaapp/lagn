@@ -13,6 +13,7 @@ export interface NativeBridge {
   chart(requestJson: string): Promise<string>;
   topic(name: string, requestJson: string): Promise<string>;
   periods(requestJson: string): Promise<string>;
+  days(requestJson: string): Promise<string>;
   family(requestJson: string): Promise<string>;
   match(requestJson: string): Promise<string>;
   places(requestJson: string): Promise<string>;

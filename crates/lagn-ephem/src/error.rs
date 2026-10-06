@@ -24,6 +24,12 @@ pub enum EphemError {
     InvalidLatitude(f64),
 
     #[error(
+        "the Sun neither rises nor sets at latitude {latitude} on JD {jd_ut} - inside the polar \
+         circles there are days with no sunrise, and a day's timings are measured from sunrise"
+    )]
+    NoSunriseThatDay { latitude: f64, jd_ut: f64 },
+
+    #[error(
         "the ascendant is undefined at latitude {0} - at the geographic poles the \
          horizon coincides with the celestial equator and no point of the ecliptic rises"
     )]

@@ -13,6 +13,7 @@ pub mod analysis;
 pub mod ashtakavarga;
 pub mod chart;
 pub mod condition;
+pub mod day;
 pub mod dasha;
 pub mod dignity;
 pub mod drishti;
@@ -25,6 +26,7 @@ pub mod transit;
 pub mod varga;
 
 pub use chart::{BirthData, Chart, ChartSettings, Lagna, LagnaWindow, Placement, VargaChart};
+pub use day::{day_timings, panchanga, DaySegment, DayTimings, Panchanga, Vara};
 pub use dasha::{DashaChain, DashaPeriod, Vimshottari, YearLength};
 pub use nakshatra::{Nakshatra, NakshatraPosition};
 pub use rasi::{Element, Mobility, Rasi};

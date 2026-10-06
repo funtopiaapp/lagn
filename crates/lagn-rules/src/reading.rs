@@ -213,3 +213,172 @@ pub fn transits(c: &Chart, from_age: f64, to_age: f64) -> Result<TransitReport, 
     all.sort_by(|a, b| a.jd_ut.total_cmp(&b.jd_ut));
     Ok(TransitReport { moon_sign: c.janma_rasi(), start_jd: start, end_jd: end, ingresses: all, windows: c.gochara(start, end)? })
 }
+
+// ---------------------------------------------------------------------------
+// A topic's own timing, judged
+// ---------------------------------------------------------------------------
+
+/// How a stretch stands for one topic.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TimingVerdict {
+    /// The period factors support this area and nothing weighs against it.
+    Favourable,
+    /// Support and difficulty both apply; the lines below say which is which.
+    Mixed,
+    /// The period factors ask for care in this area.
+    AsksCare,
+    /// No period rule applies to this stretch. The area is live here, but the
+    /// corpus has nothing to say about whether the stretch favours it, and
+    /// saying "mixed" would imply a judgement that was never made.
+    NotJudged,
+}
+
+impl TimingVerdict {
+    pub fn label(self) -> &'static str {
+        match self {
+            TimingVerdict::Favourable => "favourable",
+            TimingVerdict::Mixed => "mixed",
+            TimingVerdict::AsksCare => "asks for care",
+            TimingVerdict::NotJudged => "no period factor applies",
+        }
+    }
+}
+
+/// How strongly a stretch is recommended for a topic, best first. Combines
+/// whether the topic is live in the stretch with how the period factors judge
+/// it, so every stretch in range can be ranked rather than only the live ones.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Recommendation {
+    /// The area is live in this stretch and the period factors support it.
+    Best,
+    /// The period factors support the stretch, though the timing rules do not
+    /// single this area out in it.
+    Good,
+    /// Support and difficulty both apply.
+    Mixed,
+    /// The area is live here, but the period factors ask for care.
+    Caution,
+    /// No reviewed period rule applies, so nothing is claimed.
+    NotJudged,
+}
+
+impl Recommendation {
+    pub fn label(self) -> &'static str {
+        match self {
+            Recommendation::Best => "best",
+            Recommendation::Good => "good",
+            Recommendation::Mixed => "mixed",
+            Recommendation::Caution => "caution",
+            Recommendation::NotJudged => "not judged",
+        }
+    }
+}
+
+/// One of a topic's timing windows with the period assessment for the same
+/// stretch, so a reader is told not only *when* the area comes forward but
+/// whether the stretch supports it.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TopicWindow {
+    pub start_jd: f64,
+    pub end_jd: f64,
+    pub maha: Graha,
+    pub antar: Graha,
+    /// The timing lords that make this topic live in this stretch. Empty when
+    /// the timing rules do not single the area out here.
+    pub matched: Vec<Graha>,
+    /// True when the topic's own timing rules point at this stretch.
+    pub live: bool,
+    pub rank: Recommendation,
+    /// Net score of the period rules for this stretch.
+    pub score: i32,
+    pub verdict: TimingVerdict,
+    /// Plain lines that name the area they are about. "Supports" on its own
+    /// never told the reader what was being supported.
+    pub supports: Vec<String>,
+    pub cautions: Vec<String>,
+}
+
+/// Rank every dasha stretch in range for a topic.
+///
+/// Earlier this listed only the stretches the topic's timing rules point at,
+/// which left holes: once the mahadasha lord stops being a timing lord, whole
+/// mahadashas vanished from the list - twelve years at a stretch on some
+/// charts - and a reader could not tell a quiet period from a missing one. So
+/// every antardasha in range is returned, each marked `live` when the timing
+/// rules do single the area out, and each ranked.
+///
+/// A topic whose corpus carries no timing rule gets nothing: the absence is
+/// deliberate there (health and parents are not timed by dasha), and ranking
+/// stretches with the generic period rules would invent timing the corpus
+/// declined to give.
+///
+/// Transits are deliberately not included: computing the gochara overlay costs
+/// close to a second over a wide age range, and a topic is read on a tap. The
+/// sensitive-periods reading carries transits, where the cost is paid once and
+/// on purpose.
+pub fn topic_timing(
+    corpus: &Corpus,
+    facts: &mut FactBase,
+    mode: Mode,
+    topic_title: &str,
+    timing: &[crate::timing::Window],
+    ages: (f64, f64),
+) -> Vec<TopicWindow> {
+    if timing.is_empty() {
+        return Vec::new();
+    }
+    // No transits: see the note above.
+    let periods = evaluate_periods(&corpus.rules, facts, mode, ages);
+    let area = topic_title.to_lowercase();
+
+    // The plain line first, the technical one in brackets - the same shape the
+    // sensitive-periods explanation uses, with the area named.
+    let line = |prefix: &str, r: &crate::resolve::RuleResult| match &r.impact {
+        Some(i) => format!("{prefix}: {i} ({})", r.text.trim_end_matches('.')),
+        None => format!("{prefix}: {}", r.text),
+    };
+
+    periods
+        .windows
+        .iter()
+        .map(|p| {
+            // Live when the topic's own timing rules name this stretch.
+            let hit = timing.iter().find(|w| w.maha == p.maha && w.antar == p.antar);
+            let supports: Vec<String> =
+                p.negators.iter().map(|r| line(&format!("Supports {area}"), r)).collect();
+            let cautions: Vec<String> =
+                p.amplifiers.iter().map(|r| line(&format!("Asks care over {area}"), r)).collect();
+            let verdict = match (supports.is_empty(), cautions.is_empty()) {
+                (true, true) => TimingVerdict::NotJudged,
+                (false, true) => TimingVerdict::Favourable,
+                (true, false) => TimingVerdict::AsksCare,
+                (false, false) if p.score < 0 => TimingVerdict::AsksCare,
+                _ => TimingVerdict::Mixed,
+            };
+            let live = hit.is_some();
+            let rank = match (live, verdict) {
+                (_, TimingVerdict::NotJudged) => Recommendation::NotJudged,
+                (true, TimingVerdict::Favourable) => Recommendation::Best,
+                (false, TimingVerdict::Favourable) => Recommendation::Good,
+                (true, TimingVerdict::AsksCare) => Recommendation::Caution,
+                (false, TimingVerdict::AsksCare) => Recommendation::Caution,
+                (_, TimingVerdict::Mixed) => Recommendation::Mixed,
+            };
+            TopicWindow {
+                start_jd: p.start_jd,
+                end_jd: p.end_jd,
+                maha: p.maha,
+                antar: p.antar,
+                matched: hit.map(|w| w.matched.clone()).unwrap_or_default(),
+                live,
+                rank,
+                score: p.score,
+                verdict,
+                supports,
+                cautions,
+            }
+        })
+        .collect()
+}

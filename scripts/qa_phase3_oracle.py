@@ -483,11 +483,16 @@ def main():
     a = ap.parse_args()
     rng = random.Random(a.seed)
 
-    # Every shipped rule file (catalogue files at the corpus root are not rules).
+    # Every shipped rule file. A rule file is a JSON array; the catalogues that
+    # sit beside the rules - porutham.review.json, porutham.explain.json - are
+    # objects. Skipping by shape rather than by name, because the blocklist of
+    # names silently broke this oracle the first time a catalogue was added
+    # inside a topic directory.
     real_rules = []
     for f in sorted(CORPUS.glob("*/*.json")):
-        if f.name != "porutham.review.json":
-            real_rules += json.loads(f.read_text())
+        loaded = json.loads(f.read_text())
+        if isinstance(loaded, list):
+            real_rules += loaded
     real_topics = sorted({r["topic"] for r in real_rules if r.get("scope", "natal") == "natal"})
     real_period = [r for r in real_rules if r.get("scope") == "period"]
     print(f"real corpus: {len(real_rules)} rules, topics {real_topics}, {len(real_period)} period rules")

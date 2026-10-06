@@ -103,3 +103,51 @@ describe("PeriodsView", () => {
     expect(f).not.toHaveBeenCalled();
   });
 });
+
+describe("asking a question from the readings page", () => {
+  // The reported bug: picking a question about marriage produced no answer.
+  // Marriage is the default topic, so the topic view never remounted, never
+  // refetched, and never reported the reading back - and the code cleared the
+  // reading it already had.
+  const withQuestions = {
+    ...topics,
+    questions: [
+      { id: "q01", question: "Is this a good time to marry?", topic: "marriage", keywords: ["marry", "marriage"] },
+      { id: "q07", question: "Is this a good time to buy a house?", topic: "health", keywords: ["house"] },
+    ],
+  };
+  const marriageReading = {
+    report: {
+      topic: "marriage", mode: "production", results: [rule("marriage.x", 2)], withheld: {},
+      supporting: ["marriage.x"], afflicting: [], cancelled: [], unknown: [], score: 2, label: "supportive",
+    },
+    windows: [{
+      rule: "marriage.timing.periods", start: "2030-01-01", end: "2031-06-01",
+      maha: "Shukra", antar: "Budha", matched: ["Shukra"], verdict: "favourable", score: 2,
+      supports: ["Supports marriage: a well-placed period lord"], cautions: [],
+      live: true, rank: "best", when: "ahead",
+    }],
+    meta: topics.topics[0], pariharams: [], writeup: null,
+  };
+
+  it("answers a question about the topic already selected", async () => {
+    vi.stubGlobal("fetch", route({ "/api/topics": withQuestions, "/api/topic/marriage": marriageReading }));
+    render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
+    const u = userEvent.setup();
+
+    await u.type(await screen.findByLabelText(/What is it about/), "marriage");
+    await u.click(await screen.findByRole("button", { name: /Is this a good time to marry\?/ }));
+
+    // The prepared answer appears, with the question as its heading.
+    expect(await screen.findByRole("heading", { name: "Is this a good time to marry?" })).toBeInTheDocument();
+    expect(screen.getByText(/Taken as a whole, your chart supports marriage/)).toBeInTheDocument();
+    expect(screen.getByText(/January 2030 to June 2031/)).toBeInTheDocument();
+  });
+
+  it("says nothing matched rather than answering a different question", async () => {
+    vi.stubGlobal("fetch", route({ "/api/topics": withQuestions, "/api/topic/marriage": marriageReading }));
+    render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
+    await userEvent.setup().type(await screen.findByLabelText(/What is it about/), "qwertyuiop");
+    expect(screen.getByText(/No reviewed question matches that/)).toBeInTheDocument();
+  });
+});

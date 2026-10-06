@@ -246,6 +246,7 @@ endpoint!(lagn_chart, api::ChartRequest, |_s, req| api::chart(req));
 endpoint!(lagn_periods, api::PeriodsRequest, |s, req| api::periods(s, req, Mode::Production));
 endpoint!(lagn_family, api::FamilyRequest, |s, req| api::family(s, req, Mode::Production));
 endpoint!(lagn_match, api::MatchRequest, |s, req| api::match_(s, req, Mode::Production));
+endpoint!(lagn_days, api::DayRequest, |_s, req| api::days(req));
 endpoint!(lagn_places, api::PlacesQuery, |s, q| api::places(s, &q));
 endpoint!(lagn_offset, api::OffsetQuery, |s, q| api::offset(s, &q));
 
@@ -352,9 +353,10 @@ mod tests {
 
         let m = cstring(&format!(r#"{{"bride":{BIRTH},"groom":{BIRTH}}}"#));
         let m = call(|| unsafe { lagn_match(m.as_ptr()) });
-        // Nine, not ten: Vasya is rejected for want of a verified table, and a
-        // device build only ever produces approved content.
-        assert_eq!(m["results"].as_array().unwrap().len(), 9);
+        // All ten: Vasya was rejected for want of a verified table until
+        // 2026-10-05, and a device build only ever produces approved content.
+        // However many the engine knows: the twelve-porutham form added two.
+        assert_eq!(m["results"].as_array().unwrap().len(), lagn_rules::PoruthamKind::ALL.len());
 
         let q = cstring(r#"{"q":"Chennai","limit":5}"#);
         let places = call(|| unsafe { lagn_places(q.as_ptr()) });

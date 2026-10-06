@@ -1,0 +1,389 @@
+{
+  "questions": [
+    {
+      "id": "q01",
+      "question": "Is this a good time to marry?",
+      "topic": "marriage",
+      "keywords": [
+        "marry",
+        "marriage",
+        "wedding",
+        "kalyanam",
+        "get married",
+        "shaadi"
+      ]
+    },
+    {
+      "id": "q02",
+      "question": "Is this a good time to get engaged?",
+      "topic": "marriage",
+      "keywords": [
+        "engage",
+        "engagement",
+        "betrothal",
+        "nichayathartham"
+      ]
+    },
+    {
+      "id": "q03",
+      "question": "Is this a good time to look for a match?",
+      "topic": "marriage",
+      "keywords": [
+        "match",
+        "alliance",
+        "bride",
+        "groom",
+        "proposal",
+        "matchmaking"
+      ]
+    },
+    {
+      "id": "q04",
+      "question": "Is this a good time to try to reconcile a marriage?",
+      "topic": "marriage",
+      "keywords": [
+        "reconcile",
+        "reconciliation",
+        "separated",
+        "separation",
+        "patch up"
+      ]
+    },
+    {
+      "id": "q05",
+      "question": "Is this a good time to have a child?",
+      "topic": "progeny",
+      "keywords": [
+        "child",
+        "baby",
+        "conceive",
+        "pregnancy",
+        "pregnant",
+        "children"
+      ]
+    },
+    {
+      "id": "q06",
+      "question": "Is this a good time to begin an adoption?",
+      "topic": "progeny",
+      "keywords": [
+        "adopt",
+        "adoption"
+      ]
+    },
+    {
+      "id": "q07",
+      "question": "Is this a good time to buy a house?",
+      "topic": "wealth",
+      "keywords": [
+        "buy a house",
+        "buy house",
+        "buy a home",
+        "property",
+        "flat",
+        "apartment",
+        "house purchase",
+        "real estate"
+      ]
+    },
+    {
+      "id": "q08",
+      "question": "Is this a good time to sell property?",
+      "topic": "wealth",
+      "keywords": [
+        "sell property",
+        "sell a house",
+        "sell house",
+        "sell land"
+      ]
+    },
+    {
+      "id": "q09",
+      "question": "Is this a good time to buy land?",
+      "topic": "wealth",
+      "keywords": [
+        "land",
+        "plot",
+        "site"
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "Is this a good time to take a loan?",
+      "topic": "wealth",
+      "keywords": [
+        "loan",
+        "borrow",
+        "mortgage",
+        "emi",
+        "debt"
+      ]
+    },
+    {
+      "id": "q11",
+      "question": "Is this a good time to lend money?",
+      "topic": "wealth",
+      "keywords": [
+        "lend",
+        "lending",
+        "give money"
+      ]
+    },
+    {
+      "id": "q12",
+      "question": "Is this a good time to invest?",
+      "topic": "wealth",
+      "keywords": [
+        "invest",
+        "investment",
+        "shares",
+        "stocks",
+        "mutual fund",
+        "gold"
+      ]
+    },
+    {
+      "id": "q13",
+      "question": "Is this a good time to make a large purchase?",
+      "topic": "wealth",
+      "keywords": [
+        "buy a car",
+        "vehicle",
+        "large purchase",
+        "expensive"
+      ]
+    },
+    {
+      "id": "q14",
+      "question": "Is this a good time to change jobs?",
+      "topic": "career",
+      "keywords": [
+        "change job",
+        "new job",
+        "switch job",
+        "resign",
+        "quit",
+        "job change",
+        "another company"
+      ]
+    },
+    {
+      "id": "q15",
+      "question": "Is this a good time to ask for a promotion or a raise?",
+      "topic": "career",
+      "keywords": [
+        "promotion",
+        "raise",
+        "appraisal",
+        "increment",
+        "hike"
+      ]
+    },
+    {
+      "id": "q16",
+      "question": "Is this a good time to start a business?",
+      "topic": "career",
+      "keywords": [
+        "start a business",
+        "business",
+        "venture",
+        "startup",
+        "own company",
+        "self employed"
+      ]
+    },
+    {
+      "id": "q17",
+      "question": "Is this a good time to take on a leadership role?",
+      "topic": "career",
+      "keywords": [
+        "leadership",
+        "manager",
+        "lead",
+        "head",
+        "promotion to"
+      ]
+    },
+    {
+      "id": "q18",
+      "question": "Is this a good time to sign a contract or an agreement?",
+      "topic": "career",
+      "keywords": [
+        "sign",
+        "contract",
+        "agreement",
+        "deal",
+        "paperwork",
+        "documents"
+      ]
+    },
+    {
+      "id": "q19",
+      "question": "Is this a good time to begin a course of study?",
+      "topic": "education",
+      "keywords": [
+        "study",
+        "course",
+        "college",
+        "admission",
+        "degree",
+        "exam",
+        "school",
+        "university"
+      ]
+    },
+    {
+      "id": "q20",
+      "question": "Is this a good time to study abroad?",
+      "topic": "immigration",
+      "keywords": [
+        "study abroad",
+        "foreign university",
+        "masters abroad",
+        "student visa"
+      ]
+    },
+    {
+      "id": "q21",
+      "question": "Is this a good time to apply to live in another country?",
+      "topic": "immigration",
+      "keywords": [
+        "green card",
+        "greencard",
+        "citizenship",
+        "immigration",
+        "immigrate",
+        "emigrate",
+        "visa",
+        "pr",
+        "permanent residency",
+        "settle abroad",
+        "move abroad",
+        "relocate abroad",
+        "foreign"
+      ]
+    },
+    {
+      "id": "q22",
+      "question": "Is this a good time to move house within the country?",
+      "topic": "wealth",
+      "keywords": [
+        "move house",
+        "shift house",
+        "relocate",
+        "moving",
+        "new place"
+      ]
+    },
+    {
+      "id": "q23",
+      "question": "Is this a good time to travel?",
+      "topic": "immigration",
+      "keywords": [
+        "travel",
+        "trip",
+        "journey",
+        "flight",
+        "abroad trip",
+        "holiday"
+      ]
+    },
+    {
+      "id": "q24",
+      "question": "Is this a good time for elective surgery or a treatment?",
+      "topic": "health",
+      "keywords": [
+        "surgery",
+        "operation",
+        "treatment",
+        "procedure",
+        "hospital",
+        "doctor"
+      ]
+    },
+    {
+      "id": "q25",
+      "question": "Is this a good time to begin treating a long-standing complaint?",
+      "topic": "health",
+      "keywords": [
+        "chronic",
+        "long standing",
+        "ongoing illness",
+        "therapy"
+      ]
+    },
+    {
+      "id": "q26",
+      "question": "Is this a good time to go to court, or to begin a dispute?",
+      "topic": "career",
+      "keywords": [
+        "court",
+        "case",
+        "litigation",
+        "dispute",
+        "lawsuit",
+        "legal"
+      ]
+    },
+    {
+      "id": "q27",
+      "question": "Is this a good time for a naming ceremony or a housewarming?",
+      "topic": "later_life",
+      "keywords": [
+        "naming",
+        "namakaranam",
+        "housewarming",
+        "griha pravesham",
+        "ceremony",
+        "function"
+      ]
+    },
+    {
+      "id": "q28",
+      "question": "Is this a good time to retire, or to step back from work?",
+      "topic": "later_life",
+      "keywords": [
+        "retire",
+        "retirement",
+        "step back",
+        "pension"
+      ]
+    },
+    {
+      "id": "q29",
+      "question": "Is this a good time to take on the care of a parent?",
+      "topic": "parents",
+      "keywords": [
+        "parent",
+        "mother",
+        "father",
+        "elderly",
+        "care of"
+      ]
+    },
+    {
+      "id": "q30",
+      "question": "Is this a good time to begin something that needs steady effort?",
+      "topic": "career",
+      "keywords": [
+        "begin",
+        "start",
+        "new beginning",
+        "auspicious",
+        "muhurtham",
+        "muhurta",
+        "good time"
+      ]
+    }
+  ],
+  "source": {
+    "reference": null,
+    "note": "The matters people consult an astrologer about, each mapped to the reading whose houses and karakas govern it. Authored from general knowledge of conventional practice and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review the mapping of question to topic."
+  },
+  "review": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-10-05",
+    "comment": "A fixed catalogue, not free-text understanding. A reader types and the app suggests from this list; the answer is always derived from the question they chose, never from what they typed, so the reading stays deterministic and reproducible and no birth detail leaves the device. A question with no match is told so rather than answered from a guess. Keywords are match terms only and are never shown as content."
+  }
+}

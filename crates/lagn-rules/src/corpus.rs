@@ -30,6 +30,10 @@ pub struct Corpus {
     /// What Ketu's house and sign say about the life carried forward.
     pub karma: Option<crate::catalogue::Karma>,
     pub porutham: Option<PoruthamReviews>,
+    /// What each porutham measures, and what its verdict is read to mean.
+    pub porutham_explain: Option<crate::catalogue::PoruthamExplainer>,
+    /// The matters a reader can ask about, each mapped to a topic.
+    pub questions: Option<crate::catalogue::Questions>,
     pub topics: Vec<crate::catalogue::TopicMeta>,
     pub bhavas: Option<crate::catalogue::Bhavas>,
     pub pariharams: Vec<crate::catalogue::Pariharam>,
@@ -51,6 +55,14 @@ pub fn load(dir: &Path) -> Result<Corpus, CorpusError> {
         match path.file_name().and_then(|n| n.to_str()) {
             Some("porutham.review.json") => {
                 corpus.porutham = Some(serde_json::from_str(&text).map_err(parse_err)?);
+                continue;
+            }
+            Some("porutham.explain.json") => {
+                corpus.porutham_explain = Some(serde_json::from_str(&text).map_err(parse_err)?);
+                continue;
+            }
+            Some("questions.json") => {
+                corpus.questions = Some(serde_json::from_str(&text).map_err(parse_err)?);
                 continue;
             }
             Some("topics.json") => {
@@ -306,6 +318,44 @@ pub fn validate(corpus: &Corpus) -> Vec<String> {
 
     validate_catalogue(corpus, &mut problems);
 
+    if let Some(q) = &corpus.questions {
+        check_review("questions.json", &q.review, &mut problems);
+        let mut ids = HashSet::new();
+        for x in &q.questions {
+            if !ids.insert(x.id.as_str()) {
+                problems.push(format!("questions.json: duplicate id {}", x.id));
+            }
+            if !x.question.trim_end().ends_with('?') {
+                problems.push(format!("questions.json {}: a question must end in a question mark", x.id));
+            }
+            if x.keywords.is_empty() {
+                problems.push(format!("questions.json {}: no keywords, so it can never be found", x.id));
+            }
+            // A question that names a topic the corpus cannot read would offer
+            // an answer and then fail to give one.
+            if !corpus.topics.iter().any(|t| t.id == x.topic) {
+                problems.push(format!("questions.json {}: topic {} is not in topics.json", x.id, x.topic));
+            }
+        }
+    }
+    if let Some(e) = &corpus.porutham_explain {
+        check_review("porutham.explain.json", &e.review, &mut problems);
+        if e.source.note.trim().is_empty() {
+            problems.push("porutham.explain.json: source.note is required".into());
+        }
+        for k in PoruthamKind::ALL {
+            match e.get(k) {
+                None => problems.push(format!("porutham.explain.json: missing {k:?}")),
+                Some(x) => {
+                    for (what, text) in [("measures", &x.measures), ("when_matching", &x.when_matching), ("when_not", &x.when_not), ("touches", &x.touches)] {
+                        if text.trim().len() < 8 {
+                            problems.push(format!("porutham.explain.json {k:?}: {what} is too short to explain anything"));
+                        }
+                    }
+                }
+            }
+        }
+    }
     if let Some(p) = &corpus.porutham {
         for k in PoruthamKind::ALL {
             match p.get(&k) {

@@ -1,0 +1,634 @@
+[
+  {
+    "id": "immigration.h12.benefic_occupant",
+    "topic": "immigration",
+    "title": "A natural benefic occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 12,
+        "by": "benefics"
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "A natural benefic sits in the 12th house, the bhava of distant places and residence away from one's birthplace, which classical texts read as support for life abroad.",
+      "impact": "Living away from where you were born tends to suit you rather than cost you. Arrangements abroad are more likely to settle into something comfortable than to stay unsettled."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. The 12th bhava as the house of distant lands and residence away from the birthplace is standard; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Benefic in the bhava strengthens the bhava. Plain-language impact line restates the same principle in everyday words and predicts no event, no approval and no date."
+    }
+  },
+  {
+    "id": "immigration.h12.malefic_occupant",
+    "topic": "immigration",
+    "title": "Mars, Saturn, Rahu or Ketu occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "house_occupied": {
+        "house": 12,
+        "by": {
+          "grahas": [
+            "mars",
+            "saturn",
+            "rahu",
+            "ketu"
+          ]
+        }
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "A natural malefic sits in the 12th house, traditionally read as foreign matters that ask for patience and careful handling rather than smooth passage.",
+      "impact": "Paperwork, waiting and rules are likely to take more out of you than they do for others. Keeping documents in order early, and expecting the process to be slow, is what helps."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Malefic in the bhava stresses the bhava. Worded as effort and patience, never as refusal, danger or loss, per DESIGN 6 section 2 guardrail 4. Names no outcome and no date."
+    }
+  },
+  {
+    "id": "immigration.l12.kendra_trikona",
+    "topic": "immigration",
+    "title": "The 12th lord is in a kendra or trikona",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 12
+        },
+        "houses": [
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 12th house sits in a kendra or trikona, which classical texts read as strength for the matters of that bhava, foreign residence among them.",
+      "impact": "Plans that involve moving away tend to have something solid under them. Steps you take toward living in another country are more likely to lead somewhere than to stall."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "A bhava lord in a kendra or trikona strengthens its bhava; the same principle used for career.l10.kendra_trikona, applied to the 12th. Predicts no event."
+    }
+  },
+  {
+    "id": "immigration.l12.dignified",
+    "topic": "immigration",
+    "title": "The 12th lord is exalted, in moolatrikona or in its own sign",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 12
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 12th house is exalted, in moolatrikona or in its own sign, and classical texts hold it able to give the results of that bhava fully.",
+      "impact": "Where foreign matters are concerned, what you build tends to hold. A move made for good reasons is likely to become a settled life rather than a temporary stay."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Dignity of the bhava lord. Impact line avoids any claim about a specific status, approval or document."
+    }
+  },
+  {
+    "id": "immigration.l12.debilitated",
+    "topic": "immigration",
+    "title": "The 12th lord is debilitated",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 12
+        },
+        "in": [
+          "debilitated"
+        ]
+      }
+    },
+    "polarity": -2,
+    "subject": {
+      "lord_of": 12
+    },
+    "text": {
+      "en": "The lord of the 12th house is debilitated, which classical texts read as that bhava giving its results with difficulty and delay.",
+      "impact": "Matters of living abroad are likely to ask for more attempts than you expect. Taking advice from someone who has done it, and not relying on a single route, is what tends to help."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Debilitation of the bhava lord. Cancelled by immigration.l12.neecha_bhanga where the classical cancellation applies. Framed as effort, with what helps; no refusal and no date."
+    }
+  },
+  {
+    "id": "immigration.l12.neecha_bhanga",
+    "topic": "immigration",
+    "title": "The 12th lord's debilitation is cancelled (neecha bhanga)",
+    "tradition": "parashari",
+    "when": {
+      "neecha_bhanga": {
+        "graha": {
+          "lord_of": 12
+        }
+      }
+    },
+    "polarity": 0,
+    "overrides": [
+      "immigration.l12.debilitated"
+    ],
+    "text": {
+      "en": "The 12th lord is debilitated, but the classical conditions for neecha bhanga are met, so the debilitation is cancelled and is not counted against this area.",
+      "impact": "An early difficulty with living abroad is the kind that lifts. What looked like a closed door often turns out to have been a slow one."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of the commonly taught neecha bhanga conditions and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Standard cancellation of debilitation, using the engine's own neecha bhanga derivation (DESIGN 6 section 3.3). Scored zero and used only to cancel, so it never announces relief from nothing."
+    }
+  },
+  {
+    "id": "immigration.rahu.h12",
+    "topic": "immigration",
+    "title": "Rahu occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "rahu",
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "Rahu, traditionally the significator of foreign places, foreigners and what lies outside one's own custom, sits in the 12th house of distant residence.",
+      "impact": "A life connected to another country is a real theme in this chart rather than a passing wish. Routes that are unusual, or that no one in the family has taken, tend to be the ones that open."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. Rahu's association with foreign lands and foreigners is widely taught in modern Indian practice; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "The single most commonly cited indication for foreign settlement. Impact line states a theme, not an approval, a country or a date."
+    }
+  },
+  {
+    "id": "immigration.rahu.l12",
+    "topic": "immigration",
+    "title": "Rahu is joined to or exchanged with the 12th lord",
+    "tradition": "parashari",
+    "when": {
+      "sambandha": {
+        "a": "rahu",
+        "b": {
+          "lord_of": 12
+        }
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Rahu and the lord of the 12th house are related by conjunction, mutual aspect or exchange, linking the significator of foreign places to the bhava of distant residence.",
+      "impact": "Opportunities abroad tend to arrive through other people, or through a turn of events you did not plan. Being ready to act when one appears matters more here than long preparation."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Sambandha between the foreign karaka and the bhava lord, using the engine's own relation derivation. No event, status or date claimed."
+    }
+  },
+  {
+    "id": "immigration.l4.h12",
+    "topic": "immigration",
+    "title": "The 4th lord is in the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 4
+        },
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lord of the 4th house, the bhava of home and homeland, sits in the 12th house of distant places: classical texts read the home as being found away from where it began.",
+      "impact": "Home, for you, is more likely to be somewhere you go to than somewhere you stay. Settling far from where you grew up tends to feel like arriving rather than leaving."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. The 4th lord placed in the 12th as an indication of residence away from the birthplace is widely taught; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Classical bhava-lord displacement: the significator of home in the house of distance. Impact line is about orientation, not about a move on a date."
+    }
+  },
+  {
+    "id": "immigration.exchange.h4_h12",
+    "topic": "immigration",
+    "title": "The 4th and 12th lords are in exchange (parivartana)",
+    "tradition": "parashari",
+    "when": {
+      "sambandha": {
+        "a": {
+          "lord_of": 4
+        },
+        "b": {
+          "lord_of": 12
+        },
+        "kinds": [
+          "exchange"
+        ]
+      }
+    },
+    "polarity": 2,
+    "text": {
+      "en": "The lords of the 4th and 12th houses occupy each other's signs, a parivartana yoga tying home directly to distant places.",
+      "impact": "The pull between staying and going is built into this chart, and it usually resolves by making a home in both. Keeping ties where you came from costs you nothing here."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of the commonly taught parivartana (exchange) yogas and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Mutual exchange between the home and distance bhavas, a strong and specific classical indication. Impact line states a pattern and what helps; no event and no date."
+    }
+  },
+  {
+    "id": "immigration.l9.h12",
+    "topic": "immigration",
+    "title": "The 9th lord is in the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 9
+        },
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the 9th house, the bhava of fortune and long journeys, sits in the 12th house of distant residence.",
+      "impact": "Good fortune tends to find you at a distance from where you started. Study, faith or a long journey are the usual doors rather than a direct application."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. The 9th bhava as long journeys is standard; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Fortune bhava lord in the distance bhava. Impact line names likely routes in general terms, never a visa category or a country."
+    }
+  },
+  {
+    "id": "immigration.l1.h12",
+    "topic": "immigration",
+    "title": "The lagna lord is in the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 1
+        },
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the lagna sits in the 12th house, placing the native's own significator in the bhava of distant places.",
+      "impact": "Your own path leads away from your birthplace more than most people's does. Time spent abroad tends to shape who you become, not just where you live."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Lagna lord in the 12th, commonly read as life away from the birthplace. States an orientation, not a relocation on a date."
+    }
+  },
+  {
+    "id": "immigration.moon.h12",
+    "topic": "immigration",
+    "title": "The Moon is in the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "moon",
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The Moon, significator of the mind and of movement across water, sits in the 12th house of distant residence.",
+      "impact": "Your attachments travel with you, which makes distance easier to bear than it is for many. Keeping regular contact with the people you leave behind is what keeps it that way."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. The Moon's association with water crossings and changes of residence is widely taught; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Moon in the distance bhava. Impact line is about temperament and what helps, with no claim about an event."
+    }
+  },
+  {
+    "id": "immigration.saturn.h12",
+    "topic": "immigration",
+    "title": "Saturn occupies the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": "saturn",
+        "houses": [
+          12
+        ]
+      }
+    },
+    "polarity": 0,
+    "text": {
+      "en": "Saturn, the significator of patience, service and long processes, sits in the 12th house. Classical practice reads this as a long stay abroad reached slowly rather than a quick move. Noted rather than scored, because what it describes is the manner, not the strength.",
+      "impact": "If a move happens here it tends to come late and to last. The waiting is part of it, and the people who get through it are usually the ones who kept going after the first refusal."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Descriptive rather than scored: Saturn here speaks to pace, not to whether the bhava is strong, so scoring it either way would misstate the indication. Mentions a refusal only as something to persist past, never as a prediction."
+    }
+  },
+  {
+    "id": "immigration.jupiter.aspects_h12",
+    "topic": "immigration",
+    "title": "Jupiter aspects the 12th house",
+    "tradition": "parashari",
+    "when": {
+      "house_aspected": {
+        "house": 12,
+        "by": {
+          "grahas": [
+            "jupiter"
+          ]
+        }
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "Jupiter, the significator of law, learning and expansion, casts its aspect on the 12th house of distant places.",
+      "impact": "Doing things by the proper route tends to work better for you than finding a way around. Where rules and lawful process are involved, that is a real advantage."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. Jupiter's graha drishti and its signification of law and dharma are standard; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Benefic aspect on the bhava. The impact line's advice - use the lawful route - is sound whatever the chart says, and names no authority, country or document."
+    }
+  },
+  {
+    "id": "immigration.sav.h12_strong",
+    "topic": "immigration",
+    "title": "The 12th house has 28 or more SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 12,
+        "min": 28
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The 12th house holds 28 or more Sarvashtakavarga bindus, at or above the average: by that reckoning a well-supported bhava.",
+      "impact": "Taken across all the grahas rather than one, the part of the chart that governs distant places has more than ordinary backing."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of the commonly taught Sarvashtakavarga averages and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "SAV threshold of 28 is the same one used by the career and marriage rules, applied to the 12th. Describes support, not an outcome."
+    }
+  },
+  {
+    "id": "immigration.sav.h12_weak",
+    "topic": "immigration",
+    "title": "The 12th house has 24 or fewer SAV bindus",
+    "tradition": "parashari",
+    "when": {
+      "sav": {
+        "house": 12,
+        "max": 24
+      }
+    },
+    "polarity": -1,
+    "text": {
+      "en": "The 12th house holds 24 or fewer Sarvashtakavarga bindus, below the average: by that reckoning a bhava with less than ordinary support.",
+      "impact": "Foreign matters are not where this chart is strongest, which is worth knowing before you build a plan that depends on them alone. It argues for a second route, not for giving up on the first."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of the commonly taught Sarvashtakavarga averages and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Mirror of the strong case, threshold matching marriage.sav.h7_weak. Worded as information for planning, never as refusal; offers what helps, per DESIGN 6 section 2 guardrail 4."
+    }
+  },
+  {
+    "id": "immigration.l12.dusthana",
+    "topic": "immigration",
+    "title": "The 12th lord is in the 6th or 8th house",
+    "tradition": "parashari",
+    "when": {
+      "graha_in_house": {
+        "graha": {
+          "lord_of": 12
+        },
+        "houses": [
+          6,
+          8
+        ]
+      }
+    },
+    "polarity": -1,
+    "subject": {
+      "lord_of": 12
+    },
+    "text": {
+      "en": "The lord of the 12th house sits in the 6th or 8th, houses of obstacle and interruption, which classical texts read as that bhava's matters proceeding unevenly.",
+      "impact": "Expect the route to change shape partway: a process that restarts, or a plan that has to be made again on different terms. Keeping records and copies of everything is the practical answer."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of a commonly taught Parashari principle and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Bhava lord in a dusthana, the same principle as marriage.l7.dusthana applied to the 12th. Framed as unevenness with a practical step, not as failure."
+    }
+  },
+  {
+    "id": "immigration.d4.l12_strong",
+    "topic": "immigration",
+    "title": "The 12th lord is strong in the chaturthamsa (D-4)",
+    "tradition": "parashari",
+    "when": {
+      "dignity": {
+        "graha": {
+          "lord_of": 12
+        },
+        "in": [
+          "exalted",
+          "moolatrikona",
+          "own_sign"
+        ],
+        "varga": "d4"
+      }
+    },
+    "polarity": 1,
+    "text": {
+      "en": "The lord of the rasi-chart 12th house is exalted, in moolatrikona or in its own sign in the chaturthamsa (D-4), the divisional chart read for home and residence.",
+      "impact": "The divisional chart for where a person lives agrees with the main chart here. A home established far away is more likely to become the real one than to stay a posting."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of the commonly taught use of the chaturthamsa for home, property and residence, and reviewed by AI at the product owner's direction. No textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Varga confirmation, in the same shape as career.l10 in the dasamsa: D-4 is the chart conventionally read for residence, which is what immigration concerns. Describes agreement between charts, not an outcome."
+    }
+  },
+  {
+    "id": "immigration.timing.periods",
+    "topic": "immigration",
+    "title": "Periods examined for foreign residence",
+    "tradition": "parashari",
+    "when": {
+      "always": {}
+    },
+    "polarity": 0,
+    "timing": [
+      {
+        "lord_of": 12
+      },
+      {
+        "lord_of": 9
+      },
+      "rahu",
+      {
+        "lord_of": 12,
+        "varga": "d4"
+      }
+    ],
+    "tags": [
+      "timing"
+    ],
+    "text": {
+      "en": "Dashas and bhuktis traditionally examined for matters of distant residence: those of the 12th lord, the 9th lord, Rahu, and the 12th lord of the chaturthamsa (D-4).",
+      "impact": "These are the stretches of life in which matters of living abroad usually come forward: an application made, a route that opens, or a decision to go. They say when the subject tends to be live, not what is decided."
+    },
+    "source": {
+      "reference": null,
+      "note": "Authored from general knowledge of commonly taught Parashari timing practice and reviewed by AI at the product owner's direction. The 12th and 9th lords and Rahu are the lords conventionally examined for foreign matters; no textual citation has been verified; an astrologer may re-review."
+    },
+    "review": {
+      "status": "approved",
+      "reviewer": "Claude (AI review at the product owner's direction)",
+      "date": "2026-10-04",
+      "comment": "Timing lords for the 12th bhava, its fortune counterpart and the foreign karaka. The impact line is explicit that a window says when the matter is live and not what is decided, which is the guardrail that matters most for a topic where people may be waiting on a real decision."
+    }
+  }
+]

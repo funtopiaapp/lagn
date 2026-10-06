@@ -42,10 +42,10 @@
     "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
   },
   "vasya": {
-    "status": "rejected",
+    "status": "approved",
     "reviewer": "Claude (AI review at the product owner's direction)",
-    "date": "2026-09-21",
-    "comment": "Not confident of the Vasya sign table: printed Tamil tables disagree on several entries. Supply a trusted table to add it."
+    "date": "2026-10-05",
+    "comment": "Reversing the Phase 3 rejection of 2026-09-21 at the product owner's direction. The reason for that rejection stands and is not resolved: printed Tamil tables agree on eight rows of the Vasya table and disagree on four - Tula, Vrischika, Makara and Kumbha. No trusted panchangam was supplied, so those four are taken on the most commonly printed reading (Tula: Makara and Kanya; Vrischika: Kanya and Karka; Makara: Mesha and Kumbha; Kumbha: Mesha), and porutham::vasya_disputed marks them so a verdict resting on one says so rather than sounding as settled as the other six. Direction is the common Tamil one: the bride's rasi under the groom's sway, not a mutual test. An astrologer with a table they trust should confirm or correct the four rows; the eight agreed rows are not in question."
   },
   "rajju": {
     "status": "approved",
@@ -58,5 +58,17 @@
     "reviewer": "Claude (AI review at the product owner's direction)",
     "date": "2026-09-21",
     "comment": "Matches the widely printed Tamil ten-porutham method with the documented defaults."
+  },
+  "naadi": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-10-05",
+    "comment": "Naadi porutham, the 12-porutham form that Tamil and Kerala reports commonly print alongside the ten. The naadi assignment runs 1-2-3-3-2-1 along the twenty-seven nakshatras and the sources agree on it, unlike the Vasya table. Sharing a naadi is what the texts object to, and they treat it as seriously as Rajju, so it is reported as critical and its text sends the reader to an astrologer. Classical cancellations of naadi dosha exist and are not computed here; an astrologer should weigh them."
+  },
+  "varna": {
+    "status": "approved",
+    "reviewer": "Claude (AI review at the product owner's direction)",
+    "date": "2026-10-05",
+    "comment": "Varna porutham, by the element of each moon-sign: water Brahmin, fire Kshatriya, earth Vaishya, air Shudra. The check is that the groom's varna does not stand below the bride's. The element-to-varna mapping is agreed across sources. This is the lightest of the twelve in practice and is not reported as critical."
   }
 }

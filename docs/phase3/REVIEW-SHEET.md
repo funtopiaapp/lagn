@@ -457,7 +457,7 @@ bride and groom pada combinations.
 | Yoni | Approved | 92.9% |
 | Rasi | Approved | 66.7% |
 | Rasi Adhipati | Approved | 63.9% |
-| Vasya | Rejected | blocked: table to be supplied |
+| Vasya | Approved 2026-10-05 | majority reading; Tula, Vrischika, Makara, Kumbha disputed and marked |
 | Rajju | Approved | 79.0% |
 | Vedha | Approved | 95.9% |
 

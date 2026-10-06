@@ -2,11 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { api, ApiError } from "../api";
 import type { BirthInput, RuleResult, Sex, TopicMeta, TopicResponse } from "../types";
 import { PariharamList } from "./PariharamList";
+import { TopicTiming } from "./TopicTiming";
 import { WriteUpView } from "./WriteUpView";
 
 const MARRIAGE: TopicMeta = { id: "marriage", title: "Marriage", summary: "", ages: [18, 45] };
 
-interface Props { birth: BirthInput; sex?: Sex; reviewToken: string; topic?: TopicMeta }
+interface Props {
+  birth: BirthInput; sex?: Sex; reviewToken: string; topic?: TopicMeta;
+  /** Called with the loaded reading, so a parent can share it as a PDF
+   *  without fetching it again. */
+  onLoaded?: (data: TopicResponse) => void;
+}
 
 function RuleCard({ r }: { r: RuleResult }) {
   return (
@@ -28,7 +34,7 @@ function RuleCard({ r }: { r: RuleResult }) {
   );
 }
 
-export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE }: Props) {
+export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE, onLoaded }: Props) {
   const [data, setData] = useState<TopicResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -47,6 +53,9 @@ export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE }: Props) 
 
   // A reading belongs to the topic it was fetched for.
   const rep = data?.report.topic === topic.id ? data.report : undefined;
+  // The parent needs the loaded reading for the PDF, so it does not have to
+  // fetch it a second time.
+  useEffect(() => { if (data && rep) onLoaded?.(data); }, [data, rep, onLoaded]);
   const [fromAge, toAge] = data?.meta?.ages ?? topic.ages;
   const byId = (id: string) => rep!.results.find((r) => r.id === id)!;
   const withheld = rep ? Object.values(rep.withheld).reduce((a, b) => a + b, 0) : 0;
@@ -74,6 +83,9 @@ export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE }: Props) 
       )}
 
       {rep && data?.writeup && <WriteUpView w={data.writeup} omit={topic.disclaimer} />}
+      {rep && data!.windows.length > 0 && (
+        <TopicTiming windows={data!.windows} topic={topic.title} ages={[fromAge, toAge]} />
+      )}
       {rep && data!.pariharams && data!.pariharams.length > 0 && <><h4>Pariharams</h4><PariharamList items={data!.pariharams} /></>}
 
       {rep && rep.results.length > 0 && (
@@ -102,8 +114,8 @@ export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE }: Props) 
           {data!.windows.length > 0 && (
             <><h4>Periods to examine (ages {fromAge} to {toAge})</h4>
               <div className="table-wrap"><table>
-                <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Dasha</th><th scope="col">Via</th></tr></thead>
-                <tbody>{data!.windows.map((w, i) => <tr key={i}><td>{w.start}</td><td>{w.end}</td><td>{w.maha} / {w.antar}</td><td>{w.matched.join(", ")}</td></tr>)}</tbody>
+                <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Dasha</th><th scope="col">Via</th><th scope="col">For this area</th></tr></thead>
+                <tbody>{data!.windows.map((w, i) => <tr key={i}><td>{w.start}</td><td>{w.end}</td><td>{w.maha} / {w.antar}</td><td>{w.matched.join(", ")}</td><td>{w.verdict}</td></tr>)}</tbody>
               </table></div></>
           )}
         </details>

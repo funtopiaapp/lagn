@@ -20,6 +20,27 @@ function cspFor(apiBase: string, counter = ""): string {
   ].join("; ");
 }
 
+/**
+ * What goes in the version hash, and what goes in the precache. They are not
+ * the same list, and the difference is the whole point.
+ *
+ * Everything in the build feeds the hash, the engine and rule corpus
+ * included: they are served cache-first under a cache named for that hash, so
+ * if they were left out, a release that changed only the corpus or only the
+ * WebAssembly would keep the old cache and go on serving the old engine to
+ * every returning reader.
+ *
+ * The engine stays out of the precache, because installing 8 MB up front
+ * would make a first visit slow and could fail outright.
+ */
+export function buildManifest(outDir: string, base: string): { version: string; precache: string[] } {
+  const all = files(outDir).filter((f) => f !== "sw.js" && !f.endsWith(".map"));
+  const precache = all.filter((f) => !f.startsWith("engine/")).map((f) => base + f).sort();
+  const hash = createHash("sha256");
+  for (const f of all.sort()) hash.update(f).update(readFileSync(join(outDir, f)));
+  return { version: hash.digest("hex").slice(0, 16), precache };
+}
+
 function files(dir: string, root = dir): string[] {
   return readdirSync(dir).flatMap((n) => {
     const p = join(dir, n);
@@ -99,13 +120,8 @@ export function pwa(apiBase: string, base = "/", counterOrigin = ""): Plugin {
         for (const icon of manifest.icons) icon.src = base + icon.src.replace(/^\//, "");
         writeFileSync(file, JSON.stringify(manifest, null, 2));
       }
-      // The engine is fetched on demand and cached then: precaching 8 MB at
-      // install would make the first visit slow and could fail outright.
-      const list = files(outDir).filter((f) => f !== "sw.js" && !f.endsWith(".map") && !f.startsWith("engine/"));
-      const precache = list.map((f) => base + f).sort();
-      const hash = createHash("sha256");
-      for (const f of list.sort()) hash.update(f).update(readFileSync(join(outDir, f)));
-      writeFileSync(join(outDir, "sw.js"), SW(hash.digest("hex").slice(0, 16), precache, base));
+      const { version, precache } = buildManifest(outDir, base);
+      writeFileSync(join(outDir, "sw.js"), SW(version, precache, base));
     },
   };
 }

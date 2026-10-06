@@ -31,7 +31,7 @@ null and say so in `note`. Inventing chapter and verse numbers is forbidden.
 1. The rule language (section 3) and its three-valued evaluator (section 4).
 2. The review gate (section 5), cancellation resolution (section 6) and dasha
    timing windows (section 7).
-3. Ten Poruthams (section 8). Nine are built. Vasya is blocked on a
+3. Ten Poruthams (section 8). All ten are built; Vasya was blocked on a
    transcribed table.
 4. A marriage corpus of about 35 draft rules, including Kuja (Chevvai) dosha and
    its cancellations, expressed in the rule language (section 9).
@@ -189,7 +189,7 @@ Let `n` be the nakshatra count and `r` the rasi count.
 | 5 | Yoni | the two yoni animals are not an enemy pair | P-4 |
 | 6 | Rasi | `r` is not 2, 6, 8 or 12 | P-5 |
 | 7 | Rasi Adhipati | the rasi lords are the same, or neither regards the other as a natural enemy (Phase 2 table) | P-6 |
-| 8 | Vasya | **blocked**: reported as not evaluated | P-7 |
+| 8 | Vasya | built 2026-10-05; four of its twelve rows are the majority reading of disagreeing sources, and are marked as such | P-7 |
 | 9 | Rajju | the two nakshatras are in different rajjus | P-8 |
 | 10 | Vedha | the pair is not a vedha pair | none |
 
@@ -246,6 +246,48 @@ and Uttara Bhadrapada; Uttara Phalguni and Purva Bhadrapada; Hasta and
 Shatabhisha; Mrigashira and Chitra; Mrigashira and Dhanishta; Chitra and
 Dhanishta.
 
+**Vasya:** the signs each rasi holds sway over. The check is directional: the
+bride's rasi must fall under the groom's sway, which is the reading Tamil
+sources most often print rather than a mutual test. Printed tables agree on
+eight rows and disagree on four - Tula, Vrischika, Makara and Kumbha - which
+are recorded here as the majority reading and reported as disputed.
+
+| Rasi | Holds sway over |
+|---|---|
+| Mesha | Simha, Vrischika |
+| Vrishabha | Karka, Tula |
+| Mithuna | Kanya |
+| Karka | Vrischika, Dhanus |
+| Simha | Tula |
+| Kanya | Mithuna, Meena |
+| Tula | Makara, Kanya |
+| Vrischika | Kanya, Karka |
+| Dhanus | Meena |
+| Makara | Mesha, Kumbha |
+| Kumbha | Mesha |
+| Meena | Makara |
+
+**Naadi:** sharing a naadi is what the texts object to, as with Rajju. The
+assignment runs 1-2-3-3-2-1 along the twenty-seven, which is why it is quoted
+as a zig-zag and not a repeating triple.
+
+| Naadi | Nakshatras |
+|---|---|
+| Adi | Ashwini, Ardra, Punarvasu, Uttara Phalguni, Hasta, Jyeshtha, Mula, Shatabhisha, Purva Bhadrapada |
+| Madhya | Bharani, Mrigashira, Pushya, Purva Phalguni, Chitra, Anuradha, Purva Ashadha, Dhanishta, Uttara Bhadrapada |
+| Antya | Krittika, Rohini, Ashlesha, Magha, Swati, Vishakha, Uttara Ashadha, Shravana, Revati |
+
+**Varna:** by the element of the moon-sign. The check is that the groom's varna
+does not stand below the bride's, ranked Brahmin above Kshatriya above Vaishya
+above Shudra.
+
+| Varna | Rasis |
+|---|---|
+| Brahmin | Karka, Vrischika, Meena |
+| Kshatriya | Mesha, Simha, Dhanus |
+| Vaishya | Vrishabha, Kanya, Makara |
+| Shudra | Mithuna, Tula, Kumbha |
+
 **Self-checks QA must verify:** each gana has 9 nakshatras and the three are
 disjoint. Each rajju follows the 1-2-3-4-5-4-3-2-1 zigzag through the 27. The
 yoni table covers all 27 exactly once. Vedha is symmetric, and every
@@ -267,7 +309,7 @@ semantics as rules.
 | P-4 | Yoni grading | enemy pair means no match; otherwise match | graded scale by male or female animals |
 | P-5 | Rasi disqualifying counts | 2, 6, 8, 12 | 6 and 8 only; excuse 6/8 when the lords are friends |
 | P-6 | Rasi Adhipati basis | natural relationship, both directions | compound; one direction only |
-| P-7 | **Vasya table** | **none: blocked** | the reviewer supplies the table from their panchangam |
+| P-7 | **Vasya table** | majority reading, four rows disputed | an astrologer confirms Tula, Vrischika, Makara and Kumbha against a panchangam they trust |
 | P-8 | Rajju exceptions (aarohana/avarohana) | none; same rajju means no match | allow some same-rajju cases by direction |
 
 ### 8.5 Chart-level variants

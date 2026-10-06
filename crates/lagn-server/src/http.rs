@@ -131,6 +131,13 @@ async fn periods(State(s): State<Arc<AppState>>, headers: HeaderMap, body: Body)
     compute(move || api::periods(&s, req, mode)).await.map(Json)
 }
 
+/// A day's timings need no chart and no review gate: a panchangam states what
+/// the day is, and nothing here is interpreted.
+async fn days(body: Body) -> ApiResult<api::DaysResponse> {
+    let req: api::DayRequest = parse_json(body)?;
+    compute(move || api::days(req)).await.map(Json)
+}
+
 async fn family(State(s): State<Arc<AppState>>, headers: HeaderMap, body: Body) -> ApiResult<lagn_rules::family::FamilyReading> {
     let req: api::FamilyRequest = parse_json(body)?;
     let mode = authorise(&s, &headers, req.mode)?;
@@ -244,6 +251,7 @@ pub fn router_with(state: Arc<AppState>, static_dir: Option<&Path>, cors: &Cors)
         .route("/api/topics", get(topics))
         .route("/api/topic/{name}", post(topic))
         .route("/api/periods", post(periods))
+        .route("/api/days", post(days))
         .route("/api/family", post(family))
         .route("/api/match", post(match_))
         .route("/api/review-sheet", get(review_sheet_md))
