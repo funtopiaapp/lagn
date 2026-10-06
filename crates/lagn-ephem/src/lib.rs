@@ -616,6 +616,14 @@ impl Ephemeris {
         // and the difference is seconds.
         let mut geopos: [c_double; 3] = [longitude, latitude, 0.0];
 
+        // Standard atmosphere, and not zeroes. Swiss Ephemeris reads a zero
+        // temperature as 0 degrees Celsius rather than "use a default", and
+        // colder air refracts more: passing zero put sunrise 13 seconds early
+        // and sunset 13 seconds late against swetest, which passes these. An
+        // almanac uses the same convention.
+        const PRESSURE_MBAR: c_double = 1013.25;
+        const TEMPERATURE_C: c_double = 15.0;
+
         let mut event = |rsmi: i32, start: f64| -> Result<f64, EphemError> {
             let mut tret: [c_double; 10] = [0.0; 10];
             let mut serr = err_buf();
@@ -627,8 +635,8 @@ impl Ephemeris {
                     swe_sys::SEFLG_SWIEPH,
                     rsmi,
                     geopos.as_mut_ptr(),
-                    0.0,
-                    0.0,
+                    PRESSURE_MBAR,
+                    TEMPERATURE_C,
                     tret.as_mut_ptr(),
                     serr.as_mut_ptr(),
                 )

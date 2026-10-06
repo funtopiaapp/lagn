@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Exhaustive porutham oracle.
 
-Parses every porutham table (gana, yoni, yoni enemies, rajju, vedha) out of
-docs/phase3/DESIGN.md section 8 and checks the kernel's output for all
-108 x 108 = 11,664 bride/groom pada combinations - the complete input space.
+Parses every porutham table (gana, yoni, yoni enemies, rajju, vedha, vasya,
+naadi, varna) out of docs/phase3/DESIGN.md section 8 and checks the kernel's
+output for all 108 x 108 = 11,664 bride/groom pada combinations - the complete
+input space.
+
+The tables come from the spec rather than from the kernel's source, so this is
+an independent check and not a restatement of the code under test.
 """
 import json, subprocess, sys
 from pathlib import Path
@@ -40,8 +44,40 @@ def pairs(a, b, keyfn):
 GANA = two_col("**Gana:**", "**Yoni:**")
 YONI = two_col("**Yoni:**", "**Yoni enemy pairs:**")
 RAJJU = two_col("**Rajju:**", "**Vedha pairs:**")
+
+def rasi_col(a, b, expect):
+    """A table of label -> rasis, as lowercase rasi keys."""
+    out = {}
+    for line in section(a, b).splitlines():
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) == 2 and all(x.strip().lower() in RASI for x in c[1].split(",")):
+            out[c[0].lower()] = [x.strip().lower() for x in c[1].split(",")]
+    assert len(out) == expect, (a, len(out))
+    return out
+
+def nak_col(a, b, expect):
+    """A table of label -> nakshatras, as nakshatra keys."""
+    out = {}
+    for line in section(a, b).splitlines():
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) == 2 and all(x.strip() in NAMES for x in c[1].split(",")):
+            for n in c[1].split(","):
+                out[KEY[n.strip()]] = c[0].lower()
+    assert len(out) == expect, (a, len(out))
+    return out
+
+# Vasya: each rasi and the rasis it holds sway over.
+VASYA = rasi_col("**Vasya:**", "**Naadi:**", 12)
+# Naadi: nakshatra -> adi / madhya / antya.
+NAADI = nak_col("**Naadi:**", "**Varna:**", 27)
+# Varna: rasi -> varna, with the ranking the spec states.
+_VARNA_ROWS = rasi_col("**Varna:**", "**Self-checks QA must verify:**", 4)
+VARNA = {r: v for v, rs in _VARNA_ROWS.items() for r in rs}
+VARNA_RANK = {"shudra": 1, "vaishya": 2, "kshatriya": 3, "brahmin": 4}
+assert len(VARNA) == 12, len(VARNA)
+assert set(_VARNA_ROWS) == set(VARNA_RANK), set(_VARNA_ROWS)
 YONI_ENEMY = pairs("**Yoni enemy pairs:**", "**Rajju:**", str.lower)
-VEDHA = pairs("**Vedha pairs:**", "**Self-checks QA must verify:**", lambda n: KEY[n])
+VEDHA = pairs("**Vedha pairs:**", "**Vasya:**", lambda n: KEY[n])
 
 # Natural relationships, reused from the Phase 2 oracle (which parses them from its spec).
 import importlib.util
@@ -64,10 +100,13 @@ def expected(b, g):
         "yoni": v(frozenset((YONI[b["nakshatra"]], YONI[g["nakshatra"]])) not in YONI_ENEMY),
         "rasi": v(r not in (2, 6, 8, 12)),
         "rasi_adhipati": v(adh),
-        "vasya": "not_evaluated",
+        # Directional: the bride's rasi under the groom's sway.
+        "vasya": v(b["rasi"] in VASYA[g["rasi"]]),
         "rajju": v(RAJJU[b["nakshatra"]] != RAJJU[g["nakshatra"]]),
         "vedha": v(frozenset((b["nakshatra"], g["nakshatra"])) not in VEDHA
                    or b["nakshatra"] == g["nakshatra"]),
+        "naadi": v(NAADI[b["nakshatra"]] != NAADI[g["nakshatra"]]),
+        "varna": v(VARNA_RANK[VARNA[g["rasi"]]] >= VARNA_RANK[VARNA[b["rasi"]]]),
     }
 
 rows = json.loads(subprocess.run([str(ROOT / "target/release/lagn"), "match", "--table"],
@@ -78,7 +117,7 @@ for row in rows:
     want = expected(row["bride"], row["groom"])
     for res in row["results"]:
         checks += 1
-        crit = res["kind"] in ("rajju", "vedha") and res["verdict"] == "not_matching"
+        crit = res["kind"] in ("rajju", "vedha", "naadi") and res["verdict"] == "not_matching"
         if res["verdict"] != want[res["kind"]] or res["critical"] != crit:
             bad += 1
             if bad <= 10:

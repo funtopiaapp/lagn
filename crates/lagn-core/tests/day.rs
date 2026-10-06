@@ -165,3 +165,101 @@ fn the_panchanga_is_bounded_over_a_whole_year_of_real_positions() {
     // A year passes through every tithi many times over.
     assert_eq!(seen_tithis.len(), 30, "only saw {} distinct tithis", seen_tithis.len());
 }
+
+/// Sunrise and sunset against `swetest`, the independent oracle this project
+/// cross-validates every computation with.
+///
+/// Phase 2C (Shadbala, Vimshopaka, sphuta drishti) is held partly on
+/// "sunrise and sunset added to layer 1, with its own oracle test against
+/// swetest" (docs/phase2/DESIGN.md section 9, condition 3). This is that test.
+///
+/// It found a real error when first written: passing zero for atmospheric
+/// temperature meant 0 degrees Celsius rather than a default, and the extra
+/// refraction put sunrise 13 seconds early and sunset 13 seconds late.
+#[test]
+fn sunrise_and_sunset_agree_with_swetest() {
+    use std::process::Command;
+
+    init();
+    let eph = Ephemeris::new(lagn_core::Ayanamsa::Lahiri, lagn_core::NodeType::Mean);
+    let swetest = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tools/swetest/swetest");
+    if !swetest.exists() {
+        eprintln!("swetest not built; run tools/swetest/build.sh. Skipping the oracle.");
+        return;
+    }
+    let ephe = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../ephe").canonicalize().unwrap();
+
+    // Four latitudes and four seasons, so a convention error cannot hide in
+    // one geometry: Madurai, Delhi, Copenhagen, and the southern hemisphere.
+    let places = [
+        ("Madurai", 9.9252, 78.1198),
+        ("Delhi", 28.6519, 77.2315),
+        ("Copenhagen", 55.6759, 12.5655),
+        ("Melbourne", -37.8136, 144.9631),
+    ];
+    let dates = [(2026, 1, 15), (2026, 4, 15), (2026, 7, 15), (2026, 10, 15)];
+
+    // A second. Any convention difference - disc centre against upper limb,
+    // refraction on against off - is tens of seconds, so this is tight enough
+    // to catch one and loose enough to survive a point release.
+    const TOL_SEC: f64 = 1.0;
+    let mut checked = 0;
+
+    for (name, lat, lon) in places {
+        for (y, m, d) in dates {
+            // Both search from the same instant, handed over as an absolute
+            // Julian Day. Starting at 0:00 UT would ask Melbourne about an
+            // instant already past its sunrise, and the two would then be
+            // comparing different events rather than disagreeing.
+            let start = noon(y, m, d) - 0.5 - lon / 360.0;
+            let out = Command::new(&swetest)
+                .arg(format!("-edir{}", ephe.display()))
+                .arg(format!("-bj{start}"))
+                .args(["-p0", "-rise", "-ut"])
+                .arg(format!("-geopos{lon},{lat},0"))
+                .output()
+                .expect("run swetest");
+            let text = String::from_utf8_lossy(&out.stdout);
+            // "rise      15.1.2026   01:02:03.4    set       ..."
+            let Some((rise, set)) = parse_rise_set(&text) else {
+                panic!("could not parse swetest output for {name} {y}-{m}-{d}:\n{text}");
+            };
+
+            let sun = eph
+                .sun_day(start, lat, lon)
+                .unwrap_or_else(|e| panic!("{name} {y}-{m}-{d}: {e}"));
+
+            // Both are Julian Day in UT, so compare the fraction of the day.
+            for (what, ours, theirs) in
+                [("sunrise", sun.sunrise_jd, rise), ("sunset", sun.sunset_jd, set)]
+            {
+                // swetest prints the time of day; compare that, allowing for
+                // the event falling on either side of 0:00 UT.
+                let ours_sec = (ours + 0.5).rem_euclid(1.0) * 86400.0;
+                let diff = (ours_sec - theirs).abs().min(86400.0 - (ours_sec - theirs).abs());
+                assert!(
+                    diff < TOL_SEC,
+                    "{name} {y}-{m}-{d} {what}: ours {ours_sec:.2}s UT, swetest {theirs:.2}s UT, \
+                     {diff:.2}s apart"
+                );
+                checked += 1;
+            }
+        }
+    }
+    assert_eq!(checked, places.len() * dates.len() * 2);
+}
+
+/// Seconds of UT for the rise and set in a `swetest -rise` line.
+fn parse_rise_set(text: &str) -> Option<(f64, f64)> {
+    let line = text.lines().find(|l| l.trim_start().starts_with("rise"))?;
+    let secs = |hms: &str| -> Option<f64> {
+        let mut it = hms.split(':');
+        let h: f64 = it.next()?.trim().parse().ok()?;
+        let m: f64 = it.next()?.trim().parse().ok()?;
+        let s: f64 = it.next()?.trim().parse().ok()?;
+        Some(h * 3600.0 + m * 60.0 + s)
+    };
+    // Times are the tokens containing two colons.
+    let times: Vec<&str> = line.split_whitespace().filter(|t| t.matches(':').count() == 2).collect();
+    Some((secs(times.first()?)?, secs(times.get(1)?)?))
+}

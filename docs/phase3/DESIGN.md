@@ -246,6 +246,48 @@ and Uttara Bhadrapada; Uttara Phalguni and Purva Bhadrapada; Hasta and
 Shatabhisha; Mrigashira and Chitra; Mrigashira and Dhanishta; Chitra and
 Dhanishta.
 
+**Vasya:** the signs each rasi holds sway over. The check is directional: the
+bride's rasi must fall under the groom's sway, which is the reading Tamil
+sources most often print rather than a mutual test. Printed tables agree on
+eight rows and disagree on four - Tula, Vrischika, Makara and Kumbha - which
+are recorded here as the majority reading and reported as disputed.
+
+| Rasi | Holds sway over |
+|---|---|
+| Mesha | Simha, Vrischika |
+| Vrishabha | Karka, Tula |
+| Mithuna | Kanya |
+| Karka | Vrischika, Dhanus |
+| Simha | Tula |
+| Kanya | Mithuna, Meena |
+| Tula | Makara, Kanya |
+| Vrischika | Kanya, Karka |
+| Dhanus | Meena |
+| Makara | Mesha, Kumbha |
+| Kumbha | Mesha |
+| Meena | Makara |
+
+**Naadi:** sharing a naadi is what the texts object to, as with Rajju. The
+assignment runs 1-2-3-3-2-1 along the twenty-seven, which is why it is quoted
+as a zig-zag and not a repeating triple.
+
+| Naadi | Nakshatras |
+|---|---|
+| Adi | Ashwini, Ardra, Punarvasu, Uttara Phalguni, Hasta, Jyeshtha, Mula, Shatabhisha, Purva Bhadrapada |
+| Madhya | Bharani, Mrigashira, Pushya, Purva Phalguni, Chitra, Anuradha, Purva Ashadha, Dhanishta, Uttara Bhadrapada |
+| Antya | Krittika, Rohini, Ashlesha, Magha, Swati, Vishakha, Uttara Ashadha, Shravana, Revati |
+
+**Varna:** by the element of the moon-sign. The check is that the groom's varna
+does not stand below the bride's, ranked Brahmin above Kshatriya above Vaishya
+above Shudra.
+
+| Varna | Rasis |
+|---|---|
+| Brahmin | Karka, Vrischika, Meena |
+| Kshatriya | Mesha, Simha, Dhanus |
+| Vaishya | Vrishabha, Kanya, Makara |
+| Shudra | Mithuna, Tula, Kumbha |
+
 **Self-checks QA must verify:** each gana has 9 nakshatras and the three are
 disjoint. Each rajju follows the 1-2-3-4-5-4-3-2-1 zigzag through the 27. The
 yoni table covers all 27 exactly once. Vedha is symmetric, and every
