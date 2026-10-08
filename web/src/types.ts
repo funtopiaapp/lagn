@@ -218,3 +218,39 @@ export interface WriteUpPoint { rule: string; title: string; text: string; meani
 export type SectionKind = "house" | "karakas" | "varga" | "supporting" | "care" | "noted" | "dosha" | "eased" | "unknown" | "timing" | "karmic_axis" | "bridge" | "life_carried" | "bonds" | "debts";
 export interface WriteUpSection { kind: SectionKind; heading: string; paragraphs: string[]; points?: WriteUpPoint[] }
 export interface WriteUp { summary: string[]; sections: WriteUpSection[] }
+
+// --- Jaimini (phase 13A, professional surface) --------------------------
+// Specification: docs/phase13/DESIGN.md sections 4, 5 and 7.
+
+export type Karaka =
+  | "atma" | "amatya" | "bhratri" | "matri" | "pitri" | "putra" | "gnati" | "dara";
+export interface KarakaAssignment {
+  karaka: Karaka; graha: string; rasi: string;
+  /** Degrees travelled through the sign. Reversed for Rahu (V-13-2). */
+  advancement: number;
+}
+export interface ArudhaPada {
+  bhava: number; bhava_rasi: string; lord: string; lord_rasi: string;
+  count: number;
+  /** Where the count lands before the exception is applied. */
+  raw: string;
+  rasi: string;
+  /** True when the pada would have fallen on its own bhava or the 7th from
+   *  it, and the 10th was taken instead (V-13-8). */
+  adjusted: boolean;
+}
+export type ArgalaKind = "wealth" | "home" | "gain";
+export type ArgalaVerdict = "stands" | "neutralised" | "overcome" | "none";
+export interface ArgalaPair {
+  kind: ArgalaKind; argala_rasi: string; counter_rasi: string;
+  argala_grahas: string[]; counter_grahas: string[]; verdict: ArgalaVerdict;
+}
+export interface Argala { rasi: string; pairs: ArgalaPair[] }
+/** A variant choice in force, named so a practitioner knows the scheme. */
+export interface VariantChoice { id: string; question: string; chosen: string }
+export interface JaiminiResponse {
+  karakas: { assigned: KarakaAssignment[] };
+  padas: ArudhaPada[];
+  argala: Argala[];
+  variants: VariantChoice[];
+}

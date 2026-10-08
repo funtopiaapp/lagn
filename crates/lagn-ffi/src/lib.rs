@@ -247,6 +247,7 @@ endpoint!(lagn_periods, api::PeriodsRequest, |s, req| api::periods(s, req, Mode:
 endpoint!(lagn_family, api::FamilyRequest, |s, req| api::family(s, req, Mode::Production));
 endpoint!(lagn_match, api::MatchRequest, |s, req| api::match_(s, req, Mode::Production));
 endpoint!(lagn_days, api::DayRequest, |_s, req| api::days(req));
+endpoint!(lagn_jaimini, api::ChartRequest, |_s, req| api::jaimini(req));
 endpoint!(lagn_places, api::PlacesQuery, |s, q| api::places(s, &q));
 endpoint!(lagn_offset, api::OffsetQuery, |s, q| api::offset(s, &q));
 

@@ -115,6 +115,11 @@ async fn chart(body: Body) -> ApiResult<view::ChartResponse> {
     compute(move || api::chart(req)).await.map(Json)
 }
 
+async fn jaimini(body: Body) -> ApiResult<lagn_core::jaimini::Jaimini> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::jaimini(req)).await.map(Json)
+}
+
 async fn topics(State(s): State<Arc<AppState>>) -> Json<api::TopicsResponse> {
     Json(api::topics(&s))
 }
@@ -248,6 +253,7 @@ pub fn router_with(state: Arc<AppState>, static_dir: Option<&Path>, cors: &Cors)
         .route("/api/places", get(places_search))
         .route("/api/offset", get(offset_suggest))
         .route("/api/chart", post(chart))
+        .route("/api/jaimini", post(jaimini))
         .route("/api/topics", get(topics))
         .route("/api/topic/{name}", post(topic))
         .route("/api/periods", post(periods))

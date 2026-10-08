@@ -30,6 +30,7 @@ qa: build oracle
 	python3 scripts/qa_phase3_oracle.py --charts 2000
 	python3 scripts/qa_porutham_oracle.py
 	python3 scripts/qa_transit_oracle.py
+	python3 scripts/qa_jaimini_oracle.py --charts 400
 	./target/release/lagn rules validate
 	bash scripts/qa_web.sh
 

@@ -110,6 +110,16 @@ const p0 = performance.now();
 const periods = call("lagn_periods", JSON.stringify({ birth, from_age: 20, to_age: 45 }));
 console.log(`\n  sensitive periods: ${periods.windows.length} windows with transits, in ${(performance.now() - p0).toFixed(0)} ms`);
 
+// The professional surface runs through the same engine, so it has to answer
+// in the browser too and not only on the server.
+const jaimini = call("lagn_jaimini", JSON.stringify({ birth }));
+const ak = jaimini.karakas.assigned.find((a) => a.karaka === "atma");
+const moved = jaimini.padas.filter((x) => x.adjusted).length;
+console.log(`  jaimini: AK is ${ak.graha} in ${ak.rasi}; ${jaimini.padas.length} padas (${moved} took the 10th); ${jaimini.variants.length} variants named`);
+if (jaimini.padas.length !== 12 || jaimini.karakas.assigned.length !== 8 || jaimini.variants.length !== 8) {
+  throw new Error("jaimini came back the wrong shape from the WebAssembly engine");
+}
+
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));
 console.log(`  place search: ${places.map((p) => p.name).join(", ")}`);
 

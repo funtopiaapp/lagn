@@ -46,6 +46,11 @@ char *lagn_periods(const char *request_json);
    Needs no chart: these timings belong to the day and the place. */
 char *lagn_days(const char *request_json);
 
+/* {"birth": {...}} -> chara karakas, arudha padas and argala.
+   Professional surface only; the response carries the variant defaults
+   that produced it. */
+char *lagn_jaimini(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

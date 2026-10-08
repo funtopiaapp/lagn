@@ -376,3 +376,25 @@ footer a { color: var(--accent); }
   .notice, .notice.disclaimer, .provenance, .hint { display: block !important; color: #333; }
   a[href]::after { content: ""; }
 }
+
+/* ------------------------------------------------- Jaimini (phase 13, Pro) */
+/* Tables here are reference data a practitioner reads across, so they scroll
+   sideways on a narrow screen rather than reflowing into something that
+   cannot be compared row to row. */
+.jaimini .grid { display: table; font-variant-numeric: tabular-nums; }
+.jaimini section.card { overflow-x: auto; }
+.jaimini .grid td, .jaimini .grid th { white-space: nowrap; }
+.jaimini .grid .num { text-align: right; font-variant-numeric: tabular-nums; }
+.jaimini .grid tbody th { font-weight: 700; }
+.jaimini .grid .hint { display: inline; font-size: 0.85em; }
+.jaimini .argala td { white-space: nowrap; }
+.jaimini .argala .chip { margin-right: 4px; }
+
+.variants dt { font-weight: 600; margin-top: 10px; }
+.variants dd { margin: 2px 0 0 0; color: var(--muted); }
+
+/* The mode switch is a setting, so it lives in the footer beside the reviewer
+   sign-in rather than in the tab bar. */
+.mode-switch { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--gap); }
+.mode-switch label { font-weight: 600; display: flex; align-items: center; gap: 2px; }
+.mode-switch .hint { margin: 0; }

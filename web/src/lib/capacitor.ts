@@ -25,6 +25,7 @@ interface CapacitorPlugin {
   topic(options: { name: string; request: string }): Promise<PluginResult>;
   periods(options: { request: string }): Promise<PluginResult>;
   days(options: { request: string }): Promise<PluginResult>;
+  jaimini(options: { request: string }): Promise<PluginResult>;
   family(options: { request: string }): Promise<PluginResult>;
   match(options: { request: string }): Promise<PluginResult>;
   places(options: { request: string }): Promise<PluginResult>;
@@ -68,6 +69,7 @@ export function installNativeBridge(): boolean {
     topic: (name, request) => text(p.topic({ name, request })),
     periods: (request) => text(p.periods({ request })),
     days: (request) => text(p.days({ request })),
+    jaimini: (request) => text(p.jaimini({ request })),
     family: (request) => text(p.family({ request })),
     match: (request) => text(p.match({ request })),
     places: (request) => text(p.places({ request })),

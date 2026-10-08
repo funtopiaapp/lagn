@@ -1,5 +1,5 @@
 import type {
-  BirthInput, ChartResponse, DaysResponse, FamilyReading, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, ChartResponse, DaysResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -103,6 +103,13 @@ export const api = {
   chart: async (birth: BirthInput) => {
     const n = await viaNative<ChartResponse>((b) => b.chart(JSON.stringify({ birth })));
     return n !== NOT_NATIVE ? n : post<ChartResponse>("/api/chart", { birth });
+  },
+
+  /** Jaimini core for a chart. Professional surface; no review gate, because
+   *  nothing in it is interpreted - see docs/phase13/DESIGN.md section 6. */
+  jaimini: async (birth: BirthInput) => {
+    const n = await viaNative<JaiminiResponse>((b) => b.jaimini(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<JaiminiResponse>("/api/jaimini", { birth });
   },
 
   topics: async () => {
