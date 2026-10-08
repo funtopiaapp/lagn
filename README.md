@@ -14,7 +14,7 @@ Every topic is read on the chart: marriage, career, wealth, education, health
 past-life reading (what the chart is held to carry forward, and how it meets
 this life). The app also
 gives sensitive periods (each dasha bhukti, with what amplifies it, what eases
-it and the transits running through it), pariharams, and family readings
+it and the transits running through it), and family readings
 (spouse, children and parents, each on their own chart beside the native's).
 Each reading is a written interpretation - the conclusion, then the houses,
 their lords and the significators, then every classical finding with the chart
@@ -33,10 +33,10 @@ Specs: `docs/phase2/`, `docs/phase3/`, `docs/phase6/DESIGN.md`. QA: `tests/QA-PH
 | 3 | Vimshottari dasha, 3 levels | done |
 | 4 | Rule engine: language, 3-valued evaluator, review gate, cancellation, timing, period rules | done, N-version checked |
 | 4 | Ten poruthams | done (Vasya blocked), exhaustively verified |
-| 4 | Corpus: 11 topics, 201 rules, bhava meanings, karma tables, 14 pariharams | 198 approved, 3 rejected, by **AI review** at the owner's direction |
+| 4 | Corpus: 11 topics, 201 rules, bhava meanings, karma tables | 198 approved, 3 rejected, by **AI review** at the owner's direction |
 | 5 | Web app: HTTP API + React UI, place search, tz suggestions | done, parity-verified against the kernel |
 | 6 | Installable PWA, offline shell, CORS for wrapped apps; conversion kit | done: `docs/phase5/CONVERSION.md` |
-| 6 | Readings for all topics, sensitive periods, pariharams, family | done: `tests/QA-PHASE6.md` |
+| 6 | Readings for all topics, sensitive periods, family | done: `tests/QA-PHASE6.md` |
 | 6 | Written interpretations: every reading as justified prose, not rule lists | done, template-generated and deterministic |
 | 6 | Plain-language "what this means for you" on every rule | done, tone rules enforced by tests |
 | 7 | Interface: app shell, light/dark with a manual choice, family verdict and tabs | done: `docs/phase7/DESIGN.md`, `tests/QA-PHASE7.md` |
@@ -54,13 +54,13 @@ crates/
   lagn-ephem/   layer 1 - the only crate that touches Swiss Ephemeris
   lagn-core/    layers 2-3 - pure, no I/O, compiles to wasm/iOS/Android unchanged
   lagn-rules/   layer 4 - rule language, evaluator, review gate, poruthams,
-                readings (periods, family, pariharams)
+                readings (periods, family)
   lagn-cli/     validation CLI
   lagn-server/  HTTP API (axum) serving the web app; `api` holds the
                 operations both transports call
   lagn-ffi/     C ABI and Android JNI, so a phone runs the engine with no
                 server (`include/lagn.h`)
-corpus/         reviewed rules per topic, topics.json, bhava.json, pariharam.json
+corpus/         reviewed rules per topic, topics.json, bhava.json
 web/            React PWA
 ephe/           .se1 ephemeris data, 1200-2400 AD
 tests/golden/   pinned charts (see that directory's README)

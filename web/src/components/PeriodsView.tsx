@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { api, ApiError } from "../api";
 import type { BirthInput, PeriodsResponse, PeriodWindow, Sex } from "../types";
-import { PariharamList } from "./PariharamList";
 
 interface Props { birth: BirthInput; sex?: Sex; reviewToken: string }
 
@@ -18,15 +17,14 @@ function WindowCard({ w }: { w: PeriodWindow }) {
       </div>
       <p>{w.explanation[0]}</p>
       <details>
-        <summary>What amplifies, what eases{w.pariharams.length > 0 ? ", pariharams" : ""}</summary>
+        <summary>What amplifies, what eases</summary>
         <ul className="plain explanation">{w.explanation.slice(1).map((line, i) => <li key={i}>{line}</li>)}</ul>
-        {w.pariharams.length > 0 && <><h5>Pariharams</h5><PariharamList items={w.pariharams} /></>}
       </details>
     </li>
   );
 }
 
-/** Every antardasha in an age range, with its period rules, transits and pariharams. */
+/** Every antardasha in an age range, with its period rules and transits. */
 export function PeriodsView({ birth, sex, reviewToken }: Props) {
   const [from, setFrom] = useState(18);
   const [to, setTo] = useState(70);
@@ -58,7 +56,7 @@ export function PeriodsView({ birth, sex, reviewToken }: Props) {
       </div>
       <p className="hint">
         Each dasha bhukti with what it brings into focus, the factors that amplify or ease it, the Saturn, Jupiter and
-        Rahu/Ketu transits running through it, and optional pariharams. A sensitive period calls for care and
+        Rahu/Ketu transits running through it. A sensitive period calls for care and
         patience; it is not a prediction of any particular event.
       </p>
       <div className="row">

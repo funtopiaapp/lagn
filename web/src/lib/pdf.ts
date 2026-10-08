@@ -119,7 +119,7 @@ export interface Block {
  * The document's content, in order, as plain blocks.
  *
  * Separate from the drawing so that what a shared file must contain - every
- * disclaimer, the provenance line, the pariharam framing - can be asserted
+ * disclaimer and the provenance line - can be asserted
  * without a PDF parser.
  */
 export function readingBlocks(input: PdfInput): Block[] {
@@ -172,26 +172,6 @@ export function readingBlocks(input: PdfInput): Block[] {
       }
     }
 
-    if (t.data.pariharams && t.data.pariharams.length > 0) {
-      out.push({ kind: "h3", text: "Pariharams" });
-      p(
-        "Optional traditional practices. No gemstones and no paid services, and never a " +
-          "substitute for medical, legal or financial advice.",
-        { grey: true },
-      );
-      for (const { pariharam: x, because } of t.data.pariharams) {
-        p(x.title, { bold: true, indent: 14 });
-        for (const practice of x.practices) p(`· ${practice}`, { indent: 20 });
-        const facts = [
-          x.deity && `Deity: ${x.deity}`,
-          x.day && `Day: ${x.day}`,
-          x.places.length > 0 && `Temples: ${x.places.join("; ")}`,
-          x.charity && `Charity: ${x.charity}`,
-        ].filter(Boolean) as string[];
-        for (const f of facts) p(f, { grey: true, indent: 20 });
-        p(`Because: ${because.join("; ")}`, { grey: true, indent: 20 });
-      }
-    }
     out.push({ kind: "rule" });
   }
 

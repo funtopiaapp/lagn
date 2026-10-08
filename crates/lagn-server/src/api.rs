@@ -189,9 +189,18 @@ pub fn offset(s: &AppState, q: &OffsetQuery) -> Result<offset::Suggestion, ApiEr
 /// computation rather than an interpretation, so there is nothing for a
 /// reviewer to approve - but the variant defaults that produced it travel
 /// with the response, which is what section 6 of the phase 13 design requires.
-pub fn jaimini(req: ChartRequest) -> Result<lagn_core::jaimini::Jaimini, ApiError> {
+pub fn jaimini(req: ChartRequest) -> Result<view::JaiminiView, ApiError> {
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
-    Ok(lagn_core::jaimini::Jaimini::compute(&c))
+    Ok(view::jaimini_view(&lagn_core::jaimini::Jaimini::compute(&c)))
+}
+
+/// Chara dasha for a chart. Like `jaimini`, computation rather than
+/// interpretation, so no review gate - and the variant defaults travel with
+/// the response (CHARA-DASHA.md section 6).
+pub fn chara(req: ChartRequest) -> Result<view::CharaView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let d = lagn_core::chara::CharaDasha::compute(&c);
+    Ok(view::chara_view(&c, &d, Some(view::jd_now())))
 }
 
 pub fn chart(req: ChartRequest) -> Result<view::ChartResponse, ApiError> {
@@ -255,15 +264,14 @@ pub fn topic(s: &Arc<AppState>, name: &str, req: TopicRequest, mode: Mode) -> Re
     let judged = lagn_rules::reading::topic_timing(
         &s.corpus, &mut facts, mode, &title, &report.timing, (from_age, to_age),
     );
-    let pariharams = lagn_rules::pariharam::suggest(&s.corpus, &report.results, &[], mode);
     let writeup = meta.as_ref().map(|m| {
         lagn_rules::writeup::write_up(&s.corpus, m, &m.focus, &report, &facts, (from_age, to_age), |_| true)
     });
-    Ok(view::TopicResponse { meta, pariharams, writeup, ..view::topic_response(report, tz, &judged, Some(crate::view::jd_now())) })
+    Ok(view::TopicResponse { meta, writeup, ..view::topic_response(report, tz, &judged, Some(crate::view::jd_now())) })
 }
 
 /// Sensitive periods: every antardasha in the age range with its period rules,
-/// focus houses, overlapping transits and pariharams.
+/// focus houses and overlapping transits.
 pub fn periods(s: &Arc<AppState>, req: PeriodsRequest, mode: Mode) -> Result<view::PeriodsResponse, ApiError> {
     check_ages(req.from_age, req.to_age)?;
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;

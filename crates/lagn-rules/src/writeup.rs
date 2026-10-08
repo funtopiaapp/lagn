@@ -618,7 +618,7 @@ pub fn write_up(
             kind: SectionKind::Debts,
             heading: "Debts carried forward".into(),
             paragraphs: vec![
-                "The tradition calls these rina, debts, and shapa. They are accounts left open rather than faults to be answered for, and each is stated with what settles it. The remedies below are the customary ones.".into(),
+                "The tradition calls these rina, debts, and shapa. They are accounts left open rather than faults to be answered for, and each is stated with what it asks of you - in how you conduct yourself, never in anything to be performed.".into(),
             ],
             points: debts,
         });

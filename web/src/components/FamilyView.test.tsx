@@ -11,9 +11,9 @@ const reading = {
   relational: { topic: "progeny", house: 5, supporting: [rule("progeny.jupiter_aspects_5", 2)], afflicting: [], score: 2, lean: "favourable",
     writeup: { summary: ["The indications for children are clearly supportive."], sections: [{ heading: "The 5th house: Putra", paragraphs: ["Your 5th house text"] }] } },
   own: [
-    { meta: { id: "health", title: "Health", summary: "", disclaimer: "This is a traditional astrological reading, not a medical assessment. For any health concern, consult a qualified doctor.", ages: [0, 90] }, report: report("health", -1, [rule("health.h1.malefic", -1)]), lean: "calls_for_care", pariharams: [],
+    { meta: { id: "health", title: "Health", summary: "", disclaimer: "This is a traditional astrological reading, not a medical assessment. For any health concern, consult a qualified doctor.", ages: [0, 90] }, report: report("health", -1, [rule("health.h1.malefic", -1)]), lean: "calls_for_care",
       writeup: { summary: ["On balance, health calls for care and effort."], sections: [{ heading: "The 1st house: Tanu", paragraphs: ["Meena's lagna text"] }] } },
-    { meta: { id: "education", title: "Education", summary: "", ages: [4, 30] }, report: report("education", 1, [rule("education.jupiter_aspects", 1)]), lean: "favourable", pariharams: [], writeup: null },
+    { meta: { id: "education", title: "Education", summary: "", ages: [4, 30] }, report: report("education", 1, [rule("education.jupiter_aspects", 1)]), lean: "favourable", writeup: null },
   ],
   agreement: "differ",
   compared_with: "health",

@@ -131,22 +131,70 @@ async fn chart_endpoint_raw_output_equals_the_library_bit_for_bit() {
 }
 
 #[tokio::test]
-async fn jaimini_endpoint_equals_the_library_and_carries_its_variants() {
-    // Phase 13A. The endpoint is a thin wrapper by design - no review gate,
-    // because nothing in Jaimini core is interpreted - so the only thing that
-    // can go wrong here is the wrapper itself, and bit-for-bit parity with the
-    // library is what rules that out.
+async fn jaimini_endpoint_presents_the_library_faithfully_with_display_names() {
+    // Phase 13A. The endpoint returns a view, not the engine's own structs,
+    // because the engine serialises its enums as identifiers - "rahu",
+    // "karka", "mars" - which are keys and not labels. Showing them raw put
+    // lowercase names on the Jaimini tab and "mars" where every other view
+    // says "Kuja". So this checks two things at once: every value still comes
+    // from the library, and every name is the one the rest of the app uses.
     let mut r = Rng(0xAB1_0013);
     for _ in 0..200 {
         let b = random_birth(&mut r);
         let (st, v, text) = call(app(None), post("/api/jaimini", &json!({ "birth": b }), None)).await;
         assert_eq!(st, StatusCode::OK, "{text}");
         let c = library_chart(&b);
-        assert_eq!(
-            v,
-            serde_json::to_value(lagn_core::jaimini::Jaimini::compute(&c)).unwrap(),
-            "jaimini differs for {b}",
-        );
+        let j = lagn_core::jaimini::Jaimini::compute(&c);
+
+        let karakas = v["karakas"].as_array().unwrap();
+        assert_eq!(karakas.len(), 8);
+        for (kv, a) in karakas.iter().zip(&j.karakas.assigned) {
+            assert_eq!(kv["abbrev"], a.karaka.abbrev());
+            assert_eq!(kv["name"], a.karaka.name());
+            assert_eq!(kv["signifies"], a.karaka.signifies());
+            assert_eq!(kv["graha"], a.graha.name(), "graha name differs for {b}");
+            assert_eq!(kv["rasi"], a.rasi.name());
+            assert_eq!(kv["advancement"].as_f64().unwrap(), a.advancement);
+            // A label, never an identifier: that is the defect this guards.
+            let g = kv["graha"].as_str().unwrap();
+            assert!(g.starts_with(|ch: char| ch.is_uppercase()), "{g} is an identifier, not a name");
+        }
+
+        let padas = v["padas"].as_array().unwrap();
+        assert_eq!(padas.len(), 12);
+        for (pv, p) in padas.iter().zip(&j.padas) {
+            assert_eq!(pv["bhava"], p.bhava);
+            assert_eq!(pv["label"], p.label());
+            assert_eq!(pv["bhava_rasi"], p.bhava_rasi.name());
+            assert_eq!(pv["lord"], p.lord.name());
+            assert_eq!(pv["lord_rasi"], p.lord_rasi.name());
+            assert_eq!(pv["count"], p.count);
+            assert_eq!(pv["raw"], p.raw.name());
+            assert_eq!(pv["rasi"], p.rasi.name());
+            assert_eq!(pv["adjusted"], p.adjusted);
+        }
+        assert_eq!(padas[0]["label"], "AL");
+        assert_eq!(padas[11]["label"], "UL");
+
+        let argala = v["argala"].as_array().unwrap();
+        assert_eq!(argala.len(), 12);
+        for (av, a) in argala.iter().zip(&j.argala) {
+            assert_eq!(av["rasi"], a.rasi.name());
+            let pairs = av["pairs"].as_array().unwrap();
+            assert_eq!(pairs.len(), 3);
+            for (pv, p) in pairs.iter().zip(&a.pairs) {
+                let (ah, ch) = p.kind.houses();
+                assert_eq!(pv["kind"], p.kind.name());
+                assert_eq!(pv["argala_house"], ah);
+                assert_eq!(pv["counter_house"], ch);
+                assert_eq!(pv["argala_rasi"], p.argala_rasi.name());
+                assert_eq!(pv["counter_rasi"], p.counter_rasi.name());
+                let names: Vec<&str> = pv["argala_grahas"].as_array().unwrap()
+                    .iter().map(|x| x.as_str().unwrap()).collect();
+                let want: Vec<&str> = p.argala_grahas.iter().map(|g| g.name()).collect();
+                assert_eq!(names, want);
+            }
+        }
 
         // Section 6 of the design: the variant defaults travel with every
         // response, so a practitioner can always tell which scheme produced
@@ -154,9 +202,75 @@ async fn jaimini_endpoint_equals_the_library_and_carries_its_variants() {
         let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
             .map(|x| x["id"].as_str().unwrap()).collect();
         assert_eq!(ids, ["V-13-1", "V-13-2", "V-13-3", "V-13-4", "V-13-5", "V-13-6", "V-13-7", "V-13-8"]);
-        assert_eq!(v["karakas"]["assigned"].as_array().unwrap().len(), 8);
-        assert_eq!(v["padas"].as_array().unwrap().len(), 12);
-        assert_eq!(v["argala"].as_array().unwrap().len(), 12);
+    }
+}
+
+#[tokio::test]
+async fn chara_endpoint_dates_come_from_the_engine_and_match_its_julian_days() {
+    // Phase 13B. The browser does no calendar arithmetic, so the endpoint has
+    // to hand it dates rather than Julian Days - and those dates must be the
+    // ones its own jd values denote, in the birth's offset. A mismatch here
+    // would put a period on the wrong day for every reader.
+    let mut r = Rng(0xAB1_013B);
+    for _ in 0..150 {
+        let b = random_birth(&mut r);
+        let (st, v, text) = call(app(None), post("/api/chara", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+        let c = library_chart(&b);
+        let d = lagn_core::chara::CharaDasha::compute(&c);
+        let tz = b["utc_offset_hours"].as_f64().unwrap();
+
+        assert_eq!(v["lagna"], c.lagna.rasi.name());
+        assert_eq!(v["lagna_is_odd"], c.lagna.rasi.is_odd());
+        assert_eq!(v["cycle_years"].as_f64().unwrap(), d.cycle_years());
+
+        let periods = v["periods"].as_array().unwrap();
+        assert_eq!(periods.len(), d.periods.len());
+        for (pv, p) in periods.iter().zip(&d.periods) {
+            assert_eq!(pv["rasi"], p.rasi.name());
+            assert_eq!(pv["cycle"], p.cycle);
+            assert_eq!(pv["start_jd"].as_f64().unwrap(), p.start_jd);
+            assert_eq!(pv["start"], lagn_server::view::civil_date(p.start_jd, tz));
+            assert_eq!(pv["end"], lagn_server::view::civil_date(p.end_jd, tz));
+            // Twelve antardashas, opening on the period's own sign.
+            let kids = pv["children"].as_array().unwrap();
+            assert_eq!(kids.len(), 12);
+            assert_eq!(kids[0]["rasi"], p.rasi.name());
+        }
+    }
+}
+
+#[tokio::test]
+async fn chara_lengths_are_one_to_twelve_years_and_say_why() {
+    // The working has to travel with the answer: a practitioner recomputes a
+    // sign's length by hand, and cannot check it without the count.
+    let b = json!({
+        "date": "1981-12-21", "time": "14:10:00",
+        "latitude": 8.8932, "longitude": 76.6141, "utc_offset_hours": 5.5,
+    });
+    let (st, v, text) = call(app(None), post("/api/chara", &json!({ "birth": b }), None)).await;
+    assert_eq!(st, StatusCode::OK, "{text}");
+
+    let lengths = v["lengths"].as_array().unwrap();
+    assert_eq!(lengths.len(), 12);
+    for l in lengths {
+        let (count, years) = (l["count"].as_u64().unwrap(), l["years"].as_f64().unwrap());
+        assert!((1..=12).contains(&count), "count {count} out of range");
+        assert!(["direct", "reverse"].contains(&l["direction"].as_str().unwrap()));
+        if l["lord_at_home"].as_bool().unwrap() {
+            assert_eq!(count, 1);
+            assert_eq!(years, 12.0);
+        } else {
+            assert_eq!(years, count as f64 - 1.0);
+        }
+    }
+
+    let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
+        .map(|x| x["id"].as_str().unwrap()).collect();
+    assert_eq!(ids, ["V-13-9", "V-13-10", "V-13-11", "V-13-12", "V-13-13"]);
+    // Computation, not interpretation: no review machinery may leak out.
+    for key in ["rules", "results", "mode", "withheld", "reviewer"] {
+        assert!(v.get(key).is_none(), "chara leaked a {key} field");
     }
 }
 
@@ -665,7 +779,7 @@ async fn static_files_never_vary_by_origin_even_with_cors_enabled() {
 }
 
 // ===========================================================================
-// Phase 6: topics catalogue, sensitive periods, pariharams
+// Phase 6: topics catalogue and sensitive periods
 // ===========================================================================
 
 fn modern_birth(r: &mut Rng) -> Value {
@@ -708,10 +822,9 @@ async fn topics_lists_every_answerable_topic_with_its_disclaimers() {
 }
 
 #[tokio::test]
-async fn topic_ages_default_to_the_catalogue_and_pariharams_follow_the_findings() {
+async fn topic_ages_default_to_the_catalogue_and_no_response_offers_a_remedy() {
     let corpus = lagn_rules::load(&root().join("corpus")).unwrap();
     let mut r = Rng(0x6_0002);
-    let mut suggested = 0;
     for _ in 0..40 {
         let b = modern_birth(&mut r);
         for id in ["career", "progeny", "marriage", "health"] {
@@ -723,16 +836,17 @@ async fn topic_ages_default_to_the_catalogue_and_pariharams_follow_the_findings(
             assert_eq!(v["report"], serde_json::to_value(&want).unwrap(), "{id}: default ages not applied");
             let wantw = lagn_rules::writeup::write_up(&corpus, meta, &meta.focus, &want, &facts, (meta.ages[0], meta.ages[1]), |_| true);
             assert_eq!(v["writeup"], serde_json::to_value(&wantw).unwrap(), "{id}: write-up differs from the library");
-            let wantp = lagn_rules::pariharam::suggest(&corpus, &want.results, &[], Mode::Production);
-            assert_eq!(v["pariharams"], serde_json::to_value(&wantp).unwrap());
-            suggested += wantp.len();
-            // Every suggestion is explained by an effective afflicting finding.
-            for p in v["pariharams"].as_array().unwrap() {
-                assert!(!p["because"].as_array().unwrap().is_empty());
+            // No remedy is offered, in any form: not as a field, and not in
+            // the prose either. The whole response is searched, because the
+            // field being gone is not the same claim as nothing recommending
+            // a practice.
+            assert!(v.get("pariharams").is_none(), "{id}: a pariharams field came back");
+            let body = serde_json::to_string(&v).unwrap().to_lowercase();
+            for word in ["pariharam", "puja", "tarpanam", "worship", "remedy", "remedies", "observance"] {
+                assert!(!body.contains(word), "{id}: the response contains {word:?}");
             }
         }
     }
-    assert!(suggested > 0, "no pariharam was ever suggested; the path is untested");
 }
 
 #[tokio::test]

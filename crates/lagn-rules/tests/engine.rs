@@ -616,16 +616,6 @@ fn no_user_visible_corpus_text_uses_banned_wording() {
     for b in &c.bhavas.as_ref().expect("bhava.json").houses {
         visible.push((format!("bhava {}", b.house), format!("{} {}", b.name, b.significations.join("; "))));
     }
-    assert!(!c.pariharams.is_empty());
-    for p in &c.pariharams {
-        let mut all = vec![p.title.clone()];
-        all.extend(p.deity.clone());
-        all.extend(p.day.clone());
-        all.extend(p.practices.clone());
-        all.extend(p.places.clone());
-        all.extend(p.charity.clone());
-        visible.push((format!("pariharam {}", p.id), all.join(" | ")));
-    }
     let bad: Vec<String> = visible
         .iter()
         .filter_map(|(k, v)| {
@@ -671,21 +661,12 @@ fn health_and_vitality_carry_the_required_disclaimers() {
 }
 
 #[test]
-fn every_pariharam_is_reachable_and_every_graha_has_one() {
+fn every_negative_rule_names_what_it_afflicts() {
     let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../corpus");
     let c = lagn_rules::load(&dir).unwrap();
-    for g in lagn_core::Graha::ALL {
-        let tag = format!("graha:{}", serde_json::to_value(g).unwrap().as_str().unwrap());
-        assert!(c.pariharams.iter().any(|p| p.triggers.contains(&tag)), "no pariharam for {tag}");
-    }
-    // A dosha pariharam must be triggerable by some shipped rule's tag.
-    for p in &c.pariharams {
-        for t in p.triggers.iter().filter(|t| t.starts_with("dosha:")) {
-            assert!(c.rules.iter().any(|r| r.tags.contains(t)), "{}: no rule carries {t}", p.id);
-        }
-    }
-    // Every negative, effective-capable rule names what it afflicts, so a
-    // pariharam can be suggested for it, unless it is a timing or house rule.
+    // Every negative, effective-capable rule names the graha it afflicts,
+    // unless it is a timing or house rule. The subject is what lets a reading
+    // say *what* is under pressure rather than only that something is.
     let unnamed: Vec<&str> = c
         .rules
         .iter()
@@ -693,7 +674,7 @@ fn every_pariharam_is_reachable_and_every_graha_has_one() {
         .map(|r| r.id.as_str())
         .collect();
     // These describe a house (any of several grahas may occupy it) or the
-    // relation between two period lords, so no single graha's pariharam fits.
+    // relation between two period lords, so no single graha is the subject.
     // A new negative rule must name its subject or be added here deliberately.
     let expected = [
         "education.h4.malefic", "education.h5.malefic", "health.h1.malefic",
@@ -771,10 +752,22 @@ fn period_readings_match_independent_expectations() {
             lines.dedup();
             assert_eq!(lines.len(), n, "repeated explanation line in {:?}", w.explanation);
 
-            // A challenging Saturn transit in the window brings up the Saturn-transit pariharam.
-            let shani = w.pressures.iter().any(|p| lagn_rules::catalogue::transit_tag(p.transit.kind).is_some());
-            let has = w.pariharams.iter().any(|p| p.pariharam.id == "transit.shani");
-            assert_eq!(has, shani, "transit pariharam mismatch in {:?}/{:?}", w.window.maha, w.window.antar);
+            // A challenging Saturn transit must be reported as a pressure, not
+            // as a support. Read from the kind itself: the tag it used to be
+            // read through existed only to trigger a pariharam.
+            use lagn_core::TransitKind::*;
+            let shani = w.pressures.iter().any(|p| matches!(
+                p.transit.kind,
+                SadeSatiRising | SadeSatiPeak | SadeSatiSetting | Ashtama | Ardhashtama | Kantaka,
+            ));
+            assert!(
+                !w.supports.iter().any(|p| matches!(
+                    p.transit.kind,
+                    SadeSatiRising | SadeSatiPeak | SadeSatiSetting | Ashtama | Ardhashtama | Kantaka,
+                )),
+                "a challenging transit was listed as a support in {:?}/{:?}",
+                w.window.maha, w.window.antar,
+            );
             shani_pressure += shani as usize;
         }
     }
@@ -1375,32 +1368,36 @@ fn the_life_carried_forward_is_the_chart_s_own_ketu() {
 }
 
 #[test]
-fn every_debt_names_its_settlement_and_reaches_its_remedy() {
+fn every_debt_names_what_it_asks_and_appears_in_the_debts_section() {
     use lagn_rules::writeup::{topic_write_up, SectionKind};
     let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../corpus");
     let corpus = lagn_rules::load(&dir).unwrap();
     let meta = corpus.topics.iter().find(|t| t.id == "past_life").unwrap();
 
-    // Corpus level: a debt rule states what settles it, and carries a dosha or
-    // graha tag so the pariharam machinery can answer it.
+    // Corpus level: a debt rule states what it asks of the native, and names
+    // the graha or dosha it concerns.
     let debts: Vec<_> = corpus.rules.iter().filter(|r| r.tags.iter().any(|t| t.starts_with("rina:"))).collect();
     assert!(debts.len() >= 5, "only {} debt rules", debts.len());
     for r in &debts {
         let m = r.text.impact.as_ref().unwrap().to_lowercase();
-        assert!(m.contains("settles it") || m.contains("customary") || m.contains("support") || m.contains("settle"),
-                "{}: a debt must say what settles it: {m}", r.id);
-        let has_remedy_tag = r.tags.iter().any(|t| t.starts_with("dosha:")) || r.subject.is_some();
-        assert!(has_remedy_tag, "{}: no tag or subject to hang a remedy on", r.id);
-        for t in r.tags.iter().filter(|t| t.starts_with("dosha:")) {
-            assert!(corpus.pariharams.iter().any(|p| p.triggers.contains(t)), "{}: no pariharam answers {t}", r.id);
-        }
+        // A debt has to be clear about what it asks of the native - in conduct,
+        // never in practice - and where it asks nothing it has to say so.
+        // Sarpa is the case that matters: its only ask was a puja, so with
+        // that gone it now states plainly that nothing is required.
+        assert!(
+            m.contains("settl") || m.contains("customary") || m.contains("asks for")
+                || m.contains("support") || m.contains("nothing is asked"),
+            "{}: a debt must say what it asks of the native, or that it asks nothing: {m}",
+            r.id,
+        );
+        let named = r.tags.iter().any(|t| t.starts_with("dosha:")) || r.subject.is_some();
+        assert!(named, "{}: names neither a dosha nor a subject", r.id);
     }
 
-    // Chart level: when a debt fires, its remedy is among those suggested.
+    // Chart level: when a debt fires, it appears in the debts section.
     let mut fired = 0;
     for f in facts(60, 0x9_0002, None) {
         let rep = evaluate_topic("past_life", &corpus.rules, &f, Mode::Production, (meta.ages[0], meta.ages[1]));
-        let suggested = lagn_rules::pariharam::suggest(&corpus, &rep.results, &[], Mode::Production);
         let w = topic_write_up(&corpus, &rep, &f, (meta.ages[0], meta.ages[1])).unwrap();
         let section = w.sections.iter().find(|s| s.kind == SectionKind::Debts);
 
@@ -1414,11 +1411,13 @@ fn every_debt_names_its_settlement_and_reaches_its_remedy() {
                 assert_eq!(shown, effective, "the debts section must hold exactly the debts that fired");
                 assert!(s.paragraphs[0].contains("rather than faults to be answered for"));
                 fired += shown.len();
-                for id in &shown {
-                    let rule = corpus.rules.iter().find(|r| &r.id == id).unwrap();
-                    for t in rule.tags.iter().filter(|t| t.starts_with("dosha:")) {
-                        assert!(suggested.iter().any(|p| p.pariharam.triggers.contains(t)),
-                                "{id} fired but its remedy for {t} was not suggested");
+                // A shown debt says what it means for the reader, rather than
+                // trailing off into something to be performed.
+                for p in &s.points {
+                    assert!(!p.text.trim().is_empty(), "{} has no text", p.rule);
+                    let lower = p.text.to_lowercase();
+                    for word in ["puja", "worship", "remedy", "remedies", "observance"] {
+                        assert!(!lower.contains(word), "{}: debt text still prescribes ({word})", p.rule);
                     }
                 }
                 // Debts are not repeated among the ordinary difficulties.

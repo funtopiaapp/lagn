@@ -13,7 +13,6 @@ pub mod explain;
 pub mod facts;
 pub mod family;
 pub mod model;
-pub mod pariharam;
 pub mod porutham;
 pub mod reading;
 pub mod report;

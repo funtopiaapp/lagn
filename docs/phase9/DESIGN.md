@@ -1,5 +1,14 @@
 # Phase 9 design: the life carried forward, bonds, and debts (rina)
 
+> **Withdrawn, 2026-10-08.** Pariharams were removed from the product at the
+> product owner's direction: no remedial practice is recommended to anyone.
+> `corpus/pariharam.json`, `lagn-rules/src/pariharam.rs` and the UI that showed
+> them are deleted, and the rule text that prescribed observances has been
+> rewritten. The sections below are kept as the design record of what once
+> shipped, not as a description of the product. `crates/lagn-rules/tests/no_remedies.rs`
+> fails if any of it returns.
+
+
 Status: approved for build. The product owner asked on 2026-09-27 for the
 past-life reading to describe past characteristics, work, the life lived, the
 spouse and children, and the debts carried forward into this life. This

@@ -195,6 +195,256 @@ pub struct DashaView {
     pub running_now: Option<RunningView>,
 }
 
+// ---------------------------------------------------------------------------
+// Jaimini core (phase 13A). Specification: docs/phase13/DESIGN.md.
+//
+// The engine serialises its enums as identifiers - "rahu", "karka", "mars" -
+// which are keys, not labels. Displaying them raw put lowercase names on the
+// Jaimini tab, and "mars" where every other view in this app says "Kuja".
+// So the display names are produced here, from the same `name()` methods the
+// rest of the views use, and the stable id travels alongside for keying.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct KarakaView {
+    /// Stable id, for keying and for tests: "atma", "amatya", and so on.
+    pub id: &'static str,
+    pub abbrev: &'static str,
+    pub name: &'static str,
+    pub signifies: &'static str,
+    pub graha: &'static str,
+    pub rasi: &'static str,
+    pub advancement: f64,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ArudhaView {
+    pub bhava: u8,
+    /// "AL", "A7", "UL" - what practice calls it.
+    pub label: String,
+    pub bhava_rasi: &'static str,
+    pub lord: &'static str,
+    pub lord_rasi: &'static str,
+    pub count: u8,
+    pub raw: &'static str,
+    pub rasi: &'static str,
+    pub adjusted: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ArgalaPairView {
+    pub kind: &'static str,
+    pub argala_house: u8,
+    pub counter_house: u8,
+    pub argala_rasi: &'static str,
+    pub counter_rasi: &'static str,
+    pub argala_grahas: Vec<&'static str>,
+    pub counter_grahas: Vec<&'static str>,
+    pub verdict: &'static str,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ArgalaView {
+    pub rasi: &'static str,
+    pub pairs: Vec<ArgalaPairView>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct JaiminiView {
+    pub karakas: Vec<KarakaView>,
+    pub padas: Vec<ArudhaView>,
+    pub argala: Vec<ArgalaView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+fn karaka_id(k: lagn_core::jaimini::Karaka) -> &'static str {
+    use lagn_core::jaimini::Karaka as K;
+    match k {
+        K::Atma => "atma", K::Amatya => "amatya", K::Bhratri => "bhratri", K::Matri => "matri",
+        K::Pitri => "pitri", K::Putra => "putra", K::Gnati => "gnati", K::Dara => "dara",
+    }
+}
+
+fn verdict_name(v: lagn_core::jaimini::ArgalaVerdict) -> &'static str {
+    use lagn_core::jaimini::ArgalaVerdict as V;
+    match v {
+        V::Stands => "stands",
+        V::Neutralised => "neutralised",
+        V::Overcome => "overcome",
+        V::None => "none",
+    }
+}
+
+pub fn jaimini_view(j: &lagn_core::jaimini::Jaimini) -> JaiminiView {
+    JaiminiView {
+        karakas: j
+            .karakas
+            .assigned
+            .iter()
+            .map(|a| KarakaView {
+                id: karaka_id(a.karaka),
+                abbrev: a.karaka.abbrev(),
+                name: a.karaka.name(),
+                signifies: a.karaka.signifies(),
+                graha: a.graha.name(),
+                rasi: a.rasi.name(),
+                advancement: a.advancement,
+            })
+            .collect(),
+        padas: j
+            .padas
+            .iter()
+            .map(|p| ArudhaView {
+                bhava: p.bhava,
+                label: p.label(),
+                bhava_rasi: p.bhava_rasi.name(),
+                lord: p.lord.name(),
+                lord_rasi: p.lord_rasi.name(),
+                count: p.count,
+                raw: p.raw.name(),
+                rasi: p.rasi.name(),
+                adjusted: p.adjusted,
+            })
+            .collect(),
+        argala: j
+            .argala
+            .iter()
+            .map(|a| ArgalaView {
+                rasi: a.rasi.name(),
+                pairs: a
+                    .pairs
+                    .iter()
+                    .map(|p| {
+                        let (ah, ch) = p.kind.houses();
+                        ArgalaPairView {
+                            kind: p.kind.name(),
+                            argala_house: ah,
+                            counter_house: ch,
+                            argala_rasi: p.argala_rasi.name(),
+                            counter_rasi: p.counter_rasi.name(),
+                            argala_grahas: p.argala_grahas.iter().map(|g| g.name()).collect(),
+                            counter_grahas: p.counter_grahas.iter().map(|g| g.name()).collect(),
+                            verdict: verdict_name(p.verdict),
+                        }
+                    })
+                    .collect(),
+            })
+            .collect(),
+        variants: j.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Chara dasha (phase 13B). Specification: docs/phase13/CHARA-DASHA.md.
+//
+// The engine returns Julian Days. They are formatted here, on the server,
+// because the browser does no calendar arithmetic (DESIGN.md section 1,
+// rule 2) - a Pro surface is no excuse to start.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct CharaLengthView {
+    pub rasi: &'static str,
+    pub lord: &'static str,
+    pub lord_rasi: &'static str,
+    /// Which way the count ran: this sign's own parity (V-13-10).
+    pub direction: &'static str,
+    pub count: u8,
+    pub years: f64,
+    pub lord_at_home: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct CharaPeriodView {
+    pub rasi: &'static str,
+    pub start: String,
+    pub end: String,
+    pub cycle: u32,
+    pub start_jd: f64,
+    pub end_jd: f64,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub children: Vec<CharaPeriodView>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct CharaRunningView {
+    pub as_of_utc: String,
+    pub maha: &'static str,
+    pub antar: &'static str,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct CharaView {
+    pub lagna: &'static str,
+    /// Why the sequence runs the way it does (V-13-9).
+    pub lagna_is_odd: bool,
+    pub direction: &'static str,
+    pub cycle_years: f64,
+    pub year_length_days: f64,
+    pub lengths: Vec<CharaLengthView>,
+    pub periods: Vec<CharaPeriodView>,
+    /// Non-deterministic by nature (depends on today); excluded from parity,
+    /// exactly as the Vimshottari view does it.
+    pub running_now: Option<CharaRunningView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+fn direction_name(d: lagn_core::chara::Direction) -> &'static str {
+    match d {
+        lagn_core::chara::Direction::Direct => "direct",
+        lagn_core::chara::Direction::Reverse => "reverse",
+    }
+}
+
+pub fn chara_view(chart: &Chart, d: &lagn_core::chara::CharaDasha, now: Option<f64>) -> CharaView {
+    let tz = chart.birth.moment.utc_offset_hours;
+    let period = |p: &lagn_core::chara::CharaPeriod| CharaPeriodView {
+        rasi: p.rasi.name(),
+        start: civil_date(p.start_jd, tz),
+        end: civil_date(p.end_jd, tz),
+        cycle: p.cycle,
+        start_jd: p.start_jd,
+        end_jd: p.end_jd,
+        children: Vec::new(),
+    };
+    CharaView {
+        lagna: d.lagna.name(),
+        lagna_is_odd: d.lagna.is_odd(),
+        direction: direction_name(d.direction),
+        cycle_years: d.cycle_years(),
+        year_length_days: d.year_length.days(),
+        lengths: d
+            .lengths
+            .iter()
+            .map(|l| CharaLengthView {
+                rasi: l.rasi.name(),
+                lord: l.lord.name(),
+                lord_rasi: l.lord_rasi.name(),
+                direction: direction_name(l.direction),
+                count: l.count,
+                years: l.years,
+                lord_at_home: l.lord_at_home,
+            })
+            .collect(),
+        periods: d
+            .periods
+            .iter()
+            .map(|p| CharaPeriodView { children: p.children.iter().map(period).collect(), ..period(p) })
+            .collect(),
+        running_now: now.and_then(|jd| {
+            d.at(jd).map(|c| CharaRunningView {
+                as_of_utc: {
+                    let t = jd_to_civil(jd, 0.0);
+                    format!("{:04}-{:02}-{:02}", t.year, t.month, t.day)
+                },
+                maha: c.maha.name(),
+                antar: c.antar.name(),
+            })
+        }),
+        variants: d.variants.clone(),
+    }
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct SignView {
     pub index: u8,
@@ -441,8 +691,6 @@ pub struct TopicResponse {
     pub windows: Vec<WindowView>,
     /// Title, summary and disclaimer from the topic catalogue.
     pub meta: Option<lagn_rules::catalogue::TopicMeta>,
-    /// Pariharams for the effective afflicting findings.
-    pub pariharams: Vec<lagn_rules::pariharam::Suggested>,
     /// The written interpretation (DESIGN section 4a).
     pub writeup: Option<lagn_rules::writeup::WriteUp>,
 }
@@ -484,7 +732,7 @@ pub fn topic_response(
             }
         })
         .collect();
-    TopicResponse { report, windows, meta: None, pariharams: Vec::new(), writeup: None }
+    TopicResponse { report, windows, meta: None, writeup: None }
 }
 
 // ---------------------------------------------------------------------------

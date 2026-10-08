@@ -29,7 +29,7 @@
       "name": "Stree Deergha",
       "measures": "the wife's long life and the endurance of the marriage, which the texts treat as the same question",
       "when_matching": "the marriage is read as enduring, and the wife's wellbeing within it as supported",
-      "when_not": "the count falls short of what the texts ask for. They prescribe no remedy beyond care and attention",
+      "when_not": "the count falls short of what the texts ask for. They ask for nothing beyond care and attention",
       "touches": "endurance of the marriage"
     },
     {
@@ -93,7 +93,7 @@
       "name": "Varna",
       "measures": "the varna of each moon-sign, taken from its element: water Brahmin, fire Kshatriya, earth Vaishya, air Shudra",
       "when_matching": "the groom's varna does not stand below the bride's, which is what the check asks",
-      "when_not": "the groom's varna stands below the bride's. In practice this is the lightest of the twelve, and the texts prescribe no remedy beyond mutual respect",
+      "when_not": "the groom's varna stands below the bride's. In practice this is the lightest of the twelve, and the texts ask for nothing beyond mutual respect",
       "touches": "work and disposition"
     }
   ],

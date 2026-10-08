@@ -40,9 +40,6 @@ pub fn print_periods(c: &Chart, r: &SensitivePeriods) {
         for line in &d.explanation {
             println!("     {line}");
         }
-        for p in &d.pariharams {
-            println!("     pariharam: {}", p.pariharam.title);
-        }
     }
     println!();
 }

@@ -18,6 +18,13 @@
 // access is guarded and the app still works for this page view.
 
 export type Mode = "lite" | "pro";
+
+/** The choices, with the hint the toggle shows on hover and to assistive tech. */
+export const MODES: [Mode, string, string][] = [
+  ["lite", "Lite", "Readings in plain language. What most people want."],
+  ["pro", "Pro", "Adds the astrologer's tools: Jaimini, Chara dasha and more. Some rest on variant choices no astrologer has signed off yet, each labelled where it appears."],
+];
+
 const KEY = "lagn.mode";
 
 export function loadMode(): Mode {

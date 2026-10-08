@@ -1,7 +1,7 @@
 // A shared PDF is forwarded, screenshotted and read months later with none of
 // the app around it. So what it must contain is not a nicety: every reading's
 // disclaimer, the provenance line saying the rules are AI-reviewed, and the
-// pariharam framing all have to travel inside the file.
+// framing all have to travel inside the file.
 
 import { describe, expect, it, vi } from "vitest";
 
@@ -13,7 +13,7 @@ const birth: BirthInput = {
   utc_offset_hours: 5.5, place: "Kollam, Kerala",
 };
 
-const topic = (over: Partial<PdfTopic["meta"]> = {}, withPariharam = false): PdfTopic => ({
+const topic = (over: Partial<PdfTopic["meta"]> = {}): PdfTopic => ({
   meta: { id: "health", title: "Health", summary: "Constitution and care.", ...over },
   data: {
     report: {
@@ -22,16 +22,6 @@ const topic = (over: Partial<PdfTopic["meta"]> = {}, withPariharam = false): Pdf
       score: -2, label: "afflicted",
     },
     windows: [],
-    pariharams: withPariharam
-      ? [{
-          pariharam: {
-            id: "graha.saturn", title: "For Saturn (Shani)", triggers: [], deity: "Shani",
-            day: "Saturday", practices: ["Light a sesame-oil lamp"], places: ["Thirunallar"],
-            charity: "Black sesame",
-          },
-          because: ["The 6th lord is in the lagna"],
-        }]
-      : [],
     writeup: {
       summary: ["On balance, the indications call for care.", over.disclaimer ?? ""].filter(Boolean),
       sections: [{
@@ -65,14 +55,14 @@ describe("the shared PDF's contents", () => {
     expect(text([topic()])).toContain("AI-reviewed, not astrologer-reviewed");
   });
 
-  it("keeps the pariharam framing with the pariharams", () => {
-    const out = text([topic({}, true)]);
-    expect(out).toContain("No gemstones and no paid services");
-    expect(out).toContain("never a substitute for medical, legal or financial advice");
-    expect(out).toContain("For Saturn (Shani)");
-    expect(out).toContain("Light a sesame-oil lamp");
-    // And why it was suggested, so the file is as traceable as the app.
-    expect(out).toContain("Because: The 6th lord is in the lagna");
+  it("recommends no remedy anywhere in the file", () => {
+    // A PDF leaves the app and gets forwarded, so anything in it travels
+    // without context. The product owner's direction is that pariharams are
+    // not recommended to anyone, and a shared file is no exception.
+    const out = text([topic(), topic({ id: "marriage", title: "Marriage" })]).toLowerCase();
+    for (const word of ["pariharam", "puja", "tarpanam", "worship", "remedy", "remedies", "observance", "gemstone", "sesame"]) {
+      expect(out).not.toContain(word);
+    }
   });
 
   it("states the birth details it was computed from, and the closing caveat", () => {

@@ -44,6 +44,8 @@ enum Command {
     Ashtakavarga(DerivedArgs),
     /// Jaimini: chara karakas, arudha padas, argala.
     Jaimini(DerivedArgs),
+    /// Chara dasha, the Jaimini rasi dasha.
+    Chara(CharaArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -91,7 +93,7 @@ struct DayArgs {
 #[command(allow_negative_numbers = true)]
 struct AgeArgs {
     /// Skip the gochara (transit) overlay. Much faster over long ranges; the
-    /// reading then carries no transit lines and no transit pariharams.
+    /// reading then carries no transit lines.
     #[arg(long)]
     no_transits: bool,
     #[command(flatten)]
@@ -192,6 +194,18 @@ struct DerivedArgs {
     birth: BirthArgs,
     #[command(flatten)]
     derivation: phase2::DerivationArgs,
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(Parser)]
+#[command(allow_negative_numbers = true)]
+struct CharaArgs {
+    #[command(flatten)]
+    birth: BirthArgs,
+    /// 1 for mahadashas only, 2 to include antardashas.
+    #[arg(long, default_value_t = 1)]
+    levels: u8,
     #[arg(long)]
     json: bool,
 }
@@ -485,6 +499,15 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&j)?);
             } else {
                 phase2::print_jaimini(&j);
+            }
+        }
+        Command::Chara(a) => {
+            let chart = build_chart(&a.birth)?;
+            let d = lagn_core::chara::CharaDasha::compute(&chart);
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&d)?);
+            } else {
+                phase2::print_chara(&chart, &d, a.levels);
             }
         }
         Command::Dasha(a) => {

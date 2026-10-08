@@ -36,7 +36,6 @@ pub struct Corpus {
     pub questions: Option<crate::catalogue::Questions>,
     pub topics: Vec<crate::catalogue::TopicMeta>,
     pub bhavas: Option<crate::catalogue::Bhavas>,
-    pub pariharams: Vec<crate::catalogue::Pariharam>,
 }
 
 /// Load every `*.json` under `dir`. `porutham.review.json` holds porutham
@@ -75,10 +74,6 @@ pub fn load(dir: &Path) -> Result<Corpus, CorpusError> {
             }
             Some("bhava.json") => {
                 corpus.bhavas = Some(serde_json::from_str(&text).map_err(parse_err)?);
-                continue;
-            }
-            Some("pariharam.json") => {
-                corpus.pariharams = serde_json::from_str(&text).map_err(parse_err)?;
                 continue;
             }
             _ => {}
@@ -436,7 +431,7 @@ pub fn summary(c: &Corpus) -> CorpusSummary {
     CorpusSummary { rules: c.rules.len(), by_topic, by_status }
 }
 
-/// Topics, bhavas and pariharams. Skipped entirely for a corpus that has no
+/// Topics and bhavas. Skipped entirely for a corpus that has no
 /// topic catalogue (e.g. a synthetic test corpus).
 fn validate_catalogue(c: &Corpus, problems: &mut Vec<String>) {
     if c.topics.is_empty() {
@@ -518,25 +513,5 @@ fn validate_catalogue(c: &Corpus, problems: &mut Vec<String>) {
             problems.push("karma.json: both dispositor readings are required".into());
         }
         check_review("karma.json", &k.review, problems);
-    }
-    let rule_tags: HashSet<&str> = c.rules.iter().flat_map(|r| r.tags.iter().map(String::as_str)).collect();
-    let mut pids = HashSet::new();
-    for p in &c.pariharams {
-        if !pids.insert(p.id.as_str()) {
-            problems.push(format!("pariharam.json: duplicate id {}", p.id));
-        }
-        if p.triggers.is_empty() || p.practices.is_empty() {
-            problems.push(format!("pariharam {}: needs triggers and practices", p.id));
-        }
-        for t in &p.triggers {
-            // graha:<name> is produced from rule subjects at run time.
-            let graha_tag = t.strip_prefix("graha:").is_some_and(|g| {
-                serde_json::from_value::<lagn_core::Graha>(serde_json::Value::String(g.to_string())).is_ok()
-            });
-            if !graha_tag && !rule_tags.contains(t.as_str()) && !crate::catalogue::TRANSIT_TAGS.contains(&t.as_str()) {
-                problems.push(format!("pariharam {}: trigger {t} is used by no rule and is not a transit tag", p.id));
-            }
-        }
-        check_review(&format!("pariharam {}", p.id), &p.review, problems);
     }
 }

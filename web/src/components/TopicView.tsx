@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, ApiError } from "../api";
 import type { BirthInput, RuleResult, Sex, TopicMeta, TopicResponse } from "../types";
-import { PariharamList } from "./PariharamList";
 import { TopicTiming } from "./TopicTiming";
 import { WriteUpView } from "./WriteUpView";
 
@@ -86,7 +85,6 @@ export function TopicView({ birth, sex, reviewToken, topic = MARRIAGE, onLoaded 
       {rep && data!.windows.length > 0 && (
         <TopicTiming windows={data!.windows} topic={topic.title} ages={[fromAge, toAge]} />
       )}
-      {rep && data!.pariharams && data!.pariharams.length > 0 && <><h4>Pariharams</h4><PariharamList items={data!.pariharams} /></>}
 
       {rep && rep.results.length > 0 && (
         <details className="rule-details" open={rep.mode === "review"}>
