@@ -1,8 +1,10 @@
 # Phase 13 design: the professional surface
 
-Status: 13A and the Chara dasha half of 13B built and through the QA gate.
-The remaining five Jaimini dashas, and 13C onwards, are specified only as
-scope. The product owner asked for JHora parity "for
+Status: 13A, the Chara dasha half of 13B, and the upagraha half of 13C are
+built and through the QA gate. What is held back is held for one reason in
+every case: the computation is a published table rather than a derivation, so
+no oracle can catch a misremembering of it. Each needs one transcribed worked
+example. The product owner asked for JHora parity "for
 professional astrologers", and for the professional and general-public
 surfaces to be *clearly separated*. This phase is both: the pro computations,
 and the mode boundary that keeps them out of a lay reader's way.
@@ -29,7 +31,7 @@ two surfaces over one engine.
 | | Lite (default) | Pro |
 |---|---|---|
 | Who it is for | the general public | astrologers |
-| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini and Chara dasha today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
+| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini, Chara dasha and Upagrahas today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
 | Language | plain, justified prose | technical terms, unglossed |
 | Numbers shown | scores and verdicts, explained | raw values, intermediate components, variant IDs |
 | Unverified output | never shown | shown, labelled |
@@ -56,7 +58,7 @@ Rules the boundary has to keep:
 |---|---|---|---|
 | 13A | Jaimini core | 8 chara karakas; arudha padas A1-A12 incl. Arudha Lagna and Upapada; argala and virodhargala | **built** |
 | 13B | Jaimini dashas | Chara (**built**, see `CHARA-DASHA.md`); Narayana, Sthira, Shoola, Brahma, Varnada each need a transcribed worked example first | partly |
-| 13C | Foundations | upagrahas (Gulika, Mandi, Kaala, Mrityu, Ardhaprahara, Yamaghantaka, Dhuma, Vyatipata, Parivesha, Indrachapa, Upaketu); special lagnas (Bhava, Hora, Ghati, Vighati, Pranapada, Sree, Indu); vargas D-5, D-6, D-8, D-11, D-81, D-108, D-144; Vimshopaka and Dasavarga/Shodasavarga weights; avasthas | no |
+| 13C | Foundations (upagrahas and time lagnas **built**, see `UPAGRAHA.md`; the rest held) | upagrahas (Gulika, Mandi, Kaala, Mrityu, Ardhaprahara, Yamaghantaka, Dhuma, Vyatipata, Parivesha, Indrachapa, Upaketu); special lagnas (Bhava, Hora, Ghati, Vighati, Pranapada, Sree, Indu); vargas D-5, D-6, D-8, D-11, D-81, D-108, D-144; Vimshopaka and Dasavarga/Shodasavarga weights; avasthas | no |
 | 13D | Dasha library | Ashtottari, Yogini, Kalachakra, Dwisaptati, Shattrimsa, Dwadasottari, Chaturaseeti, Shashtihayani, Shodasottari, Panchottari, Satabdika, Tribhagi, and the applicability rules that pick one | no |
 | 13E | Balas | Shadbala, Bhava bala, Ishta/Kashta phala, sphuta drishti | variants unsigned; ships labelled (section 6) |
 | 13F | Ashtakavarga depth | sodhya pindas (rasi, graha, sodhya), kaksha transit, trikona and ekadhipatya sodhana | no |

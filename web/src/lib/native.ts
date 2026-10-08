@@ -16,6 +16,7 @@ export interface NativeBridge {
   days(requestJson: string): Promise<string>;
   jaimini(requestJson: string): Promise<string>;
   chara(requestJson: string): Promise<string>;
+  upagraha(requestJson: string): Promise<string>;
   family(requestJson: string): Promise<string>;
   match(requestJson: string): Promise<string>;
   places(requestJson: string): Promise<string>;

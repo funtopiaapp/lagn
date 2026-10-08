@@ -197,6 +197,16 @@ pub fn jaimini(req: ChartRequest) -> Result<view::JaiminiView, ApiError> {
 /// Chara dasha for a chart. Like `jaimini`, computation rather than
 /// interpretation, so no review gate - and the variant defaults travel with
 /// the response (CHARA-DASHA.md section 6).
+/// Upagrahas and the time lagnas. Computation, so no review gate; the
+/// variant defaults travel with the response.
+pub fn upagraha(req: ChartRequest) -> Result<view::UpagrahaView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);
+    let u = lagn_core::upagraha::Upagrahas::compute(&eph, &c)
+        .map_err(|e| ApiError::BadRequest(e.to_string()))?;
+    Ok(view::upagraha_view(&u))
+}
+
 pub fn chara(req: ChartRequest) -> Result<view::CharaView, ApiError> {
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
     let d = lagn_core::chara::CharaDasha::compute(&c);

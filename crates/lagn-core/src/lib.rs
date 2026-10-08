@@ -25,6 +25,7 @@ pub mod nakshatra;
 pub mod rasi;
 pub mod relationship;
 pub mod transit;
+pub mod upagraha;
 pub mod varga;
 
 pub use chart::{BirthData, Chart, ChartSettings, Lagna, LagnaWindow, Placement, VargaChart};
@@ -45,6 +46,7 @@ pub use jaimini::{
     CharaKarakas, Jaimini, Karaka, KarakaAssignment, VariantChoice,
 };
 pub use transit::{Ingress, SignStay, TransitKind, TransitWindow};
+pub use upagraha::{DayPart, DayPartPoint, Point, SunOffset, TimeLagna, Upagrahas};
 pub use relationship::{CompoundRelation, NaturalRelation, TemporaryRelation};
 
 // Re-exported so downstream crates need only depend on lagn-core.

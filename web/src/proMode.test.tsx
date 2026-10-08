@@ -20,6 +20,7 @@ describe("the Lite surface", () => {
     const ids = tabsFor("lite").map(([id]) => id);
     expect(ids).not.toContain("jaimini");
     expect(ids).not.toContain("chara");
+    expect(ids).not.toContain("upagraha");
   });
 });
 
@@ -34,5 +35,6 @@ describe("the Pro surface", () => {
     const ids = tabsFor("pro").map(([id]) => id);
     expect(ids).toContain("jaimini");
     expect(ids).toContain("chara");
+    expect(ids).toContain("upagraha");
   });
 });

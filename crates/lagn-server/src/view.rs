@@ -335,6 +335,70 @@ pub fn jaimini_view(j: &lagn_core::jaimini::Jaimini) -> JaiminiView {
 }
 
 // ---------------------------------------------------------------------------
+// Upagrahas and the time lagnas (phase 13C).
+// Specification: docs/phase13/UPAGRAHA.md.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct PointView {
+    pub name: String,
+    /// Formatted as degrees, minutes and seconds within the sign.
+    pub degrees: String,
+    pub longitude: f64,
+    pub rasi: &'static str,
+    pub rasi_tamil: &'static str,
+    pub house: u8,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct DayPartView {
+    #[serde(flatten)]
+    pub point: PointView,
+    pub ruler: &'static str,
+    pub part: u8,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct UpagrahaView {
+    pub at_night: bool,
+    pub vara: &'static str,
+    pub vara_lord: &'static str,
+    pub hours_since_sunrise: f64,
+    pub sun_offsets: Vec<PointView>,
+    pub day_parts: Vec<DayPartView>,
+    pub time_lagnas: Vec<PointView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+fn point_view(p: &lagn_core::upagraha::Point) -> PointView {
+    PointView {
+        name: p.name.to_string(),
+        degrees: lagn_core::format::dms(p.degrees_in_rasi),
+        longitude: p.longitude,
+        rasi: p.rasi.name(),
+        rasi_tamil: p.rasi.tamil_name(),
+        house: p.house,
+    }
+}
+
+pub fn upagraha_view(u: &lagn_core::upagraha::Upagrahas) -> UpagrahaView {
+    UpagrahaView {
+        at_night: u.at_night,
+        vara: u.vara.english(),
+        vara_lord: u.vara.lord().name(),
+        hours_since_sunrise: u.hours_since_sunrise,
+        sun_offsets: u.sun_offsets.iter().map(point_view).collect(),
+        day_parts: u
+            .day_parts
+            .iter()
+            .map(|d| DayPartView { point: point_view(&d.point), ruler: d.ruler.name(), part: d.part })
+            .collect(),
+        time_lagnas: u.time_lagnas.iter().map(point_view).collect(),
+        variants: u.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Chara dasha (phase 13B). Specification: docs/phase13/CHARA-DASHA.md.
 //
 // The engine returns Julian Days. They are formatted here, on the server,

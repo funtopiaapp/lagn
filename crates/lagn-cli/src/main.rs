@@ -46,6 +46,8 @@ enum Command {
     Jaimini(DerivedArgs),
     /// Chara dasha, the Jaimini rasi dasha.
     Chara(CharaArgs),
+    /// Upagrahas (Gulika, Dhuma and the rest) and the time lagnas.
+    Upagraha(DerivedArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -499,6 +501,16 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&j)?);
             } else {
                 phase2::print_jaimini(&j);
+            }
+        }
+        Command::Upagraha(a) => {
+            let chart = build_chart(&a.birth)?;
+            let eph = Ephemeris::new(a.birth.ayanamsa.into(), a.birth.node.into());
+            let u = lagn_core::upagraha::Upagrahas::compute(&eph, &chart)?;
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&u)?);
+            } else {
+                phase2::print_upagrahas(&u);
             }
         }
         Command::Chara(a) => {
