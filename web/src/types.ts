@@ -93,12 +93,6 @@ export interface TopicMeta { id: string; title: string; summary: string; disclai
 export interface BhavaMeaning { house: number; name: string; significations: string[] }
 export interface TopicsResponse { questions: Question[]; topics: TopicMeta[]; bhavas: BhavaMeaning[] }
 
-export interface Pariharam {
-  id: string; title: string; triggers: string[]; deity: string | null; day: string | null;
-  practices: string[]; places: string[]; charity: string | null;
-}
-export interface Suggested { pariharam: Pariharam; because: string[] }
-
 export interface FocusHouse { house: number; name: string; significations: string[]; via: ("occupies" | "rules" | "dispositor")[] }
 export interface TransitNote { label: string; start_jd: number; end_jd: number }
 export interface TransitView {
@@ -110,7 +104,7 @@ export interface PeriodWindow {
   score: number; sensitive: boolean;
   amplifiers: RuleResult[]; negators: RuleResult[]; noted: RuleResult[]; cancelled: [string, string][];
   focus: FocusHouse[]; pressures: TransitNote[]; supports: TransitNote[];
-  pariharams: Suggested[]; explanation: string[];
+  explanation: string[];
 }
 export interface PeriodsResponse {
   mode: "production" | "review"; withheld: Record<string, number>; moon_sign: string;
@@ -126,7 +120,6 @@ export interface TopicResponse {
   };
   windows: TimingWindow[];
   meta?: TopicMeta | null;
-  pariharams?: Suggested[];
   writeup?: WriteUp | null;
 }
 
@@ -179,7 +172,7 @@ export type Lean = "favourable" | "balanced" | "calls_for_care";
 export interface FamilyReading {
   relation: "spouse" | "child" | "mother" | "father";
   relational: { topic: string; house: number; supporting: RuleResult[]; afflicting: RuleResult[]; score: number; lean: Lean | null; writeup: WriteUp | null };
-  own: { meta: TopicMeta | null; report: TopicResponse["report"]; lean: Lean | null; pariharams: Suggested[]; writeup: WriteUp | null }[];
+  own: { meta: TopicMeta | null; report: TopicResponse["report"]; lean: Lean | null; writeup: WriteUp | null }[];
   agreement: "agree" | "differ" | "inconclusive";
   compared_with: string;
   comparison: string[];
@@ -222,15 +215,21 @@ export interface WriteUp { summary: string[]; sections: WriteUpSection[] }
 // --- Jaimini (phase 13A, professional surface) --------------------------
 // Specification: docs/phase13/DESIGN.md sections 4, 5 and 7.
 
+/** Stable karaka id, for keying. The labels come from the engine. */
 export type Karaka =
   | "atma" | "amatya" | "bhratri" | "matri" | "pitri" | "putra" | "gnati" | "dara";
 export interface KarakaAssignment {
-  karaka: Karaka; graha: string; rasi: string;
+  id: Karaka;
+  abbrev: string; name: string; signifies: string;
+  graha: string; rasi: string;
   /** Degrees travelled through the sign. Reversed for Rahu (V-13-2). */
   advancement: number;
 }
 export interface ArudhaPada {
-  bhava: number; bhava_rasi: string; lord: string; lord_rasi: string;
+  bhava: number;
+  /** "AL", "A7", "UL" - what practice calls it. */
+  label: string;
+  bhava_rasi: string; lord: string; lord_rasi: string;
   count: number;
   /** Where the count lands before the exception is applied. */
   raw: string;
@@ -239,18 +238,53 @@ export interface ArudhaPada {
    *  it, and the 10th was taken instead (V-13-8). */
   adjusted: boolean;
 }
-export type ArgalaKind = "wealth" | "home" | "gain";
 export type ArgalaVerdict = "stands" | "neutralised" | "overcome" | "none";
 export interface ArgalaPair {
-  kind: ArgalaKind; argala_rasi: string; counter_rasi: string;
+  kind: string; argala_house: number; counter_house: number;
+  argala_rasi: string; counter_rasi: string;
   argala_grahas: string[]; counter_grahas: string[]; verdict: ArgalaVerdict;
 }
 export interface Argala { rasi: string; pairs: ArgalaPair[] }
 /** A variant choice in force, named so a practitioner knows the scheme. */
 export interface VariantChoice { id: string; question: string; chosen: string }
 export interface JaiminiResponse {
-  karakas: { assigned: KarakaAssignment[] };
+  karakas: KarakaAssignment[];
   padas: ArudhaPada[];
   argala: Argala[];
+  variants: VariantChoice[];
+}
+
+// --- Chara dasha (phase 13B, professional surface) ---------------------
+// Specification: docs/phase13/CHARA-DASHA.md.
+//
+// Dates arrive already formatted. The engine works in Julian Days and the
+// server turns them into dates, because the browser does no calendar
+// arithmetic - a professional surface is no excuse to start.
+
+export type CharaDirection = "direct" | "reverse";
+export interface CharaLength {
+  rasi: string; lord: string; lord_rasi: string;
+  /** Which way the count ran: this sign's own parity (V-13-10). */
+  direction: CharaDirection;
+  count: number; years: number;
+  /** True when the lord is at home, so the period is 12 rather than 0. */
+  lord_at_home: boolean;
+}
+export interface CharaPeriod {
+  rasi: string; start: string; end: string; cycle: number;
+  start_jd: number; end_jd: number;
+  children?: CharaPeriod[];
+}
+export interface CharaRunning { as_of_utc: string; maha: string; antar: string }
+export interface CharaResponse {
+  lagna: string;
+  /** Why the sequence runs the way it does (V-13-9). */
+  lagna_is_odd: boolean;
+  direction: CharaDirection;
+  cycle_years: number;
+  year_length_days: number;
+  lengths: CharaLength[];
+  periods: CharaPeriod[];
+  running_now: CharaRunning | null;
   variants: VariantChoice[];
 }

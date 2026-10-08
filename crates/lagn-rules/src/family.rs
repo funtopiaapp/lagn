@@ -11,7 +11,6 @@ use crate::writeup::{write_up, WriteUp};
 use crate::corpus::Corpus;
 use crate::facts::FactBase;
 use crate::model::Scope;
-use crate::pariharam::{suggest, Suggested};
 use crate::resolve::{evaluate_topic, Mode, RuleResult, TopicReport};
 
 /// Placeholder for the member's name, filled in by whatever displays the
@@ -117,7 +116,6 @@ pub struct OwnReading {
     pub meta: Option<TopicMeta>,
     pub report: TopicReport,
     pub lean: Option<Lean>,
-    pub pariharams: Vec<Suggested>,
     pub writeup: Option<WriteUp>,
 }
 
@@ -257,10 +255,10 @@ pub fn family_reading(corpus: &Corpus, native: &FactBase, member: &FactBase, rel
         .map(|t| {
             let report = evaluate_topic(t, &corpus.rules, member, mode, ages(corpus, t));
             let (_, lean) = lean_of(&report, |_| true);
-            let pariharams = suggest(corpus, &report.results, &[], mode);
+
             let meta = corpus.topics.iter().find(|m| m.id == *t && mode.admits(m.review.status)).cloned();
             let writeup = meta.as_ref().map(|m| write_up(corpus, m, &m.focus, &report, member, ages(corpus, t), |_| true));
-            OwnReading { meta, report, lean, pariharams, writeup }
+            OwnReading { meta, report, lean, writeup }
         })
         .collect();
     let compared_with = relation.own_topics()[0].to_string();

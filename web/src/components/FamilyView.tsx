@@ -3,7 +3,6 @@ import { api, ApiError } from "../api";
 import { exportJson, importJson, loadMembers, newId, RELATIONS, saveMembers, type Member, type Relation } from "../lib/family";
 import type { BirthInput, FamilyReading, Lean, Sex } from "../types";
 import { BirthForm } from "./BirthForm";
-import { PariharamList } from "./PariharamList";
 import { WriteUpView } from "./WriteUpView";
 
 interface Props { birth: BirthInput; sex?: Sex; reviewToken: string }
@@ -73,7 +72,6 @@ function Reading({ m, f }: { m: Member; f: FamilyReading }) {
               <summary>{o.meta?.title ?? o.report.topic} — {leanText(o.lean)}</summary>
               {o.meta?.disclaimer && <p className="notice disclaimer" role="note">{o.meta.disclaimer}</p>}
               {o.writeup ? <WriteUpView w={o.writeup} level={5} omit={o.meta?.disclaimer} /> : <p className="hint">No reviewed interpretations are available for this topic yet.</p>}
-              {o.pariharams.length > 0 && <PariharamList items={o.pariharams} />}
             </details>
           ))}
         </section>

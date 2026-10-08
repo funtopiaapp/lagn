@@ -36,8 +36,7 @@ pub struct Rule {
     pub timing: Vec<GrahaRef>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tags: Vec<String>,
-    /// The graha the rule is about, resolved per chart. An effective
-    /// afflicting rule brings up that graha's pariharam.
+    /// The graha the rule is about, resolved per chart.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub subject: Option<GrahaRef>,
     pub text: Text,

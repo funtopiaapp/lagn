@@ -16,8 +16,10 @@ describe("the Lite surface", () => {
     expect(tabsFor("lite").map(([, label]) => label)).toEqual(LITE);
   });
 
-  it("does not offer the Jaimini tab at all", () => {
-    expect(tabsFor("lite").map(([id]) => id)).not.toContain("jaimini");
+  it("does not offer any professional tab at all", () => {
+    const ids = tabsFor("lite").map(([id]) => id);
+    expect(ids).not.toContain("jaimini");
+    expect(ids).not.toContain("chara");
   });
 });
 
@@ -28,7 +30,9 @@ describe("the Pro surface", () => {
     expect(pro.length).toBeGreaterThan(LITE.length);
   });
 
-  it("is where Jaimini lives", () => {
-    expect(tabsFor("pro").map(([id]) => id)).toContain("jaimini");
+  it("is where the professional tools live", () => {
+    const ids = tabsFor("pro").map(([id]) => id);
+    expect(ids).toContain("jaimini");
+    expect(ids).toContain("chara");
   });
 });

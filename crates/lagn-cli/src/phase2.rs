@@ -303,3 +303,53 @@ fn verdict(v: lagn_core::jaimini::ArgalaVerdict) -> &'static str {
         V::None => "-          ",
     }
 }
+
+/// Chara dasha: the Jaimini rasi dasha.
+/// Specification: `docs/phase13/CHARA-DASHA.md`.
+pub fn print_chara(c: &Chart, d: &lagn_core::chara::CharaDasha, levels: u8) {
+    use lagn_core::chara::Direction;
+    println!(
+        "\n  Lagna {} ({}), sequence runs {}",
+        d.lagna.name(),
+        if d.lagna.is_odd() { "odd" } else { "even" },
+        if d.direction == Direction::Direct { "zodiacally" } else { "anti-zodiacally" },
+    );
+    println!("  Cycle of {:.0} years\n", d.cycle_years());
+
+    println!("  {:<12} {:<9} {:<12} {:<7} Years", "Rasi", "Lord", "Lord in", "Count");
+    for l in &d.lengths {
+        println!(
+            "  {:<12} {:<9} {:<12} {:<7} {:>5.0}{}",
+            l.rasi.name(), l.lord.name(), l.lord_rasi.name(), l.count, l.years,
+            if l.lord_at_home { "  (lord at home)" } else { "" },
+        );
+    }
+
+    println!("\n  Periods");
+    for p in &d.periods {
+        let (from, to) = (civil(c, p.start_jd), civil(c, p.end_jd));
+        println!("  {:<12} {}  to  {}   cycle {}", p.rasi.name(), from, to, p.cycle);
+        if levels > 1 {
+            for ch in &p.children {
+                println!("      {:<10} {}  to  {}", ch.rasi.name(), civil(c, ch.start_jd), civil(c, ch.end_jd));
+            }
+        }
+    }
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/CHARA-DASHA.md section 6)");
+    for v in &d.variants {
+        println!("  {:<9} {:<46} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}
+
+/// A date in the birth place's own wall clock, which is the only frame a
+/// reader of this printout has.
+///
+/// `jd_to_civil` takes the offset itself and picks the calendar the date
+/// belongs to, so a pre-1582 period is printed in the calendar its birth was
+/// read in rather than shifted nine days by a hard-coded Gregorian.
+fn civil(c: &Chart, jd: f64) -> String {
+    let d = lagn_core::jd_to_civil(jd, c.birth.moment.utc_offset_hours);
+    format!("{:04}-{:02}-{:02}", d.year, d.month, d.day)
+}

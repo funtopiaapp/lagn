@@ -14,40 +14,178 @@ const birth = { date: "1981-12-21", time: "14:10:00", latitude: 8.8932, longitud
 
 afterEach(() => vi.unstubAllGlobals());
 
-/** The owner's own chart, as the engine actually computes it. */
+/**
+ * The owner's own chart, taken verbatim from `/api/jaimini` rather than
+ * written by hand. Hand-writing it is how this fixture drifted from the
+ * engine once already: it carried properly cased names while the endpoint
+ * was still emitting raw enum identifiers, so the tab showed "rahu karka"
+ * and the tests were happy.
+ */
 const data: JaiminiResponse = {
-  karakas: {
-    assigned: [
-      { karaka: "atma", graha: "Rahu", rasi: "Karka", advancement: 29.853 },
-      { karaka: "amatya", graha: "Shani", rasi: "Kanya", advancement: 27.206 },
-      { karaka: "bhratri", graha: "Shukra", rasi: "Makara", advancement: 13.217 },
-      { karaka: "matri", graha: "Budha", rasi: "Dhanus", advancement: 11.850 },
-      { karaka: "pitri", graha: "Chandra", rasi: "Tula", advancement: 10.907 },
-      { karaka: "putra", graha: "Guru", rasi: "Tula", advancement: 10.819 },
-      { karaka: "gnati", graha: "Kuja", rasi: "Kanya", advancement: 8.869 },
-      { karaka: "dara", graha: "Surya", rasi: "Dhanus", advancement: 5.798 },
-    ],
-  },
-  padas: [
-    { bhava: 1, bhava_rasi: "Mesha", lord: "Kuja", lord_rasi: "Kanya", count: 6, raw: "Kumbha", rasi: "Kumbha", adjusted: false },
-    { bhava: 4, bhava_rasi: "Karka", lord: "Chandra", lord_rasi: "Tula", count: 4, raw: "Makara", rasi: "Tula", adjusted: true },
-    { bhava: 12, bhava_rasi: "Meena", lord: "Guru", lord_rasi: "Tula", count: 8, raw: "Vrishabha", rasi: "Vrishabha", adjusted: false },
-  ],
-  argala: [
+  "karakas": [
     {
-      rasi: "Mesha",
-      pairs: [
-        { kind: "wealth", argala_rasi: "Vrishabha", counter_rasi: "Meena", argala_grahas: [], counter_grahas: [], verdict: "none" },
-        { kind: "home", argala_rasi: "Karka", counter_rasi: "Makara", argala_grahas: ["rahu"], counter_grahas: ["ketu", "venus"], verdict: "overcome" },
-        { kind: "gain", argala_rasi: "Kumbha", counter_rasi: "Mithuna", argala_grahas: [], counter_grahas: [], verdict: "none" },
-      ],
+      "id": "atma",
+      "abbrev": "AK",
+      "name": "Atmakaraka",
+      "signifies": "the self",
+      "graha": "Rahu",
+      "rasi": "Karka",
+      "advancement": 29.85275916706557
     },
+    {
+      "id": "amatya",
+      "abbrev": "AmK",
+      "name": "Amatyakaraka",
+      "signifies": "career, the minister",
+      "graha": "Shani",
+      "rasi": "Kanya",
+      "advancement": 27.206084323315764
+    },
+    {
+      "id": "bhratri",
+      "abbrev": "BK",
+      "name": "Bhratrikaraka",
+      "signifies": "siblings, the guru",
+      "graha": "Shukra",
+      "rasi": "Makara",
+      "advancement": 13.216938915111143
+    },
+    {
+      "id": "matri",
+      "abbrev": "MK",
+      "name": "Matrikaraka",
+      "signifies": "mother",
+      "graha": "Budha",
+      "rasi": "Dhanus",
+      "advancement": 11.850312537123841
+    },
+    {
+      "id": "pitri",
+      "abbrev": "PiK",
+      "name": "Pitrikaraka",
+      "signifies": "father",
+      "graha": "Chandra",
+      "rasi": "Tula",
+      "advancement": 10.907007560751396
+    },
+    {
+      "id": "putra",
+      "abbrev": "PuK",
+      "name": "Putrakaraka",
+      "signifies": "children",
+      "graha": "Guru",
+      "rasi": "Tula",
+      "advancement": 10.818660140697432
+    },
+    {
+      "id": "gnati",
+      "abbrev": "GK",
+      "name": "Gnatikaraka",
+      "signifies": "obstacles, illness, cousins",
+      "graha": "Kuja",
+      "rasi": "Kanya",
+      "advancement": 8.868851963492602
+    },
+    {
+      "id": "dara",
+      "abbrev": "DK",
+      "name": "Darakaraka",
+      "signifies": "spouse",
+      "graha": "Surya",
+      "rasi": "Dhanus",
+      "advancement": 5.7975404713676255
+    }
   ],
-  variants: [
-    { id: "V-13-1", question: "number of chara karakas", chosen: "8, Rahu included" },
-    { id: "V-13-2", question: "Rahu's advancement", chosen: "reversed (30 - degrees)" },
+  "padas": [
+    {
+      "bhava": 1,
+      "label": "AL",
+      "bhava_rasi": "Mesha",
+      "lord": "Kuja",
+      "lord_rasi": "Kanya",
+      "count": 6,
+      "raw": "Kumbha",
+      "rasi": "Kumbha",
+      "adjusted": false
+    },
+    {
+      "bhava": 4,
+      "label": "A4",
+      "bhava_rasi": "Karka",
+      "lord": "Chandra",
+      "lord_rasi": "Tula",
+      "count": 4,
+      "raw": "Makara",
+      "rasi": "Tula",
+      "adjusted": true
+    },
+    {
+      "bhava": 12,
+      "label": "UL",
+      "bhava_rasi": "Meena",
+      "lord": "Guru",
+      "lord_rasi": "Tula",
+      "count": 8,
+      "raw": "Vrishabha",
+      "rasi": "Vrishabha",
+      "adjusted": false
+    }
   ],
-};
+  "argala": [
+    {
+      "rasi": "Mesha",
+      "pairs": [
+        {
+          "kind": "wealth",
+          "argala_house": 2,
+          "counter_house": 12,
+          "argala_rasi": "Vrishabha",
+          "counter_rasi": "Meena",
+          "argala_grahas": [],
+          "counter_grahas": [],
+          "verdict": "none"
+        },
+        {
+          "kind": "home",
+          "argala_house": 4,
+          "counter_house": 10,
+          "argala_rasi": "Karka",
+          "counter_rasi": "Makara",
+          "argala_grahas": [
+            "Rahu"
+          ],
+          "counter_grahas": [
+            "Shukra",
+            "Ketu"
+          ],
+          "verdict": "overcome"
+        },
+        {
+          "kind": "gain",
+          "argala_house": 11,
+          "counter_house": 3,
+          "argala_rasi": "Kumbha",
+          "counter_rasi": "Mithuna",
+          "argala_grahas": [],
+          "counter_grahas": [],
+          "verdict": "none"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "V-13-1",
+      "question": "number of chara karakas",
+      "chosen": "8, Rahu included"
+    },
+    {
+      "id": "V-13-2",
+      "question": "Rahu's advancement",
+      "chosen": "reversed (30 - degrees)"
+    }
+  ]
+} as JaiminiResponse;
 
 function stub(body: unknown, status = 200) {
   vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(new Response(JSON.stringify(body), { status }))));
@@ -60,10 +198,14 @@ describe("the chara karakas", () => {
 
     const karakas = within(await screen.findByRole("table", { name: "Chara karakas" }));
     const row = within(karakas.getByRole("row", { name: /Atmakaraka/ }));
+    // Properly cased, and the South Indian name - the same words every other
+    // tab uses, because they come from the engine rather than a table here.
     expect(row.getByText("Rahu")).toBeInTheDocument();
     // Rahu at 0.147 degrees of Karka reads as 29.853 travelled, which is what
     // puts it top. Showing the figure is what makes that checkable.
     expect(row.getByText("29.853°")).toBeInTheDocument();
+    // Kuja, not "mars": the engine names it.
+    expect(karakas.getByRole("row", { name: /Gnatikaraka/ })).toHaveTextContent("Kuja");
 
     expect(karakas.getByRole("row", { name: /Darakaraka/ })).toHaveTextContent("Surya");
     // Each karaka says what it stands for, unglossed but present.

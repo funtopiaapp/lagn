@@ -14,7 +14,6 @@ const topics = {
   bhavas: [],
 };
 const rule = (id: string, polarity: number, text = "t") => ({ id, title: id, status: "approved", reviewer: "Claude (AI review at the product owner's direction)", polarity, outcome: "true", effective: true, cancelled_by: null, text, trace: [] });
-const pariharam = { pariharam: { id: "graha.saturn", title: "For Saturn (Shani)", triggers: ["graha:saturn"], deity: "Hanuman", day: "Saturday", practices: ["Light a sesame-oil lamp on Saturdays"], places: ["Thirunallar"], charity: "Donate black sesame (ellu)" }, because: ["health.l1.dusthana"] };
 
 function route(map: Record<string, unknown>) {
   return vi.fn((url: string) => {
@@ -44,19 +43,24 @@ describe("ReadingsView", () => {
     expect(notes.some((t) => /consult a qualified doctor/.test(t))).toBe(true);
   });
 
-  it("shows pariharams with the findings that brought them up", async () => {
-    const reading = { report: { topic: "health", mode: "production", results: [rule("health.l1.dusthana", -2)], withheld: {}, supporting: [], afflicting: ["health.l1.dusthana"], cancelled: [], unknown: [], score: -2, label: "afflicted" }, windows: [], meta: topics.topics[1], pariharams: [pariharam] };
+  it("never offers a remedy, even for a heavily afflicted reading", async () => {
+    // The product owner's direction: pariharams are not recommended to anyone.
+    // An afflicted health reading is where one used to appear, so this is the
+    // case that would notice if the feature ever came back.
+    const reading = { report: { topic: "health", mode: "production", results: [rule("health.l1.dusthana", -2)], withheld: {}, supporting: [], afflicting: ["health.l1.dusthana"], cancelled: [], unknown: [], score: -2, label: "afflicted" }, windows: [], meta: topics.topics[1] };
     vi.stubGlobal("fetch", route({ "/api/topics": topics, "/api/topic/health": reading }));
     render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
     const u = userEvent.setup();
     await u.click(await screen.findByRole("button", { name: "Health" }));
-    expect(await screen.findByText("For Saturn (Shani)")).toBeInTheDocument();
-    expect(screen.getByText(/No gemstones or paid services/)).toBeInTheDocument();
-    expect(screen.getByText("Because: health.l1.dusthana")).toBeInTheDocument();
+    await screen.findByText(/health.l1.dusthana/);
+
+    for (const word of [/pariharam/i, /puja/i, /tarpanam/i, /worship/i, /remed(y|ies)/i, /observance/i, /gemstone/i]) {
+      expect(screen.queryByText(word)).toBeNull();
+    }
   });
 
   it("never shows one topic's reading under another topic", async () => {
-    const reading = { report: { topic: "marriage", mode: "production", results: [rule("marriage.x", 1)], withheld: {}, supporting: ["marriage.x"], afflicting: [], cancelled: [], unknown: [], score: 1, label: "supportive" }, windows: [], pariharams: [] };
+    const reading = { report: { topic: "marriage", mode: "production", results: [rule("marriage.x", 1)], withheld: {}, supporting: ["marriage.x"], afflicting: [], cancelled: [], unknown: [], score: 1, label: "supportive" }, windows: [] };
     vi.stubGlobal("fetch", route({ "/api/topics": topics, "/api/topic/marriage": reading }));
     render(<ReadingsView birth={birth} reviewToken="" lagna={lagna} />);
     const u = userEvent.setup();
@@ -71,7 +75,7 @@ describe("PeriodsView", () => {
     start: "2030-01-01", end: "2031-01-01", maha_name: maha, antar_name: antar, current, score, sensitive: score <= -2,
     amplifiers: score < 0 ? [rule("periods.antar.dusthana", -1)] : [], negators: [], noted: [], cancelled: [],
     focus: [{ house: 7, name: "Kalatra", significations: ["spouse and marriage"], via: ["occupies"] }],
-    pressures: [], supports: [], pariharams: score <= -2 ? [pariharam] : [],
+    pressures: [], supports: [],
     explanation: [`${maha} mahadasha, ${antar} bhukti. The matters of this period are spouse and marriage (house 7).`, "Calls for care: the sub-period lord sits in a dusthana."],
   });
   const data = { mode: "production", withheld: {}, moon_sign: "Mesha", transits: [], windows: [w("Shani", "Shani", 0, true), w("Shani", "Ketu", -2), w("Shani", "Shukra", 1)] };
@@ -127,7 +131,7 @@ describe("asking a question from the readings page", () => {
       supports: ["Supports marriage: a well-placed period lord"], cautions: [],
       live: true, rank: "best", when: "ahead",
     }],
-    meta: topics.topics[0], pariharams: [], writeup: null,
+    meta: topics.topics[0], writeup: null,
   };
 
   it("answers a question about the topic already selected", async () => {

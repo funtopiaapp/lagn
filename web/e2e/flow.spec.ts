@@ -9,6 +9,11 @@ async function enter(page: Page, date: string, time: string, place: string, pick
   await page.fill('input[type="time"]', time);
   await page.getByPlaceholder(/Town/).fill(place);
   await page.getByRole("button", { name: pick }).first().click();
+  // Wait for the place to be *chosen*, not merely clicked. The form prints the
+  // coordinates once it has one, and without this the next click can land
+  // while the suggestion list is still settling - which under parallel load
+  // left the form on screen and made the following steps ambiguous.
+  await expect(page.locator("form .hint").filter({ hasText: "°" }).first()).toBeVisible();
 }
 
 /** The birth the UI will send, read back from the API's echo after computing. */
@@ -109,7 +114,7 @@ test("production shows only reviewed interpretations, with their provenance", as
   // Reviewer mode still works, and says so.
   await page.getByText("Reviewer sign-in").click();
   await page.locator('input[type="password"]').fill(TOKEN);
-  await page.getByRole("button", { name: "Enter" }).click();
+  await page.getByRole("button", { name: "Enter", exact: true }).click();
   // The reading refreshes by itself in review mode; no extra click.
   await expect(page.getByText(/Review mode: drafts are shown/)).toBeVisible();
 });
@@ -120,7 +125,7 @@ test("a wrong reviewer token is refused, and nothing draft is shown", async ({ p
   await page.getByRole("button", { name: "Compute chart" }).click();
   await page.getByText("Reviewer sign-in").click();
   await page.locator('input[type="password"]').fill("not-the-token-at-all-000000");
-  await page.getByRole("button", { name: "Enter" }).click();
+  await page.getByRole("button", { name: "Enter", exact: true }).click();
   await page.getByRole("button", { name: "Readings", exact: true }).click();
   await expect(page.getByRole("alert")).toContainText("X-Review-Token");
   await expect(page.locator(".rule")).toHaveCount(0);
@@ -132,7 +137,7 @@ test("porutham in review mode equals the API", async ({ page }) => {
   await page.getByRole("button", { name: "Compute chart" }).click();
   await page.getByText("Reviewer sign-in").click();
   await page.locator('input[type="password"]').fill(TOKEN);
-  await page.getByRole("button", { name: "Enter" }).click();
+  await page.getByRole("button", { name: "Enter", exact: true }).click();
   await page.getByRole("button", { name: "Match", exact: true }).click();
   await enter(page, "1988-11-02", "21:45", "Madurai", /Madurai/);
   const req = page.waitForRequest("/api/match");
@@ -511,4 +516,195 @@ test("a reading is computed locally, with no network request for it", async ({ p
 
   // Place search, the chart and the reading all happened in the browser.
   expect(apiCalls).toEqual([]);
+});
+
+// ---------------------------------------------------------------------------
+// The professional surface (phase 13)
+// ---------------------------------------------------------------------------
+
+// Scoped locators, because the plain names collide: "Chart" also matches
+// "New chart" in the header, and "Pro" also matches "Saved profiles".
+const modeButton = (page: Page, name: "Lite" | "Pro") =>
+  page.getByRole("group", { name: "Mode" }).getByRole("button", { name, exact: true });
+const tab = (page: Page, name: string) =>
+  page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name, exact: true });
+
+test("Pro is off by default, switches from the header, and is not in the URL", async ({ page }) => {
+  await page.goto("/");
+
+  // It is at the top, reachable without scrolling anywhere.
+  await expect(page.getByRole("group", { name: "Mode" })).toBeVisible();
+  await expect(modeButton(page, "Lite")).toHaveAttribute("aria-pressed", "true");
+
+  await enter(page, "1981-12-21", "14:10", "Kollam", /Kollam/);
+  await page.getByRole("button", { name: /Compute chart/ }).click();
+  await expect(tab(page, "Chart")).toBeVisible();
+
+  // Lite offers no professional tab.
+  await expect(tab(page, "Jaimini")).toHaveCount(0);
+  await expect(tab(page, "Chara dasha")).toHaveCount(0);
+
+  await modeButton(page, "Pro").click();
+  await expect(tab(page, "Jaimini")).toBeVisible();
+  await expect(tab(page, "Chara dasha")).toBeVisible();
+
+  // A shared link must not carry the mode: a lay reader opening it gets Lite.
+  expect(new URL(page.url()).search).toBe("");
+
+  // Standing on a Pro tab and turning Pro off must land on a Lite tab, not a
+  // blank panel.
+  await tab(page, "Jaimini").click();
+  await modeButton(page, "Lite").click();
+  await expect(tab(page, "Jaimini")).toHaveCount(0);
+  await expect(tab(page, "Chart")).toHaveAttribute("aria-current", "page");
+
+  // The choice survives a reload, being a device setting. A reload returns to
+  // the birth form - the chart is never persisted - so the mode is checked on
+  // the form, which is where it is shown.
+  await modeButton(page, "Pro").click();
+  await page.reload();
+  await expect(modeButton(page, "Pro")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("navigation", { name: "Sections" })).toHaveCount(0);
+});
+
+test("the professional tabs answer from the browser engine, with no stale-export error", async ({ page }) => {
+  // The engine is 8 MB and each test gets a cold context, so this must not
+  // depend on another test having warmed the cache first.
+  test.setTimeout(180_000);
+  // The bug this pins: the service worker served the previous build's
+  // WebAssembly - its filenames being stable - while the new JavaScript called
+  // an export that build did not have, so the Jaimini tab threw "not a
+  // function". Engine URLs now carry the engine's content hash. This test
+  // drives both professional tabs through the real engine in a real browser,
+  // which is the only place that failure was visible.
+  await page.unroute("**/engine/**");
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+
+  await page.goto("/");
+  await page.waitForFunction(() => typeof window.Lagn?.chart === "function", null, { timeout: 60_000 });
+  // Both new calls must be present on the bridge, not just the old ones.
+  await page.waitForFunction(
+    () => typeof window.Lagn?.jaimini === "function" && typeof window.Lagn?.chara === "function",
+    null,
+    { timeout: 60_000 },
+  );
+
+  await enter(page, "1981-12-21", "14:10", "Kollam", /Kollam/);
+  await page.getByRole("button", { name: /Compute chart/ }).click();
+  await modeButton(page, "Pro").click();
+
+  await tab(page, "Jaimini").click();
+  await expect(page.getByRole("table", { name: "Chara karakas" })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("table", { name: "Arudha padas" })).toBeVisible();
+  await expect(page.getByRole("table", { name: "Argala and virodhargala" })).toBeVisible();
+  // Rahu is read backwards, which on this chart makes it the Atmakaraka. The
+  // name is the engine's, so it reads "Rahu" here exactly as elsewhere - this
+  // caught the tab rendering raw enum identifiers instead.
+  await expect(page.getByRole("row", { name: /Atmakaraka/ })).toContainText("Rahu");
+  await expect(page.getByRole("row", { name: /Gnatikaraka/ })).toContainText("Kuja");
+
+  await tab(page, "Chara dasha").click();
+  await expect(page.getByRole("table", { name: "Chara dasha lengths" })).toBeVisible({ timeout: 30_000 });
+  // Mesha lagna is odd, so the sequence runs zodiacally; the cycle is 68 years.
+  await expect(page.getByText(/runs zodiacally/)).toBeVisible();
+  await expect(page.getByText(/68 years/)).toBeVisible();
+
+  // No alert anywhere, and nothing thrown - a stale export surfaced as both.
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("every engine request carries the engine's version", async ({ page }) => {
+  test.setTimeout(180_000);
+  // Without this an old service worker answers from its own cache and the
+  // app runs new JavaScript against the previous build's engine.
+  await page.unroute("**/engine/**");
+  const urls: string[] = [];
+  page.on("request", (r) => {
+    if (r.url().includes("/engine/")) urls.push(r.url());
+  });
+
+  await page.goto("/");
+  await page.waitForFunction(() => typeof window.Lagn?.chart === "function", null, { timeout: 60_000 });
+
+  expect(urls.length).toBeGreaterThan(0);
+  for (const u of urls) {
+    expect(new URL(u).searchParams.get("v"), `${u} has no version`).toBeTruthy();
+  }
+});
+
+// ---------------------------------------------------------------------------
+// No remedies, anywhere a reader can reach
+// ---------------------------------------------------------------------------
+
+/** The vocabulary of prescribed practice. "Ayilyam" is absent on purpose: it
+ *  is also the Tamil name of the nakshatra Ashlesha, and "puja" catches the
+ *  practice regardless. */
+const REMEDIAL = [
+  "pariharam", "parihara", "puja", "pooja", "tarpanam", "abhishekam", "archana",
+  "homam", "pradosham", "navagraha", "worship", "remedy", "remedies", "remedial",
+  "observance", "gemstone", "amulet", "talisman", "propitiate",
+];
+
+test("no reading anywhere in the app recommends a remedy", async ({ page }) => {
+  // The product owner's direction: pariharams are not recommended to anyone.
+  // The engine no longer computes them and the catalogue is deleted, but the
+  // claim that matters to a reader is about the rendered page - so this walks
+  // every tab, in both modes, and reads what is actually on screen.
+  test.setTimeout(180_000);
+  await page.unroute("**/engine/**"); // the real engine, as a reader gets it
+
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await page.waitForFunction(() => typeof window.Lagn?.chart === "function", null, { timeout: 120_000 });
+
+  // A chart with afflictions in it, which is where a remedy used to appear.
+  await enter(page, "1981-12-21", "14:10", "Kollam", /Kollam/);
+  await page.getByRole("button", { name: /Compute chart/ }).click();
+  await expect(tab(page, "Chart")).toBeVisible();
+
+  const offending = async (where: string) => {
+    const text = (await page.locator("body").innerText()).toLowerCase();
+    const found = REMEDIAL.filter((w) => text.includes(w));
+    expect(found, `${where} shows remedial language`).toEqual([]);
+  };
+
+  for (const name of ["Chart", "Readings", "Sensitive periods", "Day timings", "Match", "Saved profiles"]) {
+    await tab(page, name).click();
+    await page.waitForTimeout(400);
+    await offending(`the ${name} tab`);
+  }
+
+  // Readings: open every topic, because a remedy was per-topic.
+  await tab(page, "Readings").click();
+  const topics = page.locator(".topics button");
+  const count = await topics.count();
+  expect(count).toBeGreaterThan(5);
+  for (let i = 0; i < count; i++) {
+    await topics.nth(i).click();
+    await page.waitForTimeout(250);
+    await offending(`the reading for topic ${i + 1}`);
+  }
+
+  // Sensitive periods used to carry transit remedies inside a disclosure, so
+  // every disclosure is opened rather than left closed.
+  await tab(page, "Sensitive periods").click();
+  await page.waitForTimeout(1500);
+  const summaries = page.locator("details summary");
+  for (let i = 0; i < Math.min(await summaries.count(), 12); i++) {
+    await summaries.nth(i).click();
+  }
+  await offending("the sensitive periods, with every disclosure open");
+
+  // And the professional surface, which is new and must not reintroduce it.
+  await modeButton(page, "Pro").click();
+  for (const name of ["Jaimini", "Chara dasha"]) {
+    await tab(page, name).click();
+    await expect(page.getByRole("table").first()).toBeVisible({ timeout: 30_000 });
+    await offending(`the ${name} tab`);
+  }
+
+  expect(errors).toEqual([]);
 });

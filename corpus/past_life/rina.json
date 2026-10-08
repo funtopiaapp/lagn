@@ -54,17 +54,17 @@
     ],
     "text": {
       "en": "The Sun, the 9th house or its lord stands with Rahu or Ketu. Tamil and Kerala practice reads this as pitru rina: something left unsettled on the father's and the forefathers' side.",
-      "impact": "In this life it tends to show as a father who was absent, unwell or preoccupied; as family property or family matters that never quite resolve; or as a sense of carrying something for people who came before you. What settles it is observance rather than worry: tarpanam on the new-moon day and during Mahalaya paksha, and looking after the elders who are still here."
+      "impact": "In this life it tends to show as a father who was absent, unwell or preoccupied; as family property or family matters that never quite resolve; or as a sense of carrying something for people who came before you. Where the tradition speaks of settling it, what it asks for is attention to the living: looking after the elders who are still here."
     },
     "source": {
       "reference": null,
-      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something to be settled by observance, never as punishment."
+      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something carried, never as punishment, and with no practice prescribed for it. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Pitru rina from the Sun, the 9th or its lord with the nodes; widely followed in South Indian practice."
+      "date": "2026-10-08",
+      "comment": "Pitru rina from the nodes with the Sun or the 9th. Text revised to remove the prescribed observance; what remains is care for living family, which is not a ritual."
     }
   },
   {
@@ -106,17 +106,17 @@
     ],
     "text": {
       "en": "The Moon or the 4th house stands with Rahu or Ketu, which Tamil practice reads as matru rina: something unsettled on the mother's side.",
-      "impact": "It tends to show as a mother who carried more than her share, as distance or difficulty in that bond, or as a home that never felt entirely settled. What settles it is plain: care given to your mother now, or to elder women who stand in that place, and worship of Ambal on Mondays."
+      "impact": "It tends to show as a mother who carried more than her share, as distance or difficulty in that bond, or as a home that never felt entirely settled. Where the tradition speaks of settling it, what it asks for is plain: care given to your mother now, or to elder women who stand in that place."
     },
     "source": {
       "reference": null,
-      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something to be settled by observance, never as punishment."
+      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something carried, never as punishment, and with no practice prescribed for it. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Matru rina from the Moon or the 4th with the nodes."
+      "date": "2026-10-08",
+      "comment": "Matru rina. Text revised to remove the prescribed worship; the care it describes is not a ritual."
     }
   },
   {
@@ -142,17 +142,17 @@
     ],
     "text": {
       "en": "Rahu or Ketu occupies the 5th house. Kerala practice especially reads this as sarpa shapa, the serpent debt, carried into the house of progeny and merit.",
-      "impact": "It is read as delay or difficulty in matters of children, and sometimes as a pull towards the sacred that was interrupted. The customary answer is the naga worship and the Ayilyam puja listed below; medical help, where it is needed, is no quarrel of the tradition's."
+      "impact": "It is read as delay or difficulty in matters of children, and sometimes as a pull towards the sacred that was interrupted. It is read as delay rather than denial. Nothing is asked of you for it, and medical help, where it is needed, is no quarrel of the tradition's."
     },
     "source": {
       "reference": null,
-      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something to be settled by observance, never as punishment."
+      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something carried, never as punishment, and with no practice prescribed for it. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Sarpa shapa from the nodes in the 5th; the standard Kerala and Tamil reading."
+      "date": "2026-10-08",
+      "comment": "Sarpa shapa from the nodes in the 5th. Text revised to remove the prescribed worship and puja. Its only ask was that practice, so the reading now states plainly that nothing is required of the native."
     }
   },
   {
@@ -184,17 +184,17 @@
     "subject": "jupiter",
     "text": {
       "en": "Jupiter, the karaka of teachers and of dharma, stands with Rahu or Ketu. The tradition reads this as guru shapa: instruction taken and not honoured, or guidance left unfinished.",
-      "impact": "It tends to show as teachers who disappoint, advice that misleads, or study begun and set down. What settles it is to become reliable in the role yourself: keep your word to those who teach you, finish what you begin, and teach freely where you can."
+      "impact": "It tends to show as teachers who disappoint, advice that misleads, or study begun and set down. Where the tradition speaks of settling it, what it asks for is to become reliable in the role yourself: keep your word to those who teach you, finish what you begin, and teach freely where you can."
     },
     "source": {
       "reference": null,
-      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something to be settled by observance, never as punishment."
+      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something carried, never as punishment, and with no practice prescribed for it. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Guru shapa from Jupiter with the nodes."
+      "date": "2026-10-08",
+      "comment": "Guru rina. Text revised for consistency with the other debts now that no observance is prescribed; the conduct it describes is not a ritual."
     }
   },
   {
@@ -242,17 +242,17 @@
     "subject": "venus",
     "text": {
       "en": "Venus or the lord of the 7th stands with Rahu or Ketu, which the tradition reads as a bond from before that was left in difficulty.",
-      "impact": "It tends to show as a marriage that asks unusual patience early on, or as a partner who arrives carrying their own history. The tradition treats it as something two people settle between them, with the Venus observances below as support; it is never read as a bar to marriage."
+      "impact": "It tends to show as a marriage that asks unusual patience early on, or as a partner who arrives carrying their own history. The tradition treats it as something two people settle between them; it is never read as a bar to marriage."
     },
     "source": {
       "reference": null,
-      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something to be settled by observance, never as punishment."
+      "note": "The rina (debt) and shapa readings as commonly followed in Tamil and Kerala practice: the nodes with the Sun or the 9th for pitru, with the Moon or the 4th for matru, on the 5th for sarpa, with Jupiter for guru, and with Venus or the 7th lord for patni. From general knowledge, reviewed by AI at the product owner's direction; no textual citation has been verified. Stated as something carried, never as punishment, and with no practice prescribed for it. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-27",
-      "comment": "Patni shapa from Venus or the 7th lord with the nodes."
+      "date": "2026-10-08",
+      "comment": "Patni rina. Text revised to remove the reference to Venus observances."
     }
   }
 ]

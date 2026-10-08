@@ -8,6 +8,7 @@ import { OfflineBanner } from "./components/OfflineBanner";
 import { PeriodsView } from "./components/PeriodsView";
 import { DayTimingsView } from "./components/DayTimingsView";
 import { JaiminiView } from "./components/JaiminiView";
+import { CharaView } from "./components/CharaView";
 import { ReadingsView } from "./components/ReadingsView";
 import { SavedCharts } from "./components/SavedCharts";
 import { loadSaved, type SavedBirth } from "./lib/savedBirths";
@@ -15,10 +16,11 @@ import { loadToken, saveToken } from "./lib/session";
 import { loadMode, saveMode, type Mode } from "./lib/mode";
 import { loadTheme, type Theme } from "./lib/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { ModeToggle } from "./components/ModeToggle";
 import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
-type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini";
+type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini" | "chara";
 
 /** The general public's surface. Phase 13 adds nothing to this list, and a
  *  test pins that: turning Pro on must add tabs, never change Lite's. */
@@ -26,7 +28,7 @@ const LITE_TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"]
 
 /** The professional surface, appended to the Lite tabs rather than replacing
  *  them. See docs/phase13/DESIGN.md section 2. */
-const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"]];
+const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"], ["chara", "Chara dasha"]];
 
 export function tabsFor(mode: Mode): [Tab, string][] {
   return mode === "pro" ? [...LITE_TABS, ...PRO_TABS] : LITE_TABS;
@@ -100,6 +102,7 @@ export function App() {
       <header className="top">
         <h1>lagn<span className="dot">.</span></h1>
         <span className="spacer" />
+        <ModeToggle mode={mode} onChange={setMode} />
         <ThemeToggle theme={theme} onChange={setTheme} />
         {chart && (
           <button type="button" onClick={() => { history.pushState({ lagn: true, view: "form" }, ""); setChart(null); }}>New chart</button>
@@ -134,6 +137,7 @@ export function App() {
             {tab === "family" && <FamilyView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "match" && <MatchView birth={chart.input} reviewToken={token} />}
             {tab === "jaimini" && mode === "pro" && <JaiminiView birth={chart.input} />}
+            {tab === "chara" && mode === "pro" && <CharaView birth={chart.input} />}
             {tab === "saved" && (
               <SavedCharts saved={saved} onChange={setSaved}
                 onOpen={(b, sx) => { setTab("chart"); void compute(b, sx); }} />
@@ -144,18 +148,6 @@ export function App() {
       </main>
 
       <footer>
-        <p className="mode-switch">
-          <label>
-            <input type="checkbox" checked={mode === "pro"}
-              onChange={(e) => setMode(e.target.checked ? "pro" : "lite")} />
-            {" "}Professional mode
-          </label>
-          <span className="hint">
-            {mode === "pro"
-              ? "Jaimini and the rest of the apparatus, in its own vocabulary. Some of it rests on variant choices no astrologer has signed off yet, and each is labelled where it appears."
-              : "Adds the professional tools - chara karakas, arudha padas, argala - for astrologers. Nothing in the readings changes."}
-          </span>
-        </p>
         {version?.review_enabled && (
           <details className="reviewer">
             <summary>{token ? "Reviewer mode on" : "Reviewer sign-in"}</summary>

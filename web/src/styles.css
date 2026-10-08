@@ -198,7 +198,6 @@ ul.rules { list-style: none; padding: 0; }
 .facts { color: var(--muted); }
 ul.plain { padding-left: 20px; }
 .provenance { font-size: 0.86rem; color: var(--muted); margin: 6px 0; }
-.pariharams .rule { background: var(--surface-2); }
 
 /* ------------------------------------------------------- topic timing */
 .topic-timing { margin: 18px 0; }
@@ -393,8 +392,18 @@ footer a { color: var(--accent); }
 .variants dt { font-weight: 600; margin-top: 10px; }
 .variants dd { margin: 2px 0 0 0; color: var(--muted); }
 
-/* The mode switch is a setting, so it lives in the footer beside the reviewer
-   sign-in rather than in the tab bar. */
-.mode-switch { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--gap); }
-.mode-switch label { font-weight: 600; display: flex; align-items: center; gap: 2px; }
-.mode-switch .hint { margin: 0; }
+/* Lite/Pro sits in the header next to the theme, as the same segmented
+   control: it changes what the whole app offers, so it should not be a
+   checkbox at the bottom of the page. */
+.mode-toggle { margin-right: 8px; }
+.mode-toggle button { padding: 6px 12px; }
+
+/* Chara dasha period list: a disclosure per period, so twelve antardashas
+   are a tap away rather than 288 rows on the page at once. */
+.chara-periods { list-style: none; margin: 0; padding: 0; }
+.chara-period { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  flex-wrap: wrap; background: none; border: 0; border-bottom: 1px solid var(--line);
+  padding: 10px 2px; font: inherit; color: inherit; cursor: pointer; }
+.chara-period:hover { background: var(--surface-2, transparent); }
+.chara-span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.chara .grid { margin-bottom: 10px; }

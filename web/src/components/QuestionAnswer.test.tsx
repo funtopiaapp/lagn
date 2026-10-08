@@ -32,7 +32,7 @@ const data = (windows: TimingWindow[], score = 4, ages: [number, number] = [18, 
   ({
     report: { topic: "wealth", mode: "production", results: [{ id: "x" }], withheld: {},
       supporting: ["a"], afflicting: [], cancelled: [], unknown: [], score, label: "supportive" },
-    windows, pariharams: [], writeup: null, meta: { ...topic, ages },
+    windows, writeup: null, meta: { ...topic, ages },
   }) as unknown as TopicResponse;
 
 const dates = () => screen.getAllByRole("listitem").map((li) => li.textContent ?? "");

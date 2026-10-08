@@ -1,7 +1,7 @@
 //! Assembling a sensitive-periods reading: each dasha window with the houses
-//! it brings into focus, the transits running through it, the pariharams its
-//! findings call for, and a plain-language explanation. Every sentence is a
-//! fixed template filled from computed facts and reviewed corpus text.
+//! it brings into focus, the transits running through it, and a
+//! plain-language explanation. Every sentence is a fixed template filled from
+//! computed facts and reviewed corpus text.
 //! Specification: `docs/phase6/DESIGN.md` section 3.6.
 
 use std::collections::BTreeMap;
@@ -10,10 +10,9 @@ use lagn_core::transit::{ingresses, TRANSIT_GRAHAS};
 use lagn_core::{Chart, Ephemeris, Graha, Ingress, Rasi, TransitWindow};
 use serde::{Deserialize, Serialize};
 
-use crate::catalogue::{transit_tag, Bhavas};
+use crate::catalogue::Bhavas;
 use crate::corpus::Corpus;
 use crate::facts::FactBase;
-use crate::pariharam::{suggest, Suggested};
 use crate::resolve::{evaluate_periods, Mode, PeriodWindow};
 
 /// Why a house is in focus during a graha's period.
@@ -56,7 +55,6 @@ pub struct PeriodDetail {
     pub pressures: Vec<TransitNote>,
     /// Supportive transits overlapping the window.
     pub supports: Vec<TransitNote>,
-    pub pariharams: Vec<Suggested>,
     pub explanation: Vec<String>,
 }
 
@@ -180,13 +178,8 @@ pub fn sensitive_periods(
             let focus = focus_houses(&facts.chart, w.antar, corpus.bhavas.as_ref());
             let pressures = overlapping(transits, w.start_jd, w.end_jd, false);
             let supports = overlapping(transits, w.start_jd, w.end_jd, true);
-            let tags: Vec<(String, &'static str)> = pressures
-                .iter()
-                .filter_map(|t| transit_tag(t.transit.kind).map(|tag| (t.label.clone(), tag)))
-                .collect();
-            let pariharams = suggest(corpus, &w.amplifiers, &tags, mode);
             let explanation = explain(&w, &focus, &pressures, &supports);
-            PeriodDetail { window: w, focus, pressures, supports, pariharams, explanation }
+            PeriodDetail { window: w, focus, pressures, supports, explanation }
         })
         .collect();
     SensitivePeriods { mode: report.mode, withheld: report.withheld, windows }

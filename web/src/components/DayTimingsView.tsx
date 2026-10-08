@@ -141,7 +141,7 @@ export function DayTimingsView({ birth }: { birth: BirthInput }) {
               </ul>
 
               <p className="hint">
-                These are traditional observances, not predictions. Nothing here says an hour will
+                These are traditional timings, not predictions. Nothing here says an hour will
                 go well or badly; it says what the tradition does with it.
               </p>
             </div>

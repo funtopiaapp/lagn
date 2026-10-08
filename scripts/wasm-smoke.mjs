@@ -113,11 +113,32 @@ console.log(`\n  sensitive periods: ${periods.windows.length} windows with trans
 // The professional surface runs through the same engine, so it has to answer
 // in the browser too and not only on the server.
 const jaimini = call("lagn_jaimini", JSON.stringify({ birth }));
-const ak = jaimini.karakas.assigned.find((a) => a.karaka === "atma");
+const ak = jaimini.karakas.find((a) => a.id === "atma");
 const moved = jaimini.padas.filter((x) => x.adjusted).length;
 console.log(`  jaimini: AK is ${ak.graha} in ${ak.rasi}; ${jaimini.padas.length} padas (${moved} took the 10th); ${jaimini.variants.length} variants named`);
-if (jaimini.padas.length !== 12 || jaimini.karakas.assigned.length !== 8 || jaimini.variants.length !== 8) {
+// The shape the app actually reads, checked field by field. A stale engine
+// that still returns the pre-view shape, or raw enum identifiers instead of
+// names, has to fail here rather than in the browser.
+if (!Array.isArray(jaimini.karakas) || jaimini.karakas.length !== 8
+  || jaimini.padas.length !== 12 || jaimini.argala.length !== 12
+  || jaimini.variants.length !== 8) {
   throw new Error("jaimini came back the wrong shape from the WebAssembly engine");
+}
+for (const f of ["id", "abbrev", "name", "signifies", "graha", "rasi", "advancement"]) {
+  if (ak[f] === undefined) throw new Error(`jaimini karaka is missing ${f}`);
+}
+if (!/^[A-Z]/.test(ak.graha) || !/^[A-Z]/.test(ak.rasi)) {
+  throw new Error(`jaimini returned identifiers rather than names: ${ak.graha} in ${ak.rasi}`);
+}
+if (jaimini.padas[0].label !== "AL" || jaimini.padas[11].label !== "UL") {
+  throw new Error("jaimini padas are not labelled the way practice names them");
+}
+
+const chara = call("lagn_chara", JSON.stringify({ birth }));
+const cycle = chara.lengths.reduce((a, l) => a + l.years, 0);
+console.log(`  chara: lagna ${chara.lagna}, runs ${chara.direction}, ${cycle}-year cycle, ${chara.periods.length} periods`);
+if (chara.lengths.length !== 12 || chara.variants.length !== 5 || chara.periods.length % 12 !== 0) {
+  throw new Error("chara dasha came back the wrong shape from the WebAssembly engine");
 }
 
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));

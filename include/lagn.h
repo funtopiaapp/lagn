@@ -51,6 +51,10 @@ char *lagn_days(const char *request_json);
    that produced it. */
 char *lagn_jaimini(const char *request_json);
 
+/* {"birth": {...}} -> Chara dasha, the Jaimini rasi dasha.
+   Professional surface only; carries its variant defaults. */
+char *lagn_chara(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

@@ -1,5 +1,5 @@
 import type {
-  BirthInput, ChartResponse, DaysResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, CharaResponse, ChartResponse, DaysResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -110,6 +110,12 @@ export const api = {
   jaimini: async (birth: BirthInput) => {
     const n = await viaNative<JaiminiResponse>((b) => b.jaimini(JSON.stringify({ birth })));
     return n !== NOT_NATIVE ? n : post<JaiminiResponse>("/api/jaimini", { birth });
+  },
+
+  /** Chara dasha, the Jaimini rasi dasha. Professional surface. */
+  chara: async (birth: BirthInput) => {
+    const n = await viaNative<CharaResponse>((b) => b.chara(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<CharaResponse>("/api/chara", { birth });
   },
 
   topics: async () => {

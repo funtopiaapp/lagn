@@ -1,5 +1,5 @@
 //! Reviewed content other than rules: the topic catalogue, bhava
-//! significations and the pariharam catalogue. Specification:
+//! significations. Specification:
 //! `docs/phase6/DESIGN.md` sections 2 and 5.
 
 use serde::{Deserialize, Serialize};
@@ -152,40 +152,6 @@ pub struct BhavaMeaning {
     pub house: u8,
     pub name: String,
     pub significations: Vec<String>,
-}
-
-/// A traditional remedy, shown when a rule or transit carrying one of its
-/// trigger tags is in effect.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct Pariharam {
-    pub id: String,
-    pub title: String,
-    /// Tags on effective rules (e.g. `graha:saturn`, `dosha:kuja`) or
-    /// transit tags (e.g. `transit:sade_sati`) that bring this pariharam up.
-    pub triggers: Vec<String>,
-    pub deity: Option<String>,
-    pub day: Option<String>,
-    pub practices: Vec<String>,
-    pub places: Vec<String>,
-    pub charity: Option<String>,
-    pub source: crate::model::Source,
-    pub review: Review,
-}
-
-/// Transit tags the engine emits (see `transit_tags`).
-pub const TRANSIT_TAGS: [&str; 4] = ["transit:sade_sati", "transit:ashtama_shani", "transit:ardhashtama_shani", "transit:kantaka_shani"];
-
-/// The pariharam tag for a challenging transit, if any.
-pub fn transit_tag(kind: lagn_core::TransitKind) -> Option<&'static str> {
-    use lagn_core::TransitKind::*;
-    match kind {
-        SadeSatiRising | SadeSatiPeak | SadeSatiSetting => Some("transit:sade_sati"),
-        Ashtama => Some("transit:ashtama_shani"),
-        Ardhashtama => Some("transit:ardhashtama_shani"),
-        Kantaka => Some("transit:kantaka_shani"),
-        GuruFavourable | NodeFavourable => None,
-    }
 }
 
 /// `corpus/karma.json`: what the tradition reads from Ketu's house and sign

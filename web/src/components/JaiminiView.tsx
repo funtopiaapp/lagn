@@ -1,20 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { api, ApiError } from "../api";
-import type { ArgalaVerdict, BirthInput, JaiminiResponse, Karaka } from "../types";
-
-/** What each karaka stands for. Stated, not interpreted: the corpus is where
- *  meaning is argued, and nothing here reads a rule. */
-const KARAKA: Record<Karaka, { abbrev: string; name: string; of: string }> = {
-  atma: { abbrev: "AK", name: "Atmakaraka", of: "the self" },
-  amatya: { abbrev: "AmK", name: "Amatyakaraka", of: "career, the minister" },
-  bhratri: { abbrev: "BK", name: "Bhratrikaraka", of: "siblings, the guru" },
-  matri: { abbrev: "MK", name: "Matrikaraka", of: "mother" },
-  pitri: { abbrev: "PiK", name: "Pitrikaraka", of: "father" },
-  putra: { abbrev: "PuK", name: "Putrakaraka", of: "children" },
-  gnati: { abbrev: "GK", name: "Gnatikaraka", of: "obstacles, illness, cousins" },
-  dara: { abbrev: "DK", name: "Darakaraka", of: "spouse" },
-};
+import type { ArgalaVerdict, BirthInput, JaiminiResponse } from "../types";
 
 const VERDICT: Record<ArgalaVerdict, { label: string; chip: string }> = {
   stands: { label: "stands", chip: "ok" },
@@ -22,13 +9,6 @@ const VERDICT: Record<ArgalaVerdict, { label: string; chip: string }> = {
   overcome: { label: "overcome", chip: "warn" },
   none: { label: "—", chip: "" },
 };
-
-/** A1 is the Arudha Lagna, A12 the Upapada; practice names both. */
-function padaLabel(bhava: number): string {
-  if (bhava === 1) return "AL";
-  if (bhava === 12) return "UL";
-  return `A${bhava}`;
-}
 
 /**
  * Jaimini core: the eight chara karakas, the twelve arudha padas, and the
@@ -40,6 +20,9 @@ function padaLabel(bhava: number): string {
  * each side of an argala - because an arudha is the one Jaimini quantity a
  * practitioner most often recomputes by hand, and the point is to let them
  * check this rather than take it on trust.
+ *
+ * Names - of grahas, signs and karakas - come from the engine rather than
+ * from a table here, so this tab says "Kuja" where every other tab does.
  *
  * Every variant in force is named at the foot, by its ID from
  * docs/phase13/DESIGN.md section 7. None of them is signed off yet.
@@ -73,10 +56,10 @@ export function JaiminiView({ birth }: { birth: BirthInput }) {
             <tr><th>Rank</th><th>Karaka</th><th>Graha</th><th>Rasi</th><th>Advanced</th></tr>
           </thead>
           <tbody>
-            {data.karakas.assigned.map((a) => (
-              <tr key={a.karaka}>
-                <th scope="row">{KARAKA[a.karaka].abbrev}</th>
-                <td>{KARAKA[a.karaka].name}<span className="hint"> · {KARAKA[a.karaka].of}</span></td>
+            {data.karakas.map((a) => (
+              <tr key={a.id}>
+                <th scope="row">{a.abbrev}</th>
+                <td>{a.name}<span className="hint"> · {a.signifies}</span></td>
                 <td>{a.graha}</td>
                 <td>{a.rasi}</td>
                 <td className="num">{a.advancement.toFixed(3)}°</td>
@@ -99,7 +82,7 @@ export function JaiminiView({ birth }: { birth: BirthInput }) {
           <tbody>
             {data.padas.map((p) => (
               <tr key={p.bhava}>
-                <th scope="row">{padaLabel(p.bhava)}</th>
+                <th scope="row">{p.label}</th>
                 <td>{p.bhava_rasi}</td>
                 <td>{p.lord}</td>
                 <td>{p.lord_rasi}</td>

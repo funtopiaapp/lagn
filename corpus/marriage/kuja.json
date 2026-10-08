@@ -23,17 +23,17 @@
     ],
     "text": {
       "en": "Mars is in the 2nd, 4th, 7th, 8th or 12th house counted from the lagna: Chevvai (Kuja) dosha. Tamil practice gives this great weight in marriage matching, and it is cancelled in several recognised conditions.",
-      "impact": "Chevvai dosha is widely respected in South Indian practice. In everyday terms it is read as friction or impatience in married life, not as a bar to marriage. The customary answer is matching with a partner whose chart carries the same dosha, and the remedies below. Most people whose charts carry it lead perfectly ordinary married lives."
+      "impact": "Chevvai dosha is widely respected in South Indian practice. In everyday terms it is read as friction or impatience in married life, not as a bar to marriage. The customary answer is matching with a partner whose chart carries the same dosha. Most people whose charts carry it lead perfectly ordinary married lives."
     },
     "source": {
       "reference": null,
-      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-22",
-      "comment": "Houses 2, 4, 7, 8, 12 from the lagna: the standard Tamil list. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+      "date": "2026-10-08",
+      "comment": "Chevvai dosha from the lagna. Text revised to remove the reference to remedies; this reading now ends at the matching, which is a chart matter rather than a practice to perform."
     }
   },
   {
@@ -60,17 +60,17 @@
     ],
     "text": {
       "en": "Mars is in the 2nd, 4th, 7th, 8th or 12th house counted from the Moon: Chevvai (Kuja) dosha as judged from the Moon.",
-      "impact": "Counted from the Moon, this is the milder form of Chevvai dosha. It is read as some friction in married life, eased by the customary matching and the remedies below."
+      "impact": "Counted from the Moon, this is the milder form of Chevvai dosha. It is read as some friction in married life, eased by the customary matching."
     },
     "source": {
       "reference": null,
-      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval."
+      "note": "Chevvai (Kuja) dosha as commonly practised in Tamil Nadu, written from general knowledge. Reference points, houses and the cancellation list vary between practitioners (DESIGN.md variants R-2 to R-4); the reviewer must confirm each before approval. No remedial practice is prescribed anywhere in this corpus, at the product owner's direction."
     },
     "review": {
       "status": "approved",
       "reviewer": "Claude (AI review at the product owner's direction)",
-      "date": "2026-09-22",
-      "comment": "Changed: polarity -2 to -1. Recognised but weighted below the lagna, and avoids one Mars scoring -4 from two viewpoints. Plain-language impact line added and reviewed 2026-09-22: it restates the same principle in everyday words, with what helps where the indication is difficult, and predicts no event."
+      "date": "2026-10-08",
+      "comment": "The milder form, from the Moon. Text revised to remove the reference to remedies."
     }
   },
   {

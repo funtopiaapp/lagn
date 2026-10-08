@@ -11,6 +11,7 @@
 
 pub mod analysis;
 pub mod ashtakavarga;
+pub mod chara;
 pub mod chart;
 pub mod condition;
 pub mod day;
@@ -38,6 +39,7 @@ pub use condition::{BaladiAvastha, JagradadiAvastha};
 pub use dignity::{Dignity, VargaMoolatrikona};
 pub use drishti::NodeAspects;
 pub use functional::{FunctionalNature, SambandhaKind};
+pub use chara::{CharaChain, CharaDasha, CharaLength, CharaPeriod, Direction};
 pub use jaimini::{
     arudha_pada, arudha_padas, argala, Argala, ArgalaKind, ArgalaPair, ArgalaVerdict, ArudhaPada,
     CharaKarakas, Jaimini, Karaka, KarakaAssignment, VariantChoice,
