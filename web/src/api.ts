@@ -1,5 +1,5 @@
 import type {
-  BirthInput, CharaResponse, ChartResponse, DaysResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, CharaResponse, ChartResponse, DaysResponse, UpagrahaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -116,6 +116,12 @@ export const api = {
   chara: async (birth: BirthInput) => {
     const n = await viaNative<CharaResponse>((b) => b.chara(JSON.stringify({ birth })));
     return n !== NOT_NATIVE ? n : post<CharaResponse>("/api/chara", { birth });
+  },
+
+  /** Upagrahas and the time lagnas. Professional surface. */
+  upagraha: async (birth: BirthInput) => {
+    const n = await viaNative<UpagrahaResponse>((b) => b.upagraha(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<UpagrahaResponse>("/api/upagraha", { birth });
   },
 
   topics: async () => {

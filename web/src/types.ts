@@ -288,3 +288,28 @@ export interface CharaResponse {
   running_now: CharaRunning | null;
   variants: VariantChoice[];
 }
+
+// --- Upagrahas and time lagnas (phase 13C, professional surface) --------
+// Specification: docs/phase13/UPAGRAHA.md.
+
+export interface UpaPoint {
+  name: string;
+  /** Degrees, minutes and seconds within the sign, formatted by the engine. */
+  degrees: string;
+  longitude: number;
+  rasi: string; rasi_tamil: string; house: number;
+}
+export interface UpaDayPart extends UpaPoint {
+  ruler: string;
+  /** Which eighth of the day or night, 1 to 7. */
+  part: number;
+}
+export interface UpagrahaResponse {
+  at_night: boolean;
+  vara: string; vara_lord: string;
+  hours_since_sunrise: number;
+  sun_offsets: UpaPoint[];
+  day_parts: UpaDayPart[];
+  time_lagnas: UpaPoint[];
+  variants: VariantChoice[];
+}

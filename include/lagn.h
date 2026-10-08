@@ -55,6 +55,10 @@ char *lagn_jaimini(const char *request_json);
    Professional surface only; carries its variant defaults. */
 char *lagn_chara(const char *request_json);
 
+/* {"birth": {...}} -> upagrahas (Gulika, Dhuma and the rest) and the
+   Bhava, Hora and Ghati lagnas. Professional surface only. */
+char *lagn_upagraha(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

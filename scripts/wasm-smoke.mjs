@@ -141,6 +141,14 @@ if (chara.lengths.length !== 12 || chara.variants.length !== 5 || chara.periods.
   throw new Error("chara dasha came back the wrong shape from the WebAssembly engine");
 }
 
+const upa = call("lagn_upagraha", JSON.stringify({ birth }));
+const gulika = upa.day_parts.find((p) => p.name === "Gulika");
+console.log(`  upagrahas: ${upa.at_night ? "night" : "day"} birth, Gulika in ${gulika.rasi} (part ${gulika.part}), ${upa.time_lagnas.length} time lagnas`);
+if (upa.sun_offsets.length !== 5 || upa.day_parts.length !== 5 || upa.time_lagnas.length !== 3
+  || upa.variants.length !== 4 || !/^[A-Z]/.test(gulika.rasi)) {
+  throw new Error("upagrahas came back the wrong shape from the WebAssembly engine");
+}
+
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));
 console.log(`  place search: ${places.map((p) => p.name).join(", ")}`);
 

@@ -206,6 +206,70 @@ async fn jaimini_endpoint_presents_the_library_faithfully_with_display_names() {
 }
 
 #[tokio::test]
+async fn upagraha_endpoint_closes_its_own_chain_and_names_every_point() {
+    // Phase 13C. The five Sun offsets are defined one from the next, and the
+    // chain collapses to Upaketu sitting exactly 30 degrees behind the Sun.
+    // Asserting that through the endpoint checks the whole path - engine,
+    // view and serialisation - against an identity that cannot be fudged.
+    let mut r = Rng(0xAB1_013C);
+    let mut nights = 0;
+    for _ in 0..120 {
+        let mut b = random_birth(&mut r);
+        // Moderate latitudes: the day division needs a real sunrise and sunset.
+        b["latitude"] = json!(b["latitude"].as_f64().unwrap() * 0.55);
+        let (st, v, text) = call(app(None), post("/api/upagraha", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+
+        let c = library_chart(&b);
+        let sun = c.placement(lagn_core::Graha::Sun).longitude;
+        let offsets = v["sun_offsets"].as_array().unwrap();
+        assert_eq!(offsets.len(), 5);
+        let upaketu = offsets.iter().find(|p| p["name"] == "Upaketu").unwrap();
+        let want = (sun - 30.0).rem_euclid(360.0);
+        let got = upaketu["longitude"].as_f64().unwrap();
+        let apart = {
+            let d = (got - want).abs() % 360.0;
+            if d > 180.0 { 360.0 - d } else { d }
+        };
+        assert!(apart < 1e-6, "Upaketu {got} is not 30 behind the Sun {sun} (want {want})");
+
+        // Every point is named and placed, with a formatted degree string
+        // rather than a raw number for the reader.
+        for group in ["sun_offsets", "day_parts", "time_lagnas"] {
+            for p in v[group].as_array().unwrap() {
+                assert!(!p["name"].as_str().unwrap().is_empty(), "{group}: unnamed point");
+                assert!(p["degrees"].as_str().unwrap().contains('\''), "{group}: degrees not formatted");
+                let h = p["house"].as_u64().unwrap();
+                assert!((1..=12).contains(&h), "{group}: house {h}");
+                // A name, never an identifier.
+                let rasi = p["rasi"].as_str().unwrap();
+                assert!(rasi.starts_with(|ch: char| ch.is_uppercase()), "{rasi} is an identifier");
+            }
+        }
+        assert_eq!(v["day_parts"].as_array().unwrap().len(), 5);
+        assert_eq!(v["time_lagnas"].as_array().unwrap().len(), 3);
+
+        // Five distinct parts: no two named upagrahas share an eighth.
+        let parts: std::collections::BTreeSet<u64> = v["day_parts"].as_array().unwrap()
+            .iter().map(|d| d["part"].as_u64().unwrap()).collect();
+        assert_eq!(parts.len(), 5, "two upagrahas share a part");
+        assert!(parts.iter().all(|p| (1..=7).contains(p)));
+
+        if v["at_night"].as_bool().unwrap() {
+            nights += 1;
+        }
+
+        let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
+            .map(|x| x["id"].as_str().unwrap()).collect();
+        assert_eq!(ids, ["V-13-14", "V-13-15", "V-13-16", "V-13-17"]);
+    }
+    // Both branches of the day/night split were exercised, or the night path
+    // is untested rather than correct.
+    assert!(nights > 0, "no night birth in the sweep; the night division is untested");
+    assert!(nights < 120, "every birth was at night; the day division is untested");
+}
+
+#[tokio::test]
 async fn chara_endpoint_dates_come_from_the_engine_and_match_its_julian_days() {
     // Phase 13B. The browser does no calendar arithmetic, so the endpoint has
     // to hand it dates rather than Julian Days - and those dates must be the

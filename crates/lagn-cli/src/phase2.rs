@@ -353,3 +353,42 @@ fn civil(c: &Chart, jd: f64) -> String {
     let d = lagn_core::jd_to_civil(jd, c.birth.moment.utc_offset_hours);
     format!("{:04}-{:02}-{:02}", d.year, d.month, d.day)
 }
+
+/// Upagrahas and the time lagnas.
+/// Specification: `docs/phase13/UPAGRAHA.md`.
+pub fn print_upagrahas(u: &lagn_core::upagraha::Upagrahas) {
+    println!(
+        "\n  {} birth, vara {} ({}), {:.3} h after sunrise; Sun at sunrise {:.4}",
+        if u.at_night { "Night" } else { "Day" },
+        u.vara.english(), u.vara.lord().name(),
+        u.hours_since_sunrise, u.sunrise_sun,
+    );
+
+    let row = |p: &lagn_core::upagraha::Point, extra: String| {
+        println!(
+            "  {:<14} {:>10.4}  {:<12} {:>7.3}  house {:>2}{}",
+            p.name, p.longitude, p.rasi.name(), p.degrees_in_rasi, p.house, extra,
+        );
+    };
+
+    println!("\n  Shadowy points from the Sun");
+    for p in &u.sun_offsets {
+        row(p, String::new());
+    }
+
+    println!("\n  From the eight-part division of the {}", if u.at_night { "night" } else { "day" });
+    for d in &u.day_parts {
+        row(&d.point, format!("   part {} ({})", d.part, d.ruler.name()));
+    }
+
+    println!("\n  Time lagnas");
+    for p in &u.time_lagnas {
+        row(p, String::new());
+    }
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/UPAGRAHA.md section 6)");
+    for v in &u.variants {
+        println!("  {:<9} {:<46} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}
