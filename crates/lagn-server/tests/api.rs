@@ -131,6 +131,52 @@ async fn chart_endpoint_raw_output_equals_the_library_bit_for_bit() {
 }
 
 #[tokio::test]
+async fn jaimini_endpoint_equals_the_library_and_carries_its_variants() {
+    // Phase 13A. The endpoint is a thin wrapper by design - no review gate,
+    // because nothing in Jaimini core is interpreted - so the only thing that
+    // can go wrong here is the wrapper itself, and bit-for-bit parity with the
+    // library is what rules that out.
+    let mut r = Rng(0xAB1_0013);
+    for _ in 0..200 {
+        let b = random_birth(&mut r);
+        let (st, v, text) = call(app(None), post("/api/jaimini", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+        let c = library_chart(&b);
+        assert_eq!(
+            v,
+            serde_json::to_value(lagn_core::jaimini::Jaimini::compute(&c)).unwrap(),
+            "jaimini differs for {b}",
+        );
+
+        // Section 6 of the design: the variant defaults travel with every
+        // response, so a practitioner can always tell which scheme produced
+        // the numbers they are looking at.
+        let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
+            .map(|x| x["id"].as_str().unwrap()).collect();
+        assert_eq!(ids, ["V-13-1", "V-13-2", "V-13-3", "V-13-4", "V-13-5", "V-13-6", "V-13-7", "V-13-8"]);
+        assert_eq!(v["karakas"]["assigned"].as_array().unwrap().len(), 8);
+        assert_eq!(v["padas"].as_array().unwrap().len(), 12);
+        assert_eq!(v["argala"].as_array().unwrap().len(), 12);
+    }
+}
+
+#[tokio::test]
+async fn jaimini_needs_no_review_token_and_never_grants_one() {
+    // It is computation, not interpretation, so it is readable without a
+    // token. That also means it must not become a side door into review-only
+    // content: the response carries no rule, no status and no reviewer.
+    let b = json!({
+        "date": "1981-12-21", "time": "14:10:00",
+        "latitude": 8.8932, "longitude": 76.6141, "utc_offset_hours": 5.5,
+    });
+    let (st, v, text) = call(app(None), post("/api/jaimini", &json!({ "birth": b }), None)).await;
+    assert_eq!(st, StatusCode::OK, "{text}");
+    for key in ["rules", "results", "mode", "withheld", "reviewer"] {
+        assert!(v.get(key).is_none(), "jaimini leaked a {key} field");
+    }
+}
+
+#[tokio::test]
 async fn dasha_display_dates_come_from_the_engine() {
     let mut r = Rng(0xAB1_0002);
     for _ in 0..100 {

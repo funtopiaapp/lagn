@@ -252,3 +252,54 @@ pub fn print_ashtakavarga(av: &Ashtakavarga) {
     }
     println!("\n");
 }
+
+/// Jaimini core: the eight chara karakas, the twelve arudha padas, and the
+/// argala acting on each sign. Specification: `docs/phase13/DESIGN.md`.
+pub fn print_jaimini(j: &lagn_core::jaimini::Jaimini) {
+    println!("\n  Chara karakas");
+    println!("  {:<5} {:<12} {:<10} {:<12} Advanced", "", "Karaka", "Graha", "Rasi");
+    for a in &j.karakas.assigned {
+        println!(
+            "  {:<5} {:<12} {:<10} {:<12} {:>7.3}",
+            a.karaka.abbrev(), a.karaka.name(), a.graha.name(), a.rasi.name(), a.advancement,
+        );
+    }
+
+    println!("\n  Arudha padas");
+    println!("  {:<5} {:<12} {:<9} {:<12} {:<6} Pada rasi", "Pada", "Bhava", "Lord", "Lord in", "Count");
+    for p in &j.padas {
+        println!(
+            "  {:<5} {:<12} {:<9} {:<12} {:<6} {}{}",
+            p.label(), p.bhava_rasi.name(), p.lord.name(), p.lord_rasi.name(),
+            p.count, p.rasi.name(),
+            if p.adjusted { "  (10th taken)" } else { "" },
+        );
+    }
+
+    println!("\n  Argala");
+    println!("  {:<12} {:<22} {:<22} gain (11/3)", "Sign", "wealth (2/12)", "home (4/10)");
+    for a in &j.argala {
+        print!("  {:<12}", a.rasi.name());
+        for p in &a.pairs {
+            let cell = format!("{} {}v{}", verdict(p.verdict), p.argala_grahas.len(), p.counter_grahas.len());
+            print!(" {cell:<21}");
+        }
+        println!();
+    }
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/DESIGN.md section 7)");
+    for v in &j.variants {
+        println!("  {:<8} {:<40} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}
+
+fn verdict(v: lagn_core::jaimini::ArgalaVerdict) -> &'static str {
+    use lagn_core::jaimini::ArgalaVerdict as V;
+    match v {
+        V::Stands => "stands     ",
+        V::Neutralised => "neutralised",
+        V::Overcome => "overcome   ",
+        V::None => "-          ",
+    }
+}

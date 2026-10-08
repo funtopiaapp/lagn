@@ -42,6 +42,8 @@ enum Command {
     Details(DerivedArgs),
     /// Bhinnashtakavarga and Sarvashtakavarga.
     Ashtakavarga(DerivedArgs),
+    /// Jaimini: chara karakas, arudha padas, argala.
+    Jaimini(DerivedArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -474,6 +476,15 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&av)?);
             } else {
                 phase2::print_ashtakavarga(&av);
+            }
+        }
+        Command::Jaimini(a) => {
+            let chart = build_chart(&a.birth)?;
+            let j = lagn_core::jaimini::Jaimini::compute(&chart);
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&j)?);
+            } else {
+                phase2::print_jaimini(&j);
             }
         }
         Command::Dasha(a) => {

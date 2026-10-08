@@ -7,17 +7,30 @@ import { MatchView } from "./components/MatchView";
 import { OfflineBanner } from "./components/OfflineBanner";
 import { PeriodsView } from "./components/PeriodsView";
 import { DayTimingsView } from "./components/DayTimingsView";
+import { JaiminiView } from "./components/JaiminiView";
 import { ReadingsView } from "./components/ReadingsView";
 import { SavedCharts } from "./components/SavedCharts";
 import { loadSaved, type SavedBirth } from "./lib/savedBirths";
 import { loadToken, saveToken } from "./lib/session";
+import { loadMode, saveMode, type Mode } from "./lib/mode";
 import { loadTheme, type Theme } from "./lib/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
-type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved";
-const TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"], ["periods", "Sensitive periods"], ["day", "Day timings"], ["family", "Family"], ["match", "Match"], ["saved", "Saved profiles"]];
+type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini";
+
+/** The general public's surface. Phase 13 adds nothing to this list, and a
+ *  test pins that: turning Pro on must add tabs, never change Lite's. */
+const LITE_TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"], ["periods", "Sensitive periods"], ["day", "Day timings"], ["family", "Family"], ["match", "Match"], ["saved", "Saved profiles"]];
+
+/** The professional surface, appended to the Lite tabs rather than replacing
+ *  them. See docs/phase13/DESIGN.md section 2. */
+const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"]];
+
+export function tabsFor(mode: Mode): [Tab, string][] {
+  return mode === "pro" ? [...LITE_TABS, ...PRO_TABS] : LITE_TABS;
+}
 
 export function App() {
   const [chart, setChart] = useState<ChartResponse | null>(null);
@@ -30,6 +43,9 @@ export function App() {
   const [token, setToken] = useState(loadToken);
   const [tokenDraft, setTokenDraft] = useState("");
   const [theme, setTheme] = useState<Theme>(loadTheme);
+  // Lite or Pro. Device-local, never in the URL, so a shared link cannot drop
+  // a lay reader onto the professional surface.
+  const [mode, setModeState] = useState<Mode>(loadMode);
   // Charts kept on this device. Read once; every change writes through.
   const [saved, setSaved] = useState<SavedBirth[]>(loadSaved);
   const [showSaved, setShowSaved] = useState(false);
@@ -48,6 +64,13 @@ export function App() {
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
+
+  const setMode = (m: Mode) => {
+    saveMode(m);
+    setModeState(m);
+    // Leaving Pro while standing on a Pro tab would show an empty section.
+    if (m === "lite" && !LITE_TABS.some(([t]) => t === tab)) setTab("chart");
+  };
 
   const setTab = (t: Tab) => {
     if (t !== tab) history.pushState({ lagn: true, view: t }, "");
@@ -100,7 +123,7 @@ export function App() {
         ) : (
           <>
             <nav className="tabs" aria-label="Sections">
-              {TABS.map(([t, label]) => (
+              {tabsFor(mode).map(([t, label]) => (
                 <button key={t} type="button" aria-current={tab === t ? "page" : undefined} onClick={() => setTab(t)}>{label}</button>
               ))}
             </nav>
@@ -110,6 +133,7 @@ export function App() {
             {tab === "day" && <DayTimingsView birth={chart.input} />}
             {tab === "family" && <FamilyView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "match" && <MatchView birth={chart.input} reviewToken={token} />}
+            {tab === "jaimini" && mode === "pro" && <JaiminiView birth={chart.input} />}
             {tab === "saved" && (
               <SavedCharts saved={saved} onChange={setSaved}
                 onOpen={(b, sx) => { setTab("chart"); void compute(b, sx); }} />
@@ -120,6 +144,18 @@ export function App() {
       </main>
 
       <footer>
+        <p className="mode-switch">
+          <label>
+            <input type="checkbox" checked={mode === "pro"}
+              onChange={(e) => setMode(e.target.checked ? "pro" : "lite")} />
+            {" "}Professional mode
+          </label>
+          <span className="hint">
+            {mode === "pro"
+              ? "Jaimini and the rest of the apparatus, in its own vocabulary. Some of it rests on variant choices no astrologer has signed off yet, and each is labelled where it appears."
+              : "Adds the professional tools - chara karakas, arudha padas, argala - for astrologers. Nothing in the readings changes."}
+          </span>
+        </p>
         {version?.review_enabled && (
           <details className="reviewer">
             <summary>{token ? "Reviewer mode on" : "Reviewer sign-in"}</summary>

@@ -37,6 +37,7 @@ interface Engine {
     lagn_topic(name: number, request: number): number;
     lagn_periods(ptr: number): number;
     lagn_days(ptr: number): number;
+    lagn_jaimini(ptr: number): number;
     lagn_family(ptr: number): number;
     lagn_match(ptr: number): number;
     lagn_places(ptr: number): number;
@@ -140,6 +141,7 @@ export async function installWasmEngine(): Promise<number | null> {
       topic: async (name, request) => call(e, e.lagn_topic, [name, request]),
       periods: async (request) => call(e, e.lagn_periods, [request]),
       days: async (request) => call(e, e.lagn_days, [request]),
+      jaimini: async (request) => call(e, e.lagn_jaimini, [request]),
       family: async (request) => call(e, e.lagn_family, [request]),
       match: async (request) => call(e, e.lagn_match, [request]),
       places: async (request) => call(e, e.lagn_places, [request]),

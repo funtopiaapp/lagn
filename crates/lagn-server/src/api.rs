@@ -183,6 +183,17 @@ pub fn offset(s: &AppState, q: &OffsetQuery) -> Result<offset::Suggestion, ApiEr
     offset::suggest(&s.tzdb, &q.tz, date, time, q.longitude).map_err(ApiError::BadRequest)
 }
 
+/// Jaimini core for a chart: chara karakas, arudha padas, argala.
+///
+/// No review gate and no mode. Like a panchangam, every value here is a
+/// computation rather than an interpretation, so there is nothing for a
+/// reviewer to approve - but the variant defaults that produced it travel
+/// with the response, which is what section 6 of the phase 13 design requires.
+pub fn jaimini(req: ChartRequest) -> Result<lagn_core::jaimini::Jaimini, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    Ok(lagn_core::jaimini::Jaimini::compute(&c))
+}
+
 pub fn chart(req: ChartRequest) -> Result<view::ChartResponse, ApiError> {
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
     let d = req.derivation.unwrap_or_default();
