@@ -120,6 +120,11 @@ async fn jaimini(body: Body) -> ApiResult<view::JaiminiView> {
     compute(move || api::jaimini(req)).await.map(Json)
 }
 
+async fn kp(body: Body) -> ApiResult<view::KpView> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::kp(req)).await.map(Json)
+}
+
 async fn upagraha(body: Body) -> ApiResult<view::UpagrahaView> {
     let req: api::ChartRequest = parse_json(body)?;
     compute(move || api::upagraha(req)).await.map(Json)
@@ -266,6 +271,7 @@ pub fn router_with(state: Arc<AppState>, static_dir: Option<&Path>, cors: &Cors)
         .route("/api/jaimini", post(jaimini))
         .route("/api/chara", post(chara))
         .route("/api/upagraha", post(upagraha))
+        .route("/api/kp", post(kp))
         .route("/api/topics", get(topics))
         .route("/api/topic/{name}", post(topic))
         .route("/api/periods", post(periods))

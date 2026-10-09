@@ -10,6 +10,7 @@ import { DayTimingsView } from "./components/DayTimingsView";
 import { JaiminiView } from "./components/JaiminiView";
 import { CharaView } from "./components/CharaView";
 import { UpagrahaView } from "./components/UpagrahaView";
+import { KpView } from "./components/KpView";
 import { ReadingsView } from "./components/ReadingsView";
 import { SavedCharts } from "./components/SavedCharts";
 import { loadSaved, type SavedBirth } from "./lib/savedBirths";
@@ -21,7 +22,7 @@ import { ModeToggle } from "./components/ModeToggle";
 import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
-type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini" | "chara" | "upagraha";
+type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini" | "chara" | "upagraha" | "kp";
 
 /** The general public's surface. Phase 13 adds nothing to this list, and a
  *  test pins that: turning Pro on must add tabs, never change Lite's. */
@@ -29,7 +30,7 @@ const LITE_TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"]
 
 /** The professional surface, appended to the Lite tabs rather than replacing
  *  them. See docs/phase13/DESIGN.md section 2. */
-const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"], ["chara", "Chara dasha"], ["upagraha", "Upagrahas"]];
+const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"], ["chara", "Chara dasha"], ["upagraha", "Upagrahas"], ["kp", "KP"]];
 
 export function tabsFor(mode: Mode): [Tab, string][] {
   return mode === "pro" ? [...LITE_TABS, ...PRO_TABS] : LITE_TABS;
@@ -140,6 +141,7 @@ export function App() {
             {tab === "jaimini" && mode === "pro" && <JaiminiView birth={chart.input} />}
             {tab === "chara" && mode === "pro" && <CharaView birth={chart.input} />}
             {tab === "upagraha" && mode === "pro" && <UpagrahaView birth={chart.input} />}
+            {tab === "kp" && mode === "pro" && <KpView birth={chart.input} />}
             {tab === "saved" && (
               <SavedCharts saved={saved} onChange={setSaved}
                 onOpen={(b, sx) => { setTab("chart"); void compute(b, sx); }} />

@@ -59,6 +59,11 @@ char *lagn_chara(const char *request_json);
    Bhava, Hora and Ghati lagnas. Professional surface only. */
 char *lagn_upagraha(const char *request_json);
 
+/* {"birth": {...}} -> a Krishnamurti Paddhati reading: the four lords of
+   every point, the Placidus cusps, the ruling planets and the house
+   significators. Professional surface only. */
+char *lagn_kp(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

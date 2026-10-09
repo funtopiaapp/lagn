@@ -313,3 +313,32 @@ export interface UpagrahaResponse {
   time_lagnas: UpaPoint[];
   variants: VariantChoice[];
 }
+
+// --- Krishnamurti Paddhati (phase 13H, professional surface) ------------
+// Specification: docs/phase13/KP.md.
+
+export interface KpLords {
+  longitude: number;
+  /** Degrees, minutes and seconds within the sign, formatted by the engine. */
+  degrees: string;
+  rasi: string; nakshatra: string; pada: number;
+  sign_lord: string; star_lord: string; sub_lord: string; sub_sub_lord: string;
+}
+export interface KpGraha extends KpLords { graha: string }
+export interface KpCusp extends KpLords { house: number }
+export interface KpRulingPlanet { role: string; graha: string; sub_lord: string | null }
+export interface KpSignificator {
+  graha: string;
+  /** 1 to 4, strongest first. */
+  rank: number;
+  because: string;
+}
+export interface KpHouseSignificators { house: number; significators: KpSignificator[] }
+export interface KpResponse {
+  ascendant: KpLords;
+  grahas: KpGraha[];
+  cusps: KpCusp[];
+  ruling_planets: KpRulingPlanet[];
+  significators: KpHouseSignificators[];
+  variants: VariantChoice[];
+}

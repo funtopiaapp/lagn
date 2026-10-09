@@ -48,6 +48,8 @@ enum Command {
     Chara(CharaArgs),
     /// Upagrahas (Gulika, Dhuma and the rest) and the time lagnas.
     Upagraha(DerivedArgs),
+    /// Krishnamurti Paddhati: the four lords, cusps, ruling planets, significators.
+    Kp(DerivedArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -501,6 +503,16 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&j)?);
             } else {
                 phase2::print_jaimini(&j);
+            }
+        }
+        Command::Kp(a) => {
+            let chart = build_chart(&a.birth)?;
+            let eph = Ephemeris::new(a.birth.ayanamsa.into(), a.birth.node.into());
+            let kp = lagn_core::kp::Kp::compute(&eph, &chart)?;
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&kp)?);
+            } else {
+                phase2::print_kp(&kp);
             }
         }
         Command::Upagraha(a) => {

@@ -199,6 +199,14 @@ pub fn jaimini(req: ChartRequest) -> Result<view::JaiminiView, ApiError> {
 /// the response (CHARA-DASHA.md section 6).
 /// Upagrahas and the time lagnas. Computation, so no review gate; the
 /// variant defaults travel with the response.
+/// A KP reading. Computation, so no review gate.
+pub fn kp(req: ChartRequest) -> Result<view::KpView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);
+    let kp = lagn_core::kp::Kp::compute(&eph, &c).map_err(|e| ApiError::BadRequest(e.to_string()))?;
+    Ok(view::kp_view(&kp))
+}
+
 pub fn upagraha(req: ChartRequest) -> Result<view::UpagrahaView, ApiError> {
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
     let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);

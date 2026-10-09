@@ -1,7 +1,7 @@
 # Phase 13 design: the professional surface
 
-Status: 13A, the Chara dasha half of 13B, and the upagraha half of 13C are
-built and through the QA gate. What is held back is held for one reason in
+Status: 13A, the Chara dasha half of 13B, the upagraha half of 13C, and all
+of 13H (KP) are built and through the QA gate. What is held back is held for one reason in
 every case: the computation is a published table rather than a derivation, so
 no oracle can catch a misremembering of it. Each needs one transcribed worked
 example. The product owner asked for JHora parity "for
@@ -31,7 +31,7 @@ two surfaces over one engine.
 | | Lite (default) | Pro |
 |---|---|---|
 | Who it is for | the general public | astrologers |
-| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini, Chara dasha and Upagrahas today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
+| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini, Chara dasha, Upagrahas and KP today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
 | Language | plain, justified prose | technical terms, unglossed |
 | Numbers shown | scores and verdicts, explained | raw values, intermediate components, variant IDs |
 | Unverified output | never shown | shown, labelled |
@@ -63,7 +63,7 @@ Rules the boundary has to keep:
 | 13E | Balas | Shadbala, Bhava bala, Ishta/Kashta phala, sphuta drishti | variants unsigned; ships labelled (section 6) |
 | 13F | Ashtakavarga depth | sodhya pindas (rasi, graha, sodhya), kaksha transit, trikona and ekadhipatya sodhana | no |
 | 13G | Varshaphal | Muntha, Varshesha, sahams, Tri-pataki, Patyayini and Mudda dasha, Harsha and Panchavargeeya bala | no |
-| 13H | KP | 249 sub-lords, cuspal sub-lords, Placidus cusps, ruling planets, significators, horary | no |
+| 13H | KP (**built**, see `KP.md`) | 249 sub-lords, cuspal sub-lords, Placidus cusps, ruling planets, significators, horary | no |
 | 13I | Yogas | named yogas as reviewed corpus rules | no (needs review capacity, not data) |
 
 Condition 3 of `docs/phase2/DESIGN.md` section 9 - sunrise and sunset in

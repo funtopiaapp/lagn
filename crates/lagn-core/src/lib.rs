@@ -21,6 +21,7 @@ pub mod drishti;
 pub mod format;
 pub mod functional;
 pub mod jaimini;
+pub mod kp;
 pub mod nakshatra;
 pub mod rasi;
 pub mod relationship;
@@ -41,6 +42,7 @@ pub use dignity::{Dignity, VargaMoolatrikona};
 pub use drishti::NodeAspects;
 pub use functional::{FunctionalNature, SambandhaKind};
 pub use chara::{CharaChain, CharaDasha, CharaLength, CharaPeriod, Direction};
+pub use kp::{Cusp, Division, HouseSignificators, Kp, Lords, RulingPlanet, Significator, SignificatorGroup};
 pub use jaimini::{
     arudha_pada, arudha_padas, argala, Argala, ArgalaKind, ArgalaPair, ArgalaVerdict, ArudhaPada,
     CharaKarakas, Jaimini, Karaka, KarakaAssignment, VariantChoice,

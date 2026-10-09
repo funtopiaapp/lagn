@@ -206,6 +206,83 @@ async fn jaimini_endpoint_presents_the_library_faithfully_with_display_names() {
 }
 
 #[tokio::test]
+async fn kp_endpoint_divides_every_nakshatra_into_the_vimshottari_proportions() {
+    // Phase 13H. The sub is the whole of KP, and it is derived rather than
+    // looked up: a nakshatra splits into nine parts in Vimshottari order from
+    // its own lord, each part proportional to that lord's years out of 120.
+    // This recomputes the sub for every point the endpoint returns, from the
+    // longitude alone, and compares.
+    let mut r = Rng(0xAB1_0138);
+    for _ in 0..80 {
+        let mut b = random_birth(&mut r);
+        // Placidus cusps are undefined near the poles.
+        b["latitude"] = json!(b["latitude"].as_f64().unwrap() * 0.6);
+        let (st, v, text) = call(app(None), post("/api/kp", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+
+        let mut points: Vec<&serde_json::Value> = vec![&v["ascendant"]];
+        points.extend(v["grahas"].as_array().unwrap());
+        points.extend(v["cusps"].as_array().unwrap());
+
+        for p in points {
+            let lon = p["longitude"].as_f64().unwrap();
+            let pos = lagn_core::nakshatra::NakshatraPosition::from_longitude(lon);
+            let star = pos.nakshatra.lord();
+            assert_eq!(p["star_lord"], star.name(), "star lord at {lon}");
+            assert_eq!(p["nakshatra"], pos.nakshatra.name());
+            assert_eq!(p["pada"], pos.pada);
+
+            // Walk the nine subs from the star lord and find the one holding
+            // this longitude's position within its nakshatra.
+            let span = lagn_core::nakshatra::NAKSHATRA_SPAN;
+            let i = lagn_core::dasha::CYCLE.iter().position(|&g| g == star).unwrap();
+            let mut at = 0.0f64;
+            let mut want = None;
+            for j in 0..9 {
+                let lord = lagn_core::dasha::CYCLE[(i + j) % 9];
+                let end = if j == 8 {
+                    span
+                } else {
+                    at + span * lagn_core::dasha::dasha_years(lord) / lagn_core::dasha::TOTAL_YEARS
+                };
+                if pos.degrees_within >= at && pos.degrees_within < end {
+                    want = Some(lord);
+                    break;
+                }
+                at = end;
+            }
+            assert_eq!(
+                p["sub_lord"], want.expect("the nine subs tile the nakshatra").name(),
+                "sub lord at {lon}",
+            );
+            // A name, never an identifier.
+            let s = p["sub_lord"].as_str().unwrap();
+            assert!(s.starts_with(|c: char| c.is_uppercase()), "{s} is an identifier");
+        }
+
+        assert_eq!(v["cusps"].as_array().unwrap().len(), 12);
+        assert_eq!(v["grahas"].as_array().unwrap().len(), 9);
+        assert_eq!(v["ruling_planets"].as_array().unwrap().len(), 5);
+
+        // Significators are ranked strongest first and never repeat a graha.
+        for h in v["significators"].as_array().unwrap() {
+            let ranks: Vec<u64> = h["significators"].as_array().unwrap()
+                .iter().map(|s| s["rank"].as_u64().unwrap()).collect();
+            let mut sorted = ranks.clone();
+            sorted.sort_unstable();
+            assert_eq!(ranks, sorted, "house {} is not ranked", h["house"]);
+            let names: std::collections::BTreeSet<&str> = h["significators"].as_array().unwrap()
+                .iter().map(|s| s["graha"].as_str().unwrap()).collect();
+            assert_eq!(names.len(), ranks.len(), "house {} repeats a graha", h["house"]);
+        }
+
+        let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
+            .map(|x| x["id"].as_str().unwrap()).collect();
+        assert_eq!(ids, ["V-13-18", "V-13-19", "V-13-20", "V-13-21"]);
+    }
+}
+
+#[tokio::test]
 async fn upagraha_endpoint_closes_its_own_chain_and_names_every_point() {
     // Phase 13C. The five Sun offsets are defined one from the next, and the
     // chain collapses to Upaketu sitting exactly 30 degrees behind the Sun.
