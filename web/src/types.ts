@@ -342,3 +342,30 @@ export interface KpResponse {
   significators: KpHouseSignificators[];
   variants: VariantChoice[];
 }
+
+// --- The annual chart, Muntha and kaksha (phase 13F/13G) ---------------
+// Specification: docs/phase13/VARSHA-KAKSHA.md.
+
+export interface VarshaPosition {
+  graha: string; rasi: string; rasi_tamil: string;
+  degrees: string; house: number; retrograde: boolean;
+}
+export interface KakshaReading {
+  graha: string; rasi: string; degrees: string;
+  /** 1 to 8, from the start of the sign. */
+  kaksha: number;
+  owner: string;
+  /** True when the kaksha's owner gave a bindu there in the natal chart. */
+  supported: boolean;
+  bindus: number;
+}
+export interface VarshaResponse {
+  age: number;
+  begins: string;
+  /** How far the annual Sun is from the natal Sun, in degrees. */
+  sun_error: number;
+  lagna: string; muntha: string; muntha_house: number;
+  positions: VarshaPosition[];
+  kaksha: KakshaReading[];
+  variants: VariantChoice[];
+}

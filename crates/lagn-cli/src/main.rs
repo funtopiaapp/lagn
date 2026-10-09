@@ -50,6 +50,8 @@ enum Command {
     Upagraha(DerivedArgs),
     /// Krishnamurti Paddhati: the four lords, cusps, ruling planets, significators.
     Kp(DerivedArgs),
+    /// The annual (solar return) chart, Muntha and kaksha transit.
+    Varsha(VarshaArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -198,6 +200,18 @@ struct DerivedArgs {
     birth: BirthArgs,
     #[command(flatten)]
     derivation: phase2::DerivationArgs,
+    #[arg(long)]
+    json: bool,
+}
+
+#[derive(Parser)]
+#[command(allow_negative_numbers = true)]
+struct VarshaArgs {
+    #[command(flatten)]
+    birth: BirthArgs,
+    /// Completed years: the year the annual chart covers.
+    #[arg(long)]
+    age: u32,
     #[arg(long)]
     json: bool,
 }
@@ -503,6 +517,16 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&j)?);
             } else {
                 phase2::print_jaimini(&j);
+            }
+        }
+        Command::Varsha(a) => {
+            let chart = build_chart(&a.birth)?;
+            let eph = Ephemeris::new(a.birth.ayanamsa.into(), a.birth.node.into());
+            let v = lagn_core::varsha::Varshaphala::compute(&eph, &chart, a.age)?;
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&v)?);
+            } else {
+                phase2::print_varsha(&v);
             }
         }
         Command::Kp(a) => {

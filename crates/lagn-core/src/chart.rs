@@ -128,6 +128,44 @@ impl Chart {
     /// Compute a chart. Deterministic: same inputs, same bytes out, forever.
     pub fn compute(birth: BirthData, settings: ChartSettings) -> Result<Chart, EphemError> {
         let jd_ut = birth.moment.to_jd_ut()?;
+        Chart::from_jd(jd_ut, birth, settings)
+    }
+
+    /// Compute a chart for an exact Julian Day rather than for a civil moment.
+    ///
+    /// The annual chart needs this. Its moment comes from solving for a solar
+    /// return and is precise to a fraction of a second; routing it back
+    /// through `BirthMoment` would round it to the civil second and throw
+    /// away the precision the solve just established. So the JD is used as
+    /// given, and the civil fields are filled in from it for display only.
+    pub fn compute_at(
+        jd_ut: f64,
+        latitude: f64,
+        longitude: f64,
+        place_name: String,
+        utc_offset_hours: f64,
+        settings: ChartSettings,
+    ) -> Result<Chart, EphemError> {
+        let d = lagn_ephem::jd_to_civil(jd_ut, utc_offset_hours);
+        let birth = BirthData {
+            moment: BirthMoment {
+                year: d.year,
+                month: d.month,
+                day: d.day,
+                hour: d.hour,
+                minute: d.minute,
+                second: d.second,
+                utc_offset_hours,
+            },
+            latitude,
+            longitude,
+            place_name,
+        };
+        Chart::from_jd(jd_ut, birth, settings)
+    }
+
+    /// The shared body of [`Chart::compute`] and [`Chart::compute_at`].
+    fn from_jd(jd_ut: f64, birth: BirthData, settings: ChartSettings) -> Result<Chart, EphemError> {
         let eph = Ephemeris::new(settings.ayanamsa, settings.node_type);
 
         let (angles, _cusps) =
