@@ -165,6 +165,13 @@ for (const h of kp.significators) {
   }
 }
 
+const varsha = call("lagn_varsha", JSON.stringify({ birth, age: 45 }));
+console.log(`  annual chart: year 45 begins ${varsha.begins}, Muntha in ${varsha.muntha} (house ${varsha.muntha_house}), Sun within ${varsha.sun_error.toExponential(1)} deg`);
+if (varsha.positions.length !== 9 || varsha.kaksha.length !== 7
+  || varsha.variants.length !== 4 || varsha.sun_error > 1e-6) {
+  throw new Error("the annual chart came back wrong from the WebAssembly engine");
+}
+
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));
 console.log(`  place search: ${places.map((p) => p.name).join(", ")}`);
 

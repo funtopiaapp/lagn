@@ -335,6 +335,94 @@ pub fn jaimini_view(j: &lagn_core::jaimini::Jaimini) -> JaiminiView {
 }
 
 // ---------------------------------------------------------------------------
+// The annual chart, Muntha and kaksha (phase 13F/13G).
+// Specification: docs/phase13/VARSHA-KAKSHA.md.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct KakshaView {
+    pub graha: &'static str,
+    pub rasi: &'static str,
+    pub degrees: String,
+    pub kaksha: u8,
+    pub owner: String,
+    pub supported: bool,
+    pub bindus: u8,
+}
+
+/// A position in the annual chart. Deliberately leaner than `PositionView`:
+/// that one carries dignity, combustion and avastha, which need a full
+/// `Analysis` the annual chart has no use for.
+#[derive(Debug, Clone, Serialize)]
+pub struct VarshaPositionView {
+    pub graha: &'static str,
+    pub rasi: &'static str,
+    pub rasi_tamil: &'static str,
+    pub degrees: String,
+    pub house: u8,
+    pub retrograde: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct VarshaView {
+    pub age: u32,
+    /// The moment the year begins, in the birth place's own wall clock.
+    pub begins: String,
+    /// How far the annual Sun is from the natal Sun, in degrees. Shown so a
+    /// reader can see the solve closed rather than take it on trust.
+    pub sun_error: f64,
+    pub lagna: &'static str,
+    pub muntha: &'static str,
+    pub muntha_house: u8,
+    pub positions: Vec<VarshaPositionView>,
+    pub kaksha: Vec<KakshaView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+pub fn varsha_view(v: &lagn_core::varsha::Varshaphala) -> VarshaView {
+    let tz = v.chart.birth.moment.utc_offset_hours;
+    let d = jd_to_civil(v.return_jd, tz);
+    VarshaView {
+        age: v.age,
+        begins: format!(
+            "{:04}-{:02}-{:02} {:02}:{:02}",
+            d.year, d.month, d.day, d.hour, d.minute
+        ),
+        sun_error: v.sun_error,
+        lagna: v.chart.lagna.rasi.name(),
+        muntha: v.muntha.name(),
+        muntha_house: v.muntha_house,
+        positions: v
+            .chart
+            .placements
+            .iter()
+            .map(|p| VarshaPositionView {
+                graha: p.graha.name(),
+                rasi: p.rasi.name(),
+                rasi_tamil: p.rasi.tamil_name(),
+                degrees: lagn_core::format::dms(p.degrees_in_rasi),
+                house: p.house,
+                retrograde: p.retrograde,
+            })
+            .collect(),
+        kaksha: v
+            .kaksha
+            .iter()
+            .map(|k| KakshaView {
+                graha: k.graha.name(),
+                rasi: k.rasi.name(),
+                degrees: lagn_core::format::dms(lagn_core::Rasi::degrees_within(k.longitude)),
+                kaksha: k.kaksha,
+                owner: format!("{:?}", k.owner),
+                supported: k.supported,
+                bindus: k.bindus,
+            })
+            .collect(),
+        variants: v.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Krishnamurti Paddhati (phase 13H). Specification: docs/phase13/KP.md.
 // ---------------------------------------------------------------------------
 

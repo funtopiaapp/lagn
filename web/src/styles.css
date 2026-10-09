@@ -412,3 +412,7 @@ footer a { color: var(--accent); }
 .kp-sig { display: inline-flex; align-items: baseline; gap: 2px; margin-right: 10px; white-space: nowrap; }
 .kp-rank { font-size: 0.72em; color: var(--muted); vertical-align: super; }
 .kp .grid th[scope="row"] { white-space: nowrap; }
+
+/* The annual chart takes one input, so it sits inline with the heading. */
+.varsha-age { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 10px; }
+.varsha-age input { width: 5.5em; }

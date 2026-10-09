@@ -446,3 +446,43 @@ pub fn print_kp(kp: &lagn_core::kp::Kp) {
     }
     println!();
 }
+
+/// The annual chart, Muntha and kaksha transit.
+/// Specification: `docs/phase13/VARSHA-KAKSHA.md`.
+pub fn print_varsha(v: &lagn_core::varsha::Varshaphala) {
+    let tz = v.chart.birth.moment.utc_offset_hours;
+    let d = lagn_core::jd_to_civil(v.return_jd, tz);
+    println!(
+        "\n  Year {} begins {:04}-{:02}-{:02} {:02}:{:02}:{:04.1} (local), Sun within {:.1e} deg of natal",
+        v.age, d.year, d.month, d.day, d.hour, d.minute, d.second, v.sun_error,
+    );
+    println!(
+        "  Annual lagna {} · Muntha in {} (house {})",
+        v.chart.lagna.rasi.name(), v.muntha.name(), v.muntha_house,
+    );
+
+    println!("\n  Annual chart");
+    println!("  {:<9} {:<12} {:<9}", "Graha", "Rasi", "Degrees");
+    for p in &v.chart.placements {
+        println!(
+            "  {:<9} {:<12} {}",
+            p.graha.name(), p.rasi.name(), lagn_core::format::dms(p.degrees_in_rasi),
+        );
+    }
+
+    println!("\n  Kaksha of each transiting graha, against the natal Ashtakavarga");
+    println!("  {:<9} {:<12} {:<7} {:<10} {:<7} Verdict", "Graha", "Rasi", "Kaksha", "Owner", "Bindus");
+    for k in &v.kaksha {
+        println!(
+            "  {:<9} {:<12} {:<7} {:<10} {:<7} {}",
+            k.graha.name(), k.rasi.name(), k.kaksha, format!("{:?}", k.owner),
+            k.bindus, if k.supported { "supported" } else { "unsupported" },
+        );
+    }
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/VARSHA-KAKSHA.md section 5)");
+    for x in &v.variants {
+        println!("  {:<9} {:<46} {}", x.id, x.question, x.chosen);
+    }
+    println!();
+}

@@ -31,6 +31,14 @@ pub struct ChartRequest {
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct VarshaRequest {
+    pub birth: BirthInput,
+    /// Completed years: the year the annual chart covers.
+    pub age: u32,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct TopicRequest {
     pub birth: BirthInput,
     #[serde(default)]
@@ -200,6 +208,18 @@ pub fn jaimini(req: ChartRequest) -> Result<view::JaiminiView, ApiError> {
 /// Upagrahas and the time lagnas. Computation, so no review gate; the
 /// variant defaults travel with the response.
 /// A KP reading. Computation, so no review gate.
+/// The annual chart for a given completed age, with Muntha and kaksha.
+pub fn varsha(req: VarshaRequest) -> Result<view::VarshaView, ApiError> {
+    if req.age > 120 {
+        return Err(ApiError::BadRequest(format!("age {} is outside 0 to 120", req.age)));
+    }
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);
+    let v = lagn_core::varsha::Varshaphala::compute(&eph, &c, req.age)
+        .map_err(|e| ApiError::BadRequest(e.to_string()))?;
+    Ok(view::varsha_view(&v))
+}
+
 pub fn kp(req: ChartRequest) -> Result<view::KpView, ApiError> {
     let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
     let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);

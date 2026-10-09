@@ -64,6 +64,11 @@ char *lagn_upagraha(const char *request_json);
    significators. Professional surface only. */
 char *lagn_kp(const char *request_json);
 
+/* {"birth": {...}, "age": n} -> the annual (solar return) chart for the
+   year the native completes age n, with Muntha and kaksha transit.
+   Professional surface only. */
+char *lagn_varsha(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

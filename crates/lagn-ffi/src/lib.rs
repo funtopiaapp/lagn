@@ -251,6 +251,7 @@ endpoint!(lagn_jaimini, api::ChartRequest, |_s, req| api::jaimini(req));
 endpoint!(lagn_chara, api::ChartRequest, |_s, req| api::chara(req));
 endpoint!(lagn_upagraha, api::ChartRequest, |_s, req| api::upagraha(req));
 endpoint!(lagn_kp, api::ChartRequest, |_s, req| api::kp(req));
+endpoint!(lagn_varsha, api::VarshaRequest, |_s, req| api::varsha(req));
 endpoint!(lagn_places, api::PlacesQuery, |s, q| api::places(s, &q));
 endpoint!(lagn_offset, api::OffsetQuery, |s, q| api::offset(s, &q));
 

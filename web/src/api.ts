@@ -1,5 +1,5 @@
 import type {
-  BirthInput, CharaResponse, ChartResponse, DaysResponse, KpResponse, UpagrahaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, CharaResponse, ChartResponse, DaysResponse, KpResponse, UpagrahaResponse, VarshaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -128,6 +128,12 @@ export const api = {
   kp: async (birth: BirthInput) => {
     const n = await viaNative<KpResponse>((b) => b.kp(JSON.stringify({ birth })));
     return n !== NOT_NATIVE ? n : post<KpResponse>("/api/kp", { birth });
+  },
+
+  /** The annual chart for a completed age. Professional surface. */
+  varsha: async (birth: BirthInput, age: number) => {
+    const n = await viaNative<VarshaResponse>((b) => b.varsha(JSON.stringify({ birth, age })));
+    return n !== NOT_NATIVE ? n : post<VarshaResponse>("/api/varsha", { birth, age });
   },
 
   topics: async () => {

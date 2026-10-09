@@ -29,6 +29,7 @@ interface CapacitorPlugin {
   chara(options: { request: string }): Promise<PluginResult>;
   upagraha(options: { request: string }): Promise<PluginResult>;
   kp(options: { request: string }): Promise<PluginResult>;
+  varsha(options: { request: string }): Promise<PluginResult>;
   family(options: { request: string }): Promise<PluginResult>;
   match(options: { request: string }): Promise<PluginResult>;
   places(options: { request: string }): Promise<PluginResult>;
@@ -76,6 +77,7 @@ export function installNativeBridge(): boolean {
     chara: (request) => text(p.chara({ request })),
     upagraha: (request) => text(p.upagraha({ request })),
     kp: (request) => text(p.kp({ request })),
+    varsha: (request) => text(p.varsha({ request })),
     family: (request) => text(p.family({ request })),
     match: (request) => text(p.match({ request })),
     places: (request) => text(p.places({ request })),

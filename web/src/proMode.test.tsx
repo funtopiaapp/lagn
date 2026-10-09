@@ -22,6 +22,7 @@ describe("the Lite surface", () => {
     expect(ids).not.toContain("chara");
     expect(ids).not.toContain("upagraha");
     expect(ids).not.toContain("kp");
+    expect(ids).not.toContain("varsha");
   });
 });
 
@@ -38,5 +39,6 @@ describe("the Pro surface", () => {
     expect(ids).toContain("chara");
     expect(ids).toContain("upagraha");
     expect(ids).toContain("kp");
+    expect(ids).toContain("varsha");
   });
 });

@@ -18,6 +18,7 @@ export interface NativeBridge {
   chara(requestJson: string): Promise<string>;
   upagraha(requestJson: string): Promise<string>;
   kp(requestJson: string): Promise<string>;
+  varsha(requestJson: string): Promise<string>;
   family(requestJson: string): Promise<string>;
   match(requestJson: string): Promise<string>;
   places(requestJson: string): Promise<string>;
