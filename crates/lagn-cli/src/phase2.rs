@@ -392,3 +392,57 @@ pub fn print_upagrahas(u: &lagn_core::upagraha::Upagrahas) {
     }
     println!();
 }
+
+/// A KP reading. Specification: `docs/phase13/KP.md`.
+pub fn print_kp(kp: &lagn_core::kp::Kp) {
+    let lords_row = |label: &str, l: &lagn_core::kp::Lords| {
+        println!(
+            "  {:<12} {:<12} {:<16} {:<9} {:<9} {:<9} {}",
+            label, l.rasi.name(), format!("{} pada {}", l.nakshatra.name(), l.pada),
+            l.sign_lord.name(), l.star_lord.name(), l.sub_lord.name(), l.sub_sub_lord.name(),
+        );
+    };
+
+    println!("\n  {:<12} {:<12} {:<16} {:<9} {:<9} {:<9} Sub-sub", "", "Rasi", "Nakshatra", "Sign", "Star", "Sub");
+    lords_row("Ascendant", &kp.ascendant);
+    for (g, l) in &kp.grahas {
+        lords_row(g.name(), l);
+    }
+
+    println!("\n  Placidus cusps");
+    println!("  {:<6} {:<12} {:<16} {:<9} {:<9} {:<9} Sub-sub", "House", "Rasi", "Nakshatra", "Sign", "Star", "Sub");
+    for c in &kp.cusps {
+        println!(
+            "  {:<6} {:<12} {:<16} {:<9} {:<9} {:<9} {}",
+            c.house, c.lords.rasi.name(),
+            format!("{} pada {}", c.lords.nakshatra.name(), c.lords.pada),
+            c.lords.sign_lord.name(), c.lords.star_lord.name(),
+            c.lords.sub_lord.name(), c.lords.sub_sub_lord.name(),
+        );
+    }
+
+    println!("\n  Ruling planets");
+    for r in &kp.ruling_planets {
+        match r.sub_lord {
+            Some(sub) => println!("  {:<26} {:<9} sub {}", r.role, r.graha.name(), sub.name()),
+            None => println!("  {:<26} {}", r.role, r.graha.name()),
+        }
+    }
+
+    println!("\n  Significators, strongest first");
+    for h in &kp.significators {
+        let list: Vec<String> = h
+            .significators
+            .iter()
+            .map(|s| format!("{} ({})", s.graha.abbrev(), s.group.rank()))
+            .collect();
+        println!("  house {:<3} {}", h.house, list.join("  "));
+    }
+    println!("\n  1 = in the star of an occupant   2 = occupies   3 = in the star of the lord   4 = the lord");
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/KP.md section 5)");
+    for v in &kp.variants {
+        println!("  {:<9} {:<48} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}

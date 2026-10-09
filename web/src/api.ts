@@ -1,5 +1,5 @@
 import type {
-  BirthInput, CharaResponse, ChartResponse, DaysResponse, UpagrahaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  BirthInput, CharaResponse, ChartResponse, DaysResponse, KpResponse, UpagrahaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -122,6 +122,12 @@ export const api = {
   upagraha: async (birth: BirthInput) => {
     const n = await viaNative<UpagrahaResponse>((b) => b.upagraha(JSON.stringify({ birth })));
     return n !== NOT_NATIVE ? n : post<UpagrahaResponse>("/api/upagraha", { birth });
+  },
+
+  /** A KP reading. Professional surface. */
+  kp: async (birth: BirthInput) => {
+    const n = await viaNative<KpResponse>((b) => b.kp(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<KpResponse>("/api/kp", { birth });
   },
 
   topics: async () => {

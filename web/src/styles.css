@@ -407,3 +407,8 @@ footer a { color: var(--accent); }
 .chara-period:hover { background: var(--surface-2, transparent); }
 .chara-span { color: var(--muted); font-variant-numeric: tabular-nums; }
 .chara .grid { margin-bottom: 10px; }
+
+/* KP significator chips: a graha with the group number that earned its place. */
+.kp-sig { display: inline-flex; align-items: baseline; gap: 2px; margin-right: 10px; white-space: nowrap; }
+.kp-rank { font-size: 0.72em; color: var(--muted); vertical-align: super; }
+.kp .grid th[scope="row"] { white-space: nowrap; }

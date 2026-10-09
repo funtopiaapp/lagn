@@ -21,6 +21,7 @@ describe("the Lite surface", () => {
     expect(ids).not.toContain("jaimini");
     expect(ids).not.toContain("chara");
     expect(ids).not.toContain("upagraha");
+    expect(ids).not.toContain("kp");
   });
 });
 
@@ -36,5 +37,6 @@ describe("the Pro surface", () => {
     expect(ids).toContain("jaimini");
     expect(ids).toContain("chara");
     expect(ids).toContain("upagraha");
+    expect(ids).toContain("kp");
   });
 });

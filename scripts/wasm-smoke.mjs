@@ -149,6 +149,22 @@ if (upa.sun_offsets.length !== 5 || upa.day_parts.length !== 5 || upa.time_lagna
   throw new Error("upagrahas came back the wrong shape from the WebAssembly engine");
 }
 
+const kp = call("lagn_kp", JSON.stringify({ birth }));
+const subs = new Set(kp.cusps.map((c) => c.sub_lord));
+console.log(`  kp: asc sub ${kp.ascendant.sub_lord}, ${kp.cusps.length} cusps (${subs.size} distinct sub lords), ${kp.ruling_planets.length} ruling planets`);
+if (kp.cusps.length !== 12 || kp.grahas.length !== 9 || kp.ruling_planets.length !== 5
+  || kp.significators.length !== 12 || kp.variants.length !== 4
+  || !/^[A-Z]/.test(kp.ascendant.sub_lord)) {
+  throw new Error("kp came back the wrong shape from the WebAssembly engine");
+}
+// Every house's significators are ranked strongest first.
+for (const h of kp.significators) {
+  const ranks = h.significators.map((s) => s.rank);
+  if (ranks.join() !== [...ranks].sort().join()) {
+    throw new Error(`kp house ${h.house} significators are not ranked`);
+  }
+}
+
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));
 console.log(`  place search: ${places.map((p) => p.name).join(", ")}`);
 

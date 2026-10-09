@@ -335,6 +335,124 @@ pub fn jaimini_view(j: &lagn_core::jaimini::Jaimini) -> JaiminiView {
 }
 
 // ---------------------------------------------------------------------------
+// Krishnamurti Paddhati (phase 13H). Specification: docs/phase13/KP.md.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct LordsView {
+    pub longitude: f64,
+    pub degrees: String,
+    pub rasi: &'static str,
+    pub nakshatra: &'static str,
+    pub pada: u8,
+    pub sign_lord: &'static str,
+    pub star_lord: &'static str,
+    pub sub_lord: &'static str,
+    pub sub_sub_lord: &'static str,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct KpCuspView {
+    pub house: u8,
+    #[serde(flatten)]
+    pub lords: LordsView,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct KpGrahaView {
+    pub graha: &'static str,
+    #[serde(flatten)]
+    pub lords: LordsView,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct RulingPlanetView {
+    pub role: String,
+    pub graha: &'static str,
+    pub sub_lord: Option<&'static str>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct SignificatorView {
+    pub graha: &'static str,
+    /// 1 to 4, strongest first.
+    pub rank: u8,
+    pub because: &'static str,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct HouseSignificatorsView {
+    pub house: u8,
+    pub significators: Vec<SignificatorView>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct KpView {
+    pub ascendant: LordsView,
+    pub grahas: Vec<KpGrahaView>,
+    pub cusps: Vec<KpCuspView>,
+    pub ruling_planets: Vec<RulingPlanetView>,
+    pub significators: Vec<HouseSignificatorsView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+fn lords_view(l: &lagn_core::kp::Lords) -> LordsView {
+    LordsView {
+        longitude: l.longitude,
+        degrees: lagn_core::format::dms(l.longitude - 30.0 * (l.rasi.index() as f64)),
+        rasi: l.rasi.name(),
+        nakshatra: l.nakshatra.name(),
+        pada: l.pada,
+        sign_lord: l.sign_lord.name(),
+        star_lord: l.star_lord.name(),
+        sub_lord: l.sub_lord.name(),
+        sub_sub_lord: l.sub_sub_lord.name(),
+    }
+}
+
+pub fn kp_view(kp: &lagn_core::kp::Kp) -> KpView {
+    KpView {
+        ascendant: lords_view(&kp.ascendant),
+        grahas: kp
+            .grahas
+            .iter()
+            .map(|(g, l)| KpGrahaView { graha: g.name(), lords: lords_view(l) })
+            .collect(),
+        cusps: kp
+            .cusps
+            .iter()
+            .map(|c| KpCuspView { house: c.house, lords: lords_view(&c.lords) })
+            .collect(),
+        ruling_planets: kp
+            .ruling_planets
+            .iter()
+            .map(|r| RulingPlanetView {
+                role: r.role.to_string(),
+                graha: r.graha.name(),
+                sub_lord: r.sub_lord.map(|g| g.name()),
+            })
+            .collect(),
+        significators: kp
+            .significators
+            .iter()
+            .map(|h| HouseSignificatorsView {
+                house: h.house,
+                significators: h
+                    .significators
+                    .iter()
+                    .map(|s| SignificatorView {
+                        graha: s.graha.name(),
+                        rank: s.group.rank(),
+                        because: s.group.describe(),
+                    })
+                    .collect(),
+            })
+            .collect(),
+        variants: kp.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Upagrahas and the time lagnas (phase 13C).
 // Specification: docs/phase13/UPAGRAHA.md.
 // ---------------------------------------------------------------------------
