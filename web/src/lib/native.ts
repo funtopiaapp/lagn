@@ -19,6 +19,10 @@ export interface NativeBridge {
   upagraha(requestJson: string): Promise<string>;
   kp(requestJson: string): Promise<string>;
   varsha(requestJson: string): Promise<string>;
+  bala(requestJson: string): Promise<string>;
+  yogini(requestJson: string): Promise<string>;
+  yogi(requestJson: string): Promise<string>;
+  ashtakavarga(requestJson: string): Promise<string>;
   family(requestJson: string): Promise<string>;
   match(requestJson: string): Promise<string>;
   places(requestJson: string): Promise<string>;

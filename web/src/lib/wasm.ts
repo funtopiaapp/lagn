@@ -25,7 +25,6 @@ const ENGINE = "engine/";
  * fetched fresh, because its filename is content-hashed - called an export
  * that build did not have. Changing the URL is what makes the old cache miss.
  */
-declare const __ENGINE_VERSION__: string;
 const VERSION = typeof __ENGINE_VERSION__ === "string" ? __ENGINE_VERSION__ : "dev";
 
 /** An engine URL, carrying the engine's version. */
@@ -41,7 +40,7 @@ function url(root: string, path: string): string {
 export const REQUIRED = [
   "lagn_init", "lagn_version", "lagn_topics", "lagn_chart", "lagn_topic",
   "lagn_periods", "lagn_days", "lagn_family", "lagn_match", "lagn_places",
-  "lagn_offset", "lagn_jaimini", "lagn_chara", "lagn_upagraha", "lagn_kp", "lagn_varsha",
+  "lagn_offset", "lagn_jaimini", "lagn_chara", "lagn_upagraha", "lagn_kp", "lagn_varsha", "lagn_bala", "lagn_yogini", "lagn_yogi", "lagn_ashtakavarga",
 ] as const;
 
 /** The files the engine reads, and where the module sees them. */
@@ -71,6 +70,10 @@ interface Engine {
     lagn_upagraha(ptr: number): number;
     lagn_kp(ptr: number): number;
     lagn_varsha(ptr: number): number;
+    lagn_bala(ptr: number): number;
+    lagn_yogini(ptr: number): number;
+    lagn_yogi(ptr: number): number;
+    lagn_ashtakavarga(ptr: number): number;
     lagn_family(ptr: number): number;
     lagn_match(ptr: number): number;
     lagn_places(ptr: number): number;
@@ -190,6 +193,10 @@ export async function installWasmEngine(): Promise<number | null> {
       upagraha: async (request) => call(e, e.lagn_upagraha, [request]),
       kp: async (request) => call(e, e.lagn_kp, [request]),
       varsha: async (request) => call(e, e.lagn_varsha, [request]),
+      bala: async (request) => call(e, e.lagn_bala, [request]),
+      yogini: async (request) => call(e, e.lagn_yogini, [request]),
+      yogi: async (request) => call(e, e.lagn_yogi, [request]),
+      ashtakavarga: async (request) => call(e, e.lagn_ashtakavarga, [request]),
       family: async (request) => call(e, e.lagn_family, [request]),
       match: async (request) => call(e, e.lagn_match, [request]),
       places: async (request) => call(e, e.lagn_places, [request]),

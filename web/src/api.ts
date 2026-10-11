@@ -1,5 +1,5 @@
 import type {
-  BirthInput, CharaResponse, ChartResponse, DaysResponse, KpResponse, UpagrahaResponse, VarshaResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
+  AshtakavargaResponse, BalaResponse, BirthInput, CharaResponse, ChartResponse, DaysResponse, KpResponse, UpagrahaResponse, VarshaResponse, YogiResponse, YoginiResponse, FamilyReading, JaiminiResponse, MatchResponse, OffsetSuggestion, PeriodsResponse, Place, TopicResponse, TopicsResponse, VersionInfo,
 } from "./types";
 import { bridge, type NativeBridge } from "./lib/native";
 import { transportReady } from "./lib/transport";
@@ -134,6 +134,30 @@ export const api = {
   varsha: async (birth: BirthInput, age: number) => {
     const n = await viaNative<VarshaResponse>((b) => b.varsha(JSON.stringify({ birth, age })));
     return n !== NOT_NATIVE ? n : post<VarshaResponse>("/api/varsha", { birth, age });
+  },
+
+  /** Shadbala, five of six. Professional surface; every value is labelled. */
+  bala: async (birth: BirthInput) => {
+    const n = await viaNative<BalaResponse>((b) => b.bala(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<BalaResponse>("/api/bala", { birth });
+  },
+
+  /** Yogini dasha. Professional surface. */
+  yogini: async (birth: BirthInput) => {
+    const n = await viaNative<YoginiResponse>((b) => b.yogini(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<YoginiResponse>("/api/yogini", { birth });
+  },
+
+  /** Yogi, Avayogi and the Yoga sphuta. Professional surface. */
+  yogi: async (birth: BirthInput) => {
+    const n = await viaNative<YogiResponse>((b) => b.yogi(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<YogiResponse>("/api/yogi", { birth });
+  },
+
+  /** The full Ashtakavarga grid. Professional surface. */
+  ashtakavarga: async (birth: BirthInput) => {
+    const n = await viaNative<AshtakavargaResponse>((b) => b.ashtakavarga(JSON.stringify({ birth })));
+    return n !== NOT_NATIVE ? n : post<AshtakavargaResponse>("/api/ashtakavarga", { birth });
   },
 
   topics: async () => {

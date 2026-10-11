@@ -335,6 +335,314 @@ pub fn jaimini_view(j: &lagn_core::jaimini::Jaimini) -> JaiminiView {
 }
 
 // ---------------------------------------------------------------------------
+// Yogi, Avayogi and the Yoga sphuta (phase 13D).
+// Specification: docs/phase13/YOGI.md.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct YogiView {
+    pub longitude: f64,
+    pub degrees: String,
+    pub rasi: &'static str,
+    pub rasi_tamil: &'static str,
+    pub nakshatra: &'static str,
+    pub pada: u8,
+    pub yogi: &'static str,
+    pub avayogi_nakshatra: &'static str,
+    pub avayogi: &'static str,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+pub fn yogi_view(y: &lagn_core::yogi::Yogi) -> YogiView {
+    YogiView {
+        longitude: y.sphuta.longitude,
+        degrees: lagn_core::format::dms(y.sphuta.degrees_in_rasi),
+        rasi: y.sphuta.rasi.name(),
+        rasi_tamil: y.sphuta.rasi.tamil_name(),
+        nakshatra: y.sphuta.nakshatra.name(),
+        pada: y.sphuta.pada,
+        yogi: y.yogi.name(),
+        avayogi_nakshatra: y.avayogi_nakshatra.name(),
+        avayogi: y.avayogi.name(),
+        variants: y.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Ashtakavarga for the professional surface (phase 13F).
+//
+// The engine has computed BAV, SAV and the prastara since phase 2B, with
+// fixed per-graha totals and a fixed SAV total of 337 - which this view
+// reports alongside so a reader can see the invariant hold rather than take
+// the grid on trust. Nothing new is computed here; this is presentation.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct BavRowView {
+    pub graha: &'static str,
+    /// Bindus by sign, Mesha first.
+    pub bindus: Vec<u8>,
+    /// Bindus by house from the lagna, 1 to 12.
+    pub by_house: Vec<u8>,
+    pub total: u32,
+    /// The fixed total this graha's BAV always comes to.
+    pub expected_total: u32,
+}
+
+/// The full grid, for the professional surface.
+///
+/// Deliberately separate from `AshtakavargaView`, the lean summary that rides
+/// on every chart response: this one carries the fixed-total invariants and a
+/// seven-by-twelve contributor matrix, which would be waste on a request that
+/// only wants a chart.
+#[derive(Debug, Clone, Serialize)]
+pub struct AshtakavargaGridView {
+    pub lagna: &'static str,
+    pub signs: Vec<&'static str>,
+    pub rows: Vec<BavRowView>,
+    pub sav: Vec<u8>,
+    pub sav_by_house: Vec<u8>,
+    pub sav_total: u32,
+    /// 337, always, for every chart ever cast.
+    pub sav_expected_total: u32,
+    /// Which contributors gave each bindu, per graha and sign.
+    pub contributors: Vec<Vec<Vec<&'static str>>>,
+}
+
+pub fn ashtakavarga_grid_view(
+    chart: &Chart,
+    av: &lagn_core::Ashtakavarga,
+) -> AshtakavargaGridView {
+    use lagn_core::ashtakavarga::{BAV_TOTALS, SAV_TOTAL};
+    let seven = lagn_core::relationship::SEVEN;
+
+    AshtakavargaGridView {
+        lagna: chart.lagna.rasi.name(),
+        signs: lagn_core::Rasi::ALL.iter().map(|r| r.name()).collect(),
+        rows: seven
+            .iter()
+            .enumerate()
+            .map(|(i, &g)| {
+                let bav = av.bav_of(g).expect("the seven have a BAV");
+                BavRowView {
+                    graha: g.name(),
+                    bindus: bav.to_vec(),
+                    by_house: (1..=12u8)
+                        .map(|h| {
+                            let sign = lagn_core::Rasi::from_index(
+                                chart.lagna.rasi.index() as i32 + h as i32 - 1,
+                            );
+                            bav[sign.index() as usize]
+                        })
+                        .collect(),
+                    total: bav.iter().map(|&x| x as u32).sum(),
+                    expected_total: BAV_TOTALS[i],
+                }
+            })
+            .collect(),
+        sav: av.sav.to_vec(),
+        sav_by_house: (1..=12u8).map(|h| av.sav_in_house(h)).collect(),
+        sav_total: av.sav.iter().map(|&x| x as u32).sum(),
+        sav_expected_total: SAV_TOTAL,
+        contributors: seven
+            .iter()
+            .map(|&g| {
+                lagn_core::Rasi::ALL
+                    .iter()
+                    .map(|&r| {
+                        av.contributors(g, r)
+                            .unwrap_or_default()
+                            .into_iter()
+                            .map(contributor_name)
+                            .collect()
+                    })
+                    .collect()
+            })
+            .collect(),
+    }
+}
+
+fn contributor_name(c: lagn_core::Contributor) -> &'static str {
+    use lagn_core::Contributor as C;
+    match c {
+        C::Sun => "Surya",
+        C::Moon => "Chandra",
+        C::Mars => "Kuja",
+        C::Mercury => "Budha",
+        C::Jupiter => "Guru",
+        C::Venus => "Shukra",
+        C::Saturn => "Shani",
+        C::Lagna => "Lagna",
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Yogini dasha (phase 13D). Specification: docs/phase13/YOGINI.md.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct YoginiPeriodView {
+    pub yogini: &'static str,
+    pub lord: &'static str,
+    pub years: f64,
+    pub start: String,
+    pub end: String,
+    pub cycle: u32,
+    pub start_jd: f64,
+    pub end_jd: f64,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub children: Vec<YoginiPeriodView>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct YoginiRunningView {
+    pub as_of_utc: String,
+    pub maha: &'static str,
+    pub antar: &'static str,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct YoginiView {
+    pub janma_nakshatra: &'static str,
+    pub birth_yogini: &'static str,
+    pub birth_lord: &'static str,
+    pub balance_years: f64,
+    /// When the yogini running at birth gives way.
+    pub balance_until: String,
+    pub cycle_years: f64,
+    pub periods: Vec<YoginiPeriodView>,
+    /// Depends on today, so excluded from parity, as the Vimshottari view does.
+    pub running_now: Option<YoginiRunningView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+pub fn yogini_view(
+    chart: &Chart,
+    d: &lagn_core::yogini::YoginiDasha,
+    now: Option<f64>,
+) -> YoginiView {
+    let tz = chart.birth.moment.utc_offset_hours;
+    let one = |p: &lagn_core::yogini::YoginiPeriod| YoginiPeriodView {
+        yogini: p.yogini.name(),
+        lord: p.lord.name(),
+        years: p.yogini.years(),
+        start: civil_date(p.start_jd, tz),
+        end: civil_date(p.end_jd, tz),
+        cycle: p.cycle,
+        start_jd: p.start_jd,
+        end_jd: p.end_jd,
+        children: Vec::new(),
+    };
+    YoginiView {
+        janma_nakshatra: d.janma_nakshatra.name(),
+        birth_yogini: d.birth_yogini.name(),
+        birth_lord: d.birth_yogini.lord().name(),
+        balance_years: d.balance_years,
+        balance_until: civil_date(d.periods[0].end_jd, tz),
+        cycle_years: lagn_core::yogini::CYCLE_YEARS,
+        periods: d
+            .periods
+            .iter()
+            .map(|p| YoginiPeriodView { children: p.children.iter().map(one).collect(), ..one(p) })
+            .collect(),
+        running_now: now.and_then(|jd| {
+            d.at(jd).map(|c| YoginiRunningView {
+                as_of_utc: {
+                    let t = jd_to_civil(jd, 0.0);
+                    format!("{:04}-{:02}-{:02}", t.year, t.month, t.day)
+                },
+                maha: c.maha.name(),
+                antar: c.antar.name(),
+            })
+        }),
+        variants: d.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Shadbala (phase 13E). Specification: docs/phase13/SHADBALA.md.
+//
+// Ships labelled: every value depends on variant choices no astrologer has
+// signed off, and one of the six components is not computed. The caveat and
+// the variant IDs travel with the numbers rather than beside them.
+// ---------------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize)]
+pub struct BalaRowView {
+    pub graha: &'static str,
+    pub sthana: f64,
+    pub uchcha: f64,
+    pub saptavargaja: f64,
+    pub ojayugma: f64,
+    pub kendra: f64,
+    pub drekkana: f64,
+    pub dig: f64,
+    pub kala: f64,
+    pub nathonnatha: f64,
+    pub paksha: f64,
+    pub tribhaga: f64,
+    pub abda: f64,
+    pub masa: f64,
+    pub vara: f64,
+    pub hora: f64,
+    pub ayana: f64,
+    pub cheshta: f64,
+    pub cheshta_from_ayana: bool,
+    pub naisargika: f64,
+    pub total_virupas: f64,
+    pub total_rupas: f64,
+    pub customary_minimum_rupas: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct BalaView {
+    /// Always false while Drik is held.
+    pub drik_included: bool,
+    pub components_computed: u8,
+    pub caveat: String,
+    pub rows: Vec<BalaRowView>,
+    pub variants: Vec<lagn_core::jaimini::VariantChoice>,
+}
+
+pub fn bala_view(b: &lagn_core::bala::Bala) -> BalaView {
+    BalaView {
+        drik_included: b.drik_included,
+        components_computed: b.components_computed,
+        caveat: b.caveat.to_string(),
+        rows: b
+            .grahas
+            .iter()
+            .map(|g| BalaRowView {
+                graha: g.graha.name(),
+                sthana: g.sthana.total,
+                uchcha: g.sthana.uchcha,
+                saptavargaja: g.sthana.saptavargaja,
+                ojayugma: g.sthana.ojayugma,
+                kendra: g.sthana.kendra,
+                drekkana: g.sthana.drekkana,
+                dig: g.dig,
+                kala: g.kala.total,
+                nathonnatha: g.kala.nathonnatha,
+                paksha: g.kala.paksha,
+                tribhaga: g.kala.tribhaga,
+                abda: g.kala.abda,
+                masa: g.kala.masa,
+                vara: g.kala.vara,
+                hora: g.kala.hora,
+                ayana: g.kala.ayana,
+                cheshta: g.cheshta.value,
+                cheshta_from_ayana: g.cheshta.from_ayana,
+                naisargika: g.naisargika,
+                total_virupas: g.total_virupas,
+                total_rupas: g.total_rupas,
+                customary_minimum_rupas: g.customary_minimum_rupas,
+            })
+            .collect(),
+        variants: b.variants.clone(),
+    }
+}
+
+// ---------------------------------------------------------------------------
 // The annual chart, Muntha and kaksha (phase 13F/13G).
 // Specification: docs/phase13/VARSHA-KAKSHA.md.
 // ---------------------------------------------------------------------------

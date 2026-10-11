@@ -1,8 +1,9 @@
 # Phase 13 design: the professional surface
 
 Status: 13A, the Chara dasha half of 13B, the upagraha half of 13C, all
-of 13H (KP), the kaksha half of 13F and the annual-chart half of 13G are
-built and through the QA gate. What is held back is held for one reason in
+of 13H (KP), the kaksha half of 13F, the annual-chart half of 13G and
+five of Shadbala's six components, Yogini dasha, Yogi/Avayogi and the
+Ashtakavarga grid are built and through the QA gate. What is held back is held for one reason in
 every case: the computation is a published table rather than a derivation, so
 no oracle can catch a misremembering of it. Each needs one transcribed worked
 example. The product owner asked for JHora parity "for
@@ -32,7 +33,7 @@ two surfaces over one engine.
 | | Lite (default) | Pro |
 |---|---|---|
 | Who it is for | the general public | astrologers |
-| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini, Chara dasha, Upagrahas, KP and the Annual chart today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
+| Tabs | Chart, Readings, Sensitive periods, Day timings, Family, Match, Saved profiles | the Lite tabs, plus Jaimini, Chara dasha, Points, KP, the Annual chart, Shadbala, Yogini dasha and Ashtakavarga today, and Balas, Vargas, Ashtakavarga, Varshaphal, KP and Yogas as they land |
 | Language | plain, justified prose | technical terms, unglossed |
 | Numbers shown | scores and verdicts, explained | raw values, intermediate components, variant IDs |
 | Unverified output | never shown | shown, labelled |
@@ -60,9 +61,9 @@ Rules the boundary has to keep:
 | 13A | Jaimini core | 8 chara karakas; arudha padas A1-A12 incl. Arudha Lagna and Upapada; argala and virodhargala | **built** |
 | 13B | Jaimini dashas | Chara (**built**, see `CHARA-DASHA.md`); Narayana, Sthira, Shoola, Brahma, Varnada each need a transcribed worked example first | partly |
 | 13C | Foundations (upagrahas and time lagnas **built**, see `UPAGRAHA.md`; the rest held) | upagrahas (Gulika, Mandi, Kaala, Mrityu, Ardhaprahara, Yamaghantaka, Dhuma, Vyatipata, Parivesha, Indrachapa, Upaketu); special lagnas (Bhava, Hora, Ghati, Vighati, Pranapada, Sree, Indu); vargas D-5, D-6, D-8, D-11, D-81, D-108, D-144; Vimshopaka and Dasavarga/Shodasavarga weights; avasthas | no |
-| 13D | Dasha library | Ashtottari, Yogini, Kalachakra, Dwisaptati, Shattrimsa, Dwadasottari, Chaturaseeti, Shashtihayani, Shodasottari, Panchottari, Satabdika, Tribhagi, and the applicability rules that pick one | no |
-| 13E | Balas | Shadbala, Bhava bala, Ishta/Kashta phala, sphuta drishti | variants unsigned; ships labelled (section 6) |
-| 13F | Ashtakavarga depth (kaksha transit **built**, see `VARSHA-KAKSHA.md`; sodhya pindas and the sodhanas held) | sodhya pindas (rasi, graha, sodhya), kaksha transit, trikona and ekadhipatya sodhana | no |
+| 13D | Dasha library (Yogini dasha and Yogi/Avayogi **built**, see `YOGINI.md` and `YOGI.md`; Ashtottari, Kalachakra and the rest held) | Ashtottari, Yogini, Kalachakra, Dwisaptati, Shattrimsa, Dwadasottari, Chaturaseeti, Shashtihayani, Shodasottari, Panchottari, Satabdika, Tribhagi, and the applicability rules that pick one | no |
+| 13E | Balas (Shadbala **built**, five of six, labelled - see `SHADBALA.md`; Drik bala, Bhava bala and Ishta/Kashta held) | Shadbala, Bhava bala, Ishta/Kashta phala, sphuta drishti | variants unsigned; ships labelled (section 6) |
+| 13F | Ashtakavarga depth (kaksha transit and the full BAV/SAV grid **built**; sodhya pindas and the sodhanas held) | sodhya pindas (rasi, graha, sodhya), kaksha transit, trikona and ekadhipatya sodhana | no |
 | 13G | Varshaphal (annual chart and Muntha **built**; Varshesha, sahams and the annual dashas held) | Muntha, Varshesha, sahams, Tri-pataki, Patyayini and Mudda dasha, Harsha and Panchavargeeya bala | no |
 | 13H | KP (**built**, see `KP.md`) | 249 sub-lords, cuspal sub-lords, Placidus cusps, ruling planets, significators, horary | no |
 | 13I | Yogas | named yogas as reviewed corpus rules | no (needs review capacity, not data) |
@@ -154,7 +155,10 @@ constraints, which exist because `docs/phase2/DESIGN.md` section 9 condition 2
 3. **No rule may consume it.** The corpus cannot condition on an unverified
    bala. A reviewed interpretation resting on an unverified number would
    launder the caveat away, and the review gate exists to stop exactly that.
-   This is enforced by test, not convention.
+   This is enforced by test, not convention - see
+   `crates/lagn-rules/tests/no_unverified_strength.rs`, which checks both that
+   no corpus file names a strength and that the rule language offers no way to
+   express one.
 
 When reference output arrives, the labels come off and constraint 3 lifts,
 with no recomputation: the numbers do not change, only their standing.

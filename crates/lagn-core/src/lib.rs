@@ -11,6 +11,7 @@
 
 pub mod analysis;
 pub mod ashtakavarga;
+pub mod bala;
 pub mod chara;
 pub mod chart;
 pub mod condition;
@@ -27,6 +28,8 @@ pub mod rasi;
 pub mod relationship;
 pub mod transit;
 pub mod varsha;
+pub mod yogi;
+pub mod yogini;
 pub mod upagraha;
 pub mod varga;
 
@@ -38,6 +41,7 @@ pub use rasi::{Element, Mobility, Rasi};
 pub use varga::{navamsa_sign, trimsamsa_sign, Varga};
 pub use analysis::{Analysis, DerivationSettings, GrahaCondition, RelationBasis, TemporarySource};
 pub use ashtakavarga::{Ashtakavarga, Contributor};
+pub use bala::{Bala, Cheshta, GrahaBala, Kala, Sthana};
 pub use condition::{BaladiAvastha, JagradadiAvastha};
 pub use dignity::{Dignity, VargaMoolatrikona};
 pub use drishti::NodeAspects;
@@ -49,6 +53,8 @@ pub use jaimini::{
     CharaKarakas, Jaimini, Karaka, KarakaAssignment, VariantChoice,
 };
 pub use transit::{Ingress, SignStay, TransitKind, TransitWindow};
+pub use yogi::{Yogi, YogaSphuta};
+pub use yogini::{Yogini, YoginiChain, YoginiDasha, YoginiPeriod};
 pub use varsha::{kaksha_of, kaksha_transit, KakshaTransit, Varshaphala};
 pub use upagraha::{DayPart, DayPartPoint, Point, SunOffset, TimeLagna, Upagrahas};
 pub use relationship::{CompoundRelation, NaturalRelation, TemporaryRelation};

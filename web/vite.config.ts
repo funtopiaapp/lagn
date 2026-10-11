@@ -23,9 +23,18 @@ export default defineConfig(({ mode }) => {
   // Resolved against this file, not the working directory, so the version is
   // the same whoever runs the build and from wherever.
   const engine = engineVersion(fileURLToPath(new URL("public/engine", import.meta.url)));
+  // The owner's kill switch, as a literal the bundler can fold. Unset means
+  // on, so forgetting it can never remove features; only "off" (or 0/false/no)
+  // turns the professional surface off, and then its chunk is not emitted at
+  // all. See docs/INTEGRATION.md.
+  const proRaw = (process.env.VITE_PRO ?? env.VITE_PRO ?? "").trim().toLowerCase();
+  const proBuild = !["off", "0", "false", "no"].includes(proRaw);
   return {
     base,
-    define: { __ENGINE_VERSION__: JSON.stringify(engine) },
+    define: {
+      __ENGINE_VERSION__: JSON.stringify(engine),
+      PRO_BUILD: JSON.stringify(proBuild),
+    },
     plugins: [react(), pwa(env.VITE_API_BASE ?? "", base, originOf(env.VITE_COUNTER_BADGE))],
     server: {
       // During development the API runs separately: `lagn-server --addr 127.0.0.1:8080`.
