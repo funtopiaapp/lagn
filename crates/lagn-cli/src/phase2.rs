@@ -486,3 +486,135 @@ pub fn print_varsha(v: &lagn_core::varsha::Varshaphala) {
     }
     println!();
 }
+
+/// Shadbala, five of six. Specification: `docs/phase13/SHADBALA.md`.
+pub fn print_bala(b: &lagn_core::bala::Bala) {
+    println!("\n  Shadbala - {} of 6 components; Drik bala is NOT computed", b.components_computed);
+    println!("  {}\n", wrap(&b.caveat, 74, "  "));
+
+    println!(
+        "  {:<9} {:>8} {:>8} {:>8} {:>8} {:>8} {:>9} {:>7} Customary min",
+        "Graha", "Sthana", "Dig", "Kala", "Cheshta", "Naisarg", "Virupas", "Rupas",
+    );
+    for g in &b.grahas {
+        println!(
+            "  {:<9} {:>8.2} {:>8.2} {:>8.2} {:>8.2} {:>8.2} {:>9.2} {:>7.2}   {}",
+            g.graha.name(), g.sthana.total, g.dig, g.kala.total, g.cheshta.value,
+            g.naisargika, g.total_virupas, g.total_rupas,
+            g.customary_minimum_rupas.map(|m| format!("{m:.1}")).unwrap_or_default(),
+        );
+    }
+    println!("\n  The customary minima are thresholds for a COMPLETE Shadbala, so they are");
+    println!("  shown for reference and must not be compared against these five-component totals.");
+
+    println!("\n  Sthana bala in detail");
+    println!(
+        "  {:<9} {:>8} {:>13} {:>10} {:>8} {:>9}",
+        "Graha", "Uchcha", "Saptavargaja", "Ojayugma", "Kendra", "Drekkana",
+    );
+    for g in &b.grahas {
+        let s = &g.sthana;
+        println!(
+            "  {:<9} {:>8.2} {:>13.2} {:>10.2} {:>8.2} {:>9.2}",
+            g.graha.name(), s.uchcha, s.saptavargaja, s.ojayugma, s.kendra, s.drekkana,
+        );
+    }
+
+    println!("\n  Kala bala in detail");
+    println!(
+        "  {:<9} {:>7} {:>7} {:>9} {:>5} {:>5} {:>5} {:>5} {:>7}",
+        "Graha", "Nathon", "Paksha", "Tribhaga", "Abda", "Masa", "Vara", "Hora", "Ayana",
+    );
+    for g in &b.grahas {
+        let k = &g.kala;
+        println!(
+            "  {:<9} {:>7.2} {:>7.2} {:>9.2} {:>5.0} {:>5.0} {:>5.0} {:>5.0} {:>7.2}",
+            g.graha.name(), k.nathonnatha, k.paksha, k.tribhaga, k.abda, k.masa, k.vara, k.hora, k.ayana,
+        );
+    }
+
+    println!("\n  Variants in force - ALL UNSIGNED (see docs/phase13/SHADBALA.md section 5)");
+    for v in &b.variants {
+        println!("  {:<9} {:<48} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}
+
+/// Wrap `text` to `width`, indenting continuation lines with `indent`.
+fn wrap(text: &str, width: usize, indent: &str) -> String {
+    let mut out = String::new();
+    let mut line = 0usize;
+    for word in text.split_whitespace() {
+        if line > 0 && line + 1 + word.len() > width {
+            out.push('\n');
+            out.push_str(indent);
+            line = 0;
+        } else if line > 0 {
+            out.push(' ');
+            line += 1;
+        }
+        out.push_str(word);
+        line += word.len();
+    }
+    out
+}
+
+/// Yogini dasha. Specification: `docs/phase13/YOGINI.md`.
+pub fn print_yogini(c: &Chart, d: &lagn_core::yogini::YoginiDasha, levels: u8) {
+    let tz = c.birth.moment.utc_offset_hours;
+    println!(
+        "\n  Yogini dasha - janma nakshatra {}, so the cycle starts in {} ({})",
+        d.janma_nakshatra.name(), d.birth_yogini.name(), d.birth_yogini.lord().name(),
+    );
+    println!("  Balance at birth: {:.4} of {:.0} years\n", d.balance_years, d.birth_yogini.years());
+
+    println!("  {:<10} {:<9} {:<6} {:<12} {:<12} Cycle", "Yogini", "Lord", "Years", "From", "To");
+    for p in &d.periods {
+        println!(
+            "  {:<10} {:<9} {:<6.0} {:<12} {:<12} {}",
+            p.yogini.name(), p.lord.name(), p.yogini.years(),
+            civil(c, p.start_jd), civil(c, p.end_jd), p.cycle,
+        );
+        if levels > 1 {
+            for ch in &p.children {
+                println!(
+                    "      {:<8} {:<9} {:<6} {:<12} {}",
+                    ch.yogini.name(), ch.lord.name(), "",
+                    civil(c, ch.start_jd), civil(c, ch.end_jd),
+                );
+            }
+        }
+    }
+    let _ = tz;
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/YOGINI.md section 6)");
+    for v in &d.variants {
+        println!("  {:<9} {:<48} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}
+
+/// Yogi, Avayogi and the Yoga sphuta.
+/// Specification: `docs/phase13/YOGI.md`.
+pub fn print_yogi(y: &lagn_core::yogi::Yogi) {
+    let s = &y.sphuta;
+    println!(
+        "\n  Yoga sphuta  {:>10.4}  {:<12} {}  {} pada {}",
+        s.longitude, s.rasi.name(), lagn_core::format::dms(s.degrees_in_rasi),
+        s.nakshatra.name(), s.pada,
+    );
+    println!("  Yogi         {:<12} (lord of {})", y.yogi.name(), s.nakshatra.name());
+    println!(
+        "  Avayogi      {:<12} (lord of {}, the 6th from the Yogi's)",
+        y.avayogi.name(), y.avayogi_nakshatra.name(),
+    );
+    println!("\n  The sphuta's offset is 93 deg 20 min, which is seven nakshatras exactly, so");
+    println!("  the Avayogi's lord always sits five places past the Yogi's in the Vimshottari");
+    println!("  cycle - an identity that holds for every chart.");
+
+    println!("\n  Variants in force (unsigned-off; see docs/phase13/YOGI.md section 3)");
+    for v in &y.variants {
+        println!("  {:<9} {:<44} {}", v.id, v.question, v.chosen);
+    }
+    println!();
+}

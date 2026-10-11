@@ -252,6 +252,10 @@ endpoint!(lagn_chara, api::ChartRequest, |_s, req| api::chara(req));
 endpoint!(lagn_upagraha, api::ChartRequest, |_s, req| api::upagraha(req));
 endpoint!(lagn_kp, api::ChartRequest, |_s, req| api::kp(req));
 endpoint!(lagn_varsha, api::VarshaRequest, |_s, req| api::varsha(req));
+endpoint!(lagn_bala, api::ChartRequest, |_s, req| api::bala(req));
+endpoint!(lagn_yogini, api::ChartRequest, |_s, req| api::yogini(req));
+endpoint!(lagn_yogi, api::ChartRequest, |_s, req| api::yogi(req));
+endpoint!(lagn_ashtakavarga, api::ChartRequest, |_s, req| api::ashtakavarga(req));
 endpoint!(lagn_places, api::PlacesQuery, |s, q| api::places(s, &q));
 endpoint!(lagn_offset, api::OffsetQuery, |s, q| api::offset(s, &q));
 

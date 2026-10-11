@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { api, ApiError } from "./api";
 import { BirthForm } from "./components/BirthForm";
 import { ChartView } from "./components/ChartView";
@@ -7,23 +7,33 @@ import { MatchView } from "./components/MatchView";
 import { OfflineBanner } from "./components/OfflineBanner";
 import { PeriodsView } from "./components/PeriodsView";
 import { DayTimingsView } from "./components/DayTimingsView";
-import { JaiminiView } from "./components/JaiminiView";
-import { CharaView } from "./components/CharaView";
-import { UpagrahaView } from "./components/UpagrahaView";
-import { KpView } from "./components/KpView";
-import { VarshaView } from "./components/VarshaView";
 import { ReadingsView } from "./components/ReadingsView";
 import { SavedCharts } from "./components/SavedCharts";
 import { loadSaved, type SavedBirth } from "./lib/savedBirths";
 import { loadToken, saveToken } from "./lib/session";
-import { loadMode, saveMode, type Mode } from "./lib/mode";
+import { loadMode, proEnabled, saveMode, type Mode } from "./lib/mode";
+import type { ProTab } from "./components/ProPanels";
+
+/// The professional surface as one lazily-loaded chunk.
+///
+/// Guarded by PRO_BUILD, a literal the build replaces, so a build with the
+/// surface off drops the chunk rather than shipping code nobody can reach.
+/// A Lite reader never downloads it either.
+const ProPanels = lazy(() =>
+  PRO_BUILD
+    ? import("./components/ProPanels").then((m) => ({ default: m.ProPanels }))
+    // Unreachable in a surface-off build - nothing renders a professional tab
+    // there - but React.lazy needs a component, and this branch is what the
+    // bundler deletes along with the chunk.
+    : Promise.resolve({ default: (() => <></>) as unknown as typeof import("./components/ProPanels").ProPanels }),
+);
 import { loadTheme, type Theme } from "./lib/theme";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { ModeToggle } from "./components/ModeToggle";
 import { VisitCounter } from "./components/VisitCounter";
 import type { BirthInput, ChartResponse, Sex, VersionInfo } from "./types";
 
-type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini" | "chara" | "upagraha" | "kp" | "varsha";
+type Tab = "chart" | "readings" | "periods" | "day" | "family" | "match" | "saved" | "jaimini" | "chara" | "upagraha" | "kp" | "varsha" | "bala" | "yogini" | "av";
 
 /** The general public's surface. Phase 13 adds nothing to this list, and a
  *  test pins that: turning Pro on must add tabs, never change Lite's. */
@@ -31,10 +41,16 @@ const LITE_TABS: [Tab, string][] = [["chart", "Chart"], ["readings", "Readings"]
 
 /** The professional surface, appended to the Lite tabs rather than replacing
  *  them. See docs/phase13/DESIGN.md section 2. */
-const PRO_TABS: [Tab, string][] = [["jaimini", "Jaimini"], ["chara", "Chara dasha"], ["upagraha", "Upagrahas"], ["kp", "KP"], ["varsha", "Annual chart"]];
+const PRO_TABS: [Tab, string][] = PRO_BUILD
+  ? [["jaimini", "Jaimini"], ["chara", "Chara dasha"], ["upagraha", "Points"], ["kp", "KP"], ["varsha", "Annual chart"], ["bala", "Shadbala"], ["yogini", "Yogini dasha"], ["av", "Ashtakavarga"]]
+  // Guarded by the literal so a surface-off build does not even carry the
+  // tab names. Leaking a list of feature names is a weak sort of "off".
+  : [];
 
 export function tabsFor(mode: Mode): [Tab, string][] {
-  return mode === "pro" ? [...LITE_TABS, ...PRO_TABS] : LITE_TABS;
+  // The kill switch is checked here as well as in loadMode, so a stale mode
+  // held in component state can never surface a professional tab.
+  return mode === "pro" && proEnabled() ? [...LITE_TABS, ...PRO_TABS] : LITE_TABS;
 }
 
 export function App() {
@@ -105,7 +121,7 @@ export function App() {
       <header className="top">
         <h1>lagn<span className="dot">.</span></h1>
         <span className="spacer" />
-        <ModeToggle mode={mode} onChange={setMode} />
+        {proEnabled() && <ModeToggle mode={mode} onChange={setMode} />}
         <ThemeToggle theme={theme} onChange={setTheme} />
         {chart && (
           <button type="button" onClick={() => { history.pushState({ lagn: true, view: "form" }, ""); setChart(null); }}>New chart</button>
@@ -139,11 +155,11 @@ export function App() {
             {tab === "day" && <DayTimingsView birth={chart.input} />}
             {tab === "family" && <FamilyView birth={chart.input} sex={sex} reviewToken={token} />}
             {tab === "match" && <MatchView birth={chart.input} reviewToken={token} />}
-            {tab === "jaimini" && mode === "pro" && <JaiminiView birth={chart.input} />}
-            {tab === "chara" && mode === "pro" && <CharaView birth={chart.input} />}
-            {tab === "upagraha" && mode === "pro" && <UpagrahaView birth={chart.input} />}
-            {tab === "kp" && mode === "pro" && <KpView birth={chart.input} />}
-            {tab === "varsha" && mode === "pro" && <VarshaView birth={chart.input} />}
+            {PRO_TABS.some(([t]) => t === tab) && mode === "pro" && proEnabled() && (
+              <Suspense fallback={<p className="hint">Loading the professional tools…</p>}>
+                <ProPanels tab={tab as ProTab} birth={chart.input} />
+              </Suspense>
+            )}
             {tab === "saved" && (
               <SavedCharts saved={saved} onChange={setSaved}
                 onOpen={(b, sx) => { setTab("chart"); void compute(b, sx); }} />

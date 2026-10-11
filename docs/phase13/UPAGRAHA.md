@@ -112,8 +112,9 @@ Ghati lagna = S + 75 h
 ```
 
 All modulo 360. The rates are exact ratios: Hora advances twice as fast as
-Bhava, and Ghati five times as fast as Hora. Those ratios are properties a
-test can assert without re-deriving the rates.
+Bhava, and Ghati two and a half times as fast as Hora - one sign per 24
+minutes against one per hour. Those ratios are properties a test can assert
+without re-deriving the rates.
 
 ## 6. Variant register
 
@@ -150,8 +151,8 @@ which layer 1 and `Chart` already provide.
 4. **A night birth uses the night division**, and the sequence starts from the
    fifth lord. A test pins a day birth and a night birth at the same place.
 5. **The time lagnas keep their ratios.** Hora advances exactly twice as fast
-   as Bhava and Ghati exactly five times as fast as Hora, measured by
-   recomputing at two moments.
+   as Bhava and Ghati exactly two and a half times as fast as Hora, measured
+   by recomputing at two moments.
 6. **At sunrise all three time lagnas equal the Sun**, which is what "reckoned
    from sunrise" means and the simplest case to get wrong.
 7. **An independent reimplementation agrees** to an arcsecond
@@ -193,3 +194,4 @@ section 1.
 | 1 | Initial design; section 1 records what is held and why | Architect |
 | 2 | Sections 4's graha names aligned to the engine's own (Kuja, not Mangala) after the oracle could not match them | QA |
 | 3 | Section 9 added | Dev |
+| 4 | Sections 5 and 8: Ghati advances 2.5 times as fast as Hora, not five times. The table (24 minutes against one hour) and the implementation (75 against 30 degrees an hour) were always right; only the prose was wrong, so no number changes | Product owner |

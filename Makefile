@@ -35,6 +35,8 @@ qa: build oracle
 	python3 scripts/qa_upagraha_oracle.py --charts 300
 	python3 scripts/qa_kp_oracle.py --charts 150
 	python3 scripts/qa_varsha_oracle.py --charts 40
+	python3 scripts/qa_yogini_oracle.py --charts 120
+	python3 scripts/qa_yogi_oracle.py --charts 200
 	./target/release/lagn rules validate
 	bash scripts/qa_web.sh
 

@@ -369,3 +369,88 @@ export interface VarshaResponse {
   kaksha: KakshaReading[];
   variants: VariantChoice[];
 }
+
+// --- Shadbala (phase 13E, professional surface, labelled) --------------
+// Specification: docs/phase13/SHADBALA.md. Every value depends on variant
+// choices no astrologer has signed off, and one of the six components is not
+// computed, so the caveat travels with the numbers.
+
+export interface BalaRow {
+  graha: string;
+  sthana: number; uchcha: number; saptavargaja: number;
+  ojayugma: number; kendra: number; drekkana: number;
+  dig: number;
+  kala: number; nathonnatha: number; paksha: number; tribhaga: number;
+  abda: number; masa: number; vara: number; hora: number; ayana: number;
+  cheshta: number;
+  /** True for Surya and Chandra, which never retrograde. */
+  cheshta_from_ayana: boolean;
+  naisargika: number;
+  total_virupas: number; total_rupas: number;
+  /** Threshold for a COMPLETE Shadbala; never compared against the total. */
+  customary_minimum_rupas: number | null;
+}
+export interface BalaResponse {
+  drik_included: boolean;
+  components_computed: number;
+  caveat: string;
+  rows: BalaRow[];
+  variants: VariantChoice[];
+}
+
+// --- Yogini dasha (phase 13D, professional surface) --------------------
+// Specification: docs/phase13/YOGINI.md.
+
+export interface YoginiPeriod {
+  yogini: string; lord: string; years: number;
+  start: string; end: string; cycle: number;
+  start_jd: number; end_jd: number;
+  children?: YoginiPeriod[];
+}
+export interface YoginiRunning { as_of_utc: string; maha: string; antar: string }
+export interface YoginiResponse {
+  janma_nakshatra: string;
+  birth_yogini: string; birth_lord: string;
+  balance_years: number;
+  /** When the yogini running at birth gives way. */
+  balance_until: string;
+  cycle_years: number;
+  periods: YoginiPeriod[];
+  running_now: YoginiRunning | null;
+  variants: VariantChoice[];
+}
+
+// --- Yogi, Avayogi and the Ashtakavarga grid (phase 13D/13F) -----------
+// Specifications: docs/phase13/YOGI.md and VARSHA-KAKSHA.md.
+
+export interface YogiResponse {
+  longitude: number; degrees: string;
+  rasi: string; rasi_tamil: string;
+  nakshatra: string; pada: number;
+  yogi: string;
+  avayogi_nakshatra: string; avayogi: string;
+  variants: VariantChoice[];
+}
+
+export interface BavRow {
+  graha: string;
+  /** Bindus by sign, Mesha first. */
+  bindus: number[];
+  /** Bindus by house from the lagna. */
+  by_house: number[];
+  total: number;
+  /** The fixed total this graha's BAV always comes to. */
+  expected_total: number;
+}
+export interface AshtakavargaResponse {
+  lagna: string;
+  signs: string[];
+  rows: BavRow[];
+  sav: number[];
+  sav_by_house: number[];
+  sav_total: number;
+  /** 337, for every chart ever cast. */
+  sav_expected_total: number;
+  /** contributors[graha][sign] -> the names that gave a bindu there. */
+  contributors: string[][][];
+}

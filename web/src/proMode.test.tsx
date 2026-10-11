@@ -1,9 +1,11 @@
 // Phase 13A acceptance criteria 8 and 9: Lite is unchanged by this phase, and
 // Pro is off by default, persists when set, and is absent from the URL.
 
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { tabsFor } from "./App";
+
+afterEach(() => vi.unstubAllEnvs());
 
 /** What the general public saw before phase 13 existed. */
 const LITE = ["Chart", "Readings", "Sensitive periods", "Day timings", "Family", "Match", "Saved profiles"];
@@ -23,6 +25,9 @@ describe("the Lite surface", () => {
     expect(ids).not.toContain("upagraha");
     expect(ids).not.toContain("kp");
     expect(ids).not.toContain("varsha");
+    expect(ids).not.toContain("bala");
+    expect(ids).not.toContain("yogini");
+    expect(ids).not.toContain("av");
   });
 });
 
@@ -40,5 +45,23 @@ describe("the Pro surface", () => {
     expect(ids).toContain("upagraha");
     expect(ids).toContain("kp");
     expect(ids).toContain("varsha");
+    expect(ids).toContain("bala");
+    expect(ids).toContain("yogini");
+    expect(ids).toContain("av");
+  });
+});
+
+describe("when the owner has turned the professional surface off", () => {
+  it("offers no professional tab even to a reader still in Pro mode", () => {
+    // The switch is checked in tabsFor as well as in loadMode, so stale mode
+    // held in component state cannot surface a professional tab.
+    vi.stubEnv("VITE_PRO", "off");
+    expect(tabsFor("pro").map(([, label]) => label)).toEqual(LITE);
+    expect(tabsFor("pro").map(([id]) => id)).not.toContain("jaimini");
+  });
+
+  it("leaves Lite exactly as it was", () => {
+    vi.stubEnv("VITE_PRO", "off");
+    expect(tabsFor("lite").map(([, label]) => label)).toEqual(LITE);
   });
 });

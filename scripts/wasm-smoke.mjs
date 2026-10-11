@@ -172,6 +172,43 @@ if (varsha.positions.length !== 9 || varsha.kaksha.length !== 7
   throw new Error("the annual chart came back wrong from the WebAssembly engine");
 }
 
+const bala = call("lagn_bala", JSON.stringify({ birth }));
+const strongest = bala.rows.reduce((a, b) => (b.total_rupas > a.total_rupas ? b : a));
+console.log(`  shadbala: ${bala.components_computed} of 6 components, strongest ${strongest.graha} at ${strongest.total_rupas.toFixed(2)} rupas`);
+// The caveat and the held component must survive into the browser: a reader
+// who sees the numbers has to see their standing too.
+if (bala.rows.length !== 7 || bala.variants.length !== 7
+  || bala.drik_included !== false || bala.components_computed !== 5
+  || !/five of the six/i.test(bala.caveat) || !/sphuta drishti/i.test(bala.caveat)) {
+  throw new Error("shadbala came back without its caveat or the wrong shape");
+}
+
+const yogini = call("lagn_yogini", JSON.stringify({ birth }));
+const yrs = yogini.periods.slice(0, 8).map((p) => p.years);
+console.log(`  yogini: ${yogini.janma_nakshatra} starts in ${yogini.birth_yogini} (${yogini.birth_lord}), balance ${yogini.balance_years.toFixed(3)}y, ${yogini.periods.length} periods`);
+// The structural check that makes this dasha safe must hold in the browser
+// too: eight consecutive periods summing to 36.
+if (yogini.periods.length < 9 || yogini.variants.length !== 5
+  || yrs.reduce((a, b) => a + b, 0) !== 36
+  || [...yrs].sort((a, b) => a - b).join() !== "1,2,3,4,5,6,7,8") {
+  throw new Error("yogini dasha came back wrong from the WebAssembly engine");
+}
+
+const yogi = call("lagn_yogi", JSON.stringify({ birth }));
+console.log(`  yogi: sphuta in ${yogi.nakshatra}, Yogi ${yogi.yogi}, Avayogi ${yogi.avayogi}`);
+if (yogi.variants.length !== 3 || !yogi.yogi || yogi.yogi === yogi.avayogi) {
+  throw new Error("yogi came back wrong from the WebAssembly engine");
+}
+
+const av = call("lagn_ashtakavarga", JSON.stringify({ birth }));
+console.log(`  ashtakavarga: SAV ${av.sav_total} (always ${av.sav_expected_total}), ${av.rows.length} BAV rows`);
+// The invariants that make this grid trustworthy must hold in the browser too.
+if (av.rows.length !== 7 || av.sav_total !== av.sav_expected_total
+  || av.rows.some((r) => r.total !== r.expected_total)
+  || av.sav.length !== 12 || av.contributors.length !== 7) {
+  throw new Error("the ashtakavarga grid broke one of its fixed totals");
+}
+
 const places = call("lagn_places", JSON.stringify({ q: "Chennai", limit: 3 }));
 console.log(`  place search: ${places.map((p) => p.name).join(", ")}`);
 

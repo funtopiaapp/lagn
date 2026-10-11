@@ -9,7 +9,7 @@ import { render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { UpagrahaView } from "./UpagrahaView";
-import type { UpagrahaResponse } from "../types";
+import type { UpagrahaResponse, YogiResponse } from "../types";
 
 const birth = { date: "1981-12-21", time: "14:10:00", latitude: 8.8932, longitude: 76.6141, utc_offset_hours: 5.5, place: "Kollam" };
 
@@ -154,8 +154,45 @@ const data: UpagrahaResponse = {
   ]
 } as UpagrahaResponse;
 
+const yogiData = {
+  "longitude": 170.03788136545234,
+  "degrees": "20\u00b002'16.37\"",
+  "rasi": "Kanya",
+  "rasi_tamil": "Kanni",
+  "nakshatra": "Hasta",
+  "pada": 4,
+  "yogi": "Chandra",
+  "avayogi_nakshatra": "Jyeshtha",
+  "avayogi": "Budha",
+  "variants": [
+    {
+      "id": "V-13-38",
+      "question": "the Yoga sphuta offset",
+      "chosen": "93 degrees 20 minutes, which is seven nakshatras exactly"
+    },
+    {
+      "id": "V-13-39",
+      "question": "counting to the Avayogi",
+      "chosen": "the 6th nakshatra from the Yogi's, counting the Yogi's as 1"
+    },
+    {
+      "id": "V-13-40",
+      "question": "Duplicate Yogi",
+      "chosen": "not computed; the accounts disagree and no identity settles it"
+    }
+  ]
+} as YogiResponse;
+
+/// Routed by URL: this view makes two calls now, and answering both with the
+/// same body would have the Yogi card render an upagraha response.
 function stub(body: unknown, status = 200) {
-  vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(new Response(JSON.stringify(body), { status }))));
+  vi.stubGlobal("fetch", vi.fn((url: string) =>
+    Promise.resolve(
+      url.includes("/api/yogi")
+        ? new Response(JSON.stringify(yogiData), { status: 200 })
+        : new Response(JSON.stringify(body), { status }),
+    ),
+  ));
 }
 
 describe("the three groups", () => {
@@ -221,5 +258,27 @@ describe("when the engine cannot answer", () => {
     stub({ error: "no sunrise at this latitude on this date" }, 400);
     render(<UpagrahaView birth={birth} />);
     expect(await screen.findByRole("alert")).toHaveTextContent("no sunrise");
+  });
+});
+
+describe("Yogi and Avayogi", () => {
+  it("appear on this tab, labelled as what they are rather than as upagrahas", async () => {
+    stub(data);
+    render(<UpagrahaView birth={birth} />);
+    const table = within(await screen.findByRole("table", { name: "Yogi and Avayogi" }));
+    // Anchored: "Avayogi" also ends in "Yogi".
+    expect(table.getByRole("row", { name: /^Yogi/ })).toHaveTextContent("Chandra");
+    expect(table.getByRole("row", { name: /Avayogi/ })).toHaveTextContent("Budha");
+    expect(table.getByRole("row", { name: /Yoga sphuta/ })).toHaveTextContent("Hasta");
+    // Said plainly: these are derived points, not upagrahas.
+    expect(screen.getByText(/Not upagrahas, but derived points/)).toBeInTheDocument();
+    // And the identity that makes them checkable is on the page.
+    expect(screen.getByText(/exactly seven nakshatras/)).toBeInTheDocument();
+  });
+
+  it("says the Duplicate Yogi is not computed", async () => {
+    stub(data);
+    render(<UpagrahaView birth={birth} />);
+    expect(await screen.findByText(/Duplicate Yogi is not computed/)).toBeInTheDocument();
   });
 });

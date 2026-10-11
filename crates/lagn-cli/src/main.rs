@@ -52,6 +52,12 @@ enum Command {
     Kp(DerivedArgs),
     /// The annual (solar return) chart, Muntha and kaksha transit.
     Varsha(VarshaArgs),
+    /// Shadbala: five of the six strengths. Every value is unverified.
+    Bala(DerivedArgs),
+    /// Yogini dasha, the 36-year cycle of eight yoginis.
+    Yogini(CharaArgs),
+    /// Yogi, Avayogi and the Yoga sphuta.
+    Yogi(DerivedArgs),
     /// Rule corpus maintenance.
     Rules {
         #[command(subcommand)]
@@ -517,6 +523,34 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 println!("{}", serde_json::to_string_pretty(&j)?);
             } else {
                 phase2::print_jaimini(&j);
+            }
+        }
+        Command::Yogi(a) => {
+            let chart = build_chart(&a.birth)?;
+            let y = lagn_core::yogi::Yogi::compute(&chart);
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&y)?);
+            } else {
+                phase2::print_yogi(&y);
+            }
+        }
+        Command::Yogini(a) => {
+            let chart = build_chart(&a.birth)?;
+            let d = lagn_core::yogini::YoginiDasha::compute(&chart);
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&d)?);
+            } else {
+                phase2::print_yogini(&chart, &d, a.levels);
+            }
+        }
+        Command::Bala(a) => {
+            let chart = build_chart(&a.birth)?;
+            let eph = Ephemeris::new(a.birth.ayanamsa.into(), a.birth.node.into());
+            let b = lagn_core::bala::Bala::for_chart(&eph, &chart)?;
+            if a.json {
+                println!("{}", serde_json::to_string_pretty(&b)?);
+            } else {
+                phase2::print_bala(&b);
             }
         }
         Command::Varsha(a) => {

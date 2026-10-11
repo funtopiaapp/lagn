@@ -120,6 +120,26 @@ async fn jaimini(body: Body) -> ApiResult<view::JaiminiView> {
     compute(move || api::jaimini(req)).await.map(Json)
 }
 
+async fn yogi(body: Body) -> ApiResult<view::YogiView> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::yogi(req)).await.map(Json)
+}
+
+async fn ashtakavarga(body: Body) -> ApiResult<view::AshtakavargaGridView> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::ashtakavarga(req)).await.map(Json)
+}
+
+async fn yogini(body: Body) -> ApiResult<view::YoginiView> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::yogini(req)).await.map(Json)
+}
+
+async fn bala(body: Body) -> ApiResult<view::BalaView> {
+    let req: api::ChartRequest = parse_json(body)?;
+    compute(move || api::bala(req)).await.map(Json)
+}
+
 async fn varsha(body: Body) -> ApiResult<view::VarshaView> {
     let req: api::VarshaRequest = parse_json(body)?;
     compute(move || api::varsha(req)).await.map(Json)
@@ -278,6 +298,10 @@ pub fn router_with(state: Arc<AppState>, static_dir: Option<&Path>, cors: &Cors)
         .route("/api/upagraha", post(upagraha))
         .route("/api/kp", post(kp))
         .route("/api/varsha", post(varsha))
+        .route("/api/bala", post(bala))
+        .route("/api/yogini", post(yogini))
+        .route("/api/yogi", post(yogi))
+        .route("/api/ashtakavarga", post(ashtakavarga))
         .route("/api/topics", get(topics))
         .route("/api/topic/{name}", post(topic))
         .route("/api/periods", post(periods))

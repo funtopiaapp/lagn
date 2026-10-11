@@ -208,6 +208,37 @@ pub fn jaimini(req: ChartRequest) -> Result<view::JaiminiView, ApiError> {
 /// Upagrahas and the time lagnas. Computation, so no review gate; the
 /// variant defaults travel with the response.
 /// A KP reading. Computation, so no review gate.
+/// Yogi, Avayogi and the Yoga sphuta. Computation, so no review gate.
+pub fn yogi(req: ChartRequest) -> Result<view::YogiView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    Ok(view::yogi_view(&lagn_core::yogi::Yogi::compute(&c)))
+}
+
+/// The full Ashtakavarga grid: every BAV, the SAV, and which contributor
+/// gave each bindu. Computed since phase 2B; this exposes it.
+pub fn ashtakavarga(req: ChartRequest) -> Result<view::AshtakavargaGridView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let av = lagn_core::Ashtakavarga::compute(&c);
+    Ok(view::ashtakavarga_grid_view(&c, &av))
+}
+
+/// Yogini dasha. Computation, so no review gate.
+pub fn yogini(req: ChartRequest) -> Result<view::YoginiView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let d = lagn_core::yogini::YoginiDasha::compute(&c);
+    Ok(view::yogini_view(&c, &d, Some(view::jd_now())))
+}
+
+/// Shadbala, five of six. Computation, so no review gate - and barred by
+/// test from being consumed by any corpus rule.
+pub fn bala(req: ChartRequest) -> Result<view::BalaView, ApiError> {
+    let c = req.birth.to_chart().map_err(ApiError::BadRequest)?;
+    let eph = lagn_core::Ephemeris::new(c.settings.ayanamsa, c.settings.node_type);
+    let b = lagn_core::bala::Bala::for_chart(&eph, &c)
+        .map_err(|e| ApiError::BadRequest(e.to_string()))?;
+    Ok(view::bala_view(&b))
+}
+
 /// The annual chart for a given completed age, with Muntha and kaksha.
 pub fn varsha(req: VarshaRequest) -> Result<view::VarshaView, ApiError> {
     if req.age > 120 {

@@ -69,6 +69,22 @@ char *lagn_kp(const char *request_json);
    Professional surface only. */
 char *lagn_varsha(const char *request_json);
 
+/* {"birth": {...}} -> Shadbala, five of the six strengths. Professional
+   surface only, and every value is unverified: the response carries the
+   caveat and the variant IDs it depends on. */
+char *lagn_bala(const char *request_json);
+
+/* {"birth": {...}} -> Yogini dasha, the 36-year cycle of eight yoginis.
+   Professional surface only. */
+char *lagn_yogini(const char *request_json);
+
+/* {"birth": {...}} -> Yogi, Avayogi and the Yoga sphuta. */
+char *lagn_yogi(const char *request_json);
+
+/* {"birth": {...}} -> the full Ashtakavarga grid: every BAV, the SAV, and
+   which contributor gave each bindu. */
+char *lagn_ashtakavarga(const char *request_json);
+
 /* {"native": {...}, "member": {...}, "relation": "..."} -> family reading. */
 char *lagn_family(const char *request_json);
 

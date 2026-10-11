@@ -206,6 +206,101 @@ async fn jaimini_endpoint_presents_the_library_faithfully_with_display_names() {
 }
 
 #[tokio::test]
+async fn yogi_endpoint_keeps_the_five_place_cycle_shift_for_every_chart() {
+    // Phase 13D. The Yoga sphuta's offset is seven nakshatras exactly, and
+    // the Avayogi is the sixth nakshatra from the Yogi's - five on - so the
+    // Avayogi's lord always sits five places past the Yogi's in the nine-lord
+    // Vimshottari cycle. That invariant needs no reference output and holds
+    // for every chart, which is why this group was safe to build.
+    let cycle = lagn_core::dasha::CYCLE;
+    let index = |name: &str| {
+        cycle.iter().position(|g| g.name() == name).expect("a Vimshottari lord")
+    };
+
+    let mut r = Rng(0xAB1_013D);
+    for _ in 0..200 {
+        let b = random_birth(&mut r);
+        let (st, v, text) = call(app(None), post("/api/yogi", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+
+        let yogi = v["yogi"].as_str().unwrap();
+        let avayogi = v["avayogi"].as_str().unwrap();
+        let shift = (index(avayogi) + 9 - index(yogi)) % 9;
+        assert_eq!(shift, 5, "Yogi {yogi} to Avayogi {avayogi} shifted {shift} for {b}");
+        assert_ne!(yogi, avayogi, "five places on in a nine-cycle cannot return to the start");
+
+        // The sphuta is where it says it is, and the Yogi is its nakshatra's lord.
+        let lon = v["longitude"].as_f64().unwrap();
+        assert!((0.0..360.0).contains(&lon));
+        let pos = lagn_core::nakshatra::NakshatraPosition::from_longitude(lon);
+        assert_eq!(v["nakshatra"], pos.nakshatra.name());
+        assert_eq!(v["yogi"], pos.nakshatra.lord().name());
+
+        let ids: Vec<&str> = v["variants"].as_array().unwrap().iter()
+            .map(|x| x["id"].as_str().unwrap()).collect();
+        assert_eq!(ids, ["V-13-38", "V-13-39", "V-13-40"]);
+    }
+}
+
+#[tokio::test]
+async fn the_ashtakavarga_grid_holds_its_fixed_totals_on_every_chart() {
+    // Phase 13F. A graha's BAV comes to the same total whatever the chart,
+    // and the SAV always to 337. The endpoint reports both the computed and
+    // the fixed total so a reader can see the invariant hold - so the test's
+    // job is to confirm they agree, over a wide sweep.
+    use lagn_core::ashtakavarga::{BAV_TOTALS, SAV_TOTAL};
+
+    let mut r = Rng(0xAB1_013F);
+    for _ in 0..200 {
+        let b = random_birth(&mut r);
+        let (st, v, text) = call(app(None), post("/api/ashtakavarga", &json!({ "birth": b }), None)).await;
+        assert_eq!(st, StatusCode::OK, "{text}");
+
+        let rows = v["rows"].as_array().unwrap();
+        assert_eq!(rows.len(), 7, "the nodes have no Bhinnashtakavarga");
+        for (i, row) in rows.iter().enumerate() {
+            let computed = row["total"].as_u64().unwrap() as u32;
+            let fixed = row["expected_total"].as_u64().unwrap() as u32;
+            assert_eq!(fixed, BAV_TOTALS[i], "the fixed total itself is wrong for row {i}");
+            assert_eq!(computed, fixed, "{}'s BAV came to {computed}, not {fixed}", row["graha"]);
+
+            let bindus = row["bindus"].as_array().unwrap();
+            assert_eq!(bindus.len(), 12);
+            // No sign can hold more bindus than there are contributors.
+            for x in bindus {
+                assert!(x.as_u64().unwrap() <= 8, "a sign holds more than eight bindus");
+            }
+            // The by-house view is the by-sign view rotated, so it must carry
+            // the same multiset.
+            let mut a: Vec<u64> = bindus.iter().map(|x| x.as_u64().unwrap()).collect();
+            let mut h: Vec<u64> = row["by_house"].as_array().unwrap()
+                .iter().map(|x| x.as_u64().unwrap()).collect();
+            a.sort_unstable();
+            h.sort_unstable();
+            assert_eq!(a, h, "{}'s by-house view is not a rotation", row["graha"]);
+        }
+
+        assert_eq!(v["sav_total"].as_u64().unwrap() as u32, SAV_TOTAL);
+        assert_eq!(v["sav_expected_total"].as_u64().unwrap() as u32, SAV_TOTAL);
+        assert_eq!(v["sav"].as_array().unwrap().len(), 12);
+
+        // Each cell's contributor list has exactly as many names as the cell
+        // has bindus: the grid and the prastara cannot disagree.
+        let contributors = v["contributors"].as_array().unwrap();
+        assert_eq!(contributors.len(), 7);
+        for (gi, per_graha) in contributors.iter().enumerate() {
+            let signs = per_graha.as_array().unwrap();
+            assert_eq!(signs.len(), 12);
+            for (si, names) in signs.iter().enumerate() {
+                let n = names.as_array().unwrap().len() as u64;
+                let bindus = rows[gi]["bindus"].as_array().unwrap()[si].as_u64().unwrap();
+                assert_eq!(n, bindus, "row {gi} sign {si}: {n} contributors for {bindus} bindus");
+            }
+        }
+    }
+}
+
+#[tokio::test]
 async fn kp_endpoint_divides_every_nakshatra_into_the_vimshottari_proportions() {
     // Phase 13H. The sub is the whole of KP, and it is derived rather than
     // looked up: a nakshatra splits into nine parts in Vimshottari order from

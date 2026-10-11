@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { api, ApiError } from "../api";
-import type { BirthInput, UpaPoint, UpagrahaResponse } from "../types";
+import type { BirthInput, UpaPoint, UpagrahaResponse, YogiResponse } from "../types";
 
 /** What each point is, for a practitioner who wants the gloss and not a lesson. */
 const WHAT: Record<string, string> = {
@@ -54,14 +54,21 @@ function Rows({ points, label }: { points: UpaPoint[]; label: string }) {
  */
 export function UpagrahaView({ birth }: { birth: BirthInput }) {
   const [data, setData] = useState<UpagrahaResponse | null>(null);
+  const [yogi, setYogi] = useState<YogiResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let live = true;
-    setData(null); setError(null);
+    setData(null); setYogi(null); setError(null);
     api.upagraha(birth)
       .then((d) => { if (live) setData(d); })
       .catch((e) => { if (live) setError(e instanceof ApiError ? e.message : String(e)); });
+    // Yogi and Avayogi are derived points too, so they belong on this tab -
+    // but they are not upagrahas, and the heading below says so. Fetched
+    // separately so a failure in one does not blank the other.
+    api.yogi(birth)
+      .then((d) => { if (live) setYogi(d); })
+      .catch(() => { /* its own card simply does not appear */ });
     return () => { live = false; };
   }, [birth]);
 
@@ -128,6 +135,44 @@ export function UpagrahaView({ birth }: { birth: BirthInput }) {
         </p>
         <Rows points={data.time_lagnas} label="Time lagnas" />
       </section>
+
+      {yogi && (
+        <section className="card">
+          <h3>Yogi and Avayogi</h3>
+          <p className="hint">
+            Not upagrahas, but derived points of the same kind. The Yoga sphuta is the Sun plus the
+            Moon plus 93°20′ — which is exactly seven nakshatras, so the Avayogi&apos;s lord always
+            sits five places past the Yogi&apos;s in the Vimshottari cycle.
+          </p>
+          <table className="grid" aria-label="Yogi and Avayogi">
+            <tbody>
+              <tr>
+                <th scope="row">Yoga sphuta</th>
+                <td>{yogi.rasi}<span className="hint"> / {yogi.rasi_tamil}</span></td>
+                <td className="num">{yogi.degrees}</td>
+                <td>{yogi.nakshatra}<span className="hint"> pada {yogi.pada}</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Yogi</th>
+                <td><strong>{yogi.yogi}</strong></td>
+                <td colSpan={2} className="hint">lord of {yogi.nakshatra}</td>
+              </tr>
+              <tr>
+                <th scope="row">Avayogi</th>
+                <td><strong>{yogi.avayogi}</strong></td>
+                <td colSpan={2} className="hint">
+                  lord of {yogi.avayogi_nakshatra}, the 6th from the Yogi&apos;s
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="hint">
+            The Duplicate Yogi is not computed: the published accounts disagree on whether it is
+            the graha conjoining the sphuta, the lord of its sign or of its navamsa, and no
+            identity settles it.
+          </p>
+        </section>
+      )}
 
       <section className="card">
         <h3>Variants in force</h3>

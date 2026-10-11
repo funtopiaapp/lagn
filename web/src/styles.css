@@ -416,3 +416,16 @@ footer a { color: var(--accent); }
 /* The annual chart takes one input, so it sits inline with the heading. */
 .varsha-age { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 10px; }
 .varsha-age input { width: 5.5em; }
+
+/* Shadbala is the one view whose numbers are unverified, so its caveat is a
+   warning rather than a quiet note. */
+.notice.warn { border-left: 3px solid var(--warn, #b45309); }
+.bala .grid td.num { font-variant-numeric: tabular-nums; }
+
+/* The Ashtakavarga grid is read across and down, so the cells are narrow and
+   shaded rather than labelled. */
+.av th, .av td { padding: 6px 7px; }
+.av-cell.strong { background: var(--accent-soft, rgba(16,122,80,0.12)); font-weight: 600; }
+.av-cell.weak { color: var(--muted); }
+.sav-row th, .sav-row td { border-top: 2px solid var(--line); }
+.ashtakavarga section.card { overflow-x: auto; }
